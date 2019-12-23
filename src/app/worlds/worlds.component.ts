@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import _split from 'lodash/split';
+import { World } from './models/world';
 
 @Component({
   selector: 'app-worlds',
@@ -15,16 +15,7 @@ export class WorldsComponent implements OnInit {
   }
 
   openFile(event) {
-    const input = event.target;
-    const reader = new FileReader();
-    reader.readAsText(input.files[0]);
-    reader.onload = () => {
-      // const data = (reader.result as string).split('childs');
-      const data = _split(reader.result, 'childs');
-      console.log(data[1]);
-      console.log(data[2]);
-      console.log(data[3]);
-    };
+    const world = new World(event.target.files[0]);
   }
 
 }
