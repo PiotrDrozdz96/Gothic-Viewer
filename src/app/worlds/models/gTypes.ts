@@ -3,6 +3,8 @@ import _join from 'lodash/join';
 import _map from 'lodash/map';
 import _compact from 'lodash/compact';
 import _chunk from 'lodash/chunk';
+import _replace from 'lodash/replace';
+import _last from 'lodash/last';
 
 import { getVobProp } from '../utils/getVobProp';
 
@@ -85,9 +87,12 @@ export class GColorList implements GType {
     public type: 'string',
     value: string,
   ) {
-    this.value = _map(_split(value, ' '), (color) => (
-      _split(color.slice(1, -1), ' ')
-    ));
+    const colors = _split(value, ') (');
+    colors[0] = _replace(colors[0], '(', '');
+    colors[colors.length - 1] = _replace(_last(colors), ')', '');
+    this.value = _map(colors, (color) => {
+      return _split(color.slice(1, -1), ' ');
+    });
   }
   toString(): string {
     return _join(_map(this.value, (color: Color) => (
