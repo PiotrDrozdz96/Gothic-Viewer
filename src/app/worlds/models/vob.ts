@@ -1,7 +1,12 @@
+import _forEach from 'lodash/forEach';
+import _findIndex from 'lodash/findIndex';
+
 import { vobWhitespace } from '../consts/whitespaces';
+import { vobPropConstructors } from '../consts/vobPropConstructors';
+import { getVobProp } from '../utils/getVobProp';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
-  GColor, GColorList, TriggerList
+  GColor, GColorList, TriggerList, Chest
 } from './gTypes';
 
 export class VobType {
@@ -32,10 +37,35 @@ export class ZCVob {
   cdStatic: GBool;
   cdDyn: GBool;
   staticVob: GBool;
-  dynamicShadow: GEnum;
+  dynShadow: GEnum;
   rest: string;
-  constructor(public index: number, public unknownValue: GInt, public vobType: VobType) {
-
+  constructor(
+    public index: number,
+    public unknownValue: GInt,
+    public vobType: VobType,
+    vobProps: Array<string>
+  ) {
+    let restMode = false;
+    _forEach(vobProps, (line) => {
+      if (!restMode) {
+        const {key, type, value} = getVobProp(line);
+        if (key === 'rest') {
+          if (this.rest) {
+            this.rest += value;
+          } else {
+            this.rest = value;
+          }
+          restMode = true;
+        } else {
+          this[key] = new vobPropConstructors[key](type, value);
+        }
+      } else {
+        if (line.includes('[]')) {
+          restMode = false;
+        }
+        this.rest += `${line}`;
+      }
+    });
   }
 }
 
@@ -81,6 +111,13 @@ export class ZCVobSound extends ZCVob {
   sndName: GString;
 }
 
+export class ZCVobSoundDaytime extends ZCVobSound {
+  // type: 'zCVobSoundDaytime:zCVobSound:'
+  sndStartTime: GFloat;
+  sndEndTime: GFloat;
+  sndName2: GString;
+}
+
 export class ZCVobLensFlare extends ZCVob {
   // type: 'zCVobLensFlare:'
   lensflareFX: GString;
@@ -91,7 +128,7 @@ export class ZCVobStair extends ZCVob {
 }
 
 export class ZCVobFarPlane extends ZCVob {
-  // type: 'zCZoneVobFarPlane:
+  // type: 'zCZoneVobFarPlane:'
   vobFarPlaneZ: GFloat;
   innerRangePerc: GFloat;
 }
@@ -110,7 +147,7 @@ export class ZCVobStartPoint extends ZCVob {
 }
 
 export class ZCPFXController extends ZCVob {
-  // type: 'CPFXControler:'
+  // type: 'zCPFXControler:'
   pfxName: GString;
   killVobWhenDone: GBool;
   pfxStartOn: GBool;
@@ -153,6 +190,26 @@ export class ZCTriggerList extends ZCTrigger {
   // type: 'zCTriggerList:zCTrigger:'
   listProcess: GEnum;
   triggerList: TriggerList;
+  constructor(
+    public index: number,
+    public unknownValue: GInt,
+    public vobType: VobType,
+    vobProps: Array<string>
+  ) {
+    super(
+      index,
+      unknownValue,
+      vobType,
+      vobProps.slice(0, _findIndex(vobProps, (line) => (
+        /numTarget=int:\d*/.test(line)
+      )))
+    );
+    this.triggerList = new TriggerList(
+      vobProps.slice(_findIndex(vobProps, (line) => (
+        /numTarget=int:\d*/.test(line)
+      )) + 1)
+    );
+  }
 }
 
 export class ZCMover extends ZCTrigger {
@@ -182,8 +239,18 @@ export class OCItem extends ZCVob {
   itemInstance: GString;
 }
 
+export class OCZoneMusic extends ZCVob {
+  // type: 'oCZoneMusic:'
+  enabled: GBool;
+  priority: GInt;
+  ellipsoid: GBool;
+  reverbLevel: GFloat;
+  volumeLevel: GFloat;
+  loop: GBool;
+}
+
 export class OCMob extends ZCVob {
-  // type: '*oCMOB:'
+  // type: 'oCMOB:'
   focusName: GString;
   hitpoints: GInt;
   damage: GInt;
@@ -195,6 +262,10 @@ export class OCMob extends ZCVob {
   owner: GString;
   ownerGuild: GString;
   isDestroyed: GBool;
+}
+
+export class OCMobInter extends OCMob {
+  // type: 'oCMobInter:oCMOB:'
   stateNum: GInt;
   triggerTarget: GString;
   useWithItem: GString;
@@ -203,12 +274,36 @@ export class OCMob extends ZCVob {
   rewind: GBool;
 }
 
-export class OCZoneMusic extends ZCVob {
-  // type: 'oCZoneMusic:'
-  enabled: GBool;
-  priority: GInt;
-  ellipsoid: GBool;
-  reverbLevel: GFloat;
-  volumeLevel: GFloat;
-  loop: GBool;
+export class OCMobWheel extends OCMobInter {
+  // type: 'oCMobWheel:oCMobInter:oCMOB:'
+}
+
+export class OCMobSwitch extends OCMobInter {
+   // type: 'oCMobSwitch:oCMobInter:oCMOB:'
+}
+
+export class OCMobLadder extends OCMobInter {
+  // type: 'oCMobLadder:oCMobInter:oCMOB:'
+}
+
+export class OCMobBed extends OCMobInter {
+  // type: 'oCMobBed:oCMobInter:oCMOB:'
+}
+
+export class OCMobFire extends OCMobInter {
+  // type: 'oCMobFire:oCMobInter:oCMOB:'
+  fireSlot: GString;
+  fireVobtreeName: GString;
+}
+
+export class OCMobDoor extends OCMobInter {
+  // type: 'oCMobDoor:oCMobInter:oCMOB:'
+  locked: GBool;
+  keyInstance: GString;
+  pickLockStr: GString;
+}
+
+export class OCMobContainer extends OCMobDoor {
+  // type: 'oCMobContainer:oCMobInter:oCMOB:'
+  contains: Chest;
 }

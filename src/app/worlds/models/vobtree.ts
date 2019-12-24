@@ -13,6 +13,5 @@ export class Vobtree {
     const childs = _slice(_split(data, 'childs'), 1, -2);
     this.vobtree = _map(childs, (vobString) => getVob(vobString));
     console.log(this.vobtree[0]);
-    console.log(this.vobtree[0].vobType.toString());
   }
 }

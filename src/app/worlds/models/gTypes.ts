@@ -1,6 +1,7 @@
 import _split from 'lodash/split';
 import _join from 'lodash/join';
 import _map from 'lodash/map';
+import _compact from 'lodash/compact';
 import _chunk from 'lodash/chunk';
 
 import { getVobProp } from '../utils/getVobProp';
@@ -113,4 +114,30 @@ export class TriggerList {
     });
   }
   // toString(): string
+}
+
+class Items {
+  instance: string;
+  number: string;
+  constructor(item: string) {
+    const [, instance, numberOf] = item.match(/([^:]+):?(\d?)/);
+    this.instance = instance;
+    this.number = numberOf || '1';
+  }
+  toString(): string {
+    return `${this.instance}${this.number !== '1' ? `:${this.number}` : ''}`;
+  }
+}
+
+export class Chest {
+  value: Array<Items>;
+  constructor(
+    public type: 'string',
+    value: string,
+  ) {
+    const items = _map(_compact(_split(value, ',')), (item) => new Items(item));
+  }
+  toString(): string {
+    return _join(_map(this.value, (item) => item.toString()), ',');
+  }
 }
