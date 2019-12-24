@@ -1,6 +1,5 @@
 import * as moment from 'moment';
 import _findIndex from 'lodash/findIndex';
-import _parseInt from 'lodash/parseInt';
 import _join from 'lodash/join';
 
 const zenGin = 'ZenGin Archive';
@@ -27,11 +26,11 @@ const errorMessages = [
 ];
 
 export class PrefixZenData {
-  ver: number;
-  saveGame: number;
+  ver: string;
+  saveGame: string;
   date: moment.Moment;
   user: string;
-  objects: number;
+  objects: string;
 
   isValid = true;
   error: string;
@@ -41,17 +40,17 @@ export class PrefixZenData {
     const converters: Array<(line: string) => boolean> = [
       (line) => line !== zenGin,
       (line) => {
-        const match = line.match(/(ver )(\d+)/);
+        const match = line.match(/(ver )(\d+\s*)/);
         if (match) {
-          this.ver = _parseInt(match[2]);
+          this.ver = match[2];
         } else { return true; }
       },
       (line) => line !== genericArchive,
       (line) => line !== ASCII,
       (line) => {
-        const match = line.match(/(saveGame )(\d+)/);
+        const match = line.match(/(saveGame )(\d+\s*)/);
         if (match) {
-          this.saveGame = _parseInt(match[2]);
+          this.saveGame = match[2];
         } else { return true; }
       },
       (line) => {
@@ -71,9 +70,9 @@ export class PrefixZenData {
       },
       (line) => line !== END,
       (line) => {
-        const match = line.match(/(objects )(\d+)/);
+        const match = line.match(/(objects )(\d+\s*)/);
         if (match) {
-          this.objects = _parseInt(match[2]);
+          this.objects = match[2];
         } else { return true; }
       },
       (line) => line !== END,

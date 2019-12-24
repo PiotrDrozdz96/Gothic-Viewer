@@ -7,6 +7,6 @@ export function extractPrefixZenData(data: string): [PrefixZenData, string] {
   if (!prefixZenData.isValid) {
     return [prefixZenData, data];
   } else {
-    return [prefixZenData, data.slice(prefixZenData.toString() - 1)];
+    return [prefixZenData, data.slice(prefixZenData.toString().length - 1)];
   }
 }

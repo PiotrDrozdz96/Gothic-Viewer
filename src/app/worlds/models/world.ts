@@ -21,15 +21,13 @@ export class World {
         alert(prefixZenData.error);
       } else {
         this.prefixZenData = prefixZenData;
-        const [binary, vobtree, waynet] = _split(
-          withoutPrefix,
-          /[VobTree % 0 0] | [WayNet % 0 0]/,
-          3
-        );
+        const [binary, withoutBinary] = _split(withoutPrefix, '[VobTree % 0 0]', 2);
+        const [vobtree, waynet] = _split(withoutBinary, '[WayNet % 0 0]', 2);
         this.binary = binary;
         this.vobtree = new Vobtree(vobtree);
         this.waynet = new Waynet(waynet);
       }
+      console.log('ready');
     };
   }
 }
