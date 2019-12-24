@@ -5,6 +5,8 @@ import _compact from 'lodash/compact';
 import _chunk from 'lodash/chunk';
 import _replace from 'lodash/replace';
 import _last from 'lodash/last';
+import _trim from 'lodash/trim';
+import _flatten from 'lodash/flatten';
 
 import { getVobProp } from '../utils/getVobProp';
 
@@ -71,7 +73,7 @@ export class GBool implements GType {
 export class GColor implements GType {
   value: Color;
   constructor(
-    public type: 'string',
+    public type: 'color',
     value: string,
   ) {
     this.value = _split(value, ' ');
@@ -87,17 +89,15 @@ export class GColorList implements GType {
     public type: 'string',
     value: string,
   ) {
-    const colors = _split(value, ') (');
+    const colors = _split(_trim(value), ') (');
     colors[0] = _replace(colors[0], '(', '');
     colors[colors.length - 1] = _replace(_last(colors), ')', '');
-    this.value = _map(colors, (color) => {
-      return _split(color.slice(1, -1), ' ');
-    });
+    this.value = _map(colors, (color) => _split(color, ' '));
   }
   toString(): string {
-    return _join(_map(this.value, (color: Color) => (
-      `(${_join(color)})`
-    )), ' ');
+    return `${this.type}:${_join(_map(this.value, (color: Color) => (
+      `(${_join(color, ' ')})`
+    )), ' ')}`;
   }
 }
 
@@ -118,14 +118,19 @@ export class TriggerList {
       };
     });
   }
-  // toString(): string
+  getLines(): Array<string> {
+    return _flatten(_map(this.value, (trigger, i) => ([
+      `triggerTarget${i}=${trigger.triggerTarget.toString()}`,
+      `fireDelay${i}=${trigger.fireDelay.toString()}`
+    ])));
+  }
 }
 
-class Items {
+export class Items {
   instance: string;
   number: string;
   constructor(item: string) {
-    const [, instance, numberOf] = item.match(/([^:]+):?(\d?)/);
+    const [, instance, numberOf] = item.match(/([^:]+):?(\d*)/);
     this.instance = instance;
     this.number = numberOf || '1';
   }
@@ -140,7 +145,7 @@ export class Chest {
     public type: 'string',
     value: string,
   ) {
-    const items = _map(_compact(_split(value, ',')), (item) => new Items(item));
+    this.value = _map(_compact(_split(value, ',')), (item) => new Items(item));
   }
   toString(): string {
     return _join(_map(this.value, (item) => item.toString()), ',');
