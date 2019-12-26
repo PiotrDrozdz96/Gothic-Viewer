@@ -8,6 +8,7 @@ import _last from 'lodash/last';
 import _trim from 'lodash/trim';
 import _flatten from 'lodash/flatten';
 
+import { vobPropWhitespace } from '../consts/whitespaces';
 import { getVobProp } from '../utils/getVobProp';
 
 type Color = Array<string>;
@@ -149,5 +150,16 @@ export class Chest {
   }
   toString(): string {
     return _join(_map(this.value, (item) => item.toString()), ',');
+  }
+}
+
+
+export class Rest {
+  value: Array<string> = [];
+  push(value: string): void {
+    this.value.push(value);
+  }
+  toString(whitespace = vobPropWhitespace): string {
+    return _join(_map(this.value, (line) => `${whitespace}${line}`), '\n');
   }
 }

@@ -1,12 +1,13 @@
 import _forEach from 'lodash/forEach';
 import _findIndex from 'lodash/findIndex';
+import _trim from 'lodash/trim';
 
 import { vobWhitespace } from '../consts/whitespaces';
 import { vobPropConstructors } from '../consts/vobPropConstructors';
 import { getVobProp } from '../utils/getVobProp';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
-  GColor, GColorList, TriggerList, Chest
+  GColor, GColorList, TriggerList, Chest, Rest
 } from './gTypes';
 
 export class VobType {
@@ -38,9 +39,9 @@ export class ZCVob {
   cdDyn: GBool;
   staticVob: GBool;
   dynShadow: GEnum;
-  rest: string;
+  rest: Rest;
   constructor(
-    public index: number,
+    public index: string,
     public unknownValue: GInt,
     public vobType: VobType,
     vobProps: Array<string>
@@ -51,9 +52,10 @@ export class ZCVob {
         const {key, type, value} = getVobProp(line);
         if (key === 'rest') {
           if (this.rest) {
-            this.rest += value;
+            this.rest.push(value);
           } else {
-            this.rest = value;
+            this.rest = new Rest();
+            this.rest.push(value);
           }
           restMode = true;
         } else {
@@ -63,7 +65,7 @@ export class ZCVob {
         if (line.includes('[]')) {
           restMode = false;
         }
-        this.rest += `${line}`;
+        this.rest.push(_trim(line));
       }
     });
   }
@@ -191,7 +193,7 @@ export class ZCTriggerList extends ZCTrigger {
   listProcess: GEnum;
   triggerList: TriggerList;
   constructor(
-    public index: number,
+    public index: string,
     public unknownValue: GInt,
     public vobType: VobType,
     vobProps: Array<string>
@@ -307,3 +309,10 @@ export class OCMobContainer extends OCMobDoor {
   // type: 'oCMobContainer:oCMobInter:oCMOB:'
   contains: Chest;
 }
+
+export type oneOfVobType = ZCVob | ZCVobLevelCompo | ZCVobSpot | ZCVobLight | ZCVobSound
+  | ZCVobSoundDaytime | ZCVobLensFlare | ZCVobStair | ZCVobFarPlane | ZCVobScreenFX
+  | ZCVobAnimate | ZCVobStartPoint | ZCPFXController | ZCZoneZFog | OCCSTrigger
+  | OCTriggerChangeLevel | ZCTriggerScript | ZCTriggerList | ZCMover | OCItem | OCZoneMusic
+  | OCMob | OCMobInter | OCMobWheel | OCMobSwitch | OCMobLadder | OCMobBed | OCMobFire
+  | OCMobDoor | OCMobContainer;

@@ -1,7 +1,7 @@
 import _random from 'lodash/random';
 import _keys from 'lodash/keys';
 
-import { GInt, GBool, GColor, GColorList, TriggerList, Items, Chest } from '../models/gTypes';
+import { GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest } from '../models/gTypes';
 
 describe('GTypes', () => {
 
@@ -172,6 +172,17 @@ describe('GTypes', () => {
       it('toString should return the same value as input', () => {
         expect(chest.toString()).toEqual(input);
       });
+    });
+  });
+
+  describe('rest', () => {
+    const rest = new Rest();
+    rest.push('[visual % 0 0]');
+    rest.push('[]');
+    rest.push('[ai % 0 0]');
+    rest.push('[]');
+    it('toString should return correctly value', () => {
+      expect(rest.toString()).toEqual('			[visual % 0 0]\n			[]\n			[ai % 0 0]\n			[]');
     });
   });
 });

@@ -55,8 +55,8 @@ describe('GetVobProp', () => {
     it('should return empty type', () => {
       expect(type).toEqual('');
     });
-    it('should return exactly the same line', () => {
-      expect(value).toEqual(line);
+    it('should return trimed line', () => {
+      expect(value).toEqual('[visual % 0 0]');
     });
   });
 
