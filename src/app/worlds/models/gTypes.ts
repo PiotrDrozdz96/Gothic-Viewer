@@ -125,6 +125,11 @@ export class TriggerList {
       `fireDelay${i}=${trigger.fireDelay.toString()}`
     ])));
   }
+  toString(whitespace = vobPropWhitespace): string {
+    return `${whitespace}numTarget=int:${this.value.length}\n${
+      _join(_map(this.getLines(), (line) => `${whitespace}${line}`), '\n')
+    }`;
+  }
 }
 
 export class Items {

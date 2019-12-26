@@ -101,6 +101,23 @@ describe('GTypes', () => {
     it('getLines should return the same value as input', () => {
       expect(triggerList.getLines()).toEqual(lines);
     });
+    it('toString should return correctly string', () => {
+      expect(triggerList.toString()).toEqual(
+        '			numTarget=int:6\n' +
+        '			triggerTarget0=string:EVT_CASTLE_FLOOR_0\n' +
+        '			fireDelay0=float:0\n' +
+        '			triggerTarget1=string:EVT_CASTLE_FLOOR_1\n' +
+        '			fireDelay1=float:1\n' +
+        '			triggerTarget2=string:EVT_CASTLE_FLOOR_2\n' +
+        '			fireDelay2=float:2\n' +
+        '			triggerTarget3=string:EVT_CASTLE_FLOOR_3\n' +
+        '			fireDelay3=float:3\n' +
+        '			triggerTarget4=string:EVT_CASTLE_FLOOR_4\n' +
+        '			fireDelay4=float:4\n' +
+        '			triggerTarget5=string:EVT_CASTLE_FLOOR_5\n' +
+        '			fireDelay5=float:5'
+      );
+    });
   });
 
   describe('Items', () => {
