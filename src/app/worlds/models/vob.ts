@@ -1,8 +1,11 @@
 import _forEach from 'lodash/forEach';
 import _findIndex from 'lodash/findIndex';
 import _trim from 'lodash/trim';
+import _omit from 'lodash/omit';
+import _keys from 'lodash/keys';
+import _join from 'lodash/join';
 
-import { vobWhitespace } from '../consts/whitespaces';
+import { vobWhitespace, vobPropWhitespace } from '../consts/whitespaces';
 import { vobPropConstructors } from '../consts/vobPropConstructors';
 import { getVobProp } from '../utils/getVobProp';
 import {
@@ -68,6 +71,23 @@ export class ZCVob {
         this.rest.push(_trim(line));
       }
     });
+  }
+  toString(): any {
+    const vobProps = _omit(this, ['index', 'unknownValue', 'vobType']);
+    const lines = [];
+    _forEach(vobProps, (prop, key) => {
+      if (key !== 'rest' && key !== 'triggerList') {
+        lines.push(`${vobPropWhitespace}${key}=${prop.toString()}`);
+      } else {
+        lines.push(prop.toString());
+      }
+    });
+    return (
+      `${vobWhitespace}childs${this.index}=${this.unknownValue.toString()}\n` +
+      `${this.vobType.toString()}\n` +
+      `${_join(lines, '\n')}\n` +
+      `${vobWhitespace}[]\n`
+    );
   }
 }
 

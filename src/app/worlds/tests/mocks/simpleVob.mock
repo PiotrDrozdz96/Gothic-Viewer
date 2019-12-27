@@ -1,5 +1,5 @@
 12788=int:0
-    [% zCVob 12289 15482]
+		[% zCVob 12289 15482]
 			pack=int:0
 			presetName=string:BAUMGRUPPE_KIRSCH
 			bbox3DWS=rawFloat:-10352.9688 1169.89722 -28687.2227 -8413.81738 2997.0769 -26804.9082 
@@ -18,4 +18,3 @@
 			[ai % 0 0]
 			[]
 		[]
-		

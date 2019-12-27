@@ -1,0 +1,42 @@
+10960=int:0
+		[% zCTriggerList:zCTrigger:zCVob 59776 13412]
+			pack=int:0
+			presetName=string:
+			bbox3DWS=rawFloat:4953.42383 8228.66113 -20006.7441 4955.42383 8230.66113 -20004.7441 
+			trafoOSToWSRot=raw:0000803f0000000000000000000000000000803f0000000000000000000000000000803f
+			trafoOSToWSPos=vec3:4954.42383 8229.66113 -20005.7441
+			vobName=string:EVT_CASTLE_TRIGGER_LIST_1
+			visual=string:
+			showVisual=bool:0
+			visualCamAlign=enum:0
+			cdStatic=bool:0
+			cdDyn=bool:0
+			staticVob=bool:0
+			dynShadow=enum:0
+			[visual % 0 0]
+			[]
+			[ai % 0 0]
+			[]
+			triggerTarget=string:
+			flags=raw:07
+			filterFlags=raw:3b
+			respondToVobName=string:
+			numCanBeActivated=int:-1
+			retriggerWaitSec=float:0
+			damageThreshold=float:0
+			fireDelaySec=float:0
+			listProcess=enum:0
+			numTarget=int:6
+			triggerTarget0=string:EVT_CASTLE_PLATE
+			fireDelay0=float:0
+			triggerTarget1=string:EVT_CASTLE_FLOOR_5
+			fireDelay1=float:6
+			triggerTarget2=string:EVT_CASTLE_FLOOR_4
+			fireDelay2=float:2
+			triggerTarget3=string:EVT_CASTLE_FLOOR_3
+			fireDelay3=float:1
+			triggerTarget4=string:EVT_CASTLE_FLOOR_2
+			fireDelay4=float:0
+			triggerTarget5=string:EVT_CASTLE_FLOOR_1
+			fireDelay5=float:4
+		[]

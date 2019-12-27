@@ -1,7 +1,10 @@
-import { VobType, ZCVob } from '../models/vob';
+import { VobType, ZCVob, ZCTriggerList } from '../models/vob';
 import { getVob } from '../utils/getVob';
 
 import simpleVob from './mocks/simpleVob.mock';
+import triggerListVob from './mocks/triggerListVob.mock';
+
+const addVobPrefix = (vob: string) => `		childs${vob}`;
 
 describe('GetVob', () => {
   describe('VobType', () => {
@@ -58,6 +61,33 @@ describe('GetVob', () => {
         '[ai % 0 0]',
         '[]'
       ]);
+    });
+    it('toString should return correctly string', () => {
+      expect(vob.toString()).toEqual(addVobPrefix(simpleVob));
+    });
+  });
+
+  describe('ZCTriggerList', () => {
+    const vob = getVob(triggerListVob);
+    it('should save correctly index', () => {
+      expect(vob.index).toEqual('10960');
+    });
+    it('should save correctly unknown value', () => {
+      expect(vob.unknownValue.value).toEqual('0');
+    });
+    it('should be return good instance', () => {
+      expect(vob.constructor).toEqual(ZCTriggerList);
+    });
+    it('should save correctly rest', () => {
+      expect(vob.rest.value).toEqual([
+        '[visual % 0 0]',
+        '[]',
+        '[ai % 0 0]',
+        '[]'
+      ]);
+    });
+    it('toString should return correctly string', () => {
+      expect(vob.toString()).toEqual(addVobPrefix(triggerListVob));
     });
   });
 });
