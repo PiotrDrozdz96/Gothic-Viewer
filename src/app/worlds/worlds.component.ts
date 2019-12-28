@@ -12,6 +12,7 @@ import { OCItem } from './models/vob';
 })
 export class WorldsComponent implements AfterViewInit {
   private gMap: GMap;
+  public world: World;
 
   constructor() { }
 
@@ -20,8 +21,8 @@ export class WorldsComponent implements AfterViewInit {
   }
 
   initWorld(fileResult) {
-    const world = new World(fileResult);
-    forEach(world.vobtree.ocItems, (vob: OCItem) => {
+    this.world = new World(fileResult);
+    forEach(this.world.vobtree.ocItems, (vob: OCItem) => {
       this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
     });
   }

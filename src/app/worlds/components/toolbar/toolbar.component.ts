@@ -1,4 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
+
+import { World } from '../../models/world';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,10 +8,16 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent {
+  public fileName = '';
+  public isOpenToolbar = true;
 
   @Output() fileResult = new EventEmitter<string>();
 
+  @Input() world: World;
+
   constructor() { }
 
-  emitFileResult(fileResult) { this.fileResult.emit(fileResult); }
+  emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
+  setFileName(fileName: string) { this.fileName = fileName; }
+  setIsOpenToolbar(value: boolean) { this.isOpenToolbar = value; }
 }

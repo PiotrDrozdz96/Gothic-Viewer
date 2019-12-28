@@ -1,5 +1,42 @@
-<div class="container">
-  <div class="input-file-wrapper">
-    <app-input-file (fileResult)="emitFileResult($event)"></app-input-file>
+<div class="button-wrapper">
+  <app-input-file
+    *ngIf="!world"
+    (fileResult)="emitFileResult($event)"
+    (fileName)="setFileName($event)"
+  ></app-input-file>
+  <div *ngIf="world">
+    <button
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="setIsOpenToolbar(true)"
+    >
+      TOOLBAR
+    </button>
   </div>
+</div>
+<div *ngIf="world && isOpenToolbar" class="toolbar">
+  <div class="header">
+    <div class="icon-button-right">
+      <button mat-icon-button>
+        <mat-icon>description</mat-icon>
+      </button>
+    </div>
+    <div class="file-name">
+      {{fileName}}
+    </div>
+    <div class="icon-button-left">
+      <app-input-file
+        type="icon"
+        (fileResult)="emitFileResult($event)"
+        (fileName)="setFileName($event)"
+      ></app-input-file>
+    </div>
+    <div class="icon-button-left">
+        <button mat-icon-button (click)="setIsOpenToolbar(false)">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+  </div>
+  <div class="content"></div>
 </div>

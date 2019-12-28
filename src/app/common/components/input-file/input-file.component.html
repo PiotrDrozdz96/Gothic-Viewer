@@ -1,5 +1,6 @@
 <input hidden (change)="onFileSelected($event)" #fileInput type="file">
 <button
+  *ngIf="type === 'mat-rised-button'"
   type="button"
   mat-raised-button
   color="accent"
@@ -7,4 +8,7 @@
 >
   Wybierz plik
 </button>
-<span *ngIf="showFileName" class="file-name">{{fileName}}</span>
+<button *ngIf="type === 'icon'" mat-icon-button (click)="fileInput.click()">
+  <mat-icon>insert_drive_file</mat-icon>
+</button>
+<span *ngIf="showLabel" class="label">{{label}}</span>
