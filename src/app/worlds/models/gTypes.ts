@@ -1,12 +1,14 @@
-import _split from 'lodash/split';
-import _join from 'lodash/join';
-import _map from 'lodash/map';
-import _compact from 'lodash/compact';
-import _chunk from 'lodash/chunk';
-import _replace from 'lodash/replace';
-import _last from 'lodash/last';
-import _trim from 'lodash/trim';
-import _flatten from 'lodash/flatten';
+import {
+  split,
+  join,
+  map,
+  compact,
+  chunk,
+  replace,
+  last,
+  trim,
+  flatten
+} from 'lodash';
 
 import { vobPropWhitespace } from '../consts/whitespaces';
 import { getVobProp } from '../utils/getVobProp';
@@ -51,10 +53,10 @@ export class GVec3 implements GType {
     public type: 'vec3',
     value: string,
   ) {
-    this.value = _map(_split(value, ' '), parseFloat);
+    this.value = map(split(value, ' '), parseFloat);
   }
   toString(): string {
-    return `${this.type}:${_join(this.value, ' ')}`;
+    return `${this.type}:${join(this.value, ' ')}`;
   }
 }
 
@@ -86,10 +88,10 @@ export class GColor implements GType {
     public type: 'color',
     value: string,
   ) {
-    this.value = _split(value, ' ');
+    this.value = split(value, ' ');
   }
   toString(): string {
-    return `${this.type}:${_join(this.value, ' ')}`;
+    return `${this.type}:${join(this.value, ' ')}`;
   }
 }
 
@@ -99,14 +101,14 @@ export class GColorList implements GType {
     public type: 'string',
     value: string,
   ) {
-    const colors = _split(_trim(value), ') (');
-    colors[0] = _replace(colors[0], '(', '');
-    colors[colors.length - 1] = _replace(_last(colors), ')', '');
-    this.value = _map(colors, (color) => _split(color, ' '));
+    const colors = split(trim(value), ') (');
+    colors[0] = replace(colors[0], '(', '');
+    colors[colors.length - 1] = replace(last(colors), ')', '');
+    this.value = map(colors, (color) => split(color, ' '));
   }
   toString(): string {
-    return `${this.type}:${_join(_map(this.value, (color: Color) => (
-      `(${_join(color, ' ')})`
+    return `${this.type}:${join(map(this.value, (color: Color) => (
+      `(${join(color, ' ')})`
     )), ' ')}`;
   }
 }
@@ -119,9 +121,9 @@ interface Trigger {
 export class TriggerList {
   value: Array<Trigger>;
   constructor(lines: Array<string>) {
-    this.value = _map(_chunk(lines, 2), (chunk) => {
-      const triggerTarget = getVobProp(chunk[0]);
-      const fireDelay = getVobProp(chunk[1]);
+    this.value = map(chunk(lines, 2), (singleChunk) => {
+      const triggerTarget = getVobProp(singleChunk[0]);
+      const fireDelay = getVobProp(singleChunk[1]);
       return {
         triggerTarget: new GString(triggerTarget.type, triggerTarget.value),
         fireDelay: new GFloat(fireDelay.type, fireDelay.value)
@@ -129,14 +131,14 @@ export class TriggerList {
     });
   }
   getLines(): Array<string> {
-    return _flatten(_map(this.value, (trigger, i) => ([
+    return flatten(map(this.value, (trigger, i) => ([
       `triggerTarget${i}=${trigger.triggerTarget.toString()}`,
       `fireDelay${i}=${trigger.fireDelay.toString()}`
     ])));
   }
   toString(whitespace = vobPropWhitespace): string {
     return `${whitespace}numTarget=int:${this.value.length}\n${
-      _join(_map(this.getLines(), (line) => `${whitespace}${line}`), '\n')
+      join(map(this.getLines(), (line) => `${whitespace}${line}`), '\n')
     }`;
   }
 }
@@ -160,10 +162,10 @@ export class Chest {
     public type: 'string',
     value: string,
   ) {
-    this.value = _map(_compact(_split(value, ',')), (item) => new Items(item));
+    this.value = map(compact(split(value, ',')), (item) => new Items(item));
   }
   toString(): string {
-    return _join(_map(this.value, (item) => item.toString()), ',');
+    return join(map(this.value, (item) => item.toString()), ',');
   }
 }
 
@@ -174,6 +176,6 @@ export class Rest {
     this.value.push(value);
   }
   toString(whitespace = vobPropWhitespace): string {
-    return _join(_map(this.value, (line) => `${whitespace}${line}`), '\n');
+    return join(map(this.value, (line) => `${whitespace}${line}`), '\n');
   }
 }

@@ -1,5 +1,4 @@
-import _random from 'lodash/random';
-import _keys from 'lodash/keys';
+import { random, keys } from 'lodash';
 
 import {
   GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest, GVec3
@@ -102,15 +101,15 @@ describe('GTypes', () => {
       expect(triggerList.value.length).toEqual(lines.length / 2);
     });
     it('should save array of objects', () => {
-      const index = _random(0, 5);
-      expect(_keys(triggerList.value[index])).toEqual(['triggerTarget', 'fireDelay']);
+      const index = random(0, 5);
+      expect(keys(triggerList.value[index])).toEqual(['triggerTarget', 'fireDelay']);
     });
     it('should save triggerTarget to correctly object in list', () => {
-      const index = _random(0, 5);
+      const index = random(0, 5);
       expect(triggerList.value[index].triggerTarget.value).toEqual(`EVT_CASTLE_FLOOR_${index}`);
     });
     it('should save fireDelay to correctly object in list', () => {
-      const index = _random(0, 5);
+      const index = random(0, 5);
       expect(triggerList.value[index].fireDelay.value).toEqual(`${index}`);
     });
     it('getLines should return the same value as input', () => {

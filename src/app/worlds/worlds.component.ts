@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import _forEach from 'lodash/forEach';
+import { forEach } from 'lodash';
 
 import { World } from './models/world';
 import { GMap } from './models/gMap';
@@ -21,7 +21,7 @@ export class WorldsComponent implements AfterViewInit {
 
   initWorld(fileResult) {
     const world = new World(fileResult);
-    _forEach(world.vobtree.ocItems, (vob: OCItem) => {
+    forEach(world.vobtree.ocItems, (vob: OCItem) => {
       this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
     });
   }

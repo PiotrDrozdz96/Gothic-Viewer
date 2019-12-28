@@ -1,6 +1,5 @@
 import * as moment from 'moment';
-import _findIndex from 'lodash/findIndex';
-import _join from 'lodash/join';
+import { findIndex, join } from 'lodash';
 
 const zenGin = 'ZenGin Archive';
 const genericArchive = 'zCArchiverGeneric';
@@ -82,7 +81,7 @@ export class PrefixZenData {
     if (prefix.length !== 11) {
       this.setError(errorMessages[0]);
     } else {
-      const errorIndex = _findIndex(converters, (condition, i) => condition(prefix[i]));
+      const errorIndex = findIndex(converters, (condition, i) => condition(prefix[i]));
       if (errorIndex !== -1) { this.setError(errorMessages[errorIndex]); }
     }
   }
@@ -93,7 +92,7 @@ export class PrefixZenData {
   }
 
   public toString() {
-    return _join([
+    return join([
       zenGin,
       `ver ${this.ver}`,
       genericArchive,

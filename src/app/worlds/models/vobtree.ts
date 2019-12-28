@@ -1,6 +1,4 @@
-import _split from 'lodash/split';
-import _slice from 'lodash/slice';
-import _map from 'lodash/map';
+import { split, slice, map } from 'lodash';
 
 import { getVob } from '../utils/getVob';
 import { OC_MOB_INTER, OC_ITEM } from '../consts/vobTypes';
@@ -12,8 +10,8 @@ export class Vobtree {
   ocItems: Array<OCItem> = [];
 
   constructor(data: string) {
-    const childs = _slice(_split(data, 'childs'), 1, -2);
-    this.vobtree = _map(childs, (vobString) => {
+    const childs = slice(split(data, 'childs'), 1, -2);
+    this.vobtree = map(childs, (vobString) => {
       const vob = getVob(vobString);
       if (vob.vobType.type === OC_MOB_INTER) {
         this.ocMobsInter.push(vob as OCMobInter);

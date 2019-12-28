@@ -1,9 +1,4 @@
-import _forEach from 'lodash/forEach';
-import _findIndex from 'lodash/findIndex';
-import _trim from 'lodash/trim';
-import _omit from 'lodash/omit';
-import _keys from 'lodash/keys';
-import _join from 'lodash/join';
+import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '../consts/whitespaces';
 import { vobPropConstructors } from '../consts/vobPropConstructors';
@@ -50,7 +45,7 @@ export class ZCVob {
     vobProps: Array<string>
   ) {
     let restMode = false;
-    _forEach(vobProps, (line) => {
+    forEach(vobProps, (line) => {
       if (!restMode) {
         const {key, type, value} = getVobProp(line);
         if (key === 'rest') {
@@ -68,14 +63,14 @@ export class ZCVob {
         if (line.includes('[]')) {
           restMode = false;
         }
-        this.rest.push(_trim(line));
+        this.rest.push(trim(line));
       }
     });
   }
   toString(): any {
-    const vobProps = _omit(this, ['index', 'unknownValue', 'vobType']);
+    const vobProps = omit(this, ['index', 'unknownValue', 'vobType']);
     const lines = [];
-    _forEach(vobProps, (prop, key) => {
+    forEach(vobProps, (prop, key) => {
       if (key !== 'rest' && key !== 'triggerList') {
         lines.push(`${vobPropWhitespace}${key}=${prop.toString()}`);
       } else {
@@ -85,7 +80,7 @@ export class ZCVob {
     return (
       `${vobWhitespace}childs${this.index}=${this.unknownValue.toString()}\n` +
       `${this.vobType.toString()}\n` +
-      `${_join(lines, '\n')}\n` +
+      `${join(lines, '\n')}\n` +
       `${vobWhitespace}[]\n`
     );
   }
@@ -222,12 +217,12 @@ export class ZCTriggerList extends ZCTrigger {
       index,
       unknownValue,
       vobType,
-      vobProps.slice(0, _findIndex(vobProps, (line) => (
+      vobProps.slice(0, findIndex(vobProps, (line) => (
         /numTarget=int:\d*/.test(line)
       )))
     );
     this.triggerList = new TriggerList(
-      vobProps.slice(_findIndex(vobProps, (line) => (
+      vobProps.slice(findIndex(vobProps, (line) => (
         /numTarget=int:\d*/.test(line)
       )) + 1)
     );

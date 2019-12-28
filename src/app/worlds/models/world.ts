@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import _split from 'lodash/split';
+import { split } from 'lodash';
 
 import { extractPrefixZenData } from '../utils/extractPrefixZenData';
 
@@ -19,8 +19,8 @@ export class World {
       alert(prefixZenData.error);
     } else {
       this.prefixZenData = prefixZenData;
-      const [binary, withoutBinary] = _split(withoutPrefix, '[VobTree % 0 0]', 2);
-      const [vobtree, waynet] = _split(withoutBinary, '[WayNet % 0 0]', 2);
+      const [binary, withoutBinary] = split(withoutPrefix, '[VobTree % 0 0]', 2);
+      const [vobtree, waynet] = split(withoutBinary, '[WayNet % 0 0]', 2);
       this.binary = binary;
       this.vobtree = new Vobtree(vobtree);
       this.waynet = new Waynet(waynet);

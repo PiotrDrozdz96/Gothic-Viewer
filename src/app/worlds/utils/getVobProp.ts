@@ -1,4 +1,4 @@
-import _trim from 'lodash/trim';
+import { trim } from 'lodash';
 
 export function getVobProp(line: string) {
   const match = line.match(/\s*([^=]+)=([^:]+):(.*)/);
@@ -6,6 +6,6 @@ export function getVobProp(line: string) {
     const [, key, type, value] = match;
     return {key, type, value: value || ''};
   } else {
-    return {key: 'rest', type: '', value: _trim(line)};
+    return {key: 'rest', type: '', value: trim(line)};
   }
 }
