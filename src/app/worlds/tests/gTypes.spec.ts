@@ -1,7 +1,9 @@
 import _random from 'lodash/random';
 import _keys from 'lodash/keys';
 
-import { GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest } from '../models/gTypes';
+import {
+  GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest, GVec3
+} from '../models/gTypes';
 
 describe('GTypes', () => {
 
@@ -16,6 +18,19 @@ describe('GTypes', () => {
     });
     it('toString should return correctly string', () => {
       expect(gType.toString()).toEqual('int:0');
+    });
+  });
+
+  describe('GVec3', () => {
+    const gType = new GVec3('vec3', '34305.1523 -4192 14397.9463');
+    it('should have correctly type', () => {
+      expect(gType.type).toEqual('vec3');
+    });
+    it('should have correctly value', () => {
+      expect(gType.value).toEqual([34305.1523, -4192, 14397.9463]);
+    });
+    it('toString should return correctly string', () => {
+      expect(gType.toString()).toEqual('vec3:34305.1523 -4192 14397.9463');
     });
   });
 

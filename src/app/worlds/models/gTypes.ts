@@ -45,8 +45,17 @@ export class GRaw extends GTypeSimilarString {
   type: 'raw';
 }
 
-export class GVec3 extends GTypeSimilarString {
-  type: 'vec3';
+export class GVec3 implements GType {
+  value: Array<number>;
+  constructor(
+    public type: 'vec3',
+    value: string,
+  ) {
+    this.value = _map(_split(value, ' '), parseFloat);
+  }
+  toString(): string {
+    return `${this.type}:${_join(this.value, ' ')}`;
+  }
 }
 
 export class GEnum extends GTypeSimilarString {
