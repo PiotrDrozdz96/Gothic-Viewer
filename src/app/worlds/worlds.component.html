@@ -1,5 +1,5 @@
 <div class="nav-bar">
-  <input type="file" (change)="openFile($event)">
+  <app-input-file (fileResult)="initWorld($event)"></app-input-file>
 </div>
 <div class="map-container">
   <div class="map-frame">

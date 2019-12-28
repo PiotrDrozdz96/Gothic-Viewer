@@ -1,6 +1,7 @@
 .nav-bar {
   height: 55px;
   background-color: #91241a;
+  padding: 10px 16px;
 }
 
 .map-container {

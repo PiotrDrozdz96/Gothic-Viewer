@@ -19,12 +19,10 @@ export class WorldsComponent implements AfterViewInit {
     this.gMap = new GMap();
   }
 
-  openFile(event) {
-    const world = new World(event.target.files[0]);
-    world.afterInit(() => {
-      _forEach(world.vobtree.ocItems, (vob: OCItem) => {
-        this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
-      });
+  initWorld(fileResult) {
+    const world = new World(fileResult);
+    _forEach(world.vobtree.ocItems, (vob: OCItem) => {
+      this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
     });
   }
 

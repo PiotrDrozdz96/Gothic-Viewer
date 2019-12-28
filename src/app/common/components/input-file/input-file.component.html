@@ -1,0 +1,10 @@
+<input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+<button
+  type="button"
+  mat-raised-button
+  color="accent"
+  (click)="fileInput.click()"
+>
+  Wybierz plik
+</button>
+<span class="file-name">{{fileName}}</span>
