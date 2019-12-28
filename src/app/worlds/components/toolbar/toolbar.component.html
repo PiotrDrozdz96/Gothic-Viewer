@@ -15,7 +15,7 @@
     </button>
   </div>
 </div>
-<div *ngIf="world && isOpenToolbar" class="toolbar">
+<div *ngIf="world && isOpenToolbar" class="toolbar" [@enterAnimation]>
   <div class="header">
     <div class="icon-button-right">
       <button mat-icon-button>
