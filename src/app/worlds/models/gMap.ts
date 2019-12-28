@@ -13,6 +13,7 @@ export class GMap {
   constructor() {
     this.map = L.map('map', {
       crs: L.CRS.Simple,
+      zoomControl: false,
     });
     const imageObs = getImage(imageUrl).subscribe((imageElement) => {
       const bounds: L.LatLngBoundsExpression = [

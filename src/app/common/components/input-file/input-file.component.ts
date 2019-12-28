@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-input-file',
@@ -6,6 +6,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./input-file.component.css']
 })
 export class InputFileComponent {
+
+  @Input() showFileName = false;
 
   @Output() fileResult = new EventEmitter<string>();
   fileName = 'Nie wybrano pliku';
@@ -17,7 +19,7 @@ export class InputFileComponent {
     reader.readAsText(event.target.files[0]);
     this.fileName = event.target.files[0].name;
     reader.onload = () => {
-      this.fileResult.emit(reader.result);
+      this.fileResult.emit(reader.result as string);
     };
   }
 

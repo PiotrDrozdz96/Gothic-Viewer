@@ -1,0 +1,9 @@
+.container {
+  position: absolute;
+  z-index: 1;
+}
+
+.input-file-wrapper {
+  margin-left: 16px;
+  margin-top: 8px;
+}

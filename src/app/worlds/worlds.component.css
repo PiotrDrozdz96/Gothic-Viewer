@@ -1,12 +1,6 @@
-.nav-bar {
-  height: 55px;
-  background-color: #91241a;
-  padding: 10px 16px;
-}
-
 .map-container {
   position: absolute;
-  top: 55px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
