@@ -1,17 +1,21 @@
+.nav-bar {
+  height: 55px;
+  background-color: #91241a;
+}
+
 .map-container {
   position: absolute;
-  top: 0;
+  top: 55px;
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 30px;
 }
 
 .map-frame {
-  border: 2px solid black;
   height: 100%;
 }
 
 #map {
   height: 100%;
+  background-color: #1c1e1f;
 }
