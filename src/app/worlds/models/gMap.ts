@@ -1,6 +1,7 @@
 import * as L from 'leaflet';
 
 import { getImage } from '../utils/getImage';
+import { greenIcon } from '../consts/leaflet-color-markers';
 import { GVec3 } from './gTypes';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
@@ -26,6 +27,9 @@ export class GMap {
 
   addMarker(vec3: GVec3, title: string) {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
-    L.marker([(z / divider), (x / divider)], {title}).addTo(this.map);
+    L.marker([(z / divider), (x / divider)], {
+      title,
+      icon: greenIcon
+    }).addTo(this.map);
   }
 }
