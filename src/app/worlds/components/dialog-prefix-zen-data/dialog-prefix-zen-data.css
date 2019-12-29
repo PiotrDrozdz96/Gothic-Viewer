@@ -1,0 +1,19 @@
+.content {
+  font-size: 14px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.label {
+  padding-bottom: 7px;
+}
+
+.file-name {
+  font-size: 18px; 
+}
+
+.actions {
+  float: right;
+}

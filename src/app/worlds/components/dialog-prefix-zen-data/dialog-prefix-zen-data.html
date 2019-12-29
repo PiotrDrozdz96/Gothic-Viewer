@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Szczegóły mapy</h1>
+<div mat-dialog-content class="content">
+  <div class="section">
+    <div class="label">Nazwa</div>
+    <div class="file-name">{{data.fileName}}</div>
+  </div>
+  <div>
+    <div class="label">Opis</div>
+    <div style="white-space: pre-line">{{data.prefixZenData.toString()}}</div>
+  </div>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button [mat-dialog-close] cdkFocusInitial>GOTOWE</button>
+</div>

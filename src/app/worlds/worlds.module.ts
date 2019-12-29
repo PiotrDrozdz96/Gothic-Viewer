@@ -5,11 +5,13 @@ import { ComponentsModule } from '../common/components/components.module';
 
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { WorldsComponent } from './worlds.component';
+import { DialogPrefixZenData } from './components/dialog-prefix-zen-data/dialog-prefix-zen-data';
 
 @NgModule({
   declarations: [
     WorldsComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    DialogPrefixZenData
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,9 @@ import { WorldsComponent } from './worlds.component';
   ],
   exports: [
     WorldsComponent
+  ],
+  entryComponents: [
+    DialogPrefixZenData
   ]
 })
 export class WorldsModule { }
