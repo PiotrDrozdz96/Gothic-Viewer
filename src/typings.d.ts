@@ -4,3 +4,9 @@ declare module '*mock' {
 }
 
 type CallbackFunction = () => void;
+
+type SimpleChange<T> = {
+  previousValue: T;
+  currentValue: T;
+  firstChange: boolean;
+}

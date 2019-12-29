@@ -1,9 +1,13 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
+import { mapValues, forEach, has } from 'lodash';
 
+import { VobTreeFilter, OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
 import { DialogPrefixZenData } from '../../components/dialog-prefix-zen-data/dialog-prefix-zen-data';
+
+const initChecked = [OC_ITEM];
 
 @Component({
   selector: 'app-toolbar',
@@ -24,15 +28,28 @@ import { DialogPrefixZenData } from '../../components/dialog-prefix-zen-data/dia
     )
   ],
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnChanges {
   public fileName = '';
   public isOpenToolbar = true;
+  public vobTreeFilter: VobTreeFilter;
 
   @Output() fileResult = new EventEmitter<string>();
 
   @Input() world: World;
 
   constructor(public dialog: MatDialog) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    const { previousValue, currentValue, firstChange } = changes.world as SimpleChange<World>;
+    if (currentValue) {
+      this.vobTreeFilter = mapValues(currentValue.vobtree, () => false);
+      forEach(initChecked, (key) => {
+        if (has(this.vobTreeFilter, key)) {
+          this.vobTreeFilter[key] = true;
+        }
+      });
+    }
+  }
 
   emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
   setFileName(fileName: string) { this.fileName = fileName; }

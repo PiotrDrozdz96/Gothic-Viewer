@@ -23,7 +23,6 @@ export class WorldsComponent implements AfterViewInit {
 
   initWorld(fileResult) {
     this.world = new World(fileResult);
-    console.log(this.world.vobtree);
     forEach(this.world.vobtree[OC_ITEM], (vob: OCItem) => {
       this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
     });

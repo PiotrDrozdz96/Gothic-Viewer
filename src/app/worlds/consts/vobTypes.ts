@@ -119,3 +119,42 @@ export interface VobTreeInterface {
   [OC_MOB_DOOR]?: Array<OCMobDoor>;
   [OC_MOB_CONTAINER]?: Array<OCMobContainer>;
 }
+
+export interface VobTreeFilter {
+  [SIMPLE_VOB]?: boolean;
+  [VOB_LEVEL_COMPO]?: boolean;
+  [VOB_SPOT]?: boolean;
+  [VOB_LIGHT]?: boolean;
+  [VOB_SOUND]?: boolean;
+  [VOB_SOUND_DAYTIME]?: boolean;
+  [VOB_LENS_FLARE]?: boolean;
+  [VOB_STAIR]?: boolean;
+  [VOB_FAR_PLANE]?: boolean;
+  [VOB_FAR_PLANE_DEFAULT]?: boolean;
+  [VOB_SCREEN_FX]?: boolean;
+  [VOB_ANIMATE]?: boolean;
+  [VOB_START_POINT]?: boolean;
+
+  [ZC_PFX_CONTROLLER]?: boolean;
+  [ZC_ZONE_FOG]?: boolean;
+  [ZC_ZONE_FOG_DEFAULT]?: boolean;
+  [ZC_CS_TRIGGER]?: boolean;
+  [ZC_TRIGGER_CHANGE_LEVEL]?: boolean;
+  [ZC_TRIGGER_SCRIPT]?: boolean;
+  [ZC_TRIGGER_LIST]?: boolean;
+  [ZC_MOVER]?: boolean;
+
+  [OC_ITEM]?: boolean;
+  [OC_ZONE_MUSIC]?: boolean;
+  [OC_ZONE_MUSIC_DEFAULT]?: boolean;
+
+  [OC_MOB]?: boolean;
+  [OC_MOB_INTER]?: boolean;
+  [OC_MOB_WHEEL]?: boolean;
+  [OC_MOB_SWITCH]?: boolean;
+  [OC_MOB_LADDER]?: boolean;
+  [OC_MOB_BED]?: boolean;
+  [OC_MOB_FIRE]?: boolean;
+  [OC_MOB_DOOR]?: boolean;
+  [OC_MOB_CONTAINER]?: boolean;
+}
