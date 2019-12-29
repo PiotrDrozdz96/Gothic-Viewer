@@ -26,11 +26,20 @@ export class GMap {
     });
   }
 
-  addMarker(vec3: GVec3, title: string) {
+  createMarker(vec3: GVec3, title: string): L.Marker {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
-    L.marker([(z / divider), (x / divider)], {
+    return L.marker([(z / divider), (x / divider)], {
       title,
       icon: greenIcon
-    }).addTo(this.map);
+    });
+  }
+
+  addMarker(marker: L.Marker) {
+    marker.addTo(this.map);
+  }
+
+  removeMarker(marker: L.Marker) {
+    marker.removeFrom(this.map);
   }
 }
+

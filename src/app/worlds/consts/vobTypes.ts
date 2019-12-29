@@ -120,41 +120,46 @@ export interface VobTreeInterface {
   [OC_MOB_CONTAINER]?: Array<OCMobContainer>;
 }
 
-export interface VobTreeFilter {
-  [SIMPLE_VOB]?: boolean;
-  [VOB_LEVEL_COMPO]?: boolean;
-  [VOB_SPOT]?: boolean;
-  [VOB_LIGHT]?: boolean;
-  [VOB_SOUND]?: boolean;
-  [VOB_SOUND_DAYTIME]?: boolean;
-  [VOB_LENS_FLARE]?: boolean;
-  [VOB_STAIR]?: boolean;
-  [VOB_FAR_PLANE]?: boolean;
-  [VOB_FAR_PLANE_DEFAULT]?: boolean;
-  [VOB_SCREEN_FX]?: boolean;
-  [VOB_ANIMATE]?: boolean;
-  [VOB_START_POINT]?: boolean;
+interface VobFilter {
+  checked: boolean;
+  markers: Array<L.Marker>;
+}
 
-  [ZC_PFX_CONTROLLER]?: boolean;
-  [ZC_ZONE_FOG]?: boolean;
-  [ZC_ZONE_FOG_DEFAULT]?: boolean;
-  [ZC_CS_TRIGGER]?: boolean;
-  [ZC_TRIGGER_CHANGE_LEVEL]?: boolean;
-  [ZC_TRIGGER_SCRIPT]?: boolean;
-  [ZC_TRIGGER_LIST]?: boolean;
-  [ZC_MOVER]?: boolean;
+export interface VobFilters {
+  [SIMPLE_VOB]?: VobFilter;
+  [VOB_LEVEL_COMPO]?: VobFilter;
+  [VOB_SPOT]?: VobFilter;
+  [VOB_LIGHT]?: VobFilter;
+  [VOB_SOUND]?: VobFilter;
+  [VOB_SOUND_DAYTIME]?: VobFilter;
+  [VOB_LENS_FLARE]?: VobFilter;
+  [VOB_STAIR]?: VobFilter;
+  [VOB_FAR_PLANE]?: VobFilter;
+  [VOB_FAR_PLANE_DEFAULT]?: VobFilter;
+  [VOB_SCREEN_FX]?: VobFilter;
+  [VOB_ANIMATE]?: VobFilter;
+  [VOB_START_POINT]?: VobFilter;
 
-  [OC_ITEM]?: boolean;
-  [OC_ZONE_MUSIC]?: boolean;
-  [OC_ZONE_MUSIC_DEFAULT]?: boolean;
+  [ZC_PFX_CONTROLLER]?: VobFilter;
+  [ZC_ZONE_FOG]?: VobFilter;
+  [ZC_ZONE_FOG_DEFAULT]?: VobFilter;
+  [ZC_CS_TRIGGER]?: VobFilter;
+  [ZC_TRIGGER_CHANGE_LEVEL]?: VobFilter;
+  [ZC_TRIGGER_SCRIPT]?: VobFilter;
+  [ZC_TRIGGER_LIST]?: VobFilter;
+  [ZC_MOVER]?: VobFilter;
 
-  [OC_MOB]?: boolean;
-  [OC_MOB_INTER]?: boolean;
-  [OC_MOB_WHEEL]?: boolean;
-  [OC_MOB_SWITCH]?: boolean;
-  [OC_MOB_LADDER]?: boolean;
-  [OC_MOB_BED]?: boolean;
-  [OC_MOB_FIRE]?: boolean;
-  [OC_MOB_DOOR]?: boolean;
-  [OC_MOB_CONTAINER]?: boolean;
+  [OC_ITEM]?: VobFilter;
+  [OC_ZONE_MUSIC]?: VobFilter;
+  [OC_ZONE_MUSIC_DEFAULT]?: VobFilter;
+
+  [OC_MOB]?: VobFilter;
+  [OC_MOB_INTER]?: VobFilter;
+  [OC_MOB_WHEEL]?: VobFilter;
+  [OC_MOB_SWITCH]?: VobFilter;
+  [OC_MOB_LADDER]?: VobFilter;
+  [OC_MOB_BED]?: VobFilter;
+  [OC_MOB_FIRE]?: VobFilter;
+  [OC_MOB_DOOR]?: VobFilter;
+  [OC_MOB_CONTAINER]?: VobFilter;
 }

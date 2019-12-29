@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { forEach } from 'lodash';
 
 import { World } from './models/world';
@@ -11,21 +11,18 @@ import { OC_ITEM } from './consts/vobTypes';
   templateUrl: './worlds.component.html',
   styleUrls: ['./worlds.component.css']
 })
-export class WorldsComponent implements AfterViewInit {
-  private gMap: GMap;
+export class WorldsComponent implements OnInit {
+  public gMap: GMap;
   public world: World;
 
   constructor() { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.gMap = new GMap();
   }
 
   initWorld(fileResult) {
     this.world = new World(fileResult);
-    forEach(this.world.vobtree[OC_ITEM], (vob: OCItem) => {
-      this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
-    });
   }
 
 }
