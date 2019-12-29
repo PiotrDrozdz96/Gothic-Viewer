@@ -4,6 +4,7 @@ import { forEach } from 'lodash';
 import { World } from './models/world';
 import { GMap } from './models/gMap';
 import { OCItem } from './models/vob';
+import { OC_ITEM } from './consts/vobTypes';
 
 @Component({
   selector: 'app-worlds',
@@ -22,7 +23,8 @@ export class WorldsComponent implements AfterViewInit {
 
   initWorld(fileResult) {
     this.world = new World(fileResult);
-    forEach(this.world.vobtree.ocItems, (vob: OCItem) => {
+    console.log(this.world.vobtree);
+    forEach(this.world.vobtree[OC_ITEM], (vob: OCItem) => {
       this.gMap.addMarker(vob.trafoOSToWSPos, vob.itemInstance.value);
     });
   }

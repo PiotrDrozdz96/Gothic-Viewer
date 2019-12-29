@@ -1,5 +1,5 @@
 import {
-  VobType, ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
+  ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
   ZCVobAnimate, ZCVobStartPoint, ZCPFXController, ZCZoneZFog, OCCSTrigger, OCTriggerChangeLevel,
   ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
@@ -43,6 +43,7 @@ export const OC_MOB_DOOR = 'oCMobDoor:oCMobInter:oCMOB:';
 export const OC_MOB_CONTAINER = 'oCMobContainer:oCMobInter:oCMOB:';
 
 export const constructors = {
+  [SIMPLE_VOB]: ZCVob,
   [VOB_LEVEL_COMPO]: ZCVobLevelCompo,
   [VOB_SPOT]: ZCVobSpot,
   [VOB_LIGHT]: ZCVobLight,
@@ -79,3 +80,42 @@ export const constructors = {
   [OC_MOB_DOOR]: OCMobDoor,
   [OC_MOB_CONTAINER]: OCMobContainer,
 };
+
+export interface VobTreeInterface {
+  [SIMPLE_VOB]?: Array<ZCVob>;
+  [VOB_LEVEL_COMPO]?: Array<ZCVobLevelCompo>;
+  [VOB_SPOT]?: Array<ZCVobSpot>;
+  [VOB_LIGHT]?: Array<ZCVobLight>;
+  [VOB_SOUND]?: Array<ZCVobSound>;
+  [VOB_SOUND_DAYTIME]?: Array<ZCVobSoundDaytime>;
+  [VOB_LENS_FLARE]?: Array<ZCVobLensFlare>;
+  [VOB_STAIR]?: Array<ZCVobStair>;
+  [VOB_FAR_PLANE]?: Array<ZCVobFarPlane>;
+  [VOB_FAR_PLANE_DEFAULT]?: Array<ZCVobFarPlane>;
+  [VOB_SCREEN_FX]?: Array<ZCVobScreenFX>;
+  [VOB_ANIMATE]?: Array<ZCVobAnimate>;
+  [VOB_START_POINT]?: Array<ZCVobStartPoint>;
+
+  [ZC_PFX_CONTROLLER]?: Array<ZCPFXController>;
+  [ZC_ZONE_FOG]?: Array<ZCZoneZFog>;
+  [ZC_ZONE_FOG_DEFAULT]?: Array<ZCZoneZFog>;
+  [ZC_CS_TRIGGER]?: Array<OCCSTrigger>;
+  [ZC_TRIGGER_CHANGE_LEVEL]?: Array<OCTriggerChangeLevel>;
+  [ZC_TRIGGER_SCRIPT]?: Array<ZCTriggerScript>;
+  [ZC_TRIGGER_LIST]?: Array<ZCTriggerList>;
+  [ZC_MOVER]?: Array<ZCMover>;
+
+  [OC_ITEM]?: Array<OCItem>;
+  [OC_ZONE_MUSIC]?: Array<OCZoneMusic>;
+  [OC_ZONE_MUSIC_DEFAULT]?: Array<OCZoneMusic>;
+
+  [OC_MOB]?: Array<OCMob>;
+  [OC_MOB_INTER]?: Array<OCMobInter>;
+  [OC_MOB_WHEEL]?: Array<OCMobWheel>;
+  [OC_MOB_SWITCH]?: Array<OCMobSwitch>;
+  [OC_MOB_LADDER]?: Array<OCMobLadder>;
+  [OC_MOB_BED]?: Array<OCMobBed>;
+  [OC_MOB_FIRE]?: Array<OCMobFire>;
+  [OC_MOB_DOOR]?: Array<OCMobDoor>;
+  [OC_MOB_CONTAINER]?: Array<OCMobContainer>;
+}
