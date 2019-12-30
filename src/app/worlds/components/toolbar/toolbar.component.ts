@@ -1,12 +1,13 @@
 import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
-import { mapValues, forEach, has, get, map } from 'lodash';
+import { mapValues, forEach, has, get, map, values, includes } from 'lodash';
 
-import { VobFilters, OC_ITEM } from '../../consts/vobTypes';
+import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
 import { GMap } from '../../models/gMap';
 import { oneOfVobType } from '../../models/vob';
+import { VobFilter, VobFilters } from '../../models/vobFilter';
 import { DialogPrefixZenData } from '../../components/dialog-prefix-zen-data/dialog-prefix-zen-data';
 
 const initChecked = [OC_ITEM];
@@ -45,17 +46,16 @@ export class ToolbarComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
-      this.vobfilters = mapValues(world.vobtree, (vobs: Array<oneOfVobType>) => {
+      this.vobfilters = map(values(world.vobtree), (vobs: Array<oneOfVobType>) => {
         return {
-          checked: false,
+          checked: includes(initChecked, vobs[0].vobType.type),
           markers: map(vobs, (vob: oneOfVobType) =>
             this.gMap.createMarker(vob.trafoOSToWSPos, vob.vobName.value))
         };
-    });
-      forEach(initChecked, (key) => {
-        if (has(this.vobfilters, key)) {
-          this.vobfilters[key].checked = true;
-          forEach(this.vobfilters[key].markers, (marker: L.Marker) => {
+      });
+      forEach(this.vobfilters, (vobFilter: VobFilter) => {
+        if (vobFilter.checked) {
+          forEach(vobFilter.markers, (marker: L.Marker) => {
             this.gMap.addMarker(marker);
           });
         }
