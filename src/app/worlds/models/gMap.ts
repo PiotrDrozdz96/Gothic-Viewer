@@ -1,4 +1,5 @@
 import * as L from 'leaflet';
+import { forEach } from 'lodash';
 
 import { getImage } from '../utils/getImage';
 import { greenIcon } from '../consts/leaflet-color-markers';
@@ -34,12 +35,16 @@ export class GMap {
     });
   }
 
-  addMarker(marker: L.Marker) {
-    marker.addTo(this.map);
+  addMarkers(markers: Array<L.Marker>) {
+    forEach(markers, (marker: L.Marker) => {
+      marker.addTo(this.map);
+    });
   }
 
-  removeMarker(marker: L.Marker) {
-    marker.removeFrom(this.map);
+  removeMarkers(markers: Array<L.Marker>) {
+    forEach(markers, (marker: L.Marker) => {
+      marker.removeFrom(this.map);
+    });
   }
 }
 

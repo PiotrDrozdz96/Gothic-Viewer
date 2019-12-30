@@ -34,7 +34,7 @@ const initChecked = [OC_ITEM];
 export class ToolbarComponent implements OnChanges {
   public fileName = '';
   public isOpenToolbar = true;
-  public vobfilters: VobFilters;
+  public vobFilters: VobFilters;
 
   @Output() fileResult = new EventEmitter<string>();
 
@@ -46,18 +46,17 @@ export class ToolbarComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
-      this.vobfilters = map(values(world.vobtree), (vobs: Array<oneOfVobType>) => {
+      this.vobFilters = map(values(world.vobtree), (vobs: Array<oneOfVobType>) => {
         return {
           checked: includes(initChecked, vobs[0].vobType.type),
+          text: vobs[0].vobType.type || 'zCVob',
           markers: map(vobs, (vob: oneOfVobType) =>
             this.gMap.createMarker(vob.trafoOSToWSPos, vob.vobName.value))
         };
       });
-      forEach(this.vobfilters, (vobFilter: VobFilter) => {
+      forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          forEach(vobFilter.markers, (marker: L.Marker) => {
-            this.gMap.addMarker(marker);
-          });
+          this.gMap.addMarkers(vobFilter.markers);
         }
       });
     }
@@ -74,5 +73,12 @@ export class ToolbarComponent implements OnChanges {
         prefixZenData: this.world.prefixZenData
       }
     });
+  }
+  onCheckboxChange({ checked }, markers) {
+    if (checked) {
+      this.gMap.addMarkers(markers);
+    } else {
+      this.gMap.removeMarkers(markers);
+    }
   }
 }

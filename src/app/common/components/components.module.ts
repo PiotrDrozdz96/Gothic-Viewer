@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -13,8 +15,11 @@ const components = [
 ];
 
 const modules = [
+  CommonModule,
+  FormsModule,
   BrowserAnimationsModule,
   MatButtonModule,
+  MatCheckboxModule,
   MatIconModule,
   MatDialogModule,
 ];
@@ -22,7 +27,6 @@ const modules = [
 @NgModule({
   declarations: components,
   imports: [
-    CommonModule,
     ...modules
   ],
   exports: [

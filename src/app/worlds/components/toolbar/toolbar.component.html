@@ -38,5 +38,15 @@
         </button>
       </div>
   </div>
-  <div class="content"></div>
+  <div class="content">
+    <div *ngFor="let vobFilter of vobFilters">
+      <mat-checkbox
+        color="warn"
+        [(ngModel)]="vobFilter.checked"
+        (change)="onCheckboxChange($event, vobFilter.markers)"
+      >
+        {{vobFilter.text}}
+      </mat-checkbox>
+    </div>
+  </div>
 </div>
