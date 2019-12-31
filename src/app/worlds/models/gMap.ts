@@ -10,6 +10,7 @@ const divider = 190;
 
 export class GMap {
   map: L.Map;
+  layerGroup = L.layerGroup;
 
   constructor() {
     this.map = L.map('map', {
@@ -35,16 +36,12 @@ export class GMap {
     });
   }
 
-  addMarkers(markers: Array<L.Marker>) {
-    forEach(markers, (marker: L.Marker) => {
-      marker.addTo(this.map);
-    });
+  addLayer(layer: L.Layer) {
+    layer.addTo(this.map);
   }
 
-  removeMarkers(markers: Array<L.Marker>) {
-    forEach(markers, (marker: L.Marker) => {
-      marker.removeFrom(this.map);
-    });
+  removeLayer(layer: L.Layer) {
+    layer.removeFrom(this.map);
   }
 }
 

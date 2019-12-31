@@ -50,13 +50,14 @@ export class ToolbarComponent implements OnChanges {
         return {
           checked: includes(initChecked, vobs[0].vobType.type),
           text: vobs[0].vobType.type || 'zCVob',
-          markers: map(vobs, (vob: oneOfVobType) =>
-            this.gMap.createMarker(vob.trafoOSToWSPos, vob.vobName.value))
+          layerGroup: this.gMap.layerGroup(map(vobs, (vob: oneOfVobType) =>
+            this.gMap.createMarker(vob.trafoOSToWSPos, vob.vobName.value)
+          ))
         };
       });
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          this.gMap.addMarkers(vobFilter.markers);
+          this.gMap.addLayer(vobFilter.layerGroup);
         }
       });
     }
@@ -74,11 +75,11 @@ export class ToolbarComponent implements OnChanges {
       }
     });
   }
-  onCheckboxChange({ checked }, markers) {
+  onCheckboxChange({ checked }, layerGroup: L.LayerGroup) {
     if (checked) {
-      this.gMap.addMarkers(markers);
+      this.gMap.addLayer(layerGroup);
     } else {
-      this.gMap.removeMarkers(markers);
+      this.gMap.removeLayer(layerGroup);
     }
   }
 }
