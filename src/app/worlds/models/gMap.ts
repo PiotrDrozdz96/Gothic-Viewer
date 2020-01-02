@@ -2,7 +2,7 @@ import * as L from 'leaflet';
 import { forEach } from 'lodash';
 
 import { getImage } from '../utils/getImage';
-import { greenIcon } from '../consts/leaflet-color-markers';
+import { getMarkerIcon } from '../utils/getMarkerIcon';
 import { GVec3 } from './gTypes';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
@@ -28,11 +28,11 @@ export class GMap {
     });
   }
 
-  createMarker(vec3: GVec3, title: string): L.Marker {
+  createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
     return L.marker([(z / divider), (x / divider)], {
       title,
-      icon: greenIcon
+      icon: getMarkerIcon(vobType),
     });
   }
 
