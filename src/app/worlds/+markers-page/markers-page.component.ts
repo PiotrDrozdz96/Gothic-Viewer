@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as html2canvas from 'html2canvas';
-import { forEach } from 'lodash';
+import * as JSZip from 'jszip';
+import { forEach, replace } from 'lodash';
+import { saveAs } from 'src/app/utils/fileSaver';
 
 import {
   VOB_LEVEL_COMPO, VOB_SPOT, VOB_LIGHT, VOB_SOUND, VOB_SOUND_DAYTIME,
@@ -69,6 +71,7 @@ export class MarkersPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker', 'canvas'];
   dataSource = ELEMENT_DATA;
   private renderedCount = 0;
+  private zip = new JSZip();
 
   constructor() { }
 
@@ -76,14 +79,27 @@ export class MarkersPageComponent implements AfterViewInit {
     forEach(this.dataSource, (element, index) => {
       html2canvas(
         document.getElementById(element.name),
-        { backgroundColor: 'transparent' },
+        { backgroundColor: 'transparent' }
       ).then((canvas) => {
         this.dataSource[index] = {...element, src: canvas.toDataURL('image/png') };
+        canvas.toBlob((blob) => {
+          this.zip.file(
+            replace(`${element.name}marker.png`, ':', '_'),
+            blob,
+            { base64: true }
+          );
+        });
         this.renderedCount++;
         if (this.renderedCount === this.dataSource.length) {
           this.dataSource = [...this.dataSource];
         }
       });
+    });
+  }
+
+  download() {
+    this.zip.generateAsync({ type: 'blob' }).then((blob) => {
+      saveAs('markers.zip', blob);
     });
   }
 

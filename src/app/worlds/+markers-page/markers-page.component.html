@@ -56,4 +56,15 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <div class="buttons">
+    <button
+      *ngIf="renderedCount === dataSource.length"
+      type="button"
+      mat-raised-button
+      color="accent"
+      (click)="download()"
+    >
+      Pobierz Markery
+    </button>
+  </div>
 </div>
