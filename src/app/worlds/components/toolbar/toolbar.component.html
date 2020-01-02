@@ -38,15 +38,17 @@
         </button>
       </div>
   </div>
-  <app-custom-scrollbar class="content">
-    <div class="filter" *ngFor="let vobFilter of vobFilters">
-      <mat-checkbox
-        color="warn"
-        [(ngModel)]="vobFilter.checked"
-        (change)="onCheckboxChange($event, vobFilter.layerGroup)"
-      >
-        {{vobFilter.text}} ({{vobFilter.length}})
-      </mat-checkbox>
-    </div>
-  </app-custom-scrollbar>
+  <div class="content">
+    <app-custom-scrollbar>
+      <div class="filter" *ngFor="let vobFilter of vobFilters">
+        <mat-checkbox
+          color="warn"
+          [(ngModel)]="vobFilter.checked"
+          (change)="onCheckboxChange($event, vobFilter.layerGroup)"
+        >
+          {{vobFilter.text}} ({{vobFilter.length}})
+        </mat-checkbox>
+      </div>
+    </app-custom-scrollbar>
+  </div>
 </div>
