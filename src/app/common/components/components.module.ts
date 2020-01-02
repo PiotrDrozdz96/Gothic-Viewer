@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -17,7 +16,6 @@ const components = [
 const modules = [
   CommonModule,
   FormsModule,
-  BrowserAnimationsModule,
   MatButtonModule,
   MatCheckboxModule,
   MatIconModule,

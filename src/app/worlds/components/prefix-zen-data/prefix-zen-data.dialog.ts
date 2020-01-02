@@ -9,13 +9,13 @@ interface Data {
 }
 
 @Component({
-  selector: 'dialog-prefix-zen-data',
-  styleUrls: ['./dialog-prefix-zen-data.css'],
-  templateUrl: 'dialog-prefix-zen-data.html',
+  selector: 'app-prefix-zen-data',
+  styleUrls: ['./prefix-zen-data.dialog.css'],
+  templateUrl: 'prefix-zen-data.dialog.html',
 })
-export class DialogPrefixZenData {
+export class PrefixZenDataDialog {
   constructor(
-    public dialogRef: MatDialogRef<DialogPrefixZenData>,
+    public dialogRef: MatDialogRef<PrefixZenDataDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Data
   ) { }
 }

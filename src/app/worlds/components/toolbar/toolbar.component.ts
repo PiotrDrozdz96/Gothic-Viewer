@@ -8,7 +8,7 @@ import { World } from '../../models/world';
 import { GMap } from '../../models/gMap';
 import { oneOfVobType } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../models/vobFilter';
-import { DialogPrefixZenData } from '../../components/dialog-prefix-zen-data/dialog-prefix-zen-data';
+import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
 
 const initChecked = [OC_ITEM];
 
@@ -67,7 +67,7 @@ export class ToolbarComponent implements OnChanges {
   setFileName(fileName: string) { this.fileName = fileName; }
   setIsOpenToolbar(value: boolean) { this.isOpenToolbar = value; }
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogPrefixZenData, {
+    const dialogRef = this.dialog.open(PrefixZenDataDialog, {
       minWidth: 520,
       data: {
         fileName: this.fileName,

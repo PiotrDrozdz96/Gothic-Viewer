@@ -1,17 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-
-import { WorldsModule } from './worlds/worlds.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    WorldsModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        loadChildren: './worlds/worlds.module#WorldsModule',
+      },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
