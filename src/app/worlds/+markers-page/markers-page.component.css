@@ -1,0 +1,18 @@
+.page {
+  padding: 50px;
+}
+
+table {
+  width: 100%;
+}
+
+.marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  color: #ffffff;
+  font-size: 16px;
+}
