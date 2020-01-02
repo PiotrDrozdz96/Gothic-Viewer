@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import * as html2canvas from 'html2canvas';
+import { forEach } from 'lodash';
 
 import {
-  SIMPLE_VOB, VOB_LEVEL_COMPO, VOB_SPOT, VOB_LIGHT, VOB_SOUND, VOB_SOUND_DAYTIME,
+  VOB_LEVEL_COMPO, VOB_SPOT, VOB_LIGHT, VOB_SOUND, VOB_SOUND_DAYTIME,
   VOB_LENS_FLARE, VOB_STAIR, VOB_FAR_PLANE, VOB_FAR_PLANE_DEFAULT, VOB_SCREEN_FX,
   VOB_ANIMATE, VOB_START_POINT, ZC_PFX_CONTROLLER, ZC_ZONE_FOG, ZC_ZONE_FOG_DEFAULT,
   ZC_CS_TRIGGER, ZC_TRIGGER_CHANGE_LEVEL, ZC_TRIGGER_SCRIPT, ZC_TRIGGER_LIST, ZC_MOVER,
@@ -15,7 +17,10 @@ export interface MarkerElement {
   color: 'blue' | 'red' | 'orange-dark' | 'orange' | 'yellow' | 'blue-dark'| 'cyan' | 'purple' | 'violet' | 'pink' | 'green-dark' | 'green' | 'green-light' | 'black' | 'white';
   shape: 'circle' | 'square' | 'star' | 'penta';
   icon: string;
+  src?: string;
 }
+
+const SIMPLE_VOB = 'zCVob:';
 
 const ELEMENT_DATA: Array<MarkerElement> = [
   { name: SIMPLE_VOB, color: 'blue-dark', shape: 'circle', icon: 'contact_support' },
@@ -60,10 +65,26 @@ const ELEMENT_DATA: Array<MarkerElement> = [
   templateUrl: './markers-page.component.html',
   styleUrls: ['./markers-page.component.css']
 })
-export class MarkersPageComponent {
-  displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker'];
+export class MarkersPageComponent implements AfterViewInit {
+  displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker', 'canvas'];
   dataSource = ELEMENT_DATA;
+  private renderedCount = 0;
 
   constructor() { }
+
+  ngAfterViewInit() {
+    forEach(this.dataSource, (element, index) => {
+      html2canvas(
+        document.getElementById(element.name),
+        { backgroundColor: 'transparent' },
+      ).then((canvas) => {
+        this.dataSource[index] = {...element, src: canvas.toDataURL('image/png') };
+        this.renderedCount++;
+        if (this.renderedCount === this.dataSource.length) {
+          this.dataSource = [...this.dataSource];
+        }
+      });
+    });
+  }
 
 }

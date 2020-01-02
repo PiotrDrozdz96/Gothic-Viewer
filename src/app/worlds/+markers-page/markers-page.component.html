@@ -1,4 +1,17 @@
 <div class="page">
+  <div
+    style="position: absolute; left: -50px"
+    *ngFor="let element of dataSource"
+  >
+    <div
+      [id]="element.name"
+      style="position:static"
+      [ngClass]="'marker extra-marker extra-marker-' + element.shape + '-' + element.color"
+    >
+      <mat-icon class="icon">{{element.icon}}</mat-icon>
+    </div>
+  </div>
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">   
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -24,11 +37,19 @@
       <th mat-header-cell *matHeaderCellDef> Marker </th>
       <td mat-cell *matCellDef="let element">
         <div
+          [id]="element.name"
           style="position:static"
           [ngClass]="'marker extra-marker extra-marker-' + element.shape + '-' + element.color"
         >
-        <mat-icon class="icon">{{element.icon}}</mat-icon>
+          <mat-icon class="icon">{{element.icon}}</mat-icon>
         </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="canvas">
+      <th mat-header-cell *matHeaderCellDef> PNG </th>
+      <td mat-cell *matCellDef="let element">
+        <img *ngIf="element.src" [src]="element.src">
       </td>
     </ng-container>
   
@@ -36,4 +57,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-
