@@ -38,15 +38,15 @@
         </button>
       </div>
   </div>
-  <div class="content">
-    <div *ngFor="let vobFilter of vobFilters">
+  <app-custom-scrollbar class="content">
+    <div class="filter" *ngFor="let vobFilter of vobFilters">
       <mat-checkbox
         color="warn"
         [(ngModel)]="vobFilter.checked"
         (change)="onCheckboxChange($event, vobFilter.layerGroup)"
       >
-        {{vobFilter.text}}
+        {{vobFilter.text}} ({{vobFilter.length}})
       </mat-checkbox>
     </div>
-  </div>
+  </app-custom-scrollbar>
 </div>

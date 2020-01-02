@@ -1,7 +1,7 @@
 import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
-import { mapValues, forEach, has, get, map, values, includes } from 'lodash';
+import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
 
 import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
@@ -49,10 +49,11 @@ export class ToolbarComponent implements OnChanges {
       this.vobFilters = map(values(world.vobtree), (vobs: Array<oneOfVobType>) => {
         return {
           checked: includes(initChecked, vobs[0].vobType.type),
-          text: vobs[0].vobType.type || 'zCVob',
+          text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
           layerGroup: this.gMap.layerGroup(map(vobs, (vob: oneOfVobType) =>
             this.gMap.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
-          ))
+          )),
+          length: vobs.length,
         };
       });
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
