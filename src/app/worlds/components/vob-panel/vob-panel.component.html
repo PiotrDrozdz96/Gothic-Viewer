@@ -9,7 +9,10 @@
   </div>
   <div class="content">
     <app-custom-scrollbar>
-      <div style="white-space: pre-line">{{vob}}</div>
+      <div *ngFor="let property of panelData" class="property">
+        <span class="key">{{property.key}}: </span>
+        <span class="value">{{property.value}}</span>
+      </div>
     </app-custom-scrollbar>
   </div>
 </div>

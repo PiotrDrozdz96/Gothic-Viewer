@@ -25,5 +25,19 @@
 }
 
 .content {
-  height: calc(100vh - 64px);
+  height: calc(100vh - 96px);
+  word-break: break-all;
+  padding: 12px 0 0 24px;
+}
+
+.property {
+  margin-bottom: 10px;
+}
+
+.key {
+  font-size: 12px;
+}
+
+.value {
+  font-size: 14px;
 }
