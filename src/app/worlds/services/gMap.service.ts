@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as L from 'leaflet';
-import { forEach, map } from 'lodash';
+import { forEach, map, omit } from 'lodash';
 
 import { getImage } from '../utils/getImage';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
@@ -18,6 +18,7 @@ const toolbardisplacement = 2.5;
 })
 export class GMapService {
   map: L.Map;
+  bouncingMarker: L.Marker;
   frontIndex = 20000;
 
   constructor() { }
@@ -59,10 +60,6 @@ export class GMapService {
   addMarker(marker: L.Marker): L.Marker { return marker.addTo(this.map); }
   removeMarker(marker: L.Marker): L.Marker { return marker.removeFrom(this.map); }
 
-  goToFront(marker: L.Marker) {
-    marker.removeFrom(this.map).setZIndexOffset(this.frontIndex++).addTo(this.map);
-  }
-
   addMarkersGroup(gMarkers: GMarkersGroup) {
     forEach(gMarkers.markers, (gMarker) => {
       this.addMarker(gMarker.marker);
@@ -75,10 +72,31 @@ export class GMapService {
     });
   }
 
-  centerMarker(marker: L.Marker) {
+  goToFront(marker: L.Marker) {
+    marker.removeFrom(this.map).setZIndexOffset(this.frontIndex++).addTo(this.map);
+  }
+
+  unbounceMarker() {
+    if (this.bouncingMarker) {
+      this.bouncingMarker.setIcon(new L.Icon(
+        omit(this.bouncingMarker.getIcon().options, ['className'])
+      ));
+      this.bouncingMarker = undefined;
+    }
+  }
+
+  bounceMarker(marker: L.Marker) {
+    this.unbounceMarker();
+    this.bouncingMarker = marker.setIcon(new L.Icon({
+      ...marker.getIcon().options,
+      className: 'bounce-marker',
+    }));
+  }
+
+  highlightMarker(marker: L.Marker) {
     const { lat, lng } = marker.getLatLng();
-    console.log(marker);
     this.goToFront(marker);
+    this.bounceMarker(marker);
     this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
   }
 }
