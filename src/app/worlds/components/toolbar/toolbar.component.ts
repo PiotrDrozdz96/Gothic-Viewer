@@ -53,16 +53,13 @@ export class ToolbarComponent implements OnChanges {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-            layerGroup: this.gMap.layerGroup(map(vobs, (vob: oneOfVobType) =>
-              this.gMap.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
-            )),
-            length: vobs.length,
+            layerGroup: this.gMap.layerGroup(vobs),
           };
         }
       );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          this.gMap.addLayer(vobFilter.layerGroup);
+          this.gMap.addLayer(vobFilter.layerGroup.layer);
         }
       });
     }

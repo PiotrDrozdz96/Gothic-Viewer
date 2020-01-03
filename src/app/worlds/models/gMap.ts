@@ -1,16 +1,17 @@
 import * as L from 'leaflet';
-import { forEach } from 'lodash';
+import { forEach, map } from 'lodash';
 
 import { getImage } from '../utils/getImage';
-import { getMarkerIcon } from '../utils/getMarkerIcon';
+import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
+import { GLayerGroup } from './gLayerGroup';
 import { GVec3 } from './gTypes';
+import { oneOfVobType } from './vob';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;
 
 export class GMap {
   map: L.Map;
-  layerGroup = L.layerGroup;
 
   constructor() {
     this.map = L.map('map', {
@@ -34,6 +35,16 @@ export class GMap {
       title,
       icon: getMarkerIcon(vobType),
     });
+  }
+
+  layerGroup(vobs: Array<oneOfVobType>): GLayerGroup {
+    return {
+      vobs,
+      iconUrl: getMarkerIconUrl(vobs[0].vobType.type),
+      layer: L.layerGroup(map(vobs, (vob: oneOfVobType) =>
+        this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
+      ))
+    };
   }
 
   addLayer(layer: L.Layer) {

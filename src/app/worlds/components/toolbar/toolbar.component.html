@@ -44,10 +44,15 @@
         <mat-checkbox
           color="warn"
           [(ngModel)]="vobFilter.checked"
-          (change)="onCheckboxChange($event, vobFilter.layerGroup)"
+          (change)="onCheckboxChange($event, vobFilter.layerGroup.layer)"
         >
-          {{vobFilter.text}} ({{vobFilter.length}})
+          {{vobFilter.text}} ({{vobFilter.layerGroup.vobs.length}})
         </mat-checkbox>
+        <app-vobs-list
+          [checked]="vobFilter.checked"
+          [text]="vobFilter.text"
+          [layerGroup]="vobFilter.layerGroup"
+        ></app-vobs-list>
       </div>
     </app-custom-scrollbar>
   </div>

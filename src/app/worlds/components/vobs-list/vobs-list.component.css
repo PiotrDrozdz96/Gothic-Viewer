@@ -1,0 +1,22 @@
+.button {
+  visibility: hidden;
+}
+
+.icon {
+  width: 18px;
+  height: 23px;
+}
+
+.list {
+  margin-left: 20px;
+}
+
+.list-element {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.list-element-text {
+  margin-left: 10px;
+}
