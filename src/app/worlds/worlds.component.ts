@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { forEach } from 'lodash';
 
 import { World } from './models/world';
-import { GMap } from './models/gMap';
 import { OCItem } from './models/vob';
 import { OC_ITEM } from './consts/vobTypes';
+import { GMapService } from './services/gMap.service';
 
 @Component({
   selector: 'app-worlds',
   templateUrl: './worlds.component.html',
   styleUrls: ['./worlds.component.css']
 })
-export class WorldsComponent implements OnInit {
-  public gMap: GMap;
+export class WorldsComponent implements AfterViewInit {
   public world: World;
 
-  constructor() { }
+  constructor(public gMap: GMapService) { }
 
-  ngOnInit() {
-    this.gMap = new GMap();
+  ngAfterViewInit() {
+    this.gMap.init();
   }
 
   initWorld(fileResult) {

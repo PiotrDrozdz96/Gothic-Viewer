@@ -5,10 +5,10 @@ import { mapValues, forEach, has, get, map, values, includes, split } from 'loda
 
 import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
-import { GMap } from '../../models/gMap';
 import { oneOfVobType } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../models/vobFilter';
 import { getSortedVobtree } from '../../utils/getSortedVobtree';
+import { GMapService } from '../../services/gMap.service';
 import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
 
 const initChecked = [OC_ITEM];
@@ -40,9 +40,8 @@ export class ToolbarComponent implements OnChanges {
   @Output() fileResult = new EventEmitter<string>();
 
   @Input() world: World;
-  @Input() gMap: GMap;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public gMap: GMapService, public dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);

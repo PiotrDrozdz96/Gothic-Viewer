@@ -2,6 +2,7 @@ import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { get } from 'lodash';
 
 import { GLayerGroup } from '../../models/GLayerGroup';
+import { GMapService } from '../../services/gMap.service';
 
 @Component({
   selector: 'app-vobs-list',
@@ -15,7 +16,7 @@ export class VobsListComponent implements OnChanges {
   @Input() text: string;
   @Input() layerGroup: GLayerGroup;
 
-  constructor() { }
+  constructor(public gMap: GMapService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     const checked: boolean = get(changes, ['checked', 'currentValue']);
