@@ -19,7 +19,6 @@ const toolbardisplacement = 2.5;
 export class GMapService {
   map: L.Map;
   bouncingMarker: L.Marker;
-  frontIndex = 20000;
 
   constructor() { }
 
@@ -72,10 +71,6 @@ export class GMapService {
     });
   }
 
-  goToFront(marker: L.Marker) {
-    marker.removeFrom(this.map).setZIndexOffset(this.frontIndex++).addTo(this.map);
-  }
-
   unbounceMarker() {
     if (this.bouncingMarker) {
       this.bouncingMarker.setIcon(new L.Icon(
@@ -95,7 +90,6 @@ export class GMapService {
 
   highlightMarker(marker: L.Marker) {
     const { lat, lng } = marker.getLatLng();
-    this.goToFront(marker);
     this.bounceMarker(marker);
     this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
   }
