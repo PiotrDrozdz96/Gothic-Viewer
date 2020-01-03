@@ -10,6 +10,8 @@ import { oneOfVobType } from '../models/vob';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;
+const zoom = 6;
+const toolbardisplacement = 2.5;
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +65,10 @@ export class GMapService {
     forEach(gMarkers.markers, (gMarker) => {
       gMarker.marker.removeFrom(this.map);
     });
+  }
+
+  centerMarker(marker: L.Marker) {
+    const { lat, lng } = marker.getLatLng();
+    this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
   }
 }

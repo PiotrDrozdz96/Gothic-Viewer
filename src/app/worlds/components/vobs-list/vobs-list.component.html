@@ -8,7 +8,11 @@
   </button>
 </span>
 <div *ngIf="isOpened" class="list">
-  <div *ngFor="let gMarker of gMarkersGroup.markers; let index = index" class="list-element">
+  <div
+    *ngFor="let gMarker of gMarkersGroup.markers; let index = index"
+    class="list-element"
+    (click)="centerMarker(index)"
+  >
     <img class="icon" [src]="gMarkersGroup.iconUrl">
     <span class="list-element-text">{{gMarker.vob.vobName.value || text}}</span>
   </div>
