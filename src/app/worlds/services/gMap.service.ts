@@ -18,6 +18,7 @@ const toolbardisplacement = 2.5;
 })
 export class GMapService {
   map: L.Map;
+  frontIndex = 20000;
 
   constructor() { }
 
@@ -55,20 +56,29 @@ export class GMapService {
     };
   }
 
+  addMarker(marker: L.Marker): L.Marker { return marker.addTo(this.map); }
+  removeMarker(marker: L.Marker): L.Marker { return marker.removeFrom(this.map); }
+
+  goToFront(marker: L.Marker) {
+    marker.removeFrom(this.map).setZIndexOffset(this.frontIndex++).addTo(this.map);
+  }
+
   addMarkersGroup(gMarkers: GMarkersGroup) {
     forEach(gMarkers.markers, (gMarker) => {
-      gMarker.marker.addTo(this.map);
+      this.addMarker(gMarker.marker);
     });
   }
 
   removeMarkersGroup(gMarkers: GMarkersGroup) {
     forEach(gMarkers.markers, (gMarker) => {
-      gMarker.marker.removeFrom(this.map);
+      this.removeMarker(gMarker.marker);
     });
   }
 
   centerMarker(marker: L.Marker) {
     const { lat, lng } = marker.getLatLng();
+    console.log(marker);
+    this.goToFront(marker);
     this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
   }
 }
