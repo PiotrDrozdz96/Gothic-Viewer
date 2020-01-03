@@ -24,10 +24,7 @@ export class GMapService {
 
   constructor() {
     this.openedVob.subscribe((gMarker) => {
-      if (gMarker) {
-        const { marker, vob } = gMarker;
-        this.highlightMarker(marker);
-      } else {
+      if (!gMarker) {
         this.unbounceMarker();
       }
     });
@@ -66,10 +63,12 @@ export class GMapService {
     }));
   }
 
-  private highlightMarker(marker: L.Marker) {
+  private highlightMarker(marker: L.Marker, isCenter: boolean) {
     const { lat, lng } = marker.getLatLng();
     this.bounceMarker(marker);
-    this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
+    if (isCenter) {
+      this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
+    }
   }
 
   private createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
@@ -90,22 +89,31 @@ export class GMapService {
     };
   }
 
-  addMarker(marker: L.Marker): L.Marker { return marker.addTo(this.map); }
-  removeMarker(marker: L.Marker): L.Marker { return marker.removeFrom(this.map); }
+  addMarker(gMarker: GMarker) {
+    const { marker } = gMarker;
+    marker.addTo(this.map).on('click', () => {
+      this.openVob(gMarker, false);
+    });
+  }
+  removeMarker(gMarker: GMarker) {
+    const { marker } = gMarker;
+    marker.removeFrom(this.map);
+  }
 
   addMarkersGroup(gMarkers: GMarkersGroup) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.addMarker(gMarker.marker);
+      this.addMarker(gMarker);
     });
   }
 
   removeMarkersGroup(gMarkers: GMarkersGroup) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.removeMarker(gMarker.marker);
+      this.removeMarker(gMarker);
     });
   }
 
-  openVob(gMarker: GMarker) {
+  openVob(gMarker: GMarker, isCenter: boolean) {
+    this.highlightMarker(gMarker.marker, isCenter);
     this.openedVob.next(gMarker);
   }
 }

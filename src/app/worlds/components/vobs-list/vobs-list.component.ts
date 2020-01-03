@@ -28,7 +28,7 @@ export class VobsListComponent implements OnChanges {
   setOpened() { this.isOpened = !this.isOpened; }
 
   openVob(index: number) {
-    this.gMap.openVob(this.gMarkersGroup.markers[index]);
+    this.gMap.openVob(this.gMarkersGroup.markers[index], true);
   }
 
 }
