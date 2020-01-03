@@ -11,7 +11,6 @@ import { oneOfVobType } from '../models/vob';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;
-const zoom = 6;
 const toolbardisplacement = 2.5;
 
 @Injectable({
@@ -67,7 +66,7 @@ export class GMapService {
     const { lat, lng } = marker.getLatLng();
     this.bounceMarker(marker);
     if (isCenter) {
-      this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
+      this.map.setView({lat, lng: lng - toolbardisplacement}, this.map.getZoom());
     }
   }
 
