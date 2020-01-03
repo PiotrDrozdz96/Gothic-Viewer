@@ -17,7 +17,7 @@
 </div>
 <div *ngIf="world && isOpenToolbar" class="toolbar" [@enterAnimation]>
   <div class="header">
-    <div class="icon-button-right">
+    <div class="icon-button-left">
       <button mat-icon-button (click)="openDialog()">
         <mat-icon>description</mat-icon>
       </button>
@@ -25,18 +25,18 @@
     <div class="file-name">
       {{fileName}}
     </div>
-    <div class="icon-button-left">
+    <div class="icon-button-right">
       <app-input-file
         type="icon"
         (fileResult)="emitFileResult($event)"
         (fileName)="setFileName($event)"
       ></app-input-file>
     </div>
-    <div class="icon-button-left">
-        <button mat-icon-button (click)="setIsOpenToolbar(false)">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-      </div>
+    <div class="icon-button-right">
+      <button mat-icon-button (click)="setIsOpenToolbar(false)">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
   </div>
   <div class="content">
     <app-custom-scrollbar>

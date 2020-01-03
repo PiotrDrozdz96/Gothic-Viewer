@@ -116,4 +116,8 @@ export class GMapService {
     this.highlightMarker(gMarker.marker, isCenter);
     this.openedVob.next(gMarker);
   }
+
+  closeVob() {
+    this.openedVob.next(undefined);
+  }
 }

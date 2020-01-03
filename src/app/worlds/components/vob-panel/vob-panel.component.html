@@ -1,1 +1,15 @@
-<p>vob-panel works!</p>
+<div *ngIf="vob" class="panel" [@enterAnimation]>
+  <div class="header">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="title">
+      {{vob.vobType}}
+    </div>
+  </div>
+  <div class="content">
+    <app-custom-scrollbar>
+      <div style="white-space: pre-line">{{vob}}</div>
+    </app-custom-scrollbar>
+  </div>
+</div>
