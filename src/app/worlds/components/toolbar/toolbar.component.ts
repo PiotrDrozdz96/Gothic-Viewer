@@ -7,6 +7,7 @@ import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
 import { oneOfVobType } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../models/vobFilter';
+import { GMarkersGroup } from '../../models/gMarkersGroup';
 import { getSortedVobtree } from '../../utils/getSortedVobtree';
 import { GMapService } from '../../services/gMap.service';
 import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
@@ -52,13 +53,13 @@ export class ToolbarComponent implements OnChanges {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-            layerGroup: this.gMap.layerGroup(vobs),
+            gMarkersGroup: this.gMap.markersGroup(vobs),
           };
         }
       );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          this.gMap.addLayer(vobFilter.layerGroup.layer);
+          this.gMap.addMarkersGroup(vobFilter.gMarkersGroup);
         }
       });
     }
@@ -76,11 +77,11 @@ export class ToolbarComponent implements OnChanges {
       }
     });
   }
-  onCheckboxChange({ checked }, layerGroup: L.LayerGroup) {
+  onCheckboxChange({ checked }, gMarkersGroup: GMarkersGroup) {
     if (checked) {
-      this.gMap.addLayer(layerGroup);
+      this.gMap.addMarkersGroup(gMarkersGroup);
     } else {
-      this.gMap.removeLayer(layerGroup);
+      this.gMap.removeMarkersGroup(gMarkersGroup);
     }
   }
 }

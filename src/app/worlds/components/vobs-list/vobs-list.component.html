@@ -1,6 +1,6 @@
 <span class="button-wrapper">
   <button
-    [ngClass]="{'button': !(layerGroup.vobs.length && checked)}"
+    [ngClass]="{'button': !(gMarkersGroup.markers.length && checked)}"
     mat-icon-button
     (click)="setOpened()"
   >
@@ -8,8 +8,8 @@
   </button>
 </span>
 <div *ngIf="isOpened" class="list">
-  <div *ngFor="let vob of layerGroup.vobs" class="list-element">
-    <img class="icon" [src]="layerGroup.iconUrl">
-    <span class="list-element-text">{{vob.vobName.value || text}}</span>
+  <div *ngFor="let gMarker of gMarkersGroup.markers; let index = index" class="list-element">
+    <img class="icon" [src]="gMarkersGroup.iconUrl">
+    <span class="list-element-text">{{gMarker.vob.vobName.value || text}}</span>
   </div>
 </div>

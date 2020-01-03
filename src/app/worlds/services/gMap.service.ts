@@ -4,7 +4,7 @@ import { forEach, map } from 'lodash';
 
 import { getImage } from '../utils/getImage';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
-import { GLayerGroup } from '../models/gLayerGroup';
+import { GMarkersGroup } from '../models/gMarkersGroup';
 import { GVec3 } from '../models/gTypes';
 import { oneOfVobType } from '../models/vob';
 
@@ -43,21 +43,25 @@ export class GMapService {
     });
   }
 
-  layerGroup(vobs: Array<oneOfVobType>): GLayerGroup {
+  markersGroup(vobs: Array<oneOfVobType>): GMarkersGroup {
     return {
-      vobs,
       iconUrl: getMarkerIconUrl(vobs[0].vobType.type),
-      layer: L.layerGroup(map(vobs, (vob: oneOfVobType) =>
-        this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
-      ))
+      markers: map(vobs, (vob: oneOfVobType) => ({
+        vob,
+        marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
+      }))
     };
   }
 
-  addLayer(layer: L.Layer) {
-    layer.addTo(this.map);
+  addMarkersGroup(gMarkers: GMarkersGroup) {
+    forEach(gMarkers.markers, (gMarker) => {
+      gMarker.marker.addTo(this.map);
+    });
   }
 
-  removeLayer(layer: L.Layer) {
-    layer.removeFrom(this.map);
+  removeMarkersGroup(gMarkers: GMarkersGroup) {
+    forEach(gMarkers.markers, (gMarker) => {
+      gMarker.marker.removeFrom(this.map);
+    });
   }
 }

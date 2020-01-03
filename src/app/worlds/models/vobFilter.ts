@@ -1,9 +1,9 @@
-import { GLayerGroup } from './gLayerGroup';
+import { GMarkersGroup } from './gMarkersGroup';
 
 export interface VobFilter {
   checked: boolean;
   text: string;
-  layerGroup: GLayerGroup;
+  gMarkersGroup: GMarkersGroup;
 }
 
 export type VobFilters = Array<VobFilter>;

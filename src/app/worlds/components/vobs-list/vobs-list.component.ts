@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { get } from 'lodash';
 
-import { GLayerGroup } from '../../models/GLayerGroup';
+import { GMarkersGroup } from '../../models/gMarkersGroup';
 import { GMapService } from '../../services/gMap.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class VobsListComponent implements OnChanges {
 
   @Input() checked: boolean;
   @Input() text: string;
-  @Input() layerGroup: GLayerGroup;
+  @Input() gMarkersGroup: GMarkersGroup;
 
   constructor(public gMap: GMapService) { }
 
