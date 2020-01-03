@@ -8,6 +8,7 @@ import { World } from '../../models/world';
 import { GMap } from '../../models/gMap';
 import { oneOfVobType } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../models/vobFilter';
+import { getSortedVobtree } from '../../utils/getSortedVobtree';
 import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
 
 const initChecked = [OC_ITEM];
@@ -46,16 +47,19 @@ export class ToolbarComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
-      this.vobFilters = map(values(world.vobtree), (vobs: Array<oneOfVobType>) => {
-        return {
-          checked: includes(initChecked, vobs[0].vobType.type),
-          text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-          layerGroup: this.gMap.layerGroup(map(vobs, (vob: oneOfVobType) =>
-            this.gMap.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
-          )),
-          length: vobs.length,
-        };
-      });
+      this.vobFilters = map(
+        getSortedVobtree(world.vobtree),
+        (vobs: Array<oneOfVobType>) => {
+          return {
+            checked: includes(initChecked, vobs[0].vobType.type),
+            text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
+            layerGroup: this.gMap.layerGroup(map(vobs, (vob: oneOfVobType) =>
+              this.gMap.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value)
+            )),
+            length: vobs.length,
+          };
+        }
+      );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
           this.gMap.addLayer(vobFilter.layerGroup);

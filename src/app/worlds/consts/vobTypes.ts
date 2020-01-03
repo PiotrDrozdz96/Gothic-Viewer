@@ -81,7 +81,46 @@ export const constructors = {
   [OC_MOB_CONTAINER]: OCMobContainer,
 };
 
-export interface VobTreeInterface {
+export const emptyVobtree = {
+  [VOB_LEVEL_COMPO]: [],
+  [SIMPLE_VOB]: [],
+  [VOB_SPOT]: [],
+  [VOB_LIGHT]: [],
+  [VOB_SOUND]: [],
+  [VOB_SOUND_DAYTIME]: [],
+  [VOB_LENS_FLARE]: [],
+  [VOB_STAIR]: [],
+  [VOB_FAR_PLANE]: [],
+  [VOB_FAR_PLANE_DEFAULT]: [],
+  [VOB_SCREEN_FX]: [],
+  [VOB_ANIMATE]: [],
+  [VOB_START_POINT]: [],
+
+  [ZC_PFX_CONTROLLER]: [],
+  [ZC_ZONE_FOG]: [],
+  [ZC_ZONE_FOG_DEFAULT]: [],
+  [ZC_CS_TRIGGER]: [],
+  [ZC_TRIGGER_CHANGE_LEVEL]: [],
+  [ZC_TRIGGER_SCRIPT]: [],
+  [ZC_TRIGGER_LIST]: [],
+  [ZC_MOVER]: [],
+
+  [OC_ITEM]: [],
+  [OC_ZONE_MUSIC]: [],
+  [OC_ZONE_MUSIC_DEFAULT]: [],
+
+  [OC_MOB]: [],
+  [OC_MOB_INTER]: [],
+  [OC_MOB_WHEEL]: [],
+  [OC_MOB_SWITCH]: [],
+  [OC_MOB_LADDER]: [],
+  [OC_MOB_BED]: [],
+  [OC_MOB_FIRE]: [],
+  [OC_MOB_DOOR]: [],
+  [OC_MOB_CONTAINER]: [],
+};
+
+export class VobTreeInterface {
   [SIMPLE_VOB]?: Array<ZCVob>;
   [VOB_LEVEL_COMPO]?: Array<ZCVobLevelCompo>;
   [VOB_SPOT]?: Array<ZCVobSpot>;
