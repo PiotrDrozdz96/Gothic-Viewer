@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit } from 'lodash';
 
 import { getImage } from '../utils/getImage';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
-import { GMarkersGroup } from '../models/gMarkersGroup';
+import { GMarkersGroup, GMarker } from '../models/gMarkersGroup';
 import { GVec3 } from '../models/gTypes';
 import { oneOfVobType } from '../models/vob';
 
@@ -17,10 +18,20 @@ const toolbardisplacement = 2.5;
   providedIn: 'root'
 })
 export class GMapService {
+  private bouncingMarker: L.Marker;
+  openedVob = new BehaviorSubject<GMarker>(undefined);
   map: L.Map;
-  bouncingMarker: L.Marker;
 
-  constructor() { }
+  constructor() {
+    this.openedVob.subscribe((gMarker) => {
+      if (gMarker) {
+        const { marker, vob } = gMarker;
+        this.highlightMarker(marker);
+      } else {
+        this.unbounceMarker();
+      }
+    });
+  }
 
   init() {
     this.map = L.map('map', {
@@ -38,7 +49,30 @@ export class GMapService {
     });
   }
 
-  createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
+  private unbounceMarker() {
+    if (this.bouncingMarker) {
+      this.bouncingMarker.setIcon(new L.Icon(
+        omit(this.bouncingMarker.getIcon().options, ['className'])
+      ));
+      this.bouncingMarker = undefined;
+    }
+  }
+
+  private bounceMarker(marker: L.Marker) {
+    this.unbounceMarker();
+    this.bouncingMarker = marker.setIcon(new L.Icon({
+      ...marker.getIcon().options,
+      className: 'bounce-marker',
+    }));
+  }
+
+  private highlightMarker(marker: L.Marker) {
+    const { lat, lng } = marker.getLatLng();
+    this.bounceMarker(marker);
+    this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
+  }
+
+  private createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
     return L.marker([(z / divider), (x / divider)], {
       title,
@@ -71,26 +105,7 @@ export class GMapService {
     });
   }
 
-  unbounceMarker() {
-    if (this.bouncingMarker) {
-      this.bouncingMarker.setIcon(new L.Icon(
-        omit(this.bouncingMarker.getIcon().options, ['className'])
-      ));
-      this.bouncingMarker = undefined;
-    }
-  }
-
-  bounceMarker(marker: L.Marker) {
-    this.unbounceMarker();
-    this.bouncingMarker = marker.setIcon(new L.Icon({
-      ...marker.getIcon().options,
-      className: 'bounce-marker',
-    }));
-  }
-
-  highlightMarker(marker: L.Marker) {
-    const { lat, lng } = marker.getLatLng();
-    this.bounceMarker(marker);
-    this.map.setView({lat, lng: lng - toolbardisplacement}, zoom);
+  openVob(gMarker: GMarker) {
+    this.openedVob.next(gMarker);
   }
 }
