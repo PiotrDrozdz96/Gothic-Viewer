@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { get } from 'lodash';
 
-import { GMarkersGroup } from '../../models/gMarkersGroup';
+import { VobMarkerGroup } from '../../types/vob-marker-group';
 import { GMapService } from '../../services/gMap.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class VobsListComponent implements OnChanges {
 
   @Input() checked: boolean;
   @Input() text: string;
-  @Input() gMarkersGroup: GMarkersGroup;
+  @Input() vobMarkerGroup: VobMarkerGroup;
 
   constructor(public gMap: GMapService) { }
 
@@ -28,7 +28,7 @@ export class VobsListComponent implements OnChanges {
   setOpened() { this.isOpened = !this.isOpened; }
 
   openVob(index: number) {
-    this.gMap.openVob(this.gMarkersGroup.markers[index], true);
+    this.gMap.openVob(this.vobMarkerGroup.markers[index], true);
   }
 
 }

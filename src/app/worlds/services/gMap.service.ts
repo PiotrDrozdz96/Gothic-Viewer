@@ -5,9 +5,9 @@ import { forEach, map, omit } from 'lodash';
 
 import { getImage } from '../utils/getImage';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
-import { GMarkersGroup, GMarker } from '../models/gMarkersGroup';
 import { GVec3 } from '../models/gTypes';
-import { oneOfVobType } from '../models/vob';
+import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
+import { oneOfVobType } from '../types/one-of-vob-type';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;
@@ -18,7 +18,7 @@ const toolbardisplacement = 2.5;
 })
 export class GMapService {
   private bouncingMarker: L.Marker;
-  openedVob = new BehaviorSubject<GMarker>(undefined);
+  openedVob = new BehaviorSubject<VobMarker>(undefined);
   map: L.Map;
 
   constructor() {
@@ -78,7 +78,7 @@ export class GMapService {
     });
   }
 
-  markersGroup(vobs: Array<oneOfVobType>): GMarkersGroup {
+  markersGroup(vobs: Array<oneOfVobType>): VobMarkerGroup {
     return {
       iconUrl: getMarkerIconUrl(vobs[0].vobType.type),
       markers: map(vobs, (vob: oneOfVobType) => ({
@@ -88,30 +88,30 @@ export class GMapService {
     };
   }
 
-  addMarker(gMarker: GMarker) {
+  addMarker(gMarker: VobMarker) {
     const { marker } = gMarker;
     marker.addTo(this.map).on('click', () => {
       this.openVob(gMarker, false);
     });
   }
-  removeMarker(gMarker: GMarker) {
+  removeMarker(gMarker: VobMarker) {
     const { marker } = gMarker;
     marker.removeFrom(this.map);
   }
 
-  addMarkersGroup(gMarkers: GMarkersGroup) {
+  addMarkersGroup(gMarkers: VobMarkerGroup) {
     forEach(gMarkers.markers, (gMarker) => {
       this.addMarker(gMarker);
     });
   }
 
-  removeMarkersGroup(gMarkers: GMarkersGroup) {
+  removeMarkersGroup(gMarkers: VobMarkerGroup) {
     forEach(gMarkers.markers, (gMarker) => {
       this.removeMarker(gMarker);
     });
   }
 
-  openVob(gMarker: GMarker, isCenter: boolean) {
+  openVob(gMarker: VobMarker, isCenter: boolean) {
     this.highlightMarker(gMarker.marker, isCenter);
     this.openedVob.next(gMarker);
   }

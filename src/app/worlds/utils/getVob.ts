@@ -1,7 +1,8 @@
 import { split, find } from 'lodash';
 
-import { VobType, oneOfVobType } from '../models/vob';
+import { VobType } from '../models/vob';
 import { GInt } from '../models/gTypes';
+import { oneOfVobType } from '../types/one-of-vob-type';
 import { constructors } from '../consts/vobTypes';
 
 

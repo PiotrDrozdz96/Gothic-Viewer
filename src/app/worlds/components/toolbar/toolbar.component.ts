@@ -6,9 +6,9 @@ import { leftPanelAnimation } from '@common/animations';
 
 import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
-import { oneOfVobType } from '../../models/vob';
-import { VobFilter, VobFilters } from '../../models/vobFilter';
-import { GMarkersGroup } from '../../models/gMarkersGroup';
+import { oneOfVobType } from '../../types/one-of-vob-type';
+import { VobFilter, VobFilters } from '../../types/vob-filter';
+import { VobMarkerGroup } from '../../types/vob-marker-group';
 import { getSortedVobtree } from '../../utils/getSortedVobtree';
 import { GMapService } from '../../services/gMap.service';
 import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
@@ -41,13 +41,13 @@ export class ToolbarComponent implements OnChanges {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-            gMarkersGroup: this.gMap.markersGroup(vobs),
+            vobMarkerGroup: this.gMap.markersGroup(vobs),
           };
         }
       );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          this.gMap.addMarkersGroup(vobFilter.gMarkersGroup);
+          this.gMap.addMarkersGroup(vobFilter.vobMarkerGroup);
         }
       });
     }
@@ -65,11 +65,11 @@ export class ToolbarComponent implements OnChanges {
       }
     });
   }
-  onCheckboxChange({ checked }, gMarkersGroup: GMarkersGroup) {
+  onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
     if (checked) {
-      this.gMap.addMarkersGroup(gMarkersGroup);
+      this.gMap.addMarkersGroup(vobMarkerGroup);
     } else {
-      this.gMap.removeMarkersGroup(gMarkersGroup);
+      this.gMap.removeMarkersGroup(vobMarkerGroup);
     }
   }
 }

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@common/*": ["app/common/*"]
+      "@common/*": ["app/common/*"],
+      "@worlds/*": ["app/worlds/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

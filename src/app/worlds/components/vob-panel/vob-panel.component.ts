@@ -3,7 +3,7 @@ import { omit, entries, map } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
-import { oneOfVobType } from '../../models/vob';
+import { oneOfVobType } from '../../types/one-of-vob-type';
 import { GMapService } from '../../services/gMap.service';
 
 interface Property {
