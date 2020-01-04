@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { omit, entries, map } from 'lodash';
+import { leftPanelAnimation } from 'src/app/animations/left-panel-animation';
 
 import { oneOfVobType } from '../../models/vob';
 import { GMapService } from '../../services/gMap.service';
@@ -14,20 +14,7 @@ interface Property {
   selector: 'app-vob-panel',
   templateUrl: './vob-panel.component.html',
   styleUrls: ['./vob-panel.component.css'],
-  animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({ left: -360 }),
-          animate('200ms', style({ left: 0 }))
-        ]),
-        transition(':leave', [
-          style({ left: 0}),
-          animate('200ms', style({ left: -360 }))
-        ])
-      ]
-    )
-  ],
+  animations: [leftPanelAnimation]
 })
 export class VobPanelComponent {
 

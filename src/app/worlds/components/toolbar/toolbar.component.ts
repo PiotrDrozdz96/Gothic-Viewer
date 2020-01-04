@@ -1,7 +1,7 @@
 import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
+import { leftPanelAnimation } from 'src/app/animations/left-panel-animation';
 
 import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';
@@ -18,20 +18,7 @@ const initChecked = [OC_ITEM];
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
-  animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({ left: -360 }),
-          animate('200ms', style({ left: 0 }))
-        ]),
-        transition(':leave', [
-          style({ left: 0}),
-          animate('200ms', style({ left: -360 }))
-        ])
-      ]
-    )
-  ],
+  animations: [ leftPanelAnimation ]
 })
 export class ToolbarComponent implements OnChanges {
   public fileName = '';
