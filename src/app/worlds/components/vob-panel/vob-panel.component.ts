@@ -4,7 +4,7 @@ import { omit, entries, map } from 'lodash';
 import { leftPanelAnimation } from '@common/animations';
 
 import { oneOfVobType } from '../../types/one-of-vob-type';
-import { GMapService } from '../../services/gMap.service';
+import { MapService } from '../../services/map.service';
 
 interface Property {
   key: string;
@@ -22,8 +22,8 @@ export class VobPanelComponent {
   public vob: oneOfVobType;
   public panelData: Array<Property>;
 
-  constructor(private gMap: GMapService) {
-    this.gMap.openedVob.subscribe((gMarker) => {
+  constructor(private mapService: MapService) {
+    this.mapService.openedVob.subscribe((gMarker) => {
       if  (gMarker) {
         const { vob } = gMarker;
         this.vob = vob;
@@ -35,7 +35,7 @@ export class VobPanelComponent {
   }
 
   close() {
-    this.gMap.closeVob();
+    this.mapService.closeVob();
   }
 
   mapPanelData(vob: oneOfVobType) {

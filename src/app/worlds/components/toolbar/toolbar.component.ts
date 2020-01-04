@@ -10,7 +10,7 @@ import { oneOfVobType } from '../../types/one-of-vob-type';
 import { VobFilter, VobFilters } from '../../types/vob-filter';
 import { VobMarkerGroup } from '../../types/vob-marker-group';
 import { getSortedVobtree } from '../../utils/getSortedVobtree';
-import { GMapService } from '../../services/gMap.service';
+import { MapService } from '../../services/map.service';
 import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
 
 const initChecked = [OC_ITEM];
@@ -30,7 +30,7 @@ export class ToolbarComponent implements OnChanges {
 
   @Input() world: World;
 
-  constructor(public gMap: GMapService, public dialog: MatDialog) {}
+  constructor(public mapService: MapService, public dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
@@ -41,13 +41,13 @@ export class ToolbarComponent implements OnChanges {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-            vobMarkerGroup: this.gMap.markersGroup(vobs),
+            vobMarkerGroup: this.mapService.markersGroup(vobs),
           };
         }
       );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
-          this.gMap.addMarkersGroup(vobFilter.vobMarkerGroup);
+          this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
         }
       });
     }
@@ -67,9 +67,9 @@ export class ToolbarComponent implements OnChanges {
   }
   onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
     if (checked) {
-      this.gMap.addMarkersGroup(vobMarkerGroup);
+      this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {
-      this.gMap.removeMarkersGroup(vobMarkerGroup);
+      this.mapService.removeMarkersGroup(vobMarkerGroup);
     }
   }
 }

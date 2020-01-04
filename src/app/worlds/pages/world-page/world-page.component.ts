@@ -4,7 +4,7 @@ import { forEach } from 'lodash';
 import { World } from '../../models/world';
 import { OCItem } from '../../models/vob';
 import { OC_ITEM } from '../../consts/vobTypes';
-import { GMapService } from '../../services/gMap.service';
+import { MapService } from '../../services/map.service';
 
 @Component({
   selector: 'app-worlds',
@@ -14,10 +14,10 @@ import { GMapService } from '../../services/gMap.service';
 export class WorldPageComponent implements AfterViewInit {
   public world: World;
 
-  constructor(public gMap: GMapService) { }
+  constructor(public mapService: MapService) { }
 
   ngAfterViewInit() {
-    this.gMap.init();
+    this.mapService.init();
   }
 
   initWorld(fileResult) {

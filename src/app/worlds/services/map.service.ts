@@ -16,7 +16,7 @@ const toolbardisplacement = 2.5;
 @Injectable({
   providedIn: 'root'
 })
-export class GMapService {
+export class MapService {
   private bouncingMarker: L.Marker;
   openedVob = new BehaviorSubject<VobMarker>(undefined);
   map: L.Map;
