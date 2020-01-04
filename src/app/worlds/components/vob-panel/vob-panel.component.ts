@@ -40,12 +40,11 @@ export class VobPanelComponent {
   mapPanelData(vob: oneOfVobType) {
     this.panelData = map(
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
-      ([key, gType]) => ({
+      ([key, gType]: [string, any]) => ({
         key,
         value: gType.value
       })
     );
-    console.log(this.panelData);
   }
 
 }
