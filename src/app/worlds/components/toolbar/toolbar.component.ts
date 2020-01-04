@@ -4,7 +4,7 @@ import { mapValues, forEach, has, get, map, values, includes, split } from 'loda
 
 import { leftPanelAnimation } from '@common/animations';
 
-import { OC_ITEM } from '../../consts/vobTypes';
+import { VOB } from '../../consts/vobTypes';
 import { World } from '../../models/world';
 import { oneOfVobType } from '../../types/one-of-vob-type';
 import { VobFilter, VobFilters } from '../../types/vob-filter';
@@ -13,7 +13,7 @@ import { getSortedVobtree } from '../../utils/getSortedVobtree';
 import { MapService } from '../../services/map.service';
 import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
 
-const initChecked = [OC_ITEM];
+const initChecked = [VOB.OC_ITEM];
 
 @Component({
   selector: 'app-toolbar',

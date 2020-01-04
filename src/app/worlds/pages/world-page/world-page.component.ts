@@ -2,8 +2,6 @@ import { Component, AfterViewInit } from '@angular/core';
 import { forEach } from 'lodash';
 
 import { World } from '../../models/world';
-import { OCItem } from '../../models/vob';
-import { OC_ITEM } from '../../consts/vobTypes';
 import { MapService } from '../../services/map.service';
 
 @Component({
