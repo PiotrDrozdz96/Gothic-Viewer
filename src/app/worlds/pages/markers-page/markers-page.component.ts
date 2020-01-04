@@ -12,7 +12,7 @@ import {
   ZC_CS_TRIGGER, ZC_TRIGGER_CHANGE_LEVEL, ZC_TRIGGER_SCRIPT, ZC_TRIGGER_LIST, ZC_MOVER,
   OC_ITEM, OC_ZONE_MUSIC, OC_ZONE_MUSIC_DEFAULT, OC_MOB, OC_MOB_INTER, OC_MOB_WHEEL,
   OC_MOB_SWITCH, OC_MOB_LADDER, OC_MOB_BED, OC_MOB_FIRE, OC_MOB_DOOR, OC_MOB_CONTAINER
-} from '../consts/vobTypes';
+} from '../../consts/vobTypes';
 
 export interface MarkerElement {
   name: string;

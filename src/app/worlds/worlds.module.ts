@@ -8,23 +8,23 @@ const modules = [
   CommonModule,
   ComponentsModule,
   RouterModule.forChild([
-    { path: '', component: WorldsComponent },
+    { path: '', component: WorldPageComponent },
     { path: 'markers', component: MarkersPageComponent },
     { path: '**', redirectTo: ''}
   ]),
 ];
 
-import { WorldsComponent } from './worlds.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { VobsListComponent } from './components/vobs-list/vobs-list.component';
 import { VobPanelComponent } from './components/vob-panel/vob-panel.component';
-import { MarkersPageComponent } from './+markers-page/markers-page.component';
+import { WorldPageComponent } from './pages/world-page/world-page.component';
+import { MarkersPageComponent } from './pages/markers-page/markers-page.component';
 
 const components = [
-  WorldsComponent,
   ToolbarComponent,
   VobsListComponent,
   VobPanelComponent,
+  WorldPageComponent,
   MarkersPageComponent,
 ];
 
