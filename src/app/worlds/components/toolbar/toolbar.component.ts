@@ -1,7 +1,8 @@
 import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
-import { leftPanelAnimation } from 'src/app/animations/left-panel-animation';
+
+import { leftPanelAnimation } from '@common/animations';
 
 import { OC_ITEM } from '../../consts/vobTypes';
 import { World } from '../../models/world';

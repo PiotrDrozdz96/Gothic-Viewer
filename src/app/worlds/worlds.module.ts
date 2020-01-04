@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { ComponentsModule } from '../common/components/components.module';
+import { ComponentsModule } from '@common/components';
 
 const modules = [
   CommonModule,
@@ -37,7 +37,11 @@ const dialogs = [PrefixZenDataDialog];
     ...components,
     ...dialogs,
   ],
-  imports: modules,
-  entryComponents: dialogs,
+  imports: [
+    ...modules
+  ],
+  entryComponents: [
+    ...dialogs
+  ],
 })
 export class WorldsModule { }

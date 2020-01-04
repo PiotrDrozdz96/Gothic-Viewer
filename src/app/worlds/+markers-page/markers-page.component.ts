@@ -2,7 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import * as html2canvas from 'html2canvas';
 import * as JSZip from 'jszip';
 import { forEach, replace } from 'lodash';
-import { saveAs } from 'src/app/utils/fileSaver';
+
+import { saveAs } from '@common/utils';
 
 import {
   VOB_LEVEL_COMPO, VOB_SPOT, VOB_LIGHT, VOB_SOUND, VOB_SOUND_DAYTIME,

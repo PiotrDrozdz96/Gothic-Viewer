@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { omit, entries, map } from 'lodash';
-import { leftPanelAnimation } from 'src/app/animations/left-panel-animation';
+
+import { leftPanelAnimation } from '@common/animations';
 
 import { oneOfVobType } from '../../models/vob';
 import { GMapService } from '../../services/gMap.service';

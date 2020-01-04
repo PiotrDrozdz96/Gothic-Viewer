@@ -11,11 +11,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InputFileComponent } from './input-file/input-file.component';
 import { CustomScrollbarComponent } from './custom-scrollbar/custom-scrollbar.component';
 
-const components = [
-  InputFileComponent,
-  CustomScrollbarComponent,
-];
-
 const modules = [
   CommonModule,
   FormsModule,
@@ -24,6 +19,11 @@ const modules = [
   MatIconModule,
   MatTableModule,
   MatDialogModule,
+];
+
+const components = [
+  InputFileComponent,
+  CustomScrollbarComponent,
 ];
 
 @NgModule({
