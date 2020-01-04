@@ -28,9 +28,9 @@ const components = [
   MarkersPageComponent,
 ];
 
-import { PrefixZenDataDialog } from './components/prefix-zen-data/prefix-zen-data.dialog';
+import { PrefixZenDataComponent } from './dialogs/prefix-zen-data/prefix-zen-data.component';
 
-const dialogs = [PrefixZenDataDialog];
+const dialogs = [PrefixZenDataComponent];
 
 @NgModule({
   declarations: [

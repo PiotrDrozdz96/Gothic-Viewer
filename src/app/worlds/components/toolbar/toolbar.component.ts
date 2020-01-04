@@ -11,7 +11,7 @@ import { VobFilter, VobFilters } from '../../types/vob-filter';
 import { VobMarkerGroup } from '../../types/vob-marker-group';
 import { getSortedVobtree } from '../../utils/getSortedVobtree';
 import { GMapService } from '../../services/gMap.service';
-import { PrefixZenDataDialog } from '../../components/prefix-zen-data/prefix-zen-data.dialog';
+import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
 
 const initChecked = [OC_ITEM];
 
@@ -57,7 +57,7 @@ export class ToolbarComponent implements OnChanges {
   setFileName(fileName: string) { this.fileName = fileName; }
   setIsOpenToolbar(value: boolean) { this.isOpenToolbar = value; }
   openDialog(): void {
-    const dialogRef = this.dialog.open(PrefixZenDataDialog, {
+    const dialogRef = this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
         fileName: this.fileName,

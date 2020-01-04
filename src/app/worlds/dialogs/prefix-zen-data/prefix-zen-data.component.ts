@@ -10,12 +10,12 @@ interface Data {
 
 @Component({
   selector: 'app-prefix-zen-data',
-  styleUrls: ['./prefix-zen-data.dialog.css'],
-  templateUrl: 'prefix-zen-data.dialog.html',
+  styleUrls: ['./prefix-zen-data.component.css'],
+  templateUrl: 'prefix-zen-data.component.html',
 })
-export class PrefixZenDataDialog {
+export class PrefixZenDataComponent {
   constructor(
-    public dialogRef: MatDialogRef<PrefixZenDataDialog>,
+    public dialogRef: MatDialogRef<PrefixZenDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Data
   ) { }
 }
