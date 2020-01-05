@@ -3,15 +3,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { ComponentsModule } from '@common/components';
+import { worldsRoutes } from './worlds.routing';
 
 const modules = [
   CommonModule,
   ComponentsModule,
-  RouterModule.forChild([
-    { path: '', component: WorldPageComponent },
-    { path: 'markers', component: MarkersPageComponent },
-    { path: '**', redirectTo: ''}
-  ]),
+  RouterModule.forChild(worldsRoutes),
 ];
 
 import { ToolbarComponent } from './components/toolbar/toolbar.component';

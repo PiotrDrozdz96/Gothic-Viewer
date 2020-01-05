@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { appRoutes } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -10,12 +11,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        loadChildren: './worlds/worlds.module#WorldsModule',
-      },
-    ]),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
