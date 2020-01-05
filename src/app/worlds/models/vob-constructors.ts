@@ -1,3 +1,5 @@
+import { VOB } from '@worlds/consts';
+
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
@@ -5,7 +7,6 @@ import {
   ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
   OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer
 } from './vob';
-import { VOB } from '../consts/vob-types';
 
 export const vobConstructors = {
   [VOB.SIMPLE]: ZCVob,

@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { omit, entries, map } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
-
-import { ZCVob } from '../../models/vob';
-import { MapService } from '../../services/map.service';
+import { ZCVob } from '@worlds/models';
+import { MapService } from '@worlds/services';
 
 interface Property {
   key: string;

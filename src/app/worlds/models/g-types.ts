@@ -10,8 +10,8 @@ import {
   flatten
 } from 'lodash';
 
-import { vobPropWhitespace } from '../consts/whitespaces';
-import { getVobProp } from '../utils/get-vob-prop';
+import { vobPropWhitespace } from '@worlds/consts';
+import { getVobProp } from '@worlds/utils';
 
 type Color = Array<string>;
 

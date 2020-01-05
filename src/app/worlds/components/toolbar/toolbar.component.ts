@@ -3,14 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
-
-import { VOB } from '../../consts/vob-types';
-import { World } from '../../models/world';
-import { ZCVob } from '../../models/vob';
-import { VobFilter, VobFilters } from '../../types/vob-filter';
-import { VobMarkerGroup } from '../../types/vob-marker-group';
-import { MapService } from '../../services/map.service';
-import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
+import { VOB } from '@worlds/consts';
+import { World, ZCVob } from '@worlds/models';
+import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
+import { MapService } from '@worlds/services';
+import { PrefixZenDataComponent } from '@worlds/dialogs';
 
 const initChecked = [VOB.OC_ITEM];
 

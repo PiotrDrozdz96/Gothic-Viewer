@@ -1,8 +1,9 @@
 import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
 
-import { vobWhitespace, vobPropWhitespace } from '../consts/whitespaces';
+import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
+import { getVobProp } from '@worlds/utils';
+
 import { vobPropConstructors } from './vob-prop-constructors';
-import { getVobProp } from '../utils/get-vob-prop';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
   GColor, GColorList, TriggerList, Chest, Rest

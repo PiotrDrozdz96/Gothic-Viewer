@@ -1,8 +1,8 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { get } from 'lodash';
 
-import { VobMarkerGroup } from '../../types/vob-marker-group';
-import { MapService } from '../../services/map.service';
+import { VobMarkerGroup } from '@worlds/types';
+import { MapService } from '@worlds/services';
 
 @Component({
   selector: 'app-vobs-list',

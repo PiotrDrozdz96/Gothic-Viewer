@@ -1,6 +1,7 @@
 import { split, slice, forEach, has, find, values, mapValues, pickBy } from 'lodash';
 
 import { emptyVobtree, VOB } from '@worlds/consts';
+
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
@@ -8,9 +9,9 @@ import {
   ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
   OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
   VobType
-} from '../models/vob';
+} from './vob';
 import { vobConstructors } from './vob-constructors';
-import { GInt } from '../models/g-types';
+import { GInt } from './g-types';
 
 export class Vobtree {
   [VOB.SIMPLE]?: Array<ZCVob>;
