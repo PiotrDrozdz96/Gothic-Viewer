@@ -11,26 +11,27 @@ const modules = [
   RouterModule.forChild(worldsRoutes),
 ];
 
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { VobsListComponent } from './components/vobs-list/vobs-list.component';
-import { VobPanelComponent } from './components/vob-panel/vob-panel.component';
-import { WorldPageComponent } from './pages/world-page/world-page.component';
-import { MarkersPageComponent } from './pages/markers-page/markers-page.component';
-
-const components = [
-  ToolbarComponent,
-  VobsListComponent,
-  VobPanelComponent,
+import { WorldPageComponent, MarkersPageComponent } from './pages';
+const pages = [
   WorldPageComponent,
   MarkersPageComponent,
 ];
 
-import { PrefixZenDataComponent } from './dialogs/prefix-zen-data/prefix-zen-data.component';
+import { ToolbarComponent, VobPanelComponent, VobsListComponent } from './components';
+const components = [
+  ToolbarComponent,
+  VobsListComponent,
+  VobPanelComponent,
+];
 
-const dialogs = [PrefixZenDataComponent];
+import { PrefixZenDataComponent } from './dialogs/';
+const dialogs = [
+  PrefixZenDataComponent,
+];
 
 @NgModule({
   declarations: [
+    ...pages,
     ...components,
     ...dialogs,
   ],
