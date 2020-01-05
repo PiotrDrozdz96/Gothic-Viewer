@@ -1,7 +1,7 @@
 import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '../consts/whitespaces';
-import { vobPropConstructors } from '../consts/vobPropConstructors';
+import { vobPropConstructors } from '../consts/vob-prop-constructors';
 import { getVobProp } from '../utils/getVobProp';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,

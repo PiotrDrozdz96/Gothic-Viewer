@@ -4,7 +4,7 @@ import { mapValues, forEach, has, get, map, values, includes, split } from 'loda
 
 import { leftPanelAnimation } from '@common/animations';
 
-import { VOB } from '../../consts/vobTypes';
+import { VOB } from '../../consts/vob-types';
 import { World } from '../../models/world';
 import { oneOfVobType } from '../../types/one-of-vob-type';
 import { VobFilter, VobFilters } from '../../types/vob-filter';

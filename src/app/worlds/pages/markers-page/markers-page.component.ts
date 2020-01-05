@@ -5,7 +5,7 @@ import { forEach, replace } from 'lodash';
 
 import { saveAs } from '@common/utils';
 
-import { VOB } from '../../consts/vobTypes';
+import { VOB } from '../../consts/vob-types';
 
 export interface MarkerElement {
   name: string;
