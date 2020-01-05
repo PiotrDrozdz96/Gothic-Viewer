@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as L from 'leaflet';
-import { forEach, map, omit } from 'lodash';
+import { forEach, map, omit, replace } from 'lodash';
 
 import { getImage } from '@common/utils';
-import { getMarkerIcon, getMarkerIconUrl } from '../utils/get-marker-icon';
 import { GVec3 } from '../models/g-types';
 import { ZCVob } from '../models/vob';
 import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
@@ -70,17 +69,30 @@ export class MapService {
     }
   }
 
+  private getMarkerIconUrl(vobType: string): string {
+    return `assets/markers/${replace(vobType || 'zCVob:', /:/g, '_')}marker.png`;
+  }
+
+  private getMarkerIcon(vobType: string): L.Icon {
+    return new L.Icon({
+      iconUrl: this.getMarkerIconUrl(vobType),
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+  }
+
   private createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
     return L.marker([(z / divider), (x / divider)], {
       title,
-      icon: getMarkerIcon(vobType),
+      icon: this.getMarkerIcon(vobType),
     });
   }
 
   markersGroup(vobs: Array<ZCVob>): VobMarkerGroup {
     return {
-      iconUrl: getMarkerIconUrl(vobs[0].vobType.type),
+      iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
       markers: map(vobs, (vob: ZCVob) => ({
         vob,
         marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
