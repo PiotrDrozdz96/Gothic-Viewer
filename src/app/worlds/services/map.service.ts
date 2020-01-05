@@ -6,8 +6,8 @@ import { forEach, map, omit } from 'lodash';
 import { getImage } from '../utils/get-image';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/get-marker-icon';
 import { GVec3 } from '../models/g-types';
+import { ZCVob } from '../models/vob';
 import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
-import { oneOfVobType } from '../types/one-of-vob-type';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;
@@ -78,10 +78,10 @@ export class MapService {
     });
   }
 
-  markersGroup(vobs: Array<oneOfVobType>): VobMarkerGroup {
+  markersGroup(vobs: Array<ZCVob>): VobMarkerGroup {
     return {
       iconUrl: getMarkerIconUrl(vobs[0].vobType.type),
-      markers: map(vobs, (vob: oneOfVobType) => ({
+      markers: map(vobs, (vob: ZCVob) => ({
         vob,
         marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
       }))

@@ -3,7 +3,7 @@ import { omit, entries, map } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
-import { oneOfVobType } from '../../types/one-of-vob-type';
+import { ZCVob } from '../../models/vob';
 import { MapService } from '../../services/map.service';
 
 interface Property {
@@ -19,7 +19,7 @@ interface Property {
 })
 export class VobPanelComponent {
 
-  public vob: oneOfVobType;
+  public vob: ZCVob;
   public panelData: Array<Property>;
 
   constructor(private mapService: MapService) {
@@ -38,7 +38,7 @@ export class VobPanelComponent {
     this.mapService.closeVob();
   }
 
-  mapPanelData(vob: oneOfVobType) {
+  mapPanelData(vob: ZCVob) {
     this.panelData = map(
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
       ([key, gType]: [string, any]) => ({

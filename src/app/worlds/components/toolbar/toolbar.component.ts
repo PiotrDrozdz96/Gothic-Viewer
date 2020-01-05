@@ -6,7 +6,7 @@ import { leftPanelAnimation } from '@common/animations';
 
 import { VOB } from '../../consts/vob-types';
 import { World } from '../../models/world';
-import { oneOfVobType } from '../../types/one-of-vob-type';
+import { ZCVob } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../types/vob-filter';
 import { VobMarkerGroup } from '../../types/vob-marker-group';
 import { getSortedVobtree } from '../../utils/get-sorted-vobtree';
@@ -37,7 +37,7 @@ export class ToolbarComponent implements OnChanges {
     if (world) {
       this.vobFilters = map(
         getSortedVobtree(world.vobtree),
-        (vobs: Array<oneOfVobType>) => {
+        (vobs: Array<ZCVob>) => {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],

@@ -1,7 +1,7 @@
-import { oneOfVobType } from './one-of-vob-type';
+import { ZCVob } from '../models/vob';
 
 export interface VobMarker {
-  vob: oneOfVobType;
+  vob: ZCVob;
   marker: L.Marker;
 }
 
