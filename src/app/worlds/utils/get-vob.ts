@@ -1,10 +1,9 @@
 import { split, find } from 'lodash';
 
+import { vobConstructors } from '../consts/vob-constructors';
 import { VobType } from '../models/vob';
 import { GInt } from '../models/g-types';
 import { oneOfVobType } from '../types/one-of-vob-type';
-import { vobConstructors } from '../consts/vob-constructors';
-
 
 export const getVob = (vobString: string): oneOfVobType => {
   const lines = split(vobString, '\n');

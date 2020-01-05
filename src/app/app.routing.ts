@@ -3,6 +3,6 @@ import { Routes } from '@angular/router';
 export const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: './worlds/worlds.module#WorldsModule',
+    loadChildren: '@worlds/worlds.module#WorldsModule',
   },
 ];
