@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit } from 'lodash';
 
-import { getImage } from '../utils/get-image';
+import { getImage } from '@common/utils';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/get-marker-icon';
 import { GVec3 } from '../models/g-types';
 import { ZCVob } from '../models/vob';
