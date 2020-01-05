@@ -1,7 +1,7 @@
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
   GColor, GColorList, TriggerList, Chest
-} from '../models/g-types';
+} from './g-types';
 
 export const vobPropConstructors = {
   // ZCVob
