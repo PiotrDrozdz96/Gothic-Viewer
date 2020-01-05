@@ -1,4 +1,4 @@
-import { getVobProp } from '../utils/get-vob-prop';
+import { getVobProp } from '@worlds/utils';
 
 describe('GetVobProp', () => {
 
