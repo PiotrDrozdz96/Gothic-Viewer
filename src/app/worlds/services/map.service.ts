@@ -4,9 +4,8 @@ import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
 import { getImage } from '@common/utils';
-import { GVec3 } from '../models/g-types';
-import { ZCVob } from '../models/vob';
-import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
+import { ZCVob, GVec3 } from '@worlds/models';
+import { VobMarkerGroup, VobMarker } from '@worlds/types';
 
 const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
 const divider = 190;

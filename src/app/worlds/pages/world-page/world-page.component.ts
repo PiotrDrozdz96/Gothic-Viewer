@@ -1,8 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { forEach } from 'lodash';
 
-import { World } from '../../models/world';
-import { MapService } from '../../services/map.service';
+import { World } from '@worlds/models';
+import { MapService } from '@worlds/services';
 
 @Component({
   selector: 'app-worlds',

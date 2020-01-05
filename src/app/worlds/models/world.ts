@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { split } from 'lodash';
 
 import { PrefixZenData } from './prefix-zen-data';
-import { Waynet } from './wayNet';
+import { Waynet } from './waynet';
 import { Vobtree } from './vobtree';
 
 export class World {
