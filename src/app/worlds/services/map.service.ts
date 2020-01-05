@@ -3,8 +3,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit } from 'lodash';
 
-import { getImage } from '../utils/getImage';
-import { getMarkerIcon, getMarkerIconUrl } from '../utils/getMarkerIcon';
+import { getImage } from '../utils/get-image';
+import { getMarkerIcon, getMarkerIconUrl } from '../utils/get-marker-icon';
 import { GVec3 } from '../models/gTypes';
 import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
 import { oneOfVobType } from '../types/one-of-vob-type';

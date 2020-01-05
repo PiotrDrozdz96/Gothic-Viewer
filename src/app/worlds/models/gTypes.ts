@@ -11,7 +11,7 @@ import {
 } from 'lodash';
 
 import { vobPropWhitespace } from '../consts/whitespaces';
-import { getVobProp } from '../utils/getVobProp';
+import { getVobProp } from '../utils/get-vob-prop';
 
 type Color = Array<string>;
 

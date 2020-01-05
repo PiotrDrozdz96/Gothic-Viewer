@@ -1,4 +1,4 @@
-import { getVobProp } from '../utils/getVobProp';
+import { getVobProp } from '../utils/get-vob-prop';
 
 describe('GetVobProp', () => {
 

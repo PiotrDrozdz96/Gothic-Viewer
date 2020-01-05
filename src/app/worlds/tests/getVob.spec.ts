@@ -1,5 +1,5 @@
 import { VobType, ZCVob, ZCTriggerList } from '../models/vob';
-import { getVob } from '../utils/getVob';
+import { getVob } from '../utils/get-vob';
 
 import simpleVob from './mocks/simpleVob.mock';
 import triggerListVob from './mocks/triggerListVob.mock';

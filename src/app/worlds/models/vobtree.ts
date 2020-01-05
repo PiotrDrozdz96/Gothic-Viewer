@@ -1,6 +1,6 @@
 import { split, slice, forEach, has } from 'lodash';
 
-import { getVob } from '../utils/getVob';
+import { getVob } from '../utils/get-vob';
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,

@@ -9,7 +9,7 @@ import { World } from '../../models/world';
 import { oneOfVobType } from '../../types/one-of-vob-type';
 import { VobFilter, VobFilters } from '../../types/vob-filter';
 import { VobMarkerGroup } from '../../types/vob-marker-group';
-import { getSortedVobtree } from '../../utils/getSortedVobtree';
+import { getSortedVobtree } from '../../utils/get-sorted-vobtree';
 import { MapService } from '../../services/map.service';
 import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
 

@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { split } from 'lodash';
 
-import { extractPrefixZenData } from '../utils/extractPrefixZenData';
+import { extractPrefixZenData } from '../utils/extract-prefix-zen-data';
 
-import { PrefixZenData } from './prefixZenData';
+import { PrefixZenData } from './prefix-zen-data';
 import { Waynet } from './wayNet';
 import { Vobtree } from './vobtree';
 
