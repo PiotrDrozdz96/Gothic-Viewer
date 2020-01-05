@@ -1,8 +1,6 @@
 import { Observable } from 'rxjs';
 import { split } from 'lodash';
 
-import { extractPrefixZenData } from '../utils/extract-prefix-zen-data';
-
 import { PrefixZenData } from './prefix-zen-data';
 import { Waynet } from './wayNet';
 import { Vobtree } from './vobtree';
@@ -14,7 +12,7 @@ export class World {
   waynet: Waynet;
 
   constructor(fileResult: string) {
-    const [prefixZenData, withoutPrefix] = extractPrefixZenData(fileResult);
+    const [prefixZenData, withoutPrefix] = this.extractPrefixZenData(fileResult);
     if (!prefixZenData.isValid) {
       alert(prefixZenData.error);
     } else {
@@ -24,6 +22,15 @@ export class World {
       this.binary = binary;
       this.vobtree = new Vobtree(vobtree);
       this.waynet = new Waynet(waynet);
+    }
+  }
+
+  private extractPrefixZenData(data: string): [PrefixZenData, string] {
+    const prefixZenData = new PrefixZenData(split(data, '\n', 11));
+    if (!prefixZenData.isValid) {
+      return [prefixZenData, data];
+    } else {
+      return [prefixZenData, data.slice(prefixZenData.toString().length - 1)];
     }
   }
 }
