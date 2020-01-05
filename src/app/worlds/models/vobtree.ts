@@ -1,16 +1,17 @@
-import { split, slice, forEach, has } from 'lodash';
+import { split, slice, forEach, has, find, values, mapValues, pickBy } from 'lodash';
 
-import { getVob } from '../utils/get-vob';
+import { vobConstructors, emptyVobtree, VOB } from '@worlds/consts';
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
   ZCVobAnimate, ZCVobStartPoint, ZCPFXController, ZCZoneZFog, OCCSTrigger, OCTriggerChangeLevel,
   ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
-  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer
+  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
+  VobType
 } from '../models/vob';
-import { VOB } from '../consts/vob-types';
+import { GInt } from '../models/g-types';
 
-interface VobTreeInterface {
+export class Vobtree {
   [VOB.SIMPLE]?: Array<ZCVob>;
   [VOB.LEVEL_COMPO]?: Array<ZCVobLevelCompo>;
   [VOB.SPOT]?: Array<ZCVobSpot>;
@@ -47,18 +48,29 @@ interface VobTreeInterface {
   [VOB.OC_MOB_FIRE]?: Array<OCMobFire>;
   [VOB.OC_MOB_DOOR]?: Array<OCMobDoor>;
   [VOB.OC_MOB_CONTAINER]?: Array<OCMobContainer>;
-}
-
-export class Vobtree implements VobTreeInterface {
 
   constructor(data: string) {
     const childs = slice(split(data, 'childs'), 1, -2);
     forEach(childs, (vobString) => {
-      const vob = getVob(vobString);
+      const vob = this.getVob(vobString);
       if (!has(this, vob.vobType.type)) {
         this[vob.vobType.type] = [];
       }
       this[vob.vobType.type].push(vob);
     });
+  }
+
+  private getVob = (vobString: string): ZCVob => {
+    const lines = split(vobString, '\n');
+    const [, index, unknownValue] = lines[0].match(/(\d+)=int:(\d+)/);
+    const vobType = new VobType(lines[1]);
+    const vobConstructor = vobConstructors[vobType.type];
+    return new vobConstructor(index, new GInt('int', unknownValue), vobType, lines.slice(2, -2));
+  }
+
+  public getSortedVobtree() {
+    return values(pickBy(mapValues(emptyVobtree, (emptyVobs, key) => (
+      this[key]
+    ))));
   }
 }

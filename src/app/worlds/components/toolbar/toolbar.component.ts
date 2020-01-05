@@ -9,7 +9,6 @@ import { World } from '../../models/world';
 import { ZCVob } from '../../models/vob';
 import { VobFilter, VobFilters } from '../../types/vob-filter';
 import { VobMarkerGroup } from '../../types/vob-marker-group';
-import { getSortedVobtree } from '../../utils/get-sorted-vobtree';
 import { MapService } from '../../services/map.service';
 import { PrefixZenDataComponent } from '../../dialogs/prefix-zen-data/prefix-zen-data.component';
 
@@ -36,7 +35,7 @@ export class ToolbarComponent implements OnChanges {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
       this.vobFilters = map(
-        getSortedVobtree(world.vobtree),
+        world.vobtree.getSortedVobtree(),
         (vobs: Array<ZCVob>) => {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
