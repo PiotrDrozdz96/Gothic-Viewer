@@ -1,7 +1,7 @@
 import { split, find } from 'lodash';
 
 import { VobType } from '../models/vob';
-import { GInt } from '../models/gTypes';
+import { GInt } from '../models/g-types';
 import { oneOfVobType } from '../types/one-of-vob-type';
 import { vobConstructors } from '../consts/vob-constructors';
 

@@ -156,7 +156,7 @@ export class Items {
   }
 }
 
-export class Chest {
+export class Chest implements GType {
   value: Array<Items>;
   constructor(
     public type: 'string',
@@ -168,7 +168,6 @@ export class Chest {
     return join(map(this.value, (item) => item.toString()), ',');
   }
 }
-
 
 export class Rest {
   value: Array<string> = [];

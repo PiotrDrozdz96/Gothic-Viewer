@@ -5,7 +5,7 @@ import { forEach, map, omit } from 'lodash';
 
 import { getImage } from '../utils/get-image';
 import { getMarkerIcon, getMarkerIconUrl } from '../utils/get-marker-icon';
-import { GVec3 } from '../models/gTypes';
+import { GVec3 } from '../models/g-types';
 import { VobMarkerGroup, VobMarker } from '../types/vob-marker-group';
 import { oneOfVobType } from '../types/one-of-vob-type';
 

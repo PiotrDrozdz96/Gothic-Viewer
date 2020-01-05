@@ -6,7 +6,7 @@ import { getVobProp } from '../utils/get-vob-prop';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
   GColor, GColorList, TriggerList, Chest, Rest
-} from './gTypes';
+} from './g-types';
 
 export class VobType {
   type: string;

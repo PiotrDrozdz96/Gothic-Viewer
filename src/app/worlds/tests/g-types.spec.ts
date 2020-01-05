@@ -2,7 +2,7 @@ import { random, keys } from 'lodash';
 
 import {
   GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest, GVec3
-} from '../models/gTypes';
+} from '../models/g-types';
 
 describe('GTypes', () => {
 
