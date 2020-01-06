@@ -1,0 +1,78 @@
+
+		childs0=int:14
+		[% zCVobLevelCompo:zCVob 12289 1]
+			pack=int:0
+			presetName=string:
+			bbox3DWS=rawFloat:-9999.40234 -10000.0039 -9200 9060.59766 5909.90039 7537.47461 
+			trafoOSToWSRot=raw:0000803f0000000000000000000000000000803f0000000000000000000000000000803f
+			trafoOSToWSPos=vec3:0 0 0
+			vobName=string:LEVEL-VOB
+			visual=string:OLDCAMP.3DS
+			showVisual=bool:0
+			visualCamAlign=enum:0
+			cdStatic=bool:0
+			cdDyn=bool:0
+			staticVob=bool:0
+			dynShadow=enum:0
+			[visual zCMesh 0 2]
+			[]
+			[ai % 0 0]
+			[]
+		[]
+		childs1=int:3250
+		[% zCVobLight:zCVob 46080 3]
+			pack=int:0
+			presetName=string:
+			bbox3DWS=rawFloat:-4697.52686 -2501.646 2642.40625 -697.526855 1498.35388 6642.40625 
+			trafoOSToWSRot=raw:0000803f0000000000000000000000000000803f0000000000000000000000000000803f
+			trafoOSToWSPos=vec3:-2697.52686 -501.646088 4642.40625
+			vobName=string:LIGHT
+			visual=string:
+			showVisual=bool:1
+			visualCamAlign=enum:0
+			cdStatic=bool:0
+			cdDyn=bool:0
+			staticVob=bool:0
+			dynShadow=enum:0
+			[visual % 0 0]
+			[]
+			[ai % 0 0]
+			[]
+			lightPresetInUse=string:
+			lightType=enum:0
+			range=float:2000
+			color=color:225 197 100 255
+			spotConeAngle=float:0
+			lightStatic=bool:0
+			lightQuality=enum:2
+			lensflareFX=string:
+			turnedOn=bool:1
+			rangeAniScale=string:
+			rangeAniFPS=float:0
+			rangeAniSmooth=bool:1
+			colorAniList=string:(211 147 107) (223 173 117) (211 147 107) (223 173 117) (225 197 100) (223 173 117) (227 209 106) (223 173 117) (211 147 107) (223 173 117) (225 197 100) (227 209 106) (223 173 117) (211 147 107) (225 197 100) (223 173 117) (225 197 100) (211 147 107) (223 173 117) (227 209 106) (225 197 100) (211 147 107) (225 197 100) (223 173 117) (225 197 100) (227 209 106) (223 173 117) (211 147 107) (223 173 117) (211 147 107) (225 197 100) (227 209 106) (223 173 117) 
+			colorAniFPS=float:11.0000067
+			colorAniSmooth=bool:0
+		[]
+		childs2=int:0
+		[% zCVob 12289 4]
+			pack=int:0
+			presetName=string:
+			bbox3DWS=rawFloat:2558.31177 132.803741 -1472.25366 2752.31177 326.803741 -1278.25366 
+			trafoOSToWSRot=raw:0000803f0000000000000000000000000000803f0000000000000000000000000000803f
+			trafoOSToWSPos=vec3:2655.31177 229.803741 -1375.25366
+			vobName=string:
+			visual=string:FIRE.pfx
+			showVisual=bool:1
+			visualCamAlign=enum:0
+			cdStatic=bool:0
+			cdDyn=bool:0
+			staticVob=bool:0
+			dynShadow=enum:0
+			[visual zCParticleFX 0 5]
+			[]
+			[ai % 0 0]
+			[]
+		[]
+    childs3=int:0
+[]

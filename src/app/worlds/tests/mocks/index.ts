@@ -7,3 +7,6 @@ export const simpleVobMock = simpleVob;
 
 import triggerListVob from './trigger-list-vob.mock';
 export const triggerListVobMock = triggerListVob;
+
+import vobtree from './vobtree.mock';
+export const vobtreeMock = vobtree;

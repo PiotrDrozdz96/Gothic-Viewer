@@ -52,7 +52,7 @@ export class Vobtree {
   [VOB.OC_MOB_CONTAINER]?: Array<OCMobContainer>;
 
   constructor(data: string) {
-    const childs = slice(split(data, 'childs'), 1, -2);
+    const childs = slice(split(data, 'childs'), 1, -1);
     forEach(childs, (vobString) => {
       const vob = this.getVob(vobString);
       if (!has(this, vob.vobType.type)) {
@@ -62,7 +62,7 @@ export class Vobtree {
     });
   }
 
-  private getVob = (vobString: string): ZCVob => {
+  private getVob(vobString: string): ZCVob {
     const lines = split(vobString, '\n');
     const [, index, unknownValue] = lines[0].match(/(\d+)=int:(\d+)/);
     const vobType = new VobType(lines[1]);
