@@ -41,3 +41,14 @@
 .value {
   font-size: 14px;
 }
+
+.value-rest {
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+.value-array {
+  font-size: 14px;
+  white-space: pre-line;
+  margin-left: 10px;
+}

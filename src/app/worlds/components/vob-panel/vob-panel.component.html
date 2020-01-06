@@ -10,8 +10,14 @@
   <div class="content">
     <app-custom-scrollbar>
       <div *ngFor="let property of panelData" class="property">
-        <span class="key">{{property.key}}: </span>
-        <span class="value">{{property.value}}</span>
+        <span *ngIf="!isRest(property.key)" class="key">{{property.key}}: </span>
+        <span *ngIf="!isArrayValue(property.value)" class="value">{{property.value}}</span>
+        <div
+          *ngIf="isArrayValue(property.value)"
+          [ngClass]="{'value-array': !isRest(property.key), 'value-rest': isRest(property.key)}"
+        >
+          {{arrayToString(property.value)}}
+        </div>
       </div>
     </app-custom-scrollbar>
   </div>

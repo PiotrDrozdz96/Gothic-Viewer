@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { omit, entries, map } from 'lodash';
+import { omit, entries, map, join, isArray } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 import { ZCVob } from '@worlds/models';
@@ -33,11 +33,7 @@ export class VobPanelComponent {
     });
   }
 
-  close() {
-    this.mapService.closeVob();
-  }
-
-  mapPanelData(vob: ZCVob) {
+  private mapPanelData(vob: ZCVob) {
     this.panelData = map(
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
       ([key, gType]: [string, any]) => ({
@@ -45,6 +41,22 @@ export class VobPanelComponent {
         value: gType.value
       })
     );
+  }
+
+  public close() {
+    this.mapService.closeVob();
+  }
+
+  public isArrayValue(value?: any): value is any[] {
+    return isArray(value);
+  }
+
+  public arrayToString(array: Array<string>) {
+    return join(array, '\n');
+  }
+
+  public isRest(key: string) {
+    return key === 'rest';
   }
 
 }
