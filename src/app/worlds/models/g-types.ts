@@ -39,8 +39,17 @@ export class GString extends GTypeSimilarString {
   type: 'string';
 }
 
-export class GRawFloat extends GTypeSimilarString {
-  type: 'rawFloat';
+export class GRawFloat implements GType {
+  value: Array<number>;
+  constructor(
+    public type: 'rawFloat',
+    value: string,
+  ) {
+    this.value = map(split(trim(value), ' '), parseFloat);
+  }
+  toString(): string {
+    return `${this.type}:${join(this.value, ' ')} `;
+  }
 }
 
 export class GRaw extends GTypeSimilarString {
