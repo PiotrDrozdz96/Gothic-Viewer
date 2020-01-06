@@ -5,7 +5,7 @@ const zenGin = 'ZenGin Archive';
 const genericArchive = 'zCArchiverGeneric';
 const ASCII = 'ASCII';
 const END = 'END';
-const gothicDateFormat = 'DD.MM.YYYY HH:mm:ss';
+const gothicDateFormat = 'DD.M.YYYY HH:mm:ss';
 
 const somethingWrongMessage = (field: string): string => (
   `Coś jest nie tak z wartością "${field}"`
