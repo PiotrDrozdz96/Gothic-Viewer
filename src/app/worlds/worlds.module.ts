@@ -33,7 +33,7 @@ const dialogs = [
   declarations: [
     ...pages,
     ...components,
-    ...dialogs,
+    ...dialogs
   ],
   imports: [
     ...modules

@@ -7,10 +7,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import { InputFileComponent } from './input-file/input-file.component';
-import { CustomScrollbarComponent } from './custom-scrollbar/custom-scrollbar.component';
-
 const modules = [
   CommonModule,
   FormsModule,
@@ -21,13 +17,15 @@ const modules = [
   MatDialogModule,
 ];
 
+import { InputFileComponent } from './input-file/input-file.component';
 const components = [
   InputFileComponent,
-  CustomScrollbarComponent,
 ];
 
 @NgModule({
-  declarations: components,
+  declarations: [
+    ...components
+  ],
   imports: [
     ...modules
   ],

@@ -38,22 +38,20 @@
       </button>
     </div>
   </div>
-  <div class="content">
-    <app-custom-scrollbar>
-      <div class="filter" *ngFor="let vobFilter of vobFilters">
-        <mat-checkbox
-          color="warn"
-          [(ngModel)]="vobFilter.checked"
-          (change)="onCheckboxChange($event, vobFilter.vobMarkerGroup)"
-        >
-          {{vobFilter.text}} ({{vobFilter.vobMarkerGroup.markers.length}})
-        </mat-checkbox>
-        <app-vobs-list
-          [checked]="vobFilter.checked"
-          [text]="vobFilter.text"
-          [vobMarkerGroup]="vobFilter.vobMarkerGroup"
-        ></app-vobs-list>
-      </div>
-    </app-custom-scrollbar>
+  <div class="content scrollbar">
+    <div class="filter" *ngFor="let vobFilter of vobFilters">
+      <mat-checkbox
+        color="warn"
+        [(ngModel)]="vobFilter.checked"
+        (change)="onCheckboxChange($event, vobFilter.vobMarkerGroup)"
+      >
+        {{vobFilter.text}} ({{vobFilter.vobMarkerGroup.markers.length}})
+      </mat-checkbox>
+      <app-vobs-list
+        [checked]="vobFilter.checked"
+        [text]="vobFilter.text"
+        [vobMarkerGroup]="vobFilter.vobMarkerGroup"
+      ></app-vobs-list>
+    </div>
   </div>
 </div>
