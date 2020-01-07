@@ -1,6 +1,6 @@
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
-  GColor, GColorList, TriggerList, Chest
+  GColor, GColorList, Chest
 } from './g-types';
 
 export const vobPropConstructors = {
@@ -78,6 +78,19 @@ export const vobPropConstructors = {
   scriptFunc: GString,
   // ZCTriggerList
   listProcess: GEnum,
+  numTarget: GInt,
+  triggerTarget0: GString,
+  fireDelay0: GFloat,
+  triggerTarget1: GString,
+  fireDelay1: GFloat,
+  triggerTarget2: GString,
+  fireDelay2: GFloat,
+  triggerTarget3: GString,
+  fireDelay3: GFloat,
+  triggerTarget4: GString,
+  fireDelay4: GFloat,
+  triggerTarget5: GString,
+  fireDelay5: GFloat,
   // ZCMover
   moverBehavior: GEnum,
   touchBlockerDamage: GFloat,

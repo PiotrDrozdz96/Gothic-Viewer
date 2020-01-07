@@ -23,7 +23,7 @@ export class VobPanelComponent {
 
   constructor(private mapService: MapService) {
     this.mapService.openedVob.subscribe((gMarker) => {
-      if  (gMarker) {
+      if (gMarker) {
         const { vob } = gMarker;
         this.vob = vob;
         this.mapPanelData(vob);

@@ -122,36 +122,6 @@ export class GColorList implements GType {
   }
 }
 
-interface Trigger {
-  triggerTarget: GString;
-  fireDelay: GFloat;
-}
-
-export class TriggerList {
-  value: Array<Trigger>;
-  constructor(lines: Array<string>) {
-    this.value = map(chunk(lines, 2), (singleChunk) => {
-      const triggerTarget = getVobProp(singleChunk[0]);
-      const fireDelay = getVobProp(singleChunk[1]);
-      return {
-        triggerTarget: new GString(triggerTarget.type, triggerTarget.value),
-        fireDelay: new GFloat(fireDelay.type, fireDelay.value)
-      };
-    });
-  }
-  getLines(): Array<string> {
-    return flatten(map(this.value, (trigger, i) => ([
-      `triggerTarget${i}=${trigger.triggerTarget.toString()}`,
-      `fireDelay${i}=${trigger.fireDelay.toString()}`
-    ])));
-  }
-  toString(whitespace = vobPropWhitespace): string {
-    return `${whitespace}numTarget=int:${this.value.length}\n${
-      join(map(this.getLines(), (line) => `${whitespace}${line}`), '\n')
-    }`;
-  }
-}
-
 export class Items {
   instance: string;
   number: string;

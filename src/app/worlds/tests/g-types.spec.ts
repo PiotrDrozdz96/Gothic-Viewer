@@ -1,7 +1,7 @@
 import { random, keys } from 'lodash';
 
 import {
-  GInt, GBool, GColor, GColorList, TriggerList, Items, Chest, Rest, GVec3
+  GInt, GBool, GColor, GColorList, Items, Chest, Rest, GVec3
 } from '@worlds/models';
 
 describe('GTypes', () => {
@@ -78,59 +78,6 @@ describe('GTypes', () => {
     });
     it('toString should return correctly string', () => {
       expect(gType.toString()).toEqual('string:(225 197 100) (227 209 106) (223 173 117)');
-    });
-  });
-
-  describe('TriggerList', () => {
-    const lines = [
-      'triggerTarget0=string:EVT_CASTLE_FLOOR_0',
-      'fireDelay0=float:0',
-      'triggerTarget1=string:EVT_CASTLE_FLOOR_1',
-      'fireDelay1=float:1',
-      'triggerTarget2=string:EVT_CASTLE_FLOOR_2',
-      'fireDelay2=float:2',
-      'triggerTarget3=string:EVT_CASTLE_FLOOR_3',
-      'fireDelay3=float:3',
-      'triggerTarget4=string:EVT_CASTLE_FLOOR_4',
-      'fireDelay4=float:4',
-      'triggerTarget5=string:EVT_CASTLE_FLOOR_5',
-      'fireDelay5=float:5',
-    ];
-    const triggerList = new TriggerList(lines);
-    it('value should be array of half lines', () => {
-      expect(triggerList.value.length).toEqual(lines.length / 2);
-    });
-    it('should save array of objects', () => {
-      const index = random(0, 5);
-      expect(keys(triggerList.value[index])).toEqual(['triggerTarget', 'fireDelay']);
-    });
-    it('should save triggerTarget to correctly object in list', () => {
-      const index = random(0, 5);
-      expect(triggerList.value[index].triggerTarget.value).toEqual(`EVT_CASTLE_FLOOR_${index}`);
-    });
-    it('should save fireDelay to correctly object in list', () => {
-      const index = random(0, 5);
-      expect(triggerList.value[index].fireDelay.value).toEqual(`${index}`);
-    });
-    it('getLines should return the same value as input', () => {
-      expect(triggerList.getLines()).toEqual(lines);
-    });
-    it('toString should return correctly string', () => {
-      expect(triggerList.toString()).toEqual(
-        '			numTarget=int:6\n' +
-        '			triggerTarget0=string:EVT_CASTLE_FLOOR_0\n' +
-        '			fireDelay0=float:0\n' +
-        '			triggerTarget1=string:EVT_CASTLE_FLOOR_1\n' +
-        '			fireDelay1=float:1\n' +
-        '			triggerTarget2=string:EVT_CASTLE_FLOOR_2\n' +
-        '			fireDelay2=float:2\n' +
-        '			triggerTarget3=string:EVT_CASTLE_FLOOR_3\n' +
-        '			fireDelay3=float:3\n' +
-        '			triggerTarget4=string:EVT_CASTLE_FLOOR_4\n' +
-        '			fireDelay4=float:4\n' +
-        '			triggerTarget5=string:EVT_CASTLE_FLOOR_5\n' +
-        '			fireDelay5=float:5'
-      );
     });
   });
 

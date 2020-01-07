@@ -6,7 +6,7 @@ import { getVobProp } from '@worlds/utils';
 import { vobPropConstructors } from './vob-prop-constructors';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
-  GColor, GColorList, TriggerList, Chest, Rest
+  GColor, GColorList, Chest, Rest
 } from './g-types';
 
 export class VobType {
@@ -68,7 +68,8 @@ export class ZCVob {
       }
     });
   }
-  toString(): any {
+
+  toString(): string {
     const vobProps = omit(this, ['index', 'unknownValue', 'vobType']);
     const lines = [];
     forEach(vobProps, (prop, key) => {
@@ -207,27 +208,19 @@ export class ZCTriggerScript extends ZCTrigger {
 export class ZCTriggerList extends ZCTrigger {
   // type: 'zCTriggerList:zCTrigger:'
   listProcess: GEnum;
-  triggerList: TriggerList;
-  constructor(
-    public index: string,
-    public unknownValue: GInt,
-    public vobType: VobType,
-    vobProps: Array<string>
-  ) {
-    super(
-      index,
-      unknownValue,
-      vobType,
-      vobProps.slice(0, findIndex(vobProps, (line) => (
-        /numTarget=int:\d*/.test(line)
-      )))
-    );
-    this.triggerList = new TriggerList(
-      vobProps.slice(findIndex(vobProps, (line) => (
-        /numTarget=int:\d*/.test(line)
-      )) + 1)
-    );
-  }
+  numTarget: GInt;
+  triggerTarget0: GString;
+  fireDelay0: GFloat;
+  triggerTarget1: GString;
+  fireDelay1: GFloat;
+  triggerTarget2: GString;
+  fireDelay2: GFloat;
+  triggerTarget3: GString;
+  fireDelay3: GFloat;
+  triggerTarget4: GString;
+  fireDelay4: GFloat;
+  triggerTarget5: GString;
+  fireDelay5: GFloat;
 }
 
 export class ZCMover extends ZCTrigger {
