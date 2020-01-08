@@ -14,7 +14,7 @@ interface Property {
   selector: 'app-vob-panel',
   templateUrl: './vob-panel.component.html',
   styleUrls: ['./vob-panel.component.css'],
-  animations: [leftPanelAnimation]
+  animations: [leftPanelAnimation],
 })
 export class VobPanelComponent {
 
@@ -38,8 +38,8 @@ export class VobPanelComponent {
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
       ([key, gType]: [string, any]) => ({
         key,
-        value: gType.value
-      })
+        value: gType.value,
+      }),
     );
   }
 

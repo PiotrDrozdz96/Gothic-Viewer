@@ -33,13 +33,13 @@ const dialogs = [
   declarations: [
     ...pages,
     ...components,
-    ...dialogs
+    ...dialogs,
   ],
   imports: [
-    ...modules
+    ...modules,
   ],
   entryComponents: [
-    ...dialogs
+    ...dialogs,
   ],
 })
 export class WorldsModule { }

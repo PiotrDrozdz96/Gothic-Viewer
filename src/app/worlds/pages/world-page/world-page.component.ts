@@ -7,7 +7,7 @@ import { MapService } from '@worlds/services';
 @Component({
   selector: 'app-worlds',
   templateUrl: './world-page.component.html',
-  styleUrls: ['./world-page.component.css']
+  styleUrls: ['./world-page.component.css'],
 })
 export class WorldPageComponent implements AfterViewInit {
   public world: World;

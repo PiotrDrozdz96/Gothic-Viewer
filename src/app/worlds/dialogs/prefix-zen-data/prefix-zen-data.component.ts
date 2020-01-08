@@ -16,6 +16,6 @@ interface Data {
 export class PrefixZenDataComponent {
   constructor(
     public dialogRef: MatDialogRef<PrefixZenDataComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Data
+    @Inject(MAT_DIALOG_DATA) public data: Data,
   ) { }
 }

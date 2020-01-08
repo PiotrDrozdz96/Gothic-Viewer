@@ -73,7 +73,7 @@ describe('GTypes', () => {
       expect(gType.value).toEqual([
         ['225', '197', '100'],
         ['227', '209', '106'],
-        ['223', '173', '117']
+        ['223', '173', '117'],
       ]);
     });
     it('toString should return correctly string', () => {

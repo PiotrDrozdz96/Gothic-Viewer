@@ -12,7 +12,7 @@ const divider = 190;
 const toolbardisplacement = 2.5;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapService {
   private bouncingMarker: L.Marker;
@@ -35,7 +35,7 @@ export class MapService {
     const imageObs = getImage(imageUrl).subscribe((imageElement) => {
       const bounds: L.LatLngBoundsExpression = [
         [-(imageElement.naturalHeight / 4), -(imageElement.naturalWidth / 4)],
-        [imageElement.naturalHeight / 4, imageElement.naturalWidth / 4]
+        [imageElement.naturalHeight / 4, imageElement.naturalWidth / 4],
       ];
       const image = L.imageOverlay(imageUrl, bounds).addTo(this.map);
       this.map.fitBounds(bounds);
@@ -46,7 +46,7 @@ export class MapService {
   private unbounceMarker() {
     if (this.bouncingMarker) {
       this.bouncingMarker.setIcon(new L.Icon(
-        omit(this.bouncingMarker.getIcon().options, ['className'])
+        omit(this.bouncingMarker.getIcon().options, ['className']),
       ));
       this.bouncingMarker = undefined;
     }
@@ -77,7 +77,7 @@ export class MapService {
       iconUrl: this.getMarkerIconUrl(vobType),
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
-      shadowSize: [41, 41]
+      shadowSize: [41, 41],
     });
   }
 
@@ -95,7 +95,7 @@ export class MapService {
       markers: map(vobs, (vob: ZCVob) => ({
         vob,
         marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
-      }))
+      })),
     };
   }
 

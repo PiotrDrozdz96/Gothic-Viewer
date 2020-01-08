@@ -1,7 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 
 export const getImage = (url: string): Observable<HTMLImageElement> => (
-  Observable.create((observer: Observer<HTMLImageElement>) => {
+  new Observable((observer: Observer<HTMLImageElement>) => {
     const img: HTMLImageElement = new Image();
     function loadListener() {
       observer.next(this);

@@ -75,7 +75,7 @@ export class PrefixZenData {
         } else { return true; }
       },
       (line) => line !== END,
-      (line) => line !== ''
+      (line) => line !== '',
     ];
 
     if (prefix.length !== 11) {

@@ -15,7 +15,7 @@ const initChecked = [VOB.OC_ITEM];
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css'],
-  animations: [ leftPanelAnimation ]
+  animations: [ leftPanelAnimation ],
 })
 export class ToolbarComponent implements OnChanges {
   public fileName = '';
@@ -39,7 +39,7 @@ export class ToolbarComponent implements OnChanges {
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
             vobMarkerGroup: this.mapService.markersGroup(vobs),
           };
-        }
+        },
       );
       forEach(this.vobFilters, (vobFilter: VobFilter) => {
         if (vobFilter.checked) {
@@ -57,8 +57,8 @@ export class ToolbarComponent implements OnChanges {
       minWidth: 520,
       data: {
         fileName: this.fileName,
-        prefixZenData: this.world.prefixZenData
-      }
+        prefixZenData: this.world.prefixZenData,
+      },
     });
   }
   onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {

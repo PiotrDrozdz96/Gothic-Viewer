@@ -56,7 +56,7 @@ const ELEMENT_DATA: Array<MarkerElement> = [
 @Component({
   selector: 'app-markers-page',
   templateUrl: './markers-page.component.html',
-  styleUrls: ['./markers-page.component.css']
+  styleUrls: ['./markers-page.component.css'],
 })
 export class MarkersPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker', 'canvas'];
@@ -70,14 +70,14 @@ export class MarkersPageComponent implements AfterViewInit {
     forEach(this.dataSource, (element, index) => {
       html2canvas(
         document.getElementById(element.name),
-        { backgroundColor: 'transparent' }
+        { backgroundColor: 'transparent' },
       ).then((canvas) => {
         this.dataSource[index] = {...element, src: canvas.toDataURL('image/png') };
         canvas.toBlob((blob) => {
           this.zip.file(
             replace(`${element.name}marker.png`, ':', '_'),
             blob,
-            { base64: true }
+            { base64: true },
           );
         });
         this.renderedCount++;

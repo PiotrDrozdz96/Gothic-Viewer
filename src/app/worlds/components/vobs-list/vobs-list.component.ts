@@ -7,7 +7,7 @@ import { MapService } from '@worlds/services';
 @Component({
   selector: 'app-vobs-list',
   templateUrl: './vobs-list.component.html',
-  styleUrls: ['./vobs-list.component.css']
+  styleUrls: ['./vobs-list.component.css'],
 })
 export class VobsListComponent implements OnChanges {
   isOpened = false;

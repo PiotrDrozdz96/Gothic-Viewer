@@ -49,7 +49,7 @@ describe('Vob', () => {
       '12788',
       new GInt('int', '0'),
       new VobType(lines[1]),
-      lines.slice(2, -2)
+      lines.slice(2, -2),
     );
 
     it('should save correctly index', () => {
@@ -69,7 +69,7 @@ describe('Vob', () => {
         '[visual § 0 9043]',
         '[]',
         '[ai % 0 0]',
-        '[]'
+        '[]',
       ]);
     });
 
@@ -84,7 +84,7 @@ describe('Vob', () => {
       '10960',
       new GInt('int', '0'),
       new VobType(lines[1]),
-      lines.slice(2, -2)
+      lines.slice(2, -2),
     );
     it('should save correctly index', () => {
       expect(vob.index).toEqual('10960');
@@ -100,7 +100,7 @@ describe('Vob', () => {
         '[visual % 0 0]',
         '[]',
         '[ai % 0 0]',
-        '[]'
+        '[]',
       ]);
     });
     it('toString should return correctly string', () => {

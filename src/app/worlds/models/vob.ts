@@ -43,7 +43,7 @@ export class ZCVob {
     public index: string,
     public unknownValue: GInt,
     public vobType: VobType,
-    vobProps: Array<string>
+    vobProps: Array<string>,
   ) {
     let restMode = false;
     forEach(vobProps, (line) => {

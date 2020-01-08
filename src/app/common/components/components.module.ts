@@ -24,14 +24,14 @@ const components = [
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
   ],
   imports: [
-    ...modules
+    ...modules,
   ],
   exports: [
     ...modules,
-    ...components
-  ]
+    ...components,
+  ],
 })
 export class ComponentsModule { }
