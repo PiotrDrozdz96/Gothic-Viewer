@@ -10,8 +10,8 @@ interface Data {
 
 @Component({
   selector: 'app-prefix-zen-data',
-  styleUrls: ['./prefix-zen-data.component.css'],
   templateUrl: 'prefix-zen-data.component.html',
+  styleUrls: ['./prefix-zen-data.component.scss'],
 })
 export class PrefixZenDataComponent {
   constructor(

@@ -13,7 +13,7 @@ interface Property {
 @Component({
   selector: 'app-vob-panel',
   templateUrl: './vob-panel.component.html',
-  styleUrls: ['./vob-panel.component.css'],
+  styleUrls: ['./vob-panel.component.scss'],
   animations: [leftPanelAnimation],
 })
 export class VobPanelComponent {

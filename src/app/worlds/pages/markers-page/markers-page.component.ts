@@ -56,7 +56,7 @@ const ELEMENT_DATA: Array<MarkerElement> = [
 @Component({
   selector: 'app-markers-page',
   templateUrl: './markers-page.component.html',
-  styleUrls: ['./markers-page.component.css'],
+  styleUrls: ['./markers-page.component.scss'],
 })
 export class MarkersPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker', 'canvas'];

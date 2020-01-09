@@ -5,7 +5,11 @@
   "projects": {
     "Gothic-IDE": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,10 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/leaflet/dist/leaflet.css",
-              "./node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css",
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles/index.css"
+              "src/styles/index.scss"
             ],
             "scripts": []
           },
@@ -95,10 +96,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/leaflet/dist/leaflet.css",
-              "./node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css",
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles/index.css"
+              "src/styles/index.scss"
             ],
             "scripts": []
           }

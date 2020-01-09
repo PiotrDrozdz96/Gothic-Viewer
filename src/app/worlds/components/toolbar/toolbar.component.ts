@@ -14,7 +14,7 @@ const initChecked = [VOB.OC_ITEM];
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css'],
+  styleUrls: ['./toolbar.component.scss'],
   animations: [ leftPanelAnimation ],
 })
 export class ToolbarComponent implements OnChanges {

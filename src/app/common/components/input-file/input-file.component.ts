@@ -5,7 +5,7 @@ type InputFileType = 'mat-rised-button' | 'icon';
 @Component({
   selector: 'app-input-file',
   templateUrl: './input-file.component.html',
-  styleUrls: ['./input-file.component.css'],
+  styleUrls: ['./input-file.component.scss'],
 })
 export class InputFileComponent {
   public label = 'Nie wybrano pliku';
