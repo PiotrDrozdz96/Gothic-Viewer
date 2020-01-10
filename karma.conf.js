@@ -16,7 +16,7 @@ module.exports = function (config) {
       clearContext: true // changed to stop reload after navigate on page
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage/Gothic-IDE'),
+      dir: require('path').join(__dirname, './coverage/Gothic-Viewer'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Gothic-IDE": {
+    "Gothic-Viewer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Gothic-IDE",
+            "outputPath": "dist/Gothic-Viewer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Gothic-IDE:build"
+            "browserTarget": "Gothic-Viewer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Gothic-IDE:build:production"
+              "browserTarget": "Gothic-Viewer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Gothic-IDE:build"
+            "browserTarget": "Gothic-Viewer:build"
           }
         },
         "test": {
@@ -128,16 +128,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Gothic-IDE:serve"
+            "devServerTarget": "Gothic-Viewer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Gothic-IDE:serve:production"
+              "devServerTarget": "Gothic-Viewer:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Gothic-IDE"
+  "defaultProject": "Gothic-Viewer"
 }
