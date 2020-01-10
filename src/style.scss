@@ -2,5 +2,9 @@
 @import '~leaflet/dist/leaflet.css';
 @import '~leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css';
 
-@import './main.scss';
-@import './scrollbar.scss';
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #1c1e1f;
+}

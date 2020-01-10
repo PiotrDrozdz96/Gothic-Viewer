@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/index.scss"
+              "src/style.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -106,7 +106,7 @@
               ]
             },
             "styles": [
-              "src/styles/index.scss"
+              "src/style.scss"
             ],
             "scripts": []
           }

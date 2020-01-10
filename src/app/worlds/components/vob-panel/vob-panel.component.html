@@ -7,7 +7,7 @@
       {{vob.vobType}}
     </div>
   </div>
-  <div class="content scrollbar">
+  <div class="content">
     <div *ngFor="let property of panelData" class="property">
       <span *ngIf="!isRest(property.key)" class="key">{{property.key}}: </span>
       <span *ngIf="!isArrayValue(property.value)" class="value">{{property.value}}</span>
