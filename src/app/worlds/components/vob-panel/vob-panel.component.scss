@@ -5,6 +5,10 @@
   @include panel($z-index-above-map-3)
 }
 
+.property {
+  margin-bottom: 10px;
+}
+
 .key {
   font-size: $font-x-small;
 }
