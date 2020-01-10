@@ -1,0 +1,18 @@
+@import 'panel';
+@import 'variables';
+
+.button-wrapper {
+  position: absolute;
+  z-index: $z-index-above-map-1;
+  top: 8px;
+  left: 16px;
+}
+
+.panel {
+  @include panel($z-index-above-map-2)
+}
+
+.filter {
+  margin-bottom: 10px;
+  min-height: 40px;
+}

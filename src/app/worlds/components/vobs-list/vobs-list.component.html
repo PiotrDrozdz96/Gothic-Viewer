@@ -1,6 +1,6 @@
-<span class="button-wrapper">
+<span>
   <button
-    [ngClass]="{'button': !(vobMarkerGroup.markers.length && checked)}"
+    [ngClass]="{'hidden': !(vobMarkerGroup.markers.length && checked)}"
     mat-icon-button
     (click)="setOpened()"
   >
@@ -13,7 +13,7 @@
     class="list-element"
     (click)="openVob(index)"
   >
-    <img class="icon" [src]="vobMarkerGroup.iconUrl">
+    <img class="small-marker" [src]="vobMarkerGroup.iconUrl">
     <span class="list-element-text">{{gMarker.vob.vobName.value || text}}</span>
   </div>
 </div>

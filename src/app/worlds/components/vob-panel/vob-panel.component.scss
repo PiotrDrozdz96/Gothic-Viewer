@@ -1,54 +1,26 @@
+@import 'panel';
+@import 'variables';
+
 .panel {
-  position: absolute;
-  height: 100vh;
-  width: 360px;
-  z-index: 403;
-  background-color: #303030;
-  color: #ffffff;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  background-color: #91241a;
-  height: 64px;
-}
-
-.title {
-  padding: 0 8px;
-  font-size: 18px;
-  width: calc(100% - 40px);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  display: inline-block;
-}
-
-.content {
-  height: calc(100vh - 76px);
-  word-break: break-all;
-  padding: 12px 0 0 24px;
-}
-
-.property {
-  margin-bottom: 10px;
+  @include panel($z-index-above-map-3)
 }
 
 .key {
-  font-size: 12px;
+  font-size: $font-x-small;
 }
 
 .value {
-  font-size: 14px;
+  font-size: $font-small;
+  word-break: break-all;
 }
 
 .value-rest {
-  font-size: 14px;
+  font-size: $font-small;
   white-space: pre-line;
 }
 
 .value-array {
-  font-size: 14px;
+  font-size: $font-small;
   white-space: pre-line;
   margin-left: 10px;
 }

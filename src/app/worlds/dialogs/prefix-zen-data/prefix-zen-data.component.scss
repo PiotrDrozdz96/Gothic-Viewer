@@ -1,5 +1,8 @@
+@import 'variables';
+@import 'mixins';
+
 .content {
-  font-size: 14px;
+  font-size: $font-small;
 }
 
 .section {
@@ -11,9 +14,9 @@
 }
 
 .file-name {
-  font-size: 18px; 
+  font-size: $font-large; 
 }
 
 .actions {
-  float: right;
+  @include flex-end;
 }

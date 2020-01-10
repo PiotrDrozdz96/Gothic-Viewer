@@ -1,19 +1,12 @@
-.button {
-  visibility: hidden;
-}
-
-.icon {
-  width: 18px;
-  height: 23px;
-}
+@import 'helpers';
+@import 'mixins';
 
 .list {
   margin-left: 20px;
 }
 
 .list-element {
-  display: flex;
-  align-items: center;
+  @include flex-center-vertical;
   margin-bottom: 10px;
   cursor: pointer;
 }

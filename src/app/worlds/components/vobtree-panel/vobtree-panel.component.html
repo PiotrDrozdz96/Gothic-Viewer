@@ -11,18 +11,18 @@
       color="accent"
       (click)="setIsOpenToolbar(true)"
     >
-      TOOLBAR
+      VOBTREE
     </button>
   </div>
 </div>
-<div *ngIf="world && isOpenToolbar" class="toolbar" [@leftPanelAnimation]>
+<div *ngIf="world && isOpenPanel" class="panel" [@leftPanelAnimation]>
   <div class="header">
     <div class="icon-button-left">
       <button mat-icon-button (click)="openDialog()">
         <mat-icon>description</mat-icon>
       </button>
     </div>
-    <div class="file-name">
+    <div class="title">
       {{fileName}}
     </div>
     <div class="icon-button-right">

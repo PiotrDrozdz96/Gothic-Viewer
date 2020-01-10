@@ -17,9 +17,9 @@ const pages = [
   MarkersPageComponent,
 ];
 
-import { ToolbarComponent, VobPanelComponent, VobsListComponent } from './components';
+import { VobtreePanelComponent, VobPanelComponent, VobsListComponent } from './components';
 const components = [
-  ToolbarComponent,
+  VobtreePanelComponent,
   VobsListComponent,
   VobPanelComponent,
 ];

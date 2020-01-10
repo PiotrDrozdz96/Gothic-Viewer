@@ -4,7 +4,27 @@
   justify-content: center;
 }
 
+@mixin flex-center-vertical() {
+  display: flex;
+  align-items: center;
+}
+
 @mixin flex-end() {
   display: flex;
   justify-content: flex-end;
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-grow() {
+  flex: 1;
+}
+
+@mixin truncate() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

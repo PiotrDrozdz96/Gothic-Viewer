@@ -12,14 +12,14 @@ import { PrefixZenDataComponent } from '@worlds/dialogs';
 const initChecked = [VOB.OC_ITEM];
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
+  selector: 'app-vobtree-panel',
+  templateUrl: './vobtree-panel.component.html',
+  styleUrls: ['./vobtree-panel.component.scss'],
   animations: [ leftPanelAnimation ],
 })
-export class ToolbarComponent implements OnChanges {
+export class VobtreePanelComponent implements OnChanges {
   public fileName = '';
-  public isOpenToolbar = true;
+  public isOpenPanel = true;
   public vobFilters: VobFilters;
 
   @Output() fileResult = new EventEmitter<string>();
@@ -51,7 +51,7 @@ export class ToolbarComponent implements OnChanges {
 
   emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
   setFileName(fileName: string) { this.fileName = fileName; }
-  setIsOpenToolbar(value: boolean) { this.isOpenToolbar = value; }
+  setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
   openDialog(): void {
     const dialogRef = this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
