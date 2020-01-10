@@ -30,6 +30,11 @@
             "styles": [
               "src/styles/index.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/common/styles/"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -95,6 +100,11 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/common/styles/"
+              ]
+            },
             "styles": [
               "src/styles/index.scss"
             ],

@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
 .page {
   padding: 50px;
 }
@@ -7,19 +10,16 @@ table {
 }
 
 .marker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
 }
 
 .icon {
-  color: #ffffff;
-  font-size: 16px;
+  color: $color-text;
+  font-size: $font-icon;
 }
 
 .buttons {
-  display: flex;
-  justify-content: flex-end;
+  @include flex-end;
   width: 100%;
   margin-top: 20px;
 }
