@@ -12,5 +12,6 @@
 }
 
 .list-element-text {
+  @include truncate;
   margin-left: 10px;
 }

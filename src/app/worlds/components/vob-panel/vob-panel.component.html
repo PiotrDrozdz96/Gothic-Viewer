@@ -3,7 +3,7 @@
     <button mat-icon-button (click)="close()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <div class="title">
+    <div class="title" [title]="vob.vobType">
       {{vob.vobType}}
     </div>
   </div>
