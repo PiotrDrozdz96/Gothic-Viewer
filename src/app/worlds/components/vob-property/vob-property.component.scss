@@ -13,6 +13,10 @@
   word-break: break-all;
 }
 
+.value-color {
+  display: flex;
+}
+
 .value-rest {
   font-size: $font-small;
   white-space: pre-line;

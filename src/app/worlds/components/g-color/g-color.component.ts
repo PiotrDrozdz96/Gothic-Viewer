@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { GColor } from '@worlds/models';
+import { Color } from '@common/types';
 
 @Component({
   selector: 'app-g-color',
@@ -10,7 +10,7 @@ import { GColor } from '@worlds/models';
 export class GColorComponent {
 
   @Input()
-  color: GColor;
+  color: Color;
 
   constructor() { }
 

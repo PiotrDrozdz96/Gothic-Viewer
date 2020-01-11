@@ -11,16 +11,10 @@ import {
   parseInt,
 } from 'lodash';
 
+import { Color, Colors } from '@common/types';
 import { vobPropWhitespace } from '@worlds/consts';
 import { getVobProp } from '@worlds/utils';
-
-type Color = [number, number, number] | [number, number, number, number];
-
-interface GType {
-  type: string;
-  value: any;
-  toString(): string;
-}
+import { GType } from '@worlds/types';
 
 abstract class GTypeSimilarString implements GType {
   constructor(
@@ -106,7 +100,7 @@ export class GColor implements GType {
 }
 
 export class GColorList implements GType {
-  value: Array<Color>;
+  value: Colors;
   constructor(
     public type: 'string',
     value: string,
@@ -149,7 +143,8 @@ export class Chest implements GType {
   }
 }
 
-export class Rest {
+export class Rest implements GType {
+  type = 'rest';
   value: Array<string> = [];
   push(value: string): void {
     this.value.push(value);

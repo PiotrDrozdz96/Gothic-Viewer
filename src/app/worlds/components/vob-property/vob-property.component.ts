@@ -10,8 +10,8 @@ import { VobProperty } from '@worlds/types';
 export class VobPropertyComponent {
 
   @Input()
-  property: VobProperty;
+  vobProperty: VobProperty;
 
-  constructor() { }
+  constructor() {}
 
 }

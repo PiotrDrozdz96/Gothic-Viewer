@@ -1,3 +1,5 @@
+import * as L from 'leaflet';
+
 import { ZCVob } from '../models/vob';
 
 export interface VobMarker {

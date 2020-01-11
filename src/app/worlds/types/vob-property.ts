@@ -1,4 +1,6 @@
+import { GType } from './g-type';
+
 export interface VobProperty {
   key: string;
-  value: any;
+  property: GType;
 }

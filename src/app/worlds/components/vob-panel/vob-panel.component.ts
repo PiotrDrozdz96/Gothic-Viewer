@@ -34,7 +34,7 @@ export class VobPanelComponent {
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
       ([key, gType]: [string, any]) => ({
         key,
-        value: gType.value,
+        property: gType,
       }),
     );
   }

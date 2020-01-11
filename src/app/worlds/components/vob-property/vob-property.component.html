@@ -1,19 +1,28 @@
-<div class="property" [ngSwitch]="property.key">
+<div class="property" [ngSwitch]="vobProperty.property.type">
 
     <div *ngSwitchCase="'rest'" class="value-rest">
-        {{property.value | arrayToString}}
+        {{vobProperty.property.value | arrayToString}}
+    </div>
+
+    <div *ngSwitchCase="'color'" class="value-color">
+      <span class="key">{{vobProperty.key}}: </span>
+      <app-g-color [color]="vobProperty.property.value"></app-g-color>
     </div>
 
     <div *ngSwitchDefault>
-      <span class="key">{{property.key}}: </span>
+      <span class="key">{{vobProperty.key}}: </span>
       <ng-container
-        *ngIf="property.value | isArray; then isArray; else notArray"
+        *ngIf="vobProperty.property.value | isArray; then isArray; else notArray"
       ></ng-container>
+
       <ng-template #isArray>
-        <div class="value-array">{{property.value | arrayToString}}</div>
+        <div class="value-array">
+          {{vobProperty.property.value | arrayToString}}
+        </div>
       </ng-template>
+
       <ng-template #notArray>
-        <span class="value">{{property.value}}</span>
+        <span class="value">{{vobProperty.property.value}}</span>
       </ng-template>
     </div>
     
