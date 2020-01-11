@@ -7,13 +7,14 @@ import {
   replace,
   last,
   trim,
-  flatten
+  flatten,
+  parseInt,
 } from 'lodash';
 
 import { vobPropWhitespace } from '@worlds/consts';
 import { getVobProp } from '@worlds/utils';
 
-type Color = Array<string>;
+type Color = [number, number, number] | [number, number, number, number];
 
 interface GType {
   type: string;
@@ -97,7 +98,7 @@ export class GColor implements GType {
     public type: 'color',
     value: string,
   ) {
-    this.value = split(value, ' ');
+    this.value = map(split(value, ' '), parseInt) as Color;
   }
   toString(): string {
     return `${this.type}:${join(this.value, ' ')}`;
@@ -113,7 +114,7 @@ export class GColorList implements GType {
     const colors = split(trim(value), ') (');
     colors[0] = replace(colors[0], '(', '');
     colors[colors.length - 1] = replace(last(colors), ')', '');
-    this.value = map(colors, (color) => split(color, ' '));
+    this.value = map(colors, (color) => map(split(color, ' '), parseInt) as Color);
   }
   toString(): string {
     return `${this.type}:${join(map(this.value, (color: Color) => (
