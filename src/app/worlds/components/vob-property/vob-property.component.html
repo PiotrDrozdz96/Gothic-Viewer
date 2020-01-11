@@ -1,0 +1,20 @@
+<div class="property" [ngSwitch]="property.key">
+
+    <div *ngSwitchCase="'rest'" class="value-rest">
+        {{property.value | arrayToString}}
+    </div>
+
+    <div *ngSwitchDefault>
+      <span class="key">{{property.key}}: </span>
+      <ng-container
+        *ngIf="property.value | isArray; then isArray; else notArray"
+      ></ng-container>
+      <ng-template #isArray>
+        <div class="value-array">{{property.value | arrayToString}}</div>
+      </ng-template>
+      <ng-template #notArray>
+        <span class="value">{{property.value}}</span>
+      </ng-template>
+    </div>
+    
+  </div>

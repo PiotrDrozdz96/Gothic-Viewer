@@ -23,11 +23,17 @@ const pages = [
   MarkersPageComponent,
 ];
 
-import { VobtreePanelComponent, VobPanelComponent, VobsListComponent } from './components';
+import {
+  VobtreePanelComponent,
+  VobPanelComponent,
+  VobsListComponent,
+  VobPropertyComponent,
+} from './components';
 const components = [
   VobtreePanelComponent,
   VobsListComponent,
   VobPanelComponent,
+  VobPropertyComponent,
 ];
 
 import { PrefixZenDataComponent } from './dialogs/';
@@ -41,6 +47,7 @@ const dialogs = [
     ...components,
     ...dialogs,
     ...pipes,
+    VobPropertyComponent,
   ],
   imports: [
     ...modules,

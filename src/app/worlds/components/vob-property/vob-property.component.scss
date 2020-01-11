@@ -1,0 +1,25 @@
+@import 'variables';
+
+.property {
+  margin-bottom: 10px;
+}
+
+.key {
+  font-size: $font-x-small;
+}
+
+.value {
+  font-size: $font-small;
+  word-break: break-all;
+}
+
+.value-rest {
+  font-size: $font-small;
+  white-space: pre-line;
+}
+
+.value-array {
+  font-size: $font-small;
+  white-space: pre-line;
+  margin-left: 10px;
+}
