@@ -11,6 +11,11 @@ const modules = [
   RouterModule.forChild(worldsRoutes),
 ];
 
+import { IsArrayPipe } from '@common/pipes';
+const pipes = [
+  IsArrayPipe,
+];
+
 import { WorldPageComponent, MarkersPageComponent } from './pages';
 const pages = [
   WorldPageComponent,
@@ -34,6 +39,7 @@ const dialogs = [
     ...pages,
     ...components,
     ...dialogs,
+    ...pipes,
   ],
   imports: [
     ...modules,

@@ -8,14 +8,17 @@
     </div>
   </div>
   <div class="content">
-    <div *ngFor="let property of panelData" class="property">
-      <span *ngIf="!isRest(property.key)" class="key">{{property.key}}: </span>
-      <span *ngIf="!isArrayValue(property.value)" class="value">{{property.value}}</span>
-      <div
-        *ngIf="isArrayValue(property.value)"
-        [ngClass]="{'value-array': !isRest(property.key), 'value-rest': isRest(property.key)}"
-      >
-        {{arrayToString(property.value)}}
+    <div *ngFor="let property of panelData" class="property" [ngSwitch]="property.key">
+      <div *ngSwitchCase="'rest'" class="value-rest">
+          {{arrayToString(property.value)}}
+      </div>
+      <div *ngSwitchDefault>
+        <span class="key">{{property.key}}: </span>
+        <div *ngIf="property.value | isArray; then isArray; else notArray"></div>
+        <ng-template #isArray class="value-array">
+            {{arrayToString(property.value)}}
+          </ng-template>
+        <ng-template #notArray class="value">{{property.value}}</ng-template>
       </div>
     </div>
   </div>

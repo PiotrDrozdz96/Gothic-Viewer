@@ -47,16 +47,8 @@ export class VobPanelComponent {
     this.mapService.closeVob();
   }
 
-  public isArrayValue(value?: any): value is any[] {
-    return isArray(value);
-  }
-
   public arrayToString(array: Array<string>) {
     return join(array, '\n');
-  }
-
-  public isRest(key: string) {
-    return key === 'rest';
   }
 
 }
