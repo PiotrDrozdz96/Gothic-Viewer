@@ -1,0 +1,9 @@
+@import 'mixins';
+
+.colors {
+  @include flex-wrap;
+  
+  & > * {
+    margin-top: 5px;
+  }
+}

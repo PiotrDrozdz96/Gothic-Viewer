@@ -29,6 +29,7 @@ import {
   VobPanelComponent,
   VobsListComponent,
   VobPropertyComponent,
+  GColorsComponent,
   GColorComponent,
 } from './components';
 const components = [
@@ -36,6 +37,7 @@ const components = [
   VobsListComponent,
   VobPanelComponent,
   VobPropertyComponent,
+  GColorsComponent,
   GColorComponent,
 ];
 
@@ -50,6 +52,7 @@ const dialogs = [
     ...components,
     ...dialogs,
     ...pipes,
+    GColorsComponent,
   ],
   imports: [
     ...modules,
