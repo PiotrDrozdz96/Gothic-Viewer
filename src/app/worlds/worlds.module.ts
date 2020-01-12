@@ -52,7 +52,6 @@ const dialogs = [
     ...components,
     ...dialogs,
     ...pipes,
-    GColorsComponent,
   ],
   imports: [
     ...modules,

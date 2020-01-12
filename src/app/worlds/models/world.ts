@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { split } from 'lodash';
 
 import { PrefixZenData } from './prefix-zen-data';

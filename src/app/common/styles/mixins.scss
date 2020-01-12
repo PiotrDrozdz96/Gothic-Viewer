@@ -1,35 +1,35 @@
-@mixin flex-center() {
+@mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-@mixin flex-center-vertical() {
+@mixin flex-center-vertical {
   display: flex;
   align-items: center;
 }
 
-@mixin flex-end() {
+@mixin flex-end {
   display: flex;
   justify-content: flex-end;
 }
 
-@mixin flex-column() {
+@mixin flex-column {
   display: flex;
   flex-direction: column;
 }
 
-@mixin flex-wrap() {
+@mixin flex-wrap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-@mixin flex-grow() {
+@mixin flex-grow {
   flex: 1;
 }
 
-@mixin truncate() {
+@mixin truncate {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
