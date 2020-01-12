@@ -1,4 +1,4 @@
-.scrollbar {
+@mixin scrollbar {
   overflow-y: scroll;
 
   &::-webkit-scrollbar {

@@ -11,17 +11,34 @@ const modules = [
   RouterModule.forChild(worldsRoutes),
 ];
 
+import { IsArrayPipe, ArrayToStringPipe, RgbPipe } from '@common/pipes';
+const pipes = [
+  IsArrayPipe,
+  ArrayToStringPipe,
+  RgbPipe,
+];
+
 import { WorldPageComponent, MarkersPageComponent } from './pages';
 const pages = [
   WorldPageComponent,
   MarkersPageComponent,
 ];
 
-import { VobtreePanelComponent, VobPanelComponent, VobsListComponent } from './components';
+import {
+  VobtreePanelComponent,
+  VobPanelComponent,
+  VobsListComponent,
+  VobPropertyComponent,
+  GColorsComponent,
+  GColorComponent,
+} from './components';
 const components = [
   VobtreePanelComponent,
   VobsListComponent,
   VobPanelComponent,
+  VobPropertyComponent,
+  GColorsComponent,
+  GColorComponent,
 ];
 
 import { PrefixZenDataComponent } from './dialogs/';
@@ -34,6 +51,7 @@ const dialogs = [
     ...pages,
     ...components,
     ...dialogs,
+    ...pipes,
   ],
   imports: [
     ...modules,

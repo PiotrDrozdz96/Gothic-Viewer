@@ -57,7 +57,7 @@ describe('GTypes', () => {
       expect(gType.type).toEqual('color');
     });
     it('should save value as array of string', () => {
-      expect(gType.value).toEqual(['211', '147', '107', '255']);
+      expect(gType.value).toEqual([211, 147, 107, 255]);
     });
     it('toString should return correctly string', () => {
       expect(gType.toString()).toEqual('color:211 147 107 255');
@@ -71,9 +71,9 @@ describe('GTypes', () => {
     });
     it('should save value as array of color', () => {
       expect(gType.value).toEqual([
-        ['225', '197', '100'],
-        ['227', '209', '106'],
-        ['223', '173', '117'],
+        [225, 197, 100],
+        [227, 209, 106],
+        [223, 173, 117],
       ]);
     });
     it('toString should return correctly string', () => {

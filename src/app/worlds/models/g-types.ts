@@ -7,19 +7,14 @@ import {
   replace,
   last,
   trim,
-  flatten
+  flatten,
+  parseInt,
 } from 'lodash';
 
+import { Color, Colors } from '@common/types';
 import { vobPropWhitespace } from '@worlds/consts';
 import { getVobProp } from '@worlds/utils';
-
-type Color = Array<string>;
-
-interface GType {
-  type: string;
-  value: any;
-  toString(): string;
-}
+import { GType } from '@worlds/types';
 
 abstract class GTypeSimilarString implements GType {
   constructor(
@@ -97,7 +92,7 @@ export class GColor implements GType {
     public type: 'color',
     value: string,
   ) {
-    this.value = split(value, ' ');
+    this.value = map(split(value, ' '), parseInt) as Color;
   }
   toString(): string {
     return `${this.type}:${join(this.value, ' ')}`;
@@ -105,7 +100,7 @@ export class GColor implements GType {
 }
 
 export class GColorList implements GType {
-  value: Array<Color>;
+  value: Colors;
   constructor(
     public type: 'string',
     value: string,
@@ -113,7 +108,7 @@ export class GColorList implements GType {
     const colors = split(trim(value), ') (');
     colors[0] = replace(colors[0], '(', '');
     colors[colors.length - 1] = replace(last(colors), ')', '');
-    this.value = map(colors, (color) => split(color, ' '));
+    this.value = map(colors, (color) => map(split(color, ' '), parseInt) as Color);
   }
   toString(): string {
     return `${this.type}:${join(map(this.value, (color: Color) => (
@@ -148,7 +143,8 @@ export class Chest implements GType {
   }
 }
 
-export class Rest {
+export class Rest implements GType {
+  type = 'rest';
   value: Array<string> = [];
   push(value: string): void {
     this.value.push(value);

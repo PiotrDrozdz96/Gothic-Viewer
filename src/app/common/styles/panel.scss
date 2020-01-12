@@ -33,7 +33,7 @@
   }
 
   .content {
-    @extend .scrollbar;
+    @include scrollbar;
     @include flex-grow;
     padding: 12px 0 12px 24px;
   }

@@ -1,0 +1,8 @@
+@import 'variables';
+
+.color {
+  width: 11px;
+  height: 11px;
+  border: 1px solid $border-color-primary;
+  margin-left: 5px;
+}

@@ -8,15 +8,7 @@
     </div>
   </div>
   <div class="content">
-    <div *ngFor="let property of panelData" class="property">
-      <span *ngIf="!isRest(property.key)" class="key">{{property.key}}: </span>
-      <span *ngIf="!isArrayValue(property.value)" class="value">{{property.value}}</span>
-      <div
-        *ngIf="isArrayValue(property.value)"
-        [ngClass]="{'value-array': !isRest(property.key), 'value-rest': isRest(property.key)}"
-      >
-        {{arrayToString(property.value)}}
-      </div>
-    </div>
+    <app-vob-property *ngFor="let vobProperty of panelData" [vobProperty]="vobProperty">
+    </app-vob-property>
   </div>
 </div>

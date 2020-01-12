@@ -4,11 +4,7 @@ import { omit, entries, map, join, isArray } from 'lodash';
 import { leftPanelAnimation } from '@common/animations';
 import { ZCVob } from '@worlds/models';
 import { MapService } from '@worlds/services';
-
-interface Property {
-  key: string;
-  value: any;
-}
+import { VobProperty } from '@worlds/types';
 
 @Component({
   selector: 'app-vob-panel',
@@ -19,7 +15,7 @@ interface Property {
 export class VobPanelComponent {
 
   public vob: ZCVob;
-  public panelData: Array<Property>;
+  public panelData: Array<VobProperty>;
 
   constructor(private mapService: MapService) {
     this.mapService.openedVob.subscribe((gMarker) => {
@@ -38,7 +34,7 @@ export class VobPanelComponent {
       entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
       ([key, gType]: [string, any]) => ({
         key,
-        value: gType.value,
+        property: gType,
       }),
     );
   }
@@ -46,17 +42,4 @@ export class VobPanelComponent {
   public close() {
     this.mapService.closeVob();
   }
-
-  public isArrayValue(value?: any): value is any[] {
-    return isArray(value);
-  }
-
-  public arrayToString(array: Array<string>) {
-    return join(array, '\n');
-  }
-
-  public isRest(key: string) {
-    return key === 'rest';
-  }
-
 }
