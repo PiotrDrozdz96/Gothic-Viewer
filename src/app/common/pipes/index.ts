@@ -1,3 +1,15 @@
-export * from './is-array/is-array.pipe';
-export * from './array-to-string/array-to-string.pipe';
-export * from './rgb/rgb.pipe';
+import { IsArrayPipe } from './is-array/is-array.pipe';
+import { ArrayToStringPipe } from './array-to-string/array-to-string.pipe';
+import { RgbPipe } from './rgb/rgb.pipe';
+
+export {
+  IsArrayPipe,
+  ArrayToStringPipe,
+  RgbPipe,
+};
+
+export default [
+  IsArrayPipe,
+  ArrayToStringPipe,
+  RgbPipe,
+];
