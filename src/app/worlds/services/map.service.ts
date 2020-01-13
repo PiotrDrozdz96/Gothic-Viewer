@@ -7,8 +7,8 @@ import { getImage } from '@common/utils';
 import { ZCVob, GVec3 } from '@worlds/models';
 import { VobMarkerGroup, VobMarker } from '@worlds/types';
 
-const imageUrl = 'http://static.giantbomb.com/uploads/original/0/5684/805645-gothic_map_wp_1600x1200.png';
-const divider = 190;
+const imageUrl = 'assets/MAP_WORLD_HD.PNG';
+const divider = 150;
 const toolbardisplacement = 2.5;
 
 @Injectable({

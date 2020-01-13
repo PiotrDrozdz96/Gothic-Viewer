@@ -9,7 +9,7 @@ import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
 import { MapService } from '@worlds/services';
 import { PrefixZenDataComponent } from '@worlds/dialogs';
 
-const initChecked = [VOB.OC_ITEM];
+const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COMPO];
 
 @Component({
   selector: 'app-vobtree-panel',
