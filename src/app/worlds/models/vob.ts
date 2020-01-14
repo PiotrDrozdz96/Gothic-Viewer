@@ -2,6 +2,7 @@ import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
 import { getVobProp } from '@worlds/utils';
+import { BlockLine } from '@worlds/types';
 
 import { vobPropConstructors } from './vob-prop-constructors';
 import {
@@ -9,7 +10,7 @@ import {
   GColor, GColorList, Chest, Rest
 } from './g-types';
 
-export class VobType {
+export class VobType implements BlockLine {
   type: string;
   firstValue: string;
   secondValue: string;
