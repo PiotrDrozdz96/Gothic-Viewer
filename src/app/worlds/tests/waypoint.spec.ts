@@ -48,6 +48,9 @@ describe('Waypoint', () => {
       it('isWay should return false', () => {
         expect(wayType.isWay()).toEqual(false);
       });
+      it('isReference should return false', () => {
+        expect(wayType.isReference()).toEqual(false);
+      });
     });
 
     describe('WayType', () => {
@@ -77,6 +80,9 @@ describe('Waypoint', () => {
       it('isWaypoint should return false', () => {
         expect(wayType.isWaypoint()).toEqual(false);
       });
+      it('isReference should return false', () => {
+        expect(wayType.isReference()).toEqual(false);
+      });
     });
 
     describe('copy way', () => {
@@ -105,6 +111,9 @@ describe('Waypoint', () => {
       });
       it('isWaypoint should return false', () => {
         expect(wayType.isWaypoint()).toEqual(false);
+      });
+      it('isReference should return true', () => {
+        expect(wayType.isReference()).toEqual(true);
       });
     });
   });

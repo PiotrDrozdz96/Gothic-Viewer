@@ -1,9 +1,11 @@
 import {
   wayRegexp, waypointRegexp,
   wayNameRegexp, waypointNameRegexp,
-  waynetWhitespace,
+  waynetWhitespace, referenceSymbol,
 } from '@worlds/consts';
 import { BlockLine } from '@worlds/types';
+
+import { GString, GInt, GBool, GVec3 } from './g-types';
 
 export class WayType implements BlockLine {
   name: string;
@@ -29,4 +31,14 @@ export class WayType implements BlockLine {
   }
   public isWaypoint(): boolean { return waypointNameRegexp.test(this.name); }
   public isWay(): boolean { return wayNameRegexp.test(this.name); }
+  public isReference(): boolean { return referenceSymbol === this.type; }
+}
+
+export class ZCWaypoint {
+  wayType: WayType;
+  wpName: GString;
+  waterDepth: GInt;
+  underWater: GBool;
+  position: GVec3;
+  direction: GVec3;
 }
