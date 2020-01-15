@@ -1,4 +1,4 @@
-import { forEach, omit, join } from 'lodash';
+import { forEach, omit, join, isEmpty } from 'lodash';
 
 import {
   wayRegexp, waypointRegexp,
@@ -70,8 +70,8 @@ export class ZCWaypoint {
     });
 
     return (
-      `${waynetWhitespace}${this.wayType.toString}\n` +
-      `${join(lines, '\n')}\n` +
+      `${this.wayType.toString()}\n` +
+      `${join(lines, '\n')}${!isEmpty(lines) ? '\n' : ''}` +
       `${waynetWhitespace}[]\n`
     );
   }
@@ -80,4 +80,5 @@ export class ZCWaypoint {
   public isWay(): boolean { return this.wayType.isWay(); }
   public isReference(): boolean { return this.wayType.isReference(); }
   public getBlockNumber(): string { return this.wayType.secondValue; }
+  public getName(): string { return this.wayType.name; }
 }

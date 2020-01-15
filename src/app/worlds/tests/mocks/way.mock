@@ -1,0 +1,6 @@
+			[wayr0 zCWaypoint 0 16870]
+				wpName=string:OCR_MAINGATE_LEFT_GUARD
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-7175.62012 -1296.37354 5523.93701
+				direction=vec3:-0.615661502 0 0.788010716

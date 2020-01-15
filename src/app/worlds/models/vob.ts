@@ -80,6 +80,7 @@ export class ZCVob {
         lines.push(prop.toString());
       }
     });
+
     return (
       `${vobWhitespace}childs${this.index}=${this.unknownValue.toString()}\n` +
       `${this.vobType.toString()}\n` +

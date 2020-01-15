@@ -1,0 +1,6 @@
+			[waypoint0 zCWaypoint 0 16849]
+				wpName=string:LOCATION_28_07
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:23871.457 -553.283813 27821.3516
+				direction=vec3:0.86651814 0 -0.499145567

@@ -1,4 +1,8 @@
-import { WayType } from '@worlds/models';
+import { split } from 'lodash';
+
+import { WayType, ZCWaypoint } from '@worlds/models';
+
+import { waypointMock, wayMock } from './mocks';
 
 describe('Waypoint', () => {
   describe('WayType', () => {
@@ -114,6 +118,64 @@ describe('Waypoint', () => {
       });
       it('isReference should return true', () => {
         expect(wayType.isReference()).toEqual(true);
+      });
+    });
+  });
+
+  describe('ZCWaypoint', () => {
+    const closeBlock = '			[]\n';
+    describe('waypoint', () => {
+      const waypoint = new ZCWaypoint(split(waypointMock, '\n').slice(0, -1));
+      it('create an instance', () => {
+        expect(waypoint).toBeTruthy();
+      });
+      it('isWaypoint should return true', () => {
+        expect(waypoint.isWaypoint()).toEqual(true);
+      });
+      it('getBlockNumber return 16849', () => {
+        expect(waypoint.getBlockNumber()).toEqual('16849');
+      });
+      it('should save wayProp', () => {
+        expect(waypoint.wpName).toBeTruthy();
+      });
+      it('toString should return correctly string', () => {
+        expect(waypoint.toString()).toEqual(`${waypointMock}${closeBlock}`);
+      });
+    });
+
+    describe('way', () => {
+      const waypoint = new ZCWaypoint(split(wayMock, '\n').slice(0, -1));
+      it('create an instance', () => {
+        expect(waypoint).toBeTruthy();
+      });
+      it('isWay should return true', () => {
+        expect(waypoint.isWay()).toEqual(true);
+      });
+      it('getBlockNumber return 16870', () => {
+        expect(waypoint.getBlockNumber()).toEqual('16870');
+      });
+      it('should save wayProp', () => {
+        expect(waypoint.position).toBeTruthy();
+      });
+      it('toString should return correctly string', () => {
+        expect(waypoint.toString()).toEqual(`${wayMock}${closeBlock}`);
+      });
+    });
+
+    describe('way reference', () => {
+      const wayReferenceMock = '			[wayl1 § 0 16869]\n';
+      const waypoint = new ZCWaypoint(split(wayReferenceMock, '\n').slice(0, -1));
+      it('create an instance', () => {
+        expect(waypoint).toBeTruthy();
+      });
+      it('isReference should return true', () => {
+        expect(waypoint.isReference()).toEqual(true);
+      });
+      it('getBlockNumber return 16869', () => {
+        expect(waypoint.getBlockNumber()).toEqual('16869');
+      });
+      it('toString should return correctly string', () => {
+        expect(waypoint.toString()).toEqual(`${wayReferenceMock}${closeBlock}`);
       });
     });
   });
