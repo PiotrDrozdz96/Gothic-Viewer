@@ -1,10 +1,10 @@
 import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
-import { getVobProp } from '@worlds/utils';
+import { getZenProp } from '@worlds/utils';
 import { BlockLine } from '@worlds/types';
 
-import { vobPropConstructors } from './vob-prop-constructors';
+import { zenPropConstructors } from './zen-prop-constructors';
 import {
   GInt, GString, GRawFloat, GRaw, GVec3, GBool, GEnum, GFloat,
   GColor, GColorList, Chest, Rest
@@ -49,7 +49,7 @@ export class ZCVob {
     let restMode = false;
     forEach(vobProps, (line) => {
       if (!restMode) {
-        const {key, type, value} = getVobProp(line);
+        const {key, type, value} = getZenProp(line);
         if (key === 'rest') {
           if (this.rest) {
             this.rest.push(value);
@@ -59,7 +59,7 @@ export class ZCVob {
           }
           restMode = true;
         } else {
-          this[key] = new vobPropConstructors[key](type, value);
+          this[key] = new zenPropConstructors[key](type, value);
         }
       } else {
         if (line.includes('[]')) {

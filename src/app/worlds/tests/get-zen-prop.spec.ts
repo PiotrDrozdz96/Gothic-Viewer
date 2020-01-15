@@ -1,10 +1,10 @@
-import { getVobProp } from '@worlds/utils';
+import { getZenProp } from '@worlds/utils';
 
-describe('GetVobProp', () => {
+describe('GetZenProp', () => {
 
   describe('simple prop', () => {
     const line = '			pack=int:0';
-    const { key, type, value } = getVobProp(line);
+    const { key, type, value } = getZenProp(line);
     it('should return correctly key', () => {
       expect(key).toEqual('pack');
     });
@@ -18,7 +18,7 @@ describe('GetVobProp', () => {
 
   describe('empty value', () => {
     const line = '			rangeAniScale=string:';
-    const { key, type, value } = getVobProp(line);
+    const { key, type, value } = getZenProp(line);
     it('should return correctly key', () => {
       expect(key).toEqual('rangeAniScale');
     });
@@ -32,7 +32,7 @@ describe('GetVobProp', () => {
 
   describe('value with spaces', () => {
     const line = '			trafoOSToWSPos=vec3:-33267.8438 2936.19434 -25089.3262';
-    const { key, type, value } = getVobProp(line);
+    const { key, type, value } = getZenProp(line);
     it('should return correctly key', () => {
       expect(key).toEqual('trafoOSToWSPos');
     });
@@ -46,7 +46,7 @@ describe('GetVobProp', () => {
 
   describe('rest', () => {
     const line = '			[visual % 0 0]';
-    const { key, type, value } = getVobProp(line);
+    const { key, type, value } = getZenProp(line);
     it('should return rest key', () => {
       expect(key).toEqual('rest');
     });

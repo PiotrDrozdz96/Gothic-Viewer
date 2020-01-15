@@ -3,7 +3,7 @@ import {
   GColor, GColorList, Chest
 } from './g-types';
 
-export const vobPropConstructors = {
+export const zenPropConstructors = {
   // ZCVob
   pack: GInt,
   presetName: GString,
@@ -145,4 +145,10 @@ export const vobPropConstructors = {
   pickLockStr: GString,
   // OCMobContainer
   contains: Chest,
+  // ZCWaypoint
+  wpName: GString,
+  waterDepth: GInt,
+  underWater: GBool,
+  position: GVec3,
+  direction: GVec3,
 };

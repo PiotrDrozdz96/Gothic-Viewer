@@ -13,7 +13,6 @@ import {
 
 import { Color, Colors } from '@common/types';
 import { vobPropWhitespace } from '@worlds/consts';
-import { getVobProp } from '@worlds/utils';
 import { GType } from '@worlds/types';
 
 abstract class GTypeSimilarString implements GType {

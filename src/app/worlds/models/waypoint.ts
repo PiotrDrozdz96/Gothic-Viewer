@@ -1,11 +1,17 @@
+import { forEach, omit, join } from 'lodash';
+
 import {
   wayRegexp, waypointRegexp,
   wayNameRegexp, waypointNameRegexp,
-  waynetWhitespace, referenceSymbol,
+  waynetWhitespace, wayPropWhitespace,
+  referenceSymbol,
 } from '@worlds/consts';
 import { BlockLine } from '@worlds/types';
+import { getZenProp } from '@worlds/utils';
 
 import { GString, GInt, GBool, GVec3 } from './g-types';
+import { zenPropConstructors } from './zen-prop-constructors';
+
 
 export class WayType implements BlockLine {
   name: string;
@@ -36,9 +42,42 @@ export class WayType implements BlockLine {
 
 export class ZCWaypoint {
   wayType: WayType;
-  wpName: GString;
-  waterDepth: GInt;
-  underWater: GBool;
-  position: GVec3;
-  direction: GVec3;
+  wpName?: GString;
+  waterDepth?: GInt;
+  underWater?: GBool;
+  position?: GVec3;
+  direction?: GVec3;
+  constructor(lines: Array<string>) {
+    const [wayTypeLine, ...zenProps] = lines;
+    this.wayType = new WayType(wayTypeLine);
+    if (!this.wayType.isReference()) {
+      forEach(zenProps, (line) => {
+        const { key, type, value } = getZenProp(line);
+        this[key] = new zenPropConstructors[key](type, value);
+      });
+    }
+  }
+
+  public toString(): string {
+    const wayProps = omit(this, ['wayType']);
+    const lines = [];
+    forEach(wayProps, (prop, key) => {
+      if (key !== 'rest' && key !== 'triggerList') {
+        lines.push(`${wayPropWhitespace}${key}=${prop.toString()}`);
+      } else {
+        lines.push(prop.toString());
+      }
+    });
+
+    return (
+      `${waynetWhitespace}${this.wayType.toString}\n` +
+      `${join(lines, '\n')}\n` +
+      `${waynetWhitespace}[]\n`
+    );
+  }
+
+  public isWaypoint(): boolean { return this.wayType.isWaypoint(); }
+  public isWay(): boolean { return this.wayType.isWay(); }
+  public isReference(): boolean { return this.wayType.isReference(); }
+  public getBlockNumber(): string { return this.wayType.secondValue; }
 }

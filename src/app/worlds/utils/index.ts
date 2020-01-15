@@ -1,1 +1,1 @@
-export * from './get-vob-prop';
+export * from './get-zen-prop';

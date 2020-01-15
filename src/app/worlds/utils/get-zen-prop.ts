@@ -1,6 +1,6 @@
 import { trim } from 'lodash';
 
-export const getVobProp = (line: string) => {
+export const getZenProp = (line: string) => {
   const match = line.match(/\s*([^=]+)=([^:]+):(.*)/);
   if (match) {
     const [, key, type, value] = match;
