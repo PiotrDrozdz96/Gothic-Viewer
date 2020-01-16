@@ -40,7 +40,8 @@ export class WayType implements BlockLine {
   }
   public isWaypoint(): boolean { return waypointName === this.name; }
   public isWay(): boolean { return wayName === this.name; }
-  public isReference(): boolean { return pointerSymbol === this.type; }
+  public isPointer(): boolean { return pointerSymbol === this.type; }
+  public getPointerNumber(): string { return this.secondValue; }
   public getWayName(): WayName { return { name: this.name, index: this.index, ending: this.ending }; }
 }
 
@@ -54,7 +55,7 @@ export class ZCWaypoint {
   constructor(lines: Array<string>) {
     const [wayTypeLine, ...zenProps] = lines;
     this.wayType = new WayType(wayTypeLine);
-    if (!this.wayType.isReference()) {
+    if (!this.wayType.isPointer()) {
       forEach(zenProps, (line) => {
         const { key, type, value } = getZenProp(line);
         this[key] = new zenPropConstructors[key](type, value);
@@ -78,8 +79,8 @@ export class ZCWaypoint {
 
   public isWaypoint(): boolean { return this.wayType.isWaypoint(); }
   public isWay(): boolean { return this.wayType.isWay(); }
-  public isReference(): boolean { return this.wayType.isReference(); }
-  public getBlockNumber(): string { return this.wayType.secondValue; }
+  public isPointer(): boolean { return this.wayType.isPointer(); }
+  public getPointerNumber(): string { return this.wayType.getPointerNumber(); }
   public getName(): string { return this.wayType.name; }
   public getWayName(): WayName { return this.wayType.getWayName(); }
 }

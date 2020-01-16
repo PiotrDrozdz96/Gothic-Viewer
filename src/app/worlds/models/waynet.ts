@@ -6,7 +6,7 @@ import { GInt } from './g-types';
 import { WayType, ZCWaypoint } from './waypoint';
 
 interface WaypointsBlock { [key: string]: WayType; }
-interface Way { l?: ZCWaypoint; r?: ZCWaypoint; }
+interface Way { l?: WayType; r?: WayType; }
 
 export class Waynet {
   waynetVersion: GInt;
@@ -27,8 +27,8 @@ export class Waynet {
       }
 
       const zcWaypoint = new ZCWaypoint(lines);
-      if (!zcWaypoint.isReference()) {
-        this.waypointsBlock[zcWaypoint.getBlockNumber()] = zcWaypoint.wayType;
+      if (!zcWaypoint.isPointer()) {
+        this.waypointsBlock[zcWaypoint.getPointerNumber()] = zcWaypoint.wayType;
       }
       if (zcWaypoint.isWaypoint()) {
         this.singleWaypoints.push(zcWaypoint.wayType);

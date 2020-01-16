@@ -56,8 +56,8 @@ describe('Waypoint', () => {
       it('isWay should return false', () => {
         expect(wayType.isWay()).toEqual(false);
       });
-      it('isReference should return false', () => {
-        expect(wayType.isReference()).toEqual(false);
+      it('isPointer should return false', () => {
+        expect(wayType.isPointer()).toEqual(false);
       });
     });
 
@@ -91,8 +91,8 @@ describe('Waypoint', () => {
       it('isWaypoint should return false', () => {
         expect(wayType.isWaypoint()).toEqual(false);
       });
-      it('isReference should return false', () => {
-        expect(wayType.isReference()).toEqual(false);
+      it('isPointer should return false', () => {
+        expect(wayType.isPointer()).toEqual(false);
       });
     });
 
@@ -126,8 +126,8 @@ describe('Waypoint', () => {
       it('isWaypoint should return false', () => {
         expect(wayType.isWaypoint()).toEqual(false);
       });
-      it('isReference should return true', () => {
-        expect(wayType.isReference()).toEqual(true);
+      it('isPointer should return true', () => {
+        expect(wayType.isPointer()).toEqual(true);
       });
     });
   });
@@ -142,8 +142,8 @@ describe('Waypoint', () => {
       it('isWaypoint should return true', () => {
         expect(waypoint.isWaypoint()).toEqual(true);
       });
-      it('getBlockNumber return 16849', () => {
-        expect(waypoint.getBlockNumber()).toEqual('16849');
+      it('getPointerNumber return 16849', () => {
+        expect(waypoint.getPointerNumber()).toEqual('16849');
       });
       it('should save wayProp', () => {
         expect(waypoint.wpName).toBeTruthy();
@@ -161,8 +161,8 @@ describe('Waypoint', () => {
       it('isWay should return true', () => {
         expect(waypoint.isWay()).toEqual(true);
       });
-      it('getBlockNumber return 16870', () => {
-        expect(waypoint.getBlockNumber()).toEqual('16870');
+      it('getPointerNumber return 16870', () => {
+        expect(waypoint.getPointerNumber()).toEqual('16870');
       });
       it('should save wayProp', () => {
         expect(waypoint.position).toBeTruthy();
@@ -178,11 +178,11 @@ describe('Waypoint', () => {
       it('create an instance', () => {
         expect(waypoint).toBeTruthy();
       });
-      it('isReference should return true', () => {
-        expect(waypoint.isReference()).toEqual(true);
+      it('isPointer should return true', () => {
+        expect(waypoint.isPointer()).toEqual(true);
       });
-      it('getBlockNumber return 16869', () => {
-        expect(waypoint.getBlockNumber()).toEqual('16869');
+      it('getPointerNumber return 16869', () => {
+        expect(waypoint.getPointerNumber()).toEqual('16869');
       });
       it('toString should return correctly string', () => {
         expect(waypoint.toString()).toEqual(`${wayReferenceMock}${closeBlock}`);
