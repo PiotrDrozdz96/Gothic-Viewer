@@ -29,7 +29,7 @@
 				position=vec3:-54638.6953 2550 2278.75439
 				direction=vec3:0 0 1
 			[]
-      numWays=int:5
+      numWays=int:4
       [wayl0 zCWaypoint 0 16869]
 				wpName=string:OC_MOAT_01
 				waterDepth=int:0
@@ -44,7 +44,7 @@
 				position=vec3:-7175.62012 -1296.37354 5523.93701
 				direction=vec3:-0.615661502 0 0.788010716
 			[]
-			[wayl1 § 0 16869]
+			[wayl1 ï¿½ 0 16869]
 			[]
 			[wayr1 zCWaypoint 0 16871]
 				wpName=string:OC_MOAT_02
@@ -60,9 +60,9 @@
 				position=vec3:-2951.28027 -1170.09473 6766.56152
 				direction=vec3:0.829037666 0 0.559192896
 			[]
-			[wayr2 § 0 16871]
+			[wayr2 ï¿½ 0 16871]
 			[]
-			[wayl3 § 0 16872]
+			[wayl3 ï¿½ 0 16872]
 			[]
 			[wayr3 zCWaypoint 0 16873]
 				wpName=string:OC_MOAT_04
@@ -71,7 +71,7 @@
 				position=vec3:-699.787659 -1478.1554 6616.45215
 				direction=vec3:0.829037607 0 0.559192955
 			[]
-      		[]
+    []
 	[]
 	[EndMarker % 0 0]
 	[]
