@@ -38,7 +38,7 @@ describe('Waypoint', () => {
       it('type should be zCWaypoint', () => {
         expect(wayType.type).toEqual('zCWaypoint');
       });
-      it('name should be waypoint18', () => {
+      it('name should be waypoint', () => {
         expect(wayType.name).toEqual('waypoint');
       });
       it('first value should be 0', () => {
@@ -70,7 +70,7 @@ describe('Waypoint', () => {
       it('type should be zCWaypoint', () => {
         expect(wayType.type).toEqual('zCWaypoint');
       });
-      it('name should be wayr3', () => {
+      it('name should be way', () => {
         expect(wayType.name).toEqual('way');
       });
       it('ending should be r', () => {
@@ -105,7 +105,7 @@ describe('Waypoint', () => {
       it('type should be §', () => {
         expect(wayType.type).toEqual('�');
       });
-      it('name should be wayr3', () => {
+      it('name should be way', () => {
         expect(wayType.name).toEqual('way');
       });
       it('ending should be l', () => {
