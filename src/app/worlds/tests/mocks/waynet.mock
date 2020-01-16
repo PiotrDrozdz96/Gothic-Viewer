@@ -1,0 +1,78 @@
+		[% zCWayNet 0 16848]
+			waynetVersion=int:1
+			numWaypoints=int:4
+			[waypoint0 zCWaypoint 0 16849]
+				wpName=string:LOCATION_28_07
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:23871.457 -553.283813 27821.3516
+				direction=vec3:0.86651814 0 -0.499145567
+			[]
+			[waypoint1 zCWaypoint 0 16850]
+				wpName=string:MOVEMENT_OW_PATH_SCAVENGER13_SPAWN02
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-30125.0918 863.352051 10757.9727
+				direction=vec3:0.342089623 0 -0.939667344
+			[]
+			[waypoint2 zCWaypoint 0 16851]
+				wpName=string:NC_PATH098
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-45475.0859 1549.67297 12704.335
+				direction=vec3:-0.906307757 0 0.4226183
+			[]
+			[waypoint3 zCWaypoint 0 16852]
+				wpName=string:NC_PATH17_MOVEMENT4
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-54638.6953 2550 2278.75439
+				direction=vec3:0 0 1
+			[]
+      numWays=int:5
+      [wayl0 zCWaypoint 0 16869]
+				wpName=string:OC_MOAT_01
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-6457 -1552 6063
+				direction=vec3:0.829037488 0 0.559192836
+			[]
+			[wayr0 zCWaypoint 0 16870]
+				wpName=string:OCR_MAINGATE_LEFT_GUARD
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-7175.62012 -1296.37354 5523.93701
+				direction=vec3:-0.615661502 0 0.788010716
+			[]
+			[wayl1 § 0 16869]
+			[]
+			[wayr1 zCWaypoint 0 16871]
+				wpName=string:OC_MOAT_02
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-4954.80371 -1315.43884 6531.55127
+				direction=vec3:0.829037666 0 0.559192896
+			[]
+			[wayl2 zCWaypoint 0 16872]
+				wpName=string:OC_MOAT_03
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-2951.28027 -1170.09473 6766.56152
+				direction=vec3:0.829037666 0 0.559192896
+			[]
+			[wayr2 § 0 16871]
+			[]
+			[wayl3 § 0 16872]
+			[]
+			[wayr3 zCWaypoint 0 16873]
+				wpName=string:OC_MOAT_04
+				waterDepth=int:0
+				underWater=bool:0
+				position=vec3:-699.787659 -1478.1554 6616.45215
+				direction=vec3:0.829037607 0 0.559192955
+			[]
+      		[]
+	[]
+	[EndMarker % 0 0]
+	[]
+[]

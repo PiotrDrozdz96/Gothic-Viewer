@@ -20,3 +20,6 @@ export const waypointMock = waypoint;
 
 import way from './way.mock';
 export const wayMock = way;
+
+import waynet from './waynet.mock';
+export const waynetMock = waynet;
