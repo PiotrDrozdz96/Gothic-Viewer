@@ -23,6 +23,10 @@ describe('Waypoint', () => {
         const lines = ['			[waypoint0 zCWaypoint 0 16849]'];
         expect(WayType.firstLineIsBlock(lines)).toEqual(true);
       });
+      it('should return true', () => {
+        const lines = split(wayMock, '\n').slice(0, -1);
+        expect(WayType.firstLineIsBlock(lines)).toEqual(true);
+      });
     });
 
     describe('WaypointType', () => {
@@ -93,13 +97,13 @@ describe('Waypoint', () => {
     });
 
     describe('copy way', () => {
-      const line = '			[wayl3 § 0 16872]';
+      const line = '			[wayl3 � 0 16872]';
       const wayType = new WayType(line);
       it('create an instance', () => {
         expect(wayType).toBeTruthy();
       });
       it('type should be §', () => {
-        expect(wayType.type).toEqual('§');
+        expect(wayType.type).toEqual('�');
       });
       it('name should be wayr3', () => {
         expect(wayType.name).toEqual('way');
@@ -169,7 +173,7 @@ describe('Waypoint', () => {
     });
 
     describe('way reference', () => {
-      const wayReferenceMock = '			[wayl1 § 0 16869]\n';
+      const wayReferenceMock = '			[wayl1 � 0 16869]\n';
       const waypoint = new ZCWaypoint(split(wayReferenceMock, '\n').slice(0, -1));
       it('create an instance', () => {
         expect(waypoint).toBeTruthy();

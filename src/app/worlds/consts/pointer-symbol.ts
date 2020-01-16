@@ -1,1 +1,1 @@
-export const pointerSymbol = '§';
+export const pointerSymbol = '�'; // § in ANSI
