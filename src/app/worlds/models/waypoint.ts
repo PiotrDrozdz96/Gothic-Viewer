@@ -1,4 +1,4 @@
-import { forEach, omit, join, isEmpty } from 'lodash';
+import { forEach, omit, join, isEmpty, parseInt } from 'lodash';
 
 import {
   wayRegexp, waypointRegexp,
@@ -6,16 +6,15 @@ import {
   waynetWhitespace, wayPropWhitespace,
   pointerSymbol,
 } from '@worlds/consts';
-import { BlockLine } from '@worlds/types';
+import { BlockLine, WayName } from '@worlds/types';
 import { getZenProp } from '@worlds/utils';
 
 import { GString, GInt, GBool, GVec3 } from './g-types';
 import { zenPropConstructors } from './zen-prop-constructors';
 
-
 export class WayType implements BlockLine {
   name: string;
-  index: string;
+  index: number;
   ending: string;
   type: string; // zCWaypoint || §
   firstValue: string;
@@ -25,7 +24,7 @@ export class WayType implements BlockLine {
     if (match) {
       const [, name, ending, index, type, firstValue, secondValue] = match;
       this.name = name;
-      this.index = index;
+      this.index = parseInt(index, 10);
       this.ending = ending;
       this.type = type;
       this.firstValue = firstValue;
@@ -42,6 +41,7 @@ export class WayType implements BlockLine {
   public isWaypoint(): boolean { return waypointName === this.name; }
   public isWay(): boolean { return wayName === this.name; }
   public isReference(): boolean { return pointerSymbol === this.type; }
+  public getWayName(): WayName { return { name: this.name, index: this.index, ending: this.ending }; }
 }
 
 export class ZCWaypoint {
@@ -66,11 +66,7 @@ export class ZCWaypoint {
     const wayProps = omit(this, ['wayType']);
     const lines = [];
     forEach(wayProps, (prop, key) => {
-      if (key !== 'rest' && key !== 'triggerList') {
-        lines.push(`${wayPropWhitespace}${key}=${prop.toString()}`);
-      } else {
-        lines.push(prop.toString());
-      }
+      lines.push(`${wayPropWhitespace}${key}=${prop.toString()}`);
     });
 
     return (
@@ -85,4 +81,5 @@ export class ZCWaypoint {
   public isReference(): boolean { return this.wayType.isReference(); }
   public getBlockNumber(): string { return this.wayType.secondValue; }
   public getName(): string { return this.wayType.name; }
+  public getWayName(): WayName { return this.wayType.getWayName(); }
 }

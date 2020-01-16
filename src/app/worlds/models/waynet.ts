@@ -6,14 +6,14 @@ import { GInt } from './g-types';
 import { WayType, ZCWaypoint } from './waypoint';
 
 interface WaypointsBlock { [key: string]: WayType; }
-interface Way { l: ZCWaypoint; r: ZCWaypoint; }
+interface Way { l?: ZCWaypoint; r?: ZCWaypoint; }
 
 export class Waynet {
   waynetVersion: GInt;
   numWaypoints: GInt;
   numWays: GInt;
 
-  singleWaypoints: Array<ZCWaypoint> = [];
+  singleWaypoints: Array<WayType> = [];
   waypointsBlock: WaypointsBlock = {};
   ways: Array<Way> = [];
 
@@ -31,9 +31,13 @@ export class Waynet {
         this.waypointsBlock[zcWaypoint.getBlockNumber()] = zcWaypoint.wayType;
       }
       if (zcWaypoint.isWaypoint()) {
-        this.singleWaypoints.push(zcWaypoint);
+        this.singleWaypoints.push(zcWaypoint.wayType);
       } else if (zcWaypoint.isWay()) {
-        // put to ways
+        const { index, ending } = zcWaypoint.getWayName();
+        if (!this.ways[index]) {
+          this.ways[index] = {};
+        }
+        this.ways[index][ending] = zcWaypoint.wayType;
       }
     });
   }
