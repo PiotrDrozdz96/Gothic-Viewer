@@ -2,4 +2,4 @@ export * from './empty-vobtree';
 export * from './vob-types';
 export * from './whitespaces';
 export * from './way-block.regexp';
-export * from './reference-symbol';
+export * from './pointer-symbol';

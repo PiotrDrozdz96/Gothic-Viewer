@@ -2,9 +2,9 @@ import { forEach, omit, join, isEmpty } from 'lodash';
 
 import {
   wayRegexp, waypointRegexp,
-  wayNameRegexp, waypointNameRegexp,
+  wayName, waypointName,
   waynetWhitespace, wayPropWhitespace,
-  referenceSymbol,
+  pointerSymbol,
 } from '@worlds/consts';
 import { BlockLine } from '@worlds/types';
 import { getZenProp } from '@worlds/utils';
@@ -15,29 +15,33 @@ import { zenPropConstructors } from './zen-prop-constructors';
 
 export class WayType implements BlockLine {
   name: string;
+  index: string;
+  ending: string;
   type: string; // zCWaypoint || §
   firstValue: string;
   secondValue: string;
   constructor(line: string) {
     const match = line.match(wayRegexp) || line.match(waypointRegexp);
     if (match) {
-      const [, name, type, firstValue, secondValue] = match;
+      const [, name, ending, index, type, firstValue, secondValue] = match;
       this.name = name;
+      this.index = index;
+      this.ending = ending;
       this.type = type;
       this.firstValue = firstValue;
       this.secondValue = secondValue;
     }
   }
   static firstLineIsBlock(lines: Array<string>): boolean {
-    return wayNameRegexp.test(lines[0]) || waypointNameRegexp.test(lines[0]);
+    return wayRegexp.test(lines[0]) || waypointRegexp.test(lines[0]);
   }
 
   public toString(whitespace = waynetWhitespace): string {
-    return `${whitespace}[${this.name} ${this.type} ${this.firstValue} ${this.secondValue}]`;
+    return `${whitespace}[${this.name}${this.ending}${this.index} ${this.type} ${this.firstValue} ${this.secondValue}]`;
   }
-  public isWaypoint(): boolean { return waypointNameRegexp.test(this.name); }
-  public isWay(): boolean { return wayNameRegexp.test(this.name); }
-  public isReference(): boolean { return referenceSymbol === this.type; }
+  public isWaypoint(): boolean { return waypointName === this.name; }
+  public isWay(): boolean { return wayName === this.name; }
+  public isReference(): boolean { return pointerSymbol === this.type; }
 }
 
 export class ZCWaypoint {
