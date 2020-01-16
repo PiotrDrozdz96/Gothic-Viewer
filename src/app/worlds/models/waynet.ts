@@ -1,5 +1,6 @@
 import { split, forEach } from 'lodash';
 
+import { slash } from '@common/utils';
 import { getZenProp } from '@worlds/utils';
 
 import { GInt } from './g-types';
@@ -9,6 +10,7 @@ interface WaypointsBlock { [key: string]: WayType; }
 interface Way { l?: WayType; r?: WayType; }
 
 export class Waynet {
+  startLine: string;
   waynetVersion: GInt;
   numWaypoints: GInt;
   numWays: GInt;
@@ -18,7 +20,9 @@ export class Waynet {
   ways: Array<Way> = [];
 
   constructor(data: string) {
-    const waypoints: Array<string> = split(data, '[]\n').slice(0, -5);
+    const [startLine, restData] = slash(data, '\n');
+    this.startLine = startLine;
+    const waypoints: Array<string> = split(restData, '[]\n').slice(0, -5);
     forEach(waypoints, (waypointString) => {
       const lines = split(waypointString, '\n').slice(0, -1);
       while (!WayType.firstLineIsBlock(lines)) {

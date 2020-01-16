@@ -7,10 +7,10 @@ describe('Waynet', () => {
   it('create an instance', () => {
     expect(waynet).toBeTruthy();
   });
-  // it('should save correctly startLine', () => {
-  //   expect(waynet.startLine).toEqual('		[% zCWayNet 0 16848]');
-  // });
-  // it('waynetVersion should be 1', () => {
-  //   expect(waynet.waynetVersion.value).toEqual('1');
-  // });
+  it('should save correctly startLine', () => {
+    expect(waynet.startLine).toEqual('		[% zCWayNet 0 16848]');
+  });
+  it('waynetVersion should be 1', () => {
+    expect(waynet.waynetVersion.value).toEqual('1');
+  });
 });

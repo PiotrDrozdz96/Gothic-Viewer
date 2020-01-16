@@ -1,5 +1,7 @@
 import { split } from 'lodash';
 
+import { slash } from '@common/utils';
+
 import { PrefixZenData } from './prefix-zen-data';
 import { Waynet } from './waynet';
 import { Vobtree } from './vobtree';
@@ -16,8 +18,8 @@ export class World {
       alert(prefixZenData.error);
     } else {
       this.prefixZenData = prefixZenData;
-      const [binary, withoutBinary] = split(withoutPrefix, '[VobTree % 0 0]\n', 2);
-      const [vobtree, waynet] = split(withoutBinary, '[WayNet % 0 0]\n', 2);
+      const [binary, withoutBinary] = slash(withoutPrefix, '[VobTree % 0 0]\n');
+      const [vobtree, waynet] = slash(withoutBinary, '[WayNet % 0 0]\n');
       this.binary = binary;
       this.vobtree = new Vobtree(vobtree);
       this.waynet = new Waynet(waynet);
