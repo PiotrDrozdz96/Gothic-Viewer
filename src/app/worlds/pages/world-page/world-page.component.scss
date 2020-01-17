@@ -1,19 +1,12 @@
 @import 'variables';
+@import 'mixins';
 
-.map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.map-frame {
-  height: 100%;
-}
+:host { @include flex-grow; }
+.map-container { @include full-page; }
+.map-frame { @include full-page; }
 
 #map {
-  height: 100%;
+  @include full-page;
   background-color: $background-color-primary;
 
   ::ng-deep .bounce-marker {
