@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { ComponentsModule } from '@common/components';
+import { ToolbarModule } from '@toolbar/components';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routing';
@@ -14,7 +14,7 @@ import { appRoutes } from './app.routing';
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    ComponentsModule,
+    ToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

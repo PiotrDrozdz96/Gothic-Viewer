@@ -4,7 +4,7 @@ import * as webpack from 'webpack';
 export default (config: webpack.Configuration, options: CustomWebpackBrowserSchema) => {
   config.module.rules.push({
     test: /\.mock$/,
-    use: [{ loader: 'raw-loader' }]
+    use: [{ loader: 'raw-loader' }],
   });
 
   return config;

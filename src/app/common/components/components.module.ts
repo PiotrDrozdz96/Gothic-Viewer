@@ -18,12 +18,8 @@ const modules = [
 ];
 
 import { InputFileComponent } from './input-file/input-file.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ToolbarIconComponent } from './toolbar-icon/toolbar-icon.component';
 const components = [
   InputFileComponent,
-  ToolbarComponent,
-  ToolbarIconComponent,
 ];
 
 @NgModule({
