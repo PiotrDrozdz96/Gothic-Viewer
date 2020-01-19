@@ -3,11 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
-import { getImage } from '@common/utils';
 import { ZCVob, GVec3 } from '@worlds/models';
 import { VobMarkerGroup, VobMarker } from '@worlds/types';
 
-const imageUrl = 'assets/MAP_WORLD_HD.PNG';
+const imageUrl = 'assets/Textures/maps/MAP_WORLD_HD.PNG';
 const divider = 150;
 const toolbardisplacement = 2.5;
 
@@ -32,15 +31,9 @@ export class MapService {
       crs: L.CRS.Simple,
       zoomControl: false,
     });
-    const imageObs = getImage(imageUrl).subscribe((imageElement) => {
-      const bounds: L.LatLngBoundsExpression = [
-        [-(imageElement.naturalHeight / 4), -(imageElement.naturalWidth / 4)],
-        [imageElement.naturalHeight / 4, imageElement.naturalWidth / 4],
-      ];
-      const image = L.imageOverlay(imageUrl, bounds).addTo(this.map);
-      this.map.fitBounds(bounds);
-      imageObs.unsubscribe();
-    });
+    const bounds: L.LatLngBoundsExpression = [[-325, -475], [325, 475]];
+    const image = L.imageOverlay(imageUrl, bounds).addTo(this.map);
+    this.map.fitBounds(bounds);
   }
 
   private unbounceMarker() {

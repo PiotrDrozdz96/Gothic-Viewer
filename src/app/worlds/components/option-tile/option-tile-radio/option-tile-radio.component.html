@@ -1,4 +1,8 @@
 <input #input hidden type="radio" [formControl]="control" [value]="value">
-<div [ngClass]="{'wrapper': true, 'active': checked}" (click)="input.click()">
-  <div class="name">MAP_WORLD_HD</div>
+<div
+  [ngClass]="{'wrapper': true, 'active': checked}"
+  (click)="input.click()"
+  [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}"
+>
+  <div class="name">{{text}}</div>
 </div>

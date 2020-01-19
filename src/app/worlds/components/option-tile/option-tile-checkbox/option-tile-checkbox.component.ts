@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 export class OptionTileCheckboxComponent {
 
   @Input() control: FormControl;
+  @Input() text: string;
+  @Input() backgroundImage: string;
 
   constructor() { }
 

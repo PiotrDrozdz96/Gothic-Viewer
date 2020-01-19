@@ -13,9 +13,8 @@ const modules = [
   RouterModule.forChild(worldsRoutes),
 ];
 
-import { IsArrayPipe, ArrayToStringPipe, RgbPipe } from '@common/pipes';
+import { ArrayToStringPipe, RgbPipe } from '@common/pipes';
 const pipes = [
-  IsArrayPipe,
   ArrayToStringPipe,
   RgbPipe,
 ];

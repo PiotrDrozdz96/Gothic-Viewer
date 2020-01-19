@@ -10,6 +10,8 @@ export class OptionTileRadioComponent {
 
   @Input() control: FormControl;
   @Input() value: string;
+  @Input() text: string;
+  @Input() backgroundImage: string;
 
   constructor() { }
 

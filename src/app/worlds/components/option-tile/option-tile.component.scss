@@ -8,7 +8,7 @@
   @include flex-center-vertical;
   border: 4px solid $border-color-secondary;
   border-radius: 25px;
-  @include background-cover("assets/MAP_WORLD_HD.PNG");
+  background-size: cover;
   cursor: pointer;
 
   &:hover {

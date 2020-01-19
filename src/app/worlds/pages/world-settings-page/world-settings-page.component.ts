@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, CheckboxControlValueAccessor } from '@angular/forms';
 
+import { mapImages } from '@worlds/consts';
+
 @Component({
   selector: 'app-world-settings-page',
   templateUrl: './world-settings-page.component.html',
@@ -8,17 +10,18 @@ import { FormBuilder, FormGroup, CheckboxControlValueAccessor } from '@angular/f
 })
 export class WorldSettingsPageComponent {
 
+  readonly mapImages = mapImages;
+
   public settingsGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.settingsGroup = formBuilder.group({
-      image: false,
-      radio: [],
+      image: '',
     });
   }
 
-  onSubmit(sth) {
-    console.log(sth);
+  public onSubmit(sth) {
+    console.log(mapImages[sth.image]);
   }
 
 }
