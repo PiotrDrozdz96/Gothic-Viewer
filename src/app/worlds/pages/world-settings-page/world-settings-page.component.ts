@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, CheckboxControlValueAccessor } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { mapImages } from '@worlds/consts';
 
@@ -16,7 +16,7 @@ export class WorldSettingsPageComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.settingsGroup = formBuilder.group({
-      image: '',
+      image: ['', Validators.required],
     });
   }
 

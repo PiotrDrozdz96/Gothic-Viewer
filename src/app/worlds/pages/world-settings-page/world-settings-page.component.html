@@ -8,5 +8,12 @@
       [backgroundImage]="mapImages[key].imageUrl"
     ></app-option-tile-radio>
   </div>
-  <button type="submit">Dawaj</button>
+  <button
+    mat-raised-button
+    type="submit"
+    color="warn"
+    [disabled]="!settingsGroup.valid"
+  >
+    Zatwierdź
+  </button>
 </form>
