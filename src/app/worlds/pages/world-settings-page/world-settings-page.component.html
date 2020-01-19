@@ -1,0 +1,14 @@
+<form [formGroup]="settingsGroup" (ngSubmit)="onSubmit(settingsGroup.value)">
+  <app-option-tile-checkbox
+    [control]="settingsGroup.get('image')">
+  </app-option-tile-checkbox>
+  <app-option-tile-radio
+    [control]="settingsGroup.get('radio')"
+    [value]="'NEW-CAMP'"
+  ></app-option-tile-radio>
+  <app-option-tile-radio
+    [control]="settingsGroup.get('radio')"
+    [value]="'PSI-CAMP'"
+  ></app-option-tile-radio>
+  <button type="submit">Dawaj</button>
+</form>
