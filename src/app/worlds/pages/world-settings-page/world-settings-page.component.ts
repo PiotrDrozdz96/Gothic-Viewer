@@ -18,7 +18,17 @@ export class WorldSettingsPageComponent {
   constructor(private formBuilder: FormBuilder) {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
-      image: ['', Validators.required],
+      image: ['blank', Validators.required],
+    });
+    this.zenChange();
+  }
+
+  get zenId(): string { return this.settingsGroup.get('zen').value; }
+  get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
+
+  private zenChange() {
+    this.settingsGroup.get('zen').valueChanges.subscribe(() => {
+      this.settingsGroup.get('image').setValue('blank');
     });
   }
 

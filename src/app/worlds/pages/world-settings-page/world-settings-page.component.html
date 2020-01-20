@@ -8,9 +8,15 @@
       [backgroundImage]="zenWorlds[key].imageUrl"
     ></app-option-tile-radio>
   </div>
-  <div class="section">
+  <div class="section" *ngIf="zenId && zenMapImageIds">
     <app-option-tile-radio
-      *ngFor="let key of mapImages | keys"
+      [control]="settingsGroup.get('image')"
+      [value]="'blank'"
+      [text]="mapImages.blank.name"
+      [backgroundImage]="mapImages.blank.imageUrl"
+    ></app-option-tile-radio>
+    <app-option-tile-radio
+      *ngFor="let key of zenMapImageIds"
       [control]="settingsGroup.get('image')"
       [value]="key"
       [text]="mapImages[key].name"
