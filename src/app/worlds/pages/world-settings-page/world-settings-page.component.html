@@ -1,6 +1,15 @@
 <form [formGroup]="settingsGroup" (ngSubmit)="onSubmit(settingsGroup.value)">
   <div class="section">
     <app-option-tile-radio
+      *ngFor="let key of zenWorlds | keys"
+      [control]="settingsGroup.get('zen')"
+      [value]="key"
+      [text]="zenWorlds[key].name"
+      [backgroundImage]="zenWorlds[key].imageUrl"
+    ></app-option-tile-radio>
+  </div>
+  <div class="section">
+    <app-option-tile-radio
       *ngFor="let key of mapImages | keys"
       [control]="settingsGroup.get('image')"
       [value]="key"
