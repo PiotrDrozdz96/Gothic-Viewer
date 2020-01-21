@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { mapImages, zenWorlds } from '@worlds/consts';
+import { WorldSettingsService } from '@worlds/services';
 
 @Component({
   selector: 'app-world-settings-page',
@@ -15,7 +17,11 @@ export class WorldSettingsPageComponent {
 
   public settingsGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private settingsService: WorldSettingsService,
+  ) {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
       image: ['blank', Validators.required],
@@ -32,8 +38,14 @@ export class WorldSettingsPageComponent {
     });
   }
 
-  public onSubmit(sth) {
-    console.log(sth);
+  public onSubmit({zen, image}: { zen: string, image: string}) {
+    this.http.get(
+      zenWorlds[zen].zenPath,
+      {responseType: 'text'},
+    ).subscribe((zenRaw: string) => {
+      const {imageUrl, bounds} = mapImages[image];
+      this.settingsService.next({ zenRaw, imageUrl, bounds });
+    });
   }
 
 }
