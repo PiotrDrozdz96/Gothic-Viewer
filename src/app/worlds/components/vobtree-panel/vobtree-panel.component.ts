@@ -37,7 +37,7 @@ export class VobtreePanelComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
       this.vobFilters = map(
@@ -58,9 +58,9 @@ export class VobtreePanelComponent implements OnChanges {
     }
   }
 
-  emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
-  setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
-  openDialog(): void {
+  public setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
+
+  public openDialog(): void {
     const dialogRef = this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
@@ -69,7 +69,8 @@ export class VobtreePanelComponent implements OnChanges {
       },
     });
   }
-  onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
+
+  public onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
     if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {

@@ -9,11 +9,9 @@
       {{name}}
     </div>
     <div class="icon-button-right">
-      <app-input-file
-        type="icon"
-        (fileResult)="emitFileResult($event)"
-        (name)="setname($event)"
-      ></app-input-file>
+      <button mat-icon-button routerLink="/settings">
+        <mat-icon>settings_applications</mat-icon>
+      </button>
     </div>
     <div class="icon-button-right">
       <button mat-icon-button (click)="setIsOpenToolbar(false)">
