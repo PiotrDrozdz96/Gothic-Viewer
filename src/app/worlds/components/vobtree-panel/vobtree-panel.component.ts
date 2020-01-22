@@ -6,7 +6,7 @@ import { leftPanelAnimation } from '@common/animations';
 import { VOB } from '@worlds/consts';
 import { World, ZCVob } from '@worlds/models';
 import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
-import { MapService } from '@worlds/services';
+import { MapService, WorldSettingsService } from '@worlds/services';
 import { PrefixZenDataComponent } from '@worlds/dialogs';
 
 const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COMPO];
@@ -18,15 +18,24 @@ const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COM
   animations: [ leftPanelAnimation ],
 })
 export class VobtreePanelComponent implements OnChanges {
-  public fileName = '';
   public isOpenPanel = true;
   public vobFilters: VobFilters;
+  public name: string;
 
   @Output() fileResult = new EventEmitter<string>();
 
   @Input() world: World;
 
-  constructor(public mapService: MapService, public dialog: MatDialog) {}
+  constructor(
+    private mapService: MapService,
+    private worldSettingsService: WorldSettingsService,
+    private dialog: MatDialog,
+  ) {
+    worldSettingsService.get().subscribe((settings) => {
+      const { name } = settings;
+      this.name = name;
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
@@ -50,13 +59,12 @@ export class VobtreePanelComponent implements OnChanges {
   }
 
   emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
-  setFileName(fileName: string) { this.fileName = fileName; }
   setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
   openDialog(): void {
     const dialogRef = this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
-        fileName: this.fileName,
+        fileName: this.name,
         prefixZenData: this.world.prefixZenData,
       },
     });

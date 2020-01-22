@@ -24,11 +24,10 @@ export class WorldPageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.mapService.init();
+    const {imageUrl, bounds, zenRaw } = this.worldSettings;
+    setTimeout(() => {
+      this.mapService.init(bounds, imageUrl);
+      this.world = new World(zenRaw);
+    }, 0);
   }
-
-  initWorld(fileResult) {
-    this.world = new World(fileResult);
-  }
-
 }

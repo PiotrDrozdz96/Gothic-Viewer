@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { mapImages, zenWorlds } from '@worlds/consts';
 import { WorldSettingsService } from '@worlds/services';
@@ -20,6 +21,7 @@ export class WorldSettingsPageComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
+    private router: Router,
     private settingsService: WorldSettingsService,
   ) {
     this.settingsGroup = formBuilder.group({
@@ -44,7 +46,8 @@ export class WorldSettingsPageComponent {
       {responseType: 'text'},
     ).subscribe((zenRaw: string) => {
       const {imageUrl, bounds} = mapImages[image];
-      this.settingsService.next({ zenRaw, imageUrl, bounds });
+      this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
+      this.router.navigate(['']);
     });
   }
 
