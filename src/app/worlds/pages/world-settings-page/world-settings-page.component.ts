@@ -47,7 +47,7 @@ export class WorldSettingsPageComponent {
     ).subscribe((zenRaw: string) => {
       const {imageUrl, bounds} = mapImages[image];
       this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
-      this.router.navigate(['']);
+      this.router.navigate(['worlds']);
     });
   }
 

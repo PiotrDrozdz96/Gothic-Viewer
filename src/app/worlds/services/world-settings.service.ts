@@ -9,11 +9,13 @@ import { WorldSettings } from '@worlds/types';
 export class WorldSettingsService {
 
   private settings = new BehaviorSubject<WorldSettings>(undefined);
+  public isValid = false;
 
   constructor() { }
 
   public next(settings: WorldSettings) {
     this.settings.next(settings);
+    this.isValid = true;
   }
 
   public get(): Observable<WorldSettings> {
