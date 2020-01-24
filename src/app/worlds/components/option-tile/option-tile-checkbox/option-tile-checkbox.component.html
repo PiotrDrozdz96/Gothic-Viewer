@@ -1,8 +1,0 @@
-<input #input hidden type="checkbox" [formControl]="control">
-<div
-  [ngClass]="{'wrapper': true, 'active': checked}"
-  (click)="input.click()"
-  [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}"
->
-  <div class="name">{{text}}</div>
-</div>

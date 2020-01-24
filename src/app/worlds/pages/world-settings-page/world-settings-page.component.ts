@@ -31,14 +31,15 @@ export class WorldSettingsPageComponent {
     this.zenChange();
   }
 
-  get zenId(): string { return this.settingsGroup.get('zen').value; }
-  get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
-
   private zenChange() {
     this.settingsGroup.get('zen').valueChanges.subscribe(() => {
       this.settingsGroup.get('image').setValue('blank');
     });
   }
+
+  get zenId(): string { return this.settingsGroup.get('zen').value; }
+  get imageId(): string { return this.settingsGroup.get('image').value; }
+  get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
 
   public onSubmit({zen, image}: { zen: string, image: string}) {
     this.http.get(
@@ -50,5 +51,4 @@ export class WorldSettingsPageComponent {
       this.router.navigate(['worlds']);
     });
   }
-
 }

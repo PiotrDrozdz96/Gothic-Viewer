@@ -35,8 +35,7 @@ import {
   VobPropertyComponent,
   GColorsComponent,
   GColorComponent,
-  OptionTileCheckboxComponent,
-  OptionTileRadioComponent,
+  OptionTileComponent,
 } from './components';
 const components = [
   VobtreePanelComponent,
@@ -45,8 +44,7 @@ const components = [
   VobPropertyComponent,
   GColorsComponent,
   GColorComponent,
-  OptionTileCheckboxComponent,
-  OptionTileRadioComponent,
+  OptionTileComponent,
 ];
 
 import { PrefixZenDataComponent } from './dialogs/';

@@ -4,5 +4,4 @@ export * from './vob-panel/vob-panel.component';
 export * from './vob-property/vob-property.component';
 export * from './g-colors/g-colors.component';
 export * from './g-color/g-color.component';
-export * from './option-tile/option-tile-checkbox/option-tile-checkbox.component';
-export * from './option-tile/option-tile-radio/option-tile-radio.component';
+export * from './option-tile/option-tile.component';
