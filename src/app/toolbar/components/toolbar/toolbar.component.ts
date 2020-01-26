@@ -22,7 +22,7 @@ export class ToolbarComponent {
   }
 
   public setActive(active: string) {
-    this.toolbarService.setActive(active);
+    this.toolbarService.setActive(active === this.active ? '' : active);
   }
 
 }

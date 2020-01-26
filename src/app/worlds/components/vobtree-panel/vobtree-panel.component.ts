@@ -3,6 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
+
+import { ToolbarService } from '@toolbar/services';
+import { MAP } from '@toolbar/consts';
+
 import { VOB } from '@worlds/consts';
 import { World, ZCVob } from '@worlds/models';
 import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
@@ -29,11 +33,15 @@ export class VobtreePanelComponent implements OnChanges {
   constructor(
     private mapService: MapService,
     private worldSettingsService: WorldSettingsService,
+    private toolbarService: ToolbarService,
     private dialog: MatDialog,
   ) {
     worldSettingsService.get().subscribe((settings) => {
       const { name } = settings;
       this.name = name;
+    });
+    toolbarService.getActiveObs().subscribe((active) => {
+      this.isOpenPanel = active === MAP;
     });
   }
 
@@ -57,8 +65,6 @@ export class VobtreePanelComponent implements OnChanges {
       });
     }
   }
-
-  public setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
 
   public openDialog(): void {
     const dialogRef = this.dialog.open(PrefixZenDataComponent, {
