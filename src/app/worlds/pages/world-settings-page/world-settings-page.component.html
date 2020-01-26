@@ -1,5 +1,6 @@
 <form [formGroup]="settingsGroup" (ngSubmit)="onSubmit(settingsGroup.value)">
   <div class="section">
+    <h1 class="section-header">Wybierz Zen</h1>
     <app-option-tile *ngFor="let key of zenWorlds | keys"
       [text]="zenWorlds[key].name"
       [backgroundImage]="zenWorlds[key].imageUrl"
@@ -13,6 +14,7 @@
   </div>
 
   <div class="section" *ngIf="zenId && zenMapImageIds">
+    <h1 class="section-header">Wybierz Mapę</h1>
     <app-option-tile
       [text]="mapImages.blank.name"
       [backgroundImage]="mapImages.blank.imageUrl"
@@ -20,7 +22,7 @@
     >
       <input #click type="radio"
         [formControl]="settingsGroup.get('image')"
-        [value]="key"
+        [value]="'blank'"
       >
     </app-option-tile>
     <app-option-tile *ngFor="let key of zenMapImageIds"
@@ -33,12 +35,14 @@
         [value]="key">
     </app-option-tile>
   </div>
-  <button
-    mat-raised-button
-    type="submit"
-    color="warn"
-    [disabled]="!settingsGroup.valid"
-  >
-    Zatwierdź
-  </button>
+  <div class="buttons">
+    <button
+      mat-raised-button
+      type="submit"
+      color="warn"
+      [disabled]="!settingsGroup.valid"
+    >
+      Zatwierdź
+    </button>
+  </div>
 </form>

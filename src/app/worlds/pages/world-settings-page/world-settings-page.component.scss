@@ -1,5 +1,24 @@
+@import 'variables';
 @import 'mixins';
+
+:host {
+  @include flex-grow;
+  padding: 0 70px;
+}
 
 .section {
   @include flex-wrap;
+  @include flex-center;
+}
+
+.section-header {
+  color: $color-text-secondary;
+  @include flex-center;
+  width: 100%;
+}
+
+.buttons {
+  @include flex-center;
+  width: 200px;
+  margin: 20px auto;
 }
