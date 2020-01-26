@@ -1,24 +1,38 @@
 // ============ colors
 $color-primary: #91241a;
 $color-text: #ffffff;
+$color-text-secondary: #adadad;
+$color-icon: #adadad;
+$color-icon-active: #ffffff;
 
 // ============ background-colors
 $background-color-primary: #1e1e1e;
 $background-color-secondary: #262525;
 $background-color-tertiary: #333333;
+$background-color-hover: #ffffff88;
 
 // ============ borders
 $border-color-primary: #ffffff;
+$border-color-secondary: #000000;
 
-// ============ fonts
+// ============ fonts-size
 $font-x-small: 12px;
 $font-small: 14px;
 $font-medium: 16px;
 $font-large: 18px;
 
-$font-icon: 16px;
+$font-icon: 32px;
+$font-marker-icon: 16px;
+
+// ============ fonts-weight
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
 
 // ============ z-indexes
+$z-index-toolbar: 1000;
 $z-index-above-map-1: 401;
 $z-index-above-map-2: 402;
 $z-index-above-map-3: 403;

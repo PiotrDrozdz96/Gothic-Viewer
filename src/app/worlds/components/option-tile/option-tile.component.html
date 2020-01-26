@@ -1,0 +1,8 @@
+<div hidden><ng-content></ng-content></div>
+<div
+  [ngClass]="{'wrapper': true, 'active': isActive}"
+  (click)="click()"
+  [ngStyle]="{'background-image': 'url(' + backgroundImage + ')'}"
+>
+  <div class="name">{{text}}</div>
+</div>

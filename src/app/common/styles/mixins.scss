@@ -29,6 +29,16 @@
   flex: 1;
 }
 
+@mixin full-page {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin background-cover($url) {
+  background-image: url($url);
+  background-size: cover;
+}
+
 @mixin truncate {
   overflow: hidden;
   white-space: nowrap;

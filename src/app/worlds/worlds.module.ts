@@ -1,26 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ComponentsModule } from '@common/components';
 import { worldsRoutes } from './worlds.routing';
 
 const modules = [
   CommonModule,
+  HttpClientModule,
+  ReactiveFormsModule,
   ComponentsModule,
   RouterModule.forChild(worldsRoutes),
 ];
 
-import { IsArrayPipe, ArrayToStringPipe, RgbPipe } from '@common/pipes';
+import { ArrayToStringPipe, RgbPipe } from '@common/pipes';
 const pipes = [
-  IsArrayPipe,
   ArrayToStringPipe,
   RgbPipe,
 ];
 
-import { WorldPageComponent, MarkersPageComponent } from './pages';
+import { WorldPageComponent, MarkersPageComponent, WorldSettingsPageComponent } from './pages';
 const pages = [
   WorldPageComponent,
+  WorldSettingsPageComponent,
   MarkersPageComponent,
 ];
 
@@ -31,6 +35,7 @@ import {
   VobPropertyComponent,
   GColorsComponent,
   GColorComponent,
+  OptionTileComponent,
 } from './components';
 const components = [
   VobtreePanelComponent,
@@ -39,6 +44,7 @@ const components = [
   VobPropertyComponent,
   GColorsComponent,
   GColorComponent,
+  OptionTileComponent,
 ];
 
 import { PrefixZenDataComponent } from './dialogs/';

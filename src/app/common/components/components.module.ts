@@ -7,6 +7,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+
+import { NgIsArrayPipeModule, NgKeysPipeModule } from 'angular-pipes';
 const modules = [
   CommonModule,
   FormsModule,
@@ -15,6 +17,8 @@ const modules = [
   MatIconModule,
   MatTableModule,
   MatDialogModule,
+  NgIsArrayPipeModule,
+  NgKeysPipeModule,
 ];
 
 import { InputFileComponent } from './input-file/input-file.component';

@@ -3,10 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
+
+import { ToolbarService } from '@toolbar/services';
+import { MAP } from '@toolbar/consts';
+
 import { VOB } from '@worlds/consts';
 import { World, ZCVob } from '@worlds/models';
 import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
-import { MapService } from '@worlds/services';
+import { MapService, WorldSettingsService } from '@worlds/services';
 import { PrefixZenDataComponent } from '@worlds/dialogs';
 
 const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COMPO];
@@ -18,17 +22,30 @@ const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COM
   animations: [ leftPanelAnimation ],
 })
 export class VobtreePanelComponent implements OnChanges {
-  public fileName = '';
   public isOpenPanel = true;
   public vobFilters: VobFilters;
+  public name: string;
 
   @Output() fileResult = new EventEmitter<string>();
 
   @Input() world: World;
 
-  constructor(public mapService: MapService, public dialog: MatDialog) {}
+  constructor(
+    private mapService: MapService,
+    private worldSettingsService: WorldSettingsService,
+    private toolbarService: ToolbarService,
+    private dialog: MatDialog,
+  ) {
+    worldSettingsService.get().subscribe((settings) => {
+      const { name } = settings;
+      this.name = name;
+    });
+    toolbarService.getActiveObs().subscribe((active) => {
+      this.isOpenPanel = active === MAP;
+    });
+  }
 
-  ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges) {
     const world: World = get(changes, ['world', 'currentValue']);
     if (world) {
       this.vobFilters = map(
@@ -49,19 +66,17 @@ export class VobtreePanelComponent implements OnChanges {
     }
   }
 
-  emitFileResult(fileResult: string) { this.fileResult.emit(fileResult); }
-  setFileName(fileName: string) { this.fileName = fileName; }
-  setIsOpenToolbar(value: boolean) { this.isOpenPanel = value; }
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
-        fileName: this.fileName,
+        fileName: this.name,
         prefixZenData: this.world.prefixZenData,
       },
     });
   }
-  onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
+
+  public onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
     if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {

@@ -2,7 +2,8 @@ import { Component, AfterViewInit } from '@angular/core';
 import { forEach } from 'lodash';
 
 import { World } from '@worlds/models';
-import { MapService } from '@worlds/services';
+import { MapService, WorldSettingsService } from '@worlds/services';
+import { WorldSettings } from '@worlds/types';
 
 @Component({
   selector: 'app-worlds',
@@ -11,15 +12,22 @@ import { MapService } from '@worlds/services';
 })
 export class WorldPageComponent implements AfterViewInit {
   public world: World;
+  private worldSettings: WorldSettings;
 
-  constructor(public mapService: MapService) { }
+  constructor(
+    private mapService: MapService,
+    private worldSettingsService: WorldSettingsService,
+  ) {
+    worldSettingsService.get().subscribe((settings) => {
+      this.worldSettings = settings;
+    });
+  }
 
   ngAfterViewInit() {
-    this.mapService.init();
+    const {imageUrl, bounds, zenRaw } = this.worldSettings;
+    setTimeout(() => {
+      this.mapService.init(bounds, imageUrl);
+      this.world = new World(zenRaw);
+    }, 0);
   }
-
-  initWorld(fileResult) {
-    this.world = new World(fileResult);
-  }
-
 }
