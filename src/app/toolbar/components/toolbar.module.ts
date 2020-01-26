@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ComponentsModule } from '@common/components';
+import { MaterialModule } from '@common/modules';
 const modules = [
   CommonModule,
-  ComponentsModule,
+  MaterialModule,
 ];
 
 import { ToolbarComponent } from './toolbar/toolbar.component';

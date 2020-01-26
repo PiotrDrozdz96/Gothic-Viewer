@@ -4,14 +4,15 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ComponentsModule } from '@common/components';
+import { MaterialModule, PipesModule } from '@common/modules';
 import { worldsRoutes } from './worlds.routing';
 
 const modules = [
   CommonModule,
   HttpClientModule,
   ReactiveFormsModule,
-  ComponentsModule,
+  MaterialModule,
+  PipesModule,
   RouterModule.forChild(worldsRoutes),
 ];
 
