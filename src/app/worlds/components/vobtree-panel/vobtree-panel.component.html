@@ -1,20 +1,3 @@
-<div class="button-wrapper">
-  <app-input-file
-    *ngIf="!world"
-    (fileResult)="emitFileResult($event)"
-    (fileName)="setFileName($event)"
-  ></app-input-file>
-  <div *ngIf="world">
-    <button
-      type="button"
-      mat-raised-button
-      color="accent"
-      (click)="setIsOpenToolbar(true)"
-    >
-      VOBTREE
-    </button>
-  </div>
-</div>
 <div *ngIf="world && isOpenPanel" class="panel" [@leftPanelAnimation]>
   <div class="header">
     <div class="icon-button-left">
@@ -22,19 +5,12 @@
         <mat-icon>description</mat-icon>
       </button>
     </div>
-    <div class="title" [title]="fileName">
-      {{fileName}}
+    <div class="title" [title]="name">
+      {{name}}
     </div>
     <div class="icon-button-right">
-      <app-input-file
-        type="icon"
-        (fileResult)="emitFileResult($event)"
-        (fileName)="setFileName($event)"
-      ></app-input-file>
-    </div>
-    <div class="icon-button-right">
-      <button mat-icon-button (click)="setIsOpenToolbar(false)">
-        <mat-icon>arrow_back</mat-icon>
+      <button mat-icon-button routerLink="/settings">
+        <mat-icon>settings_applications</mat-icon>
       </button>
     </div>
   </div>

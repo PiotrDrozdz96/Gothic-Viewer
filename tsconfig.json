@@ -4,6 +4,7 @@
     "baseUrl": "src",
     "paths": {
       "@common/*": ["app/common/*"],
+      "@toolbar/*": ["app/toolbar/*"],
       "@worlds/*": ["app/worlds/*"]
     },
     "outDir": "./dist/out-tsc",

@@ -1,0 +1,16 @@
+@import 'variables';
+
+mat-icon {
+  padding: 15px 10px;
+  color: $color-icon;
+  font-size: $font-icon;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-icon-active;
+  }
+}
+
+.active {
+  color: $color-icon-active;
+}
