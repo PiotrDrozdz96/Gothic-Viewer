@@ -22,6 +22,7 @@ export const VOB = {
   ZC_TRIGGER_CHANGE_LEVEL: 'oCTriggerChangeLevel:zCTrigger:' as 'oCTriggerChangeLevel:zCTrigger:',
   ZC_TRIGGER_SCRIPT: 'oCTriggerScript:zCTrigger:' as 'oCTriggerScript:zCTrigger:',
   ZC_TRIGGER_LIST: 'zCTriggerList:zCTrigger:' as 'zCTriggerList:zCTrigger:',
+  ZC_CODE_MASTER: 'zCCodeMaster:' as 'zCCodeMaster:',
   ZC_TOUCH_DAMAGE: 'oCTouchDamage:zCTouchDamage:' as 'oCTouchDamage:zCTouchDamage:',
   ZC_MOVER: 'zCMover:zCTrigger:' as 'zCMover:zCTrigger:',
 

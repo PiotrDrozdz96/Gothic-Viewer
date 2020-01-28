@@ -23,6 +23,7 @@ export const emptyVobtree = {
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]: [],
   [VOB.ZC_TRIGGER_SCRIPT]: [],
   [VOB.ZC_TRIGGER_LIST]: [],
+  [VOB.ZC_CODE_MASTER]: [],
   [VOB.ZC_TOUCH_DAMAGE]: [],
   [VOB.ZC_MOVER]: [],
 

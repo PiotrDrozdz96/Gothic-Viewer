@@ -225,6 +225,20 @@ export class ZCTriggerList extends ZCTrigger {
   fireDelay5: GFloat;
 }
 
+export class ZCCodeMaster extends ZCVob {
+  triggerTarget: GString;
+  orderRelevant: GBool;
+  firstFalseIsFailure: GBool;
+  triggerTargetFailure: GString;
+  untriggerCancels: GBool;
+  numSlaves: GInt;
+  slaveVobName0: GString;
+  slaveVobName1: GString;
+  slaveVobName2: GString;
+  slaveVobName3: GString;
+  slaveVobName4: GString;
+}
+
 export class ZCTouchDamage extends ZCVob {
   // type: 'oCTouchDamage:zCTouchDamage:'
   damage: GFloat;

@@ -38,6 +38,7 @@ const ELEMENT_DATA: Array<MarkerElement> = [
   { name: VOB.ZC_TRIGGER_CHANGE_LEVEL, color: 'orange-dark', shape: 'circle', icon: 'screen_share' },
   { name: VOB.ZC_TRIGGER_SCRIPT, color: 'orange-dark', shape: 'circle', icon: 'video_library' },
   { name: VOB.ZC_TRIGGER_LIST, color: 'orange-dark', shape: 'circle', icon: 'subscriptions' },
+  { name: VOB.ZC_CODE_MASTER, color: 'orange-dark', shape: 'circle', icon: 'code' },
   { name: VOB.ZC_TOUCH_DAMAGE, color: 'orange-dark', shape: 'circle', icon: 'gavel' },
   { name: VOB.ZC_MOVER, color: 'orange-dark', shape: 'circle', icon: 'slow_motion_video' },
 

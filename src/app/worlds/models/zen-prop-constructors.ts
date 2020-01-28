@@ -91,6 +91,17 @@ export const zenPropConstructors = {
   fireDelay4: GFloat,
   triggerTarget5: GString,
   fireDelay5: GFloat,
+  // ZCCodeMaster
+  orderRelevant: GBool,
+  firstFalseIsFailure: GBool,
+  triggerTargetFailure: GString,
+  untriggerCancels: GBool,
+  numSlaves: GInt,
+  slaveVobName0: GString,
+  slaveVobName1: GString,
+  slaveVobName2: GString,
+  slaveVobName3: GString,
+  slaveVobName4: GString,
   // ZCTouchDamage
   damage: GFloat,
   Barrier: GBool,

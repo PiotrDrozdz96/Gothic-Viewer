@@ -4,9 +4,9 @@ import { emptyVobtree, VOB } from '@worlds/consts';
 
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
-  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate,
-  ZCVobStartPoint, ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel,
-  ZCTriggerScript, ZCTriggerList, ZCTouchDamage, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
+  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate, ZCVobStartPoint,
+  ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript,
+  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
   OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
   VobType
 } from './vob';
@@ -36,6 +36,7 @@ export class Vobtree {
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]?: Array<OCTriggerChangeLevel>;
   [VOB.ZC_TRIGGER_SCRIPT]?: Array<ZCTriggerScript>;
   [VOB.ZC_TRIGGER_LIST]?: Array<ZCTriggerList>;
+  [VOB.ZC_CODE_MASTER]?: Array<ZCCodeMaster>;
   [VOB.ZC_TOUCH_DAMAGE]: Array<ZCTouchDamage>;
   [VOB.ZC_MOVER]?: Array<ZCMover>;
 
