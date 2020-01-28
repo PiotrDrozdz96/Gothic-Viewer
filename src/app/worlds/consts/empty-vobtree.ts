@@ -18,10 +18,12 @@ export const emptyVobtree = {
   [VOB.ZC_PFX_CONTROLLER]: [],
   [VOB.ZC_ZONE_FOG]: [],
   [VOB.ZC_ZONE_FOG_DEFAULT]: [],
+  [VOB.ZC_TRIGGER]: [],
   [VOB.ZC_CS_TRIGGER]: [],
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]: [],
   [VOB.ZC_TRIGGER_SCRIPT]: [],
   [VOB.ZC_TRIGGER_LIST]: [],
+  [VOB.ZC_TOUCH_DAMAGE]: [],
   [VOB.ZC_MOVER]: [],
 
   [VOB.OC_ITEM]: [],

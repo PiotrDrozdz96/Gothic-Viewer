@@ -33,10 +33,12 @@ const ELEMENT_DATA: Array<MarkerElement> = [
   { name: VOB.ZC_PFX_CONTROLLER, color: 'orange-dark', shape: 'circle', icon: 'control_camera' },
   { name: VOB.ZC_ZONE_FOG, color: 'orange-dark', shape: 'square', icon: 'cloud' },
   { name: VOB.ZC_ZONE_FOG_DEFAULT, color: 'orange-dark', shape: 'square', icon: 'cloud' },
+  { name: VOB.ZC_TRIGGER, color: 'orange-dark', shape: 'circle', icon: 'snooze' },
   { name: VOB.ZC_CS_TRIGGER, color: 'orange-dark', shape: 'circle', icon: 'snooze' },
   { name: VOB.ZC_TRIGGER_CHANGE_LEVEL, color: 'orange-dark', shape: 'circle', icon: 'screen_share' },
   { name: VOB.ZC_TRIGGER_SCRIPT, color: 'orange-dark', shape: 'circle', icon: 'video_library' },
   { name: VOB.ZC_TRIGGER_LIST, color: 'orange-dark', shape: 'circle', icon: 'subscriptions' },
+  { name: VOB.ZC_TOUCH_DAMAGE, color: 'orange-dark', shape: 'circle', icon: 'gavel' },
   { name: VOB.ZC_MOVER, color: 'orange-dark', shape: 'circle', icon: 'slow_motion_video' },
 
   { name: VOB.OC_ITEM, color: 'green', shape: 'star', icon: 'star' },

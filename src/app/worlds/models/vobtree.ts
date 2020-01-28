@@ -4,9 +4,9 @@ import { emptyVobtree, VOB } from '@worlds/consts';
 
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
-  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
-  ZCVobAnimate, ZCVobStartPoint, ZCPFXController, ZCZoneZFog, OCCSTrigger, OCTriggerChangeLevel,
-  ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
+  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate,
+  ZCVobStartPoint, ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel,
+  ZCTriggerScript, ZCTriggerList, ZCTouchDamage, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
   OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
   VobType
 } from './vob';
@@ -31,10 +31,12 @@ export class Vobtree {
   [VOB.ZC_PFX_CONTROLLER]?: Array<ZCPFXController>;
   [VOB.ZC_ZONE_FOG]?: Array<ZCZoneZFog>;
   [VOB.ZC_ZONE_FOG_DEFAULT]?: Array<ZCZoneZFog>;
+  [VOB.ZC_TRIGGER]?: Array<ZCTrigger>;
   [VOB.ZC_CS_TRIGGER]?: Array<OCCSTrigger>;
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]?: Array<OCTriggerChangeLevel>;
   [VOB.ZC_TRIGGER_SCRIPT]?: Array<ZCTriggerScript>;
   [VOB.ZC_TRIGGER_LIST]?: Array<ZCTriggerList>;
+  [VOB.ZC_TOUCH_DAMAGE]: Array<ZCTouchDamage>;
   [VOB.ZC_MOVER]?: Array<ZCMover>;
 
   [VOB.OC_ITEM]?: Array<OCItem>;
@@ -67,6 +69,7 @@ export class Vobtree {
     const [, index, unknownValue] = lines[0].match(/(\d+)=int:(\d+)/);
     const vobType = new VobType(lines[1]);
     const vobConstructor = vobConstructors[vobType.type];
+    console.log(vobType.type);
     return new vobConstructor(index, new GInt('int', unknownValue), vobType, lines.slice(2, -2));
   }
 

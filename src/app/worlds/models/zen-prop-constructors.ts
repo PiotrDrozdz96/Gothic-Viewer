@@ -91,6 +91,19 @@ export const zenPropConstructors = {
   fireDelay4: GFloat,
   triggerTarget5: GString,
   fireDelay5: GFloat,
+  // ZCTouchDamage
+  damage: GFloat,
+  Barrier: GBool,
+  Blunt: GBool,
+  Edge: GBool,
+  Fire: GBool,
+  Fly: GBool,
+  Magic: GBool,
+  Point: GBool,
+  Fall: GBool,
+  damageRepeatDelaySec: GFloat,
+  damageVolDownScale: GFloat,
+  damageCollType: GEnum,
   // ZCMover
   moverBehavior: GEnum,
   touchBlockerDamage: GFloat,
@@ -122,7 +135,6 @@ export const zenPropConstructors = {
   // OCMob
   focusName: GString,
   hitpoints: GInt,
-  damage: GInt,
   moveable: GBool,
   takeable: GBool,
   focusOverride: GBool,

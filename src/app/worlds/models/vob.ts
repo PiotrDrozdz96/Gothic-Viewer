@@ -181,7 +181,7 @@ export class ZCZoneZFog extends ZCVob {
   fogColor: GColor;
 }
 
-abstract class ZCTrigger extends ZCVob {
+export class ZCTrigger extends ZCVob {
   triggerTarget: GString;
   flags: GRaw;
   filterFlags: GRaw;
@@ -223,6 +223,22 @@ export class ZCTriggerList extends ZCTrigger {
   fireDelay4: GFloat;
   triggerTarget5: GString;
   fireDelay5: GFloat;
+}
+
+export class ZCTouchDamage extends ZCVob {
+  // type: 'oCTouchDamage:zCTouchDamage:'
+  damage: GFloat;
+  Barrier: GBool;
+  Blunt: GBool;
+  Edge: GBool;
+  Fire: GBool;
+  Fly: GBool;
+  Magic: GBool;
+  Point: GBool;
+  Fall: GBool;
+  damageRepeatDelaySec: GFloat;
+  damageVolDownScale: GFloat;
+  damageCollType: GEnum;
 }
 
 export class ZCMover extends ZCTrigger {

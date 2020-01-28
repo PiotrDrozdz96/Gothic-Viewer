@@ -2,10 +2,10 @@ import { VOB } from '@worlds/consts';
 
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
-  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
-  ZCVobAnimate, ZCVobStartPoint, ZCPFXController, ZCZoneZFog, OCCSTrigger, OCTriggerChangeLevel,
-  ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
-  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer
+  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate,
+  ZCVobStartPoint, ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel,
+  ZCTriggerScript, ZCTriggerList, ZCTouchDamage, ZCMover, OCItem, OCZoneMusic, OCMob,
+  OCMobInter, OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer
 } from './vob';
 
 export const vobConstructors = {
@@ -26,10 +26,12 @@ export const vobConstructors = {
   [VOB.ZC_PFX_CONTROLLER]: ZCPFXController,
   [VOB.ZC_ZONE_FOG]: ZCZoneZFog,
   [VOB.ZC_ZONE_FOG_DEFAULT]: ZCZoneZFog,
+  [VOB.ZC_TRIGGER]: ZCTrigger,
   [VOB.ZC_CS_TRIGGER]: OCCSTrigger,
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]: OCTriggerChangeLevel,
   [VOB.ZC_TRIGGER_SCRIPT]: ZCTriggerScript,
   [VOB.ZC_TRIGGER_LIST]: ZCTriggerList,
+  [VOB.ZC_TOUCH_DAMAGE]: ZCTouchDamage,
   [VOB.ZC_MOVER]: ZCMover,
 
   [VOB.OC_ITEM]: OCItem,

@@ -1,6 +1,8 @@
 @import 'variables';
 @import 'mixins';
 
+:host { @include page; }
+
 .page {
   padding: 50px;
 }

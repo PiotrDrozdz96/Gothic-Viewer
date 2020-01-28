@@ -17,10 +17,12 @@ export const VOB = {
   ZC_PFX_CONTROLLER: 'zCPFXControler:' as 'zCPFXControler:',
   ZC_ZONE_FOG: 'zCZoneZFog:' as 'zCZoneZFog:',
   ZC_ZONE_FOG_DEFAULT: 'zCZoneZFogDefault:zCZoneZFog:' as 'zCZoneZFogDefault:zCZoneZFog:',
+  ZC_TRIGGER: 'zCTrigger:' as 'zCTrigger:',
   ZC_CS_TRIGGER: 'oCCSTrigger:zCTrigger:' as 'oCCSTrigger:zCTrigger:',
   ZC_TRIGGER_CHANGE_LEVEL: 'oCTriggerChangeLevel:zCTrigger:' as 'oCTriggerChangeLevel:zCTrigger:',
   ZC_TRIGGER_SCRIPT: 'oCTriggerScript:zCTrigger:' as 'oCTriggerScript:zCTrigger:',
   ZC_TRIGGER_LIST: 'zCTriggerList:zCTrigger:' as 'zCTriggerList:zCTrigger:',
+  ZC_TOUCH_DAMAGE: 'oCTouchDamage:zCTouchDamage:' as 'oCTouchDamage:zCTouchDamage:',
   ZC_MOVER: 'zCMover:zCTrigger:' as 'zCMover:zCTrigger:',
 
   OC_ITEM: 'oCItem:' as 'oCItem:',
