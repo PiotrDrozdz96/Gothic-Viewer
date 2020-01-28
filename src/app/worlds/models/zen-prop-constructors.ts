@@ -134,6 +134,9 @@ export const zenPropConstructors = {
   sfxLock: GString,
   sfxUnlock: GString,
   sfxUseLocked: GString,
+  // ZCMessageFilter
+  onTrigger: GEnum,
+  onUntrigger: GEnum,
   // OCItem
   itemInstance: GString,
   // OCZoneMusic

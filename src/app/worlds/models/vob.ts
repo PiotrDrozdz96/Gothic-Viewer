@@ -277,6 +277,13 @@ export class ZCMover extends ZCTrigger {
   sfxUseLocked: GString;
 }
 
+export class ZCMessageFilter extends ZCVob {
+  // type: 'zCMessageFilter:'
+  triggerTarget: GString;
+  onTrigger: GEnum;
+  unUntrigger: GEnum;
+}
+
 export class OCItem extends ZCVob {
   // type: 'oCItem:'
   itemInstance: GString;

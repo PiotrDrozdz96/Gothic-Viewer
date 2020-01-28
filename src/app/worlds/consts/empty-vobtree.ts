@@ -26,6 +26,7 @@ export const emptyVobtree = {
   [VOB.ZC_CODE_MASTER]: [],
   [VOB.ZC_TOUCH_DAMAGE]: [],
   [VOB.ZC_MOVER]: [],
+  [VOB.ZC_MESSAGE_FILTER]: [],
 
   [VOB.OC_ITEM]: [],
   [VOB.OC_ZONE_MUSIC]: [],

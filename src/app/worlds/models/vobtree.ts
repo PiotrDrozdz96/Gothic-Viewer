@@ -6,9 +6,9 @@ import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate, ZCVobStartPoint,
   ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript,
-  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
-  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
-  VobType
+  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, ZCMessageFilter, OCItem, OCZoneMusic, OCMob,
+  OCMobInter, OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
+  VobType,
 } from './vob';
 import { vobConstructors } from './vob-constructors';
 import { GInt } from './g-types';
@@ -39,6 +39,7 @@ export class Vobtree {
   [VOB.ZC_CODE_MASTER]?: Array<ZCCodeMaster>;
   [VOB.ZC_TOUCH_DAMAGE]: Array<ZCTouchDamage>;
   [VOB.ZC_MOVER]?: Array<ZCMover>;
+  [VOB.ZC_MESSAGE_FILTER]?: Array<ZCMessageFilter>;
 
   [VOB.OC_ITEM]?: Array<OCItem>;
   [VOB.OC_ZONE_MUSIC]?: Array<OCZoneMusic>;

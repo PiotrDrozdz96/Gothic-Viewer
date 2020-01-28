@@ -25,6 +25,7 @@ export const VOB = {
   ZC_CODE_MASTER: 'zCCodeMaster:' as 'zCCodeMaster:',
   ZC_TOUCH_DAMAGE: 'oCTouchDamage:zCTouchDamage:' as 'oCTouchDamage:zCTouchDamage:',
   ZC_MOVER: 'zCMover:zCTrigger:' as 'zCMover:zCTrigger:',
+  ZC_MESSAGE_FILTER: 'zCMessageFilter:' as 'zCMessageFilter:',
 
   OC_ITEM: 'oCItem:' as 'oCItem:',
   OC_ZONE_MUSIC: 'oCZoneMusic:' as 'oCZoneMusic:',
