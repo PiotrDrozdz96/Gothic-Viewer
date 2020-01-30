@@ -30,6 +30,7 @@ export const VOB = {
   OC_ITEM: 'oCItem:' as 'oCItem:',
   OC_ZONE_MUSIC: 'oCZoneMusic:' as 'oCZoneMusic:',
   OC_ZONE_MUSIC_DEFAULT: 'oCZoneMusicDefault:oCZoneMusic:' as 'oCZoneMusicDefault:oCZoneMusic:',
+  ZC_CAM_TRJ: 'zCCamTrj_KeyFrame:' as 'zCCamTrj_KeyFrame:',
   ZC_CS_CAMERA: 'zCCSCamera:' as 'zCCSCamera:',
   OC_MOB: 'oCMOB:' as 'oCMOB:',
   OC_MOB_INTER: 'oCMobInter:oCMOB:' as 'oCMobInter:oCMOB:',

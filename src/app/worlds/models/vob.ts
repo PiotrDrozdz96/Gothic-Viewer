@@ -1,4 +1,4 @@
-import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
+import { forEach, trim, omit, join, slice, findIndex, includes } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
 import { getZenProp } from '@worlds/utils';
@@ -300,6 +300,30 @@ export class OCZoneMusic extends ZCVob {
   loop: GBool;
 }
 
+export class ZCCamTrj extends ZCVob {
+  // type: 'zCCamTrj_KeyFrame:'
+  time: GFloat;
+  angleRollDeg: GFloat;
+  camFOVScale: GFloat;
+  motionType: GEnum;
+  motionTypeFOV: GEnum;
+  motionTypeRoll: GEnum;
+  motionTypeTimeScale: GEnum;
+  tension: GFloat;
+  bias: GFloat;
+  continuity: GFloat;
+  timeScale: GFloat;
+  timeIsFixed: GEnum;
+  originalPose: GRaw;
+}
+
+const removeKeyFrames = (vobProps: Array<string>): Array<string> => (
+  slice(vobProps, 0, findIndex(
+    vobProps,
+    (line) => includes(line, 'zCCamTrj_KeyFrame'),
+  ))
+);
+
 export class ZCCSCamera extends ZCVob {
   camTrjFOR: GEnum;
   targetTrjFOR: GEnum;
@@ -317,6 +341,16 @@ export class ZCCSCamera extends ZCVob {
   autoCamUntriggerOnLastKeyDelay: GFloat;
   numPos: GInt;
   numTargets: GInt;
+  keyFrames: Array<ZCCamTrj>;
+  constructor(
+    index: string,
+    unknownValue: GInt,
+    vobType: VobType,
+    vobProps: Array<string>,
+  ) {
+  super(index, unknownValue, vobType, removeKeyFrames(vobProps));
+  }
+
 }
 
 export class OCMob extends ZCVob {
