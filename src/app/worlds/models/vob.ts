@@ -59,6 +59,7 @@ export class ZCVob {
           }
           restMode = true;
         } else {
+
           this[key] = new zenPropConstructors[key](type, value);
         }
       } else {
@@ -297,6 +298,25 @@ export class OCZoneMusic extends ZCVob {
   reverbLevel: GFloat;
   volumeLevel: GFloat;
   loop: GBool;
+}
+
+export class ZCCSCamera extends ZCVob {
+  camTrjFOR: GEnum;
+  targetTrjFOR: GEnum;
+  loopMode: GEnum;
+  splLerpMode: GEnum;
+  ignoreFORVobRotCam: GBool;
+  ignoreFORVobRotTarget: GBool;
+  adaptToSurroundings: GBool;
+  easeToFirstKey: GBool;
+  easeFromLastKey: GBool;
+  totalTime: GFloat;
+  autoCamFocusVobName: GString;
+  autoCamPlayerMovable: GBool;
+  autoCamUntriggerOnLastKey: GBool;
+  autoCamUntriggerOnLastKeyDelay: GFloat;
+  numPos: GInt;
+  numTargets: GInt;
 }
 
 export class OCMob extends ZCVob {

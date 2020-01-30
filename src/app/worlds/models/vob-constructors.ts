@@ -4,8 +4,8 @@ import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate, ZCVobStartPoint,
   ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript,
-  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, ZCMessageFilter, OCItem, OCZoneMusic, OCMob,
-  OCMobInter, OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer
+  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, ZCMessageFilter, ZCCSCamera, OCItem, OCZoneMusic,
+  OCMob, OCMobInter, OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
 } from './vob';
 
 export const vobConstructors = {
@@ -35,6 +35,7 @@ export const vobConstructors = {
   [VOB.ZC_TOUCH_DAMAGE]: ZCTouchDamage,
   [VOB.ZC_MOVER]: ZCMover,
   [VOB.ZC_MESSAGE_FILTER]: ZCMessageFilter,
+  [VOB.ZC_CS_CAMERA]: ZCCSCamera,
 
   [VOB.OC_ITEM]: OCItem,
   [VOB.OC_ZONE_MUSIC]: OCZoneMusic,

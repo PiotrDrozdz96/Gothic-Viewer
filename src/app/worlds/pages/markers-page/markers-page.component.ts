@@ -42,6 +42,7 @@ const ELEMENT_DATA: Array<MarkerElement> = [
   { name: VOB.ZC_TOUCH_DAMAGE, color: 'orange-dark', shape: 'circle', icon: 'gavel' },
   { name: VOB.ZC_MOVER, color: 'orange-dark', shape: 'circle', icon: 'slow_motion_video' },
   { name: VOB.ZC_MESSAGE_FILTER, color: 'orange-dark', shape: 'circle', icon: 'message' },
+  { name: VOB.ZC_CS_CAMERA, color: 'orange-dark', shape: 'circle', icon: 'photo_camera' },
 
   { name: VOB.OC_ITEM, color: 'green', shape: 'star', icon: 'star' },
   { name: VOB.OC_ZONE_MUSIC, color: 'blue', shape: 'square', icon: 'music_note' },
