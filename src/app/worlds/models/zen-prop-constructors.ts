@@ -134,6 +134,9 @@ export const zenPropConstructors = {
   sfxLock: GString,
   sfxUnlock: GString,
   sfxUseLocked: GString,
+  // ZCMoverControler
+  moverMessage: GEnum,
+  gotoFixedKey: GInt,
   // ZCMessageFilter
   onTrigger: GEnum,
   onUntrigger: GEnum,

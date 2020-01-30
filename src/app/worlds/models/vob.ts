@@ -278,6 +278,12 @@ export class ZCMover extends ZCTrigger {
   sfxUseLocked: GString;
 }
 
+export class ZCMoverControler extends ZCVob {
+  triggerTarget: GString;
+  moverMessage: GEnum;
+  gotoFixedKey: GInt;
+}
+
 export class ZCMessageFilter extends ZCVob {
   // type: 'zCMessageFilter:'
   triggerTarget: GString;
