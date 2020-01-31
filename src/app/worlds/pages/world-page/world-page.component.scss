@@ -1,7 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
-:host { @include flex-grow; }
+:host { @include page; }
 .map-container { @include full-page; }
 .map-frame { @include full-page; }
 

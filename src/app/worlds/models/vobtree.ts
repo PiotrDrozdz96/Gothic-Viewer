@@ -1,14 +1,14 @@
-import { split, slice, forEach, has, find, values, mapValues, pickBy } from 'lodash';
+import { split, slice, forEach, has, includes, values, mapValues, pickBy } from 'lodash';
 
-import { emptyVobtree, VOB } from '@worlds/consts';
+import { pointerSymbol, emptyVobtree, VOB } from '@worlds/consts';
 
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
-  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX,
-  ZCVobAnimate, ZCVobStartPoint, ZCPFXController, ZCZoneZFog, OCCSTrigger, OCTriggerChangeLevel,
-  ZCTriggerScript, ZCTriggerList, ZCMover, OCItem, OCZoneMusic, OCMob, OCMobInter,
-  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer,
-  VobType
+  ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate, ZCVobStartPoint,
+  ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript,
+  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, ZCMoverControler, ZCMessageFilter,
+  ZCCSCamera, OCItem, OCZoneMusic, OCMob, OCMobInter, OCMobWheel, OCMobSwitch,
+  OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer, VobType,
 } from './vob';
 import { vobConstructors } from './vob-constructors';
 import { GInt } from './g-types';
@@ -31,11 +31,17 @@ export class Vobtree {
   [VOB.ZC_PFX_CONTROLLER]?: Array<ZCPFXController>;
   [VOB.ZC_ZONE_FOG]?: Array<ZCZoneZFog>;
   [VOB.ZC_ZONE_FOG_DEFAULT]?: Array<ZCZoneZFog>;
+  [VOB.ZC_TRIGGER]?: Array<ZCTrigger>;
   [VOB.ZC_CS_TRIGGER]?: Array<OCCSTrigger>;
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]?: Array<OCTriggerChangeLevel>;
   [VOB.ZC_TRIGGER_SCRIPT]?: Array<ZCTriggerScript>;
   [VOB.ZC_TRIGGER_LIST]?: Array<ZCTriggerList>;
+  [VOB.ZC_CODE_MASTER]?: Array<ZCCodeMaster>;
+  [VOB.ZC_TOUCH_DAMAGE]: Array<ZCTouchDamage>;
   [VOB.ZC_MOVER]?: Array<ZCMover>;
+  [VOB.ZC_MOVER_CONTROLER]?: Array<ZCMoverControler>;
+  [VOB.ZC_MESSAGE_FILTER]?: Array<ZCMessageFilter>;
+  [VOB.ZC_CS_CAMERA]?: Array<ZCCSCamera>;
 
   [VOB.OC_ITEM]?: Array<OCItem>;
   [VOB.OC_ZONE_MUSIC]?: Array<OCZoneMusic>;
@@ -51,21 +57,36 @@ export class Vobtree {
   [VOB.OC_MOB_DOOR]?: Array<OCMobDoor>;
   [VOB.OC_MOB_CONTAINER]?: Array<OCMobContainer>;
 
+  pointers?: Array<Array<string>>;
+
   constructor(data: string) {
     const childs = slice(split(data, 'childs'), 1, -1);
     forEach(childs, (vobString) => {
-      const vob = this.getVob(vobString);
-      if (!has(this, vob.vobType.type)) {
-        this[vob.vobType.type] = [];
+      const lines = split(vobString, '\n');
+      if (includes(lines[1], pointerSymbol)) {
+        this.addPointer(lines);
+      } else {
+        const vob = this.getVob(lines);
+        if (!has(this, vob.vobType.type)) {
+          this[vob.vobType.type] = [];
+        }
+        this[vob.vobType.type].push(vob);
       }
-      this[vob.vobType.type].push(vob);
     });
   }
 
-  private getVob(vobString: string): ZCVob {
-    const lines = split(vobString, '\n');
+  private addPointer(lines: Array<string>): void {
+    if (!this.pointers) {
+      this.pointers = [];
+    } else {
+      this.pointers.push(lines);
+    }
+  }
+
+  private getVob(lines: Array<string>): ZCVob {
     const [, index, unknownValue] = lines[0].match(/(\d+)=int:(\d+)/);
     const vobType = new VobType(lines[1]);
+    console.log(vobType);
     const vobConstructor = vobConstructors[vobType.type];
     return new vobConstructor(index, new GInt('int', unknownValue), vobType, lines.slice(2, -2));
   }

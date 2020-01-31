@@ -2,7 +2,7 @@
 @import 'mixins';
 
 :host {
-  @include flex-grow;
+  @include page;
   padding: 0 70px;
 }
 

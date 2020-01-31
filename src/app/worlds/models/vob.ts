@@ -1,4 +1,4 @@
-import { forEach, findIndex, trim, omit, keys, join } from 'lodash';
+import { forEach, trim, omit, join, slice, findIndex, includes } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
 import { getZenProp } from '@worlds/utils';
@@ -59,6 +59,7 @@ export class ZCVob {
           }
           restMode = true;
         } else {
+
           this[key] = new zenPropConstructors[key](type, value);
         }
       } else {
@@ -181,7 +182,7 @@ export class ZCZoneZFog extends ZCVob {
   fogColor: GColor;
 }
 
-abstract class ZCTrigger extends ZCVob {
+export class ZCTrigger extends ZCVob {
   triggerTarget: GString;
   flags: GRaw;
   filterFlags: GRaw;
@@ -225,6 +226,36 @@ export class ZCTriggerList extends ZCTrigger {
   fireDelay5: GFloat;
 }
 
+export class ZCCodeMaster extends ZCVob {
+  triggerTarget: GString;
+  orderRelevant: GBool;
+  firstFalseIsFailure: GBool;
+  triggerTargetFailure: GString;
+  untriggerCancels: GBool;
+  numSlaves: GInt;
+  slaveVobName0: GString;
+  slaveVobName1: GString;
+  slaveVobName2: GString;
+  slaveVobName3: GString;
+  slaveVobName4: GString;
+}
+
+export class ZCTouchDamage extends ZCVob {
+  // type: 'oCTouchDamage:zCTouchDamage:'
+  damage: GFloat;
+  Barrier: GBool;
+  Blunt: GBool;
+  Edge: GBool;
+  Fire: GBool;
+  Fly: GBool;
+  Magic: GBool;
+  Point: GBool;
+  Fall: GBool;
+  damageRepeatDelaySec: GFloat;
+  damageVolDownScale: GFloat;
+  damageCollType: GEnum;
+}
+
 export class ZCMover extends ZCTrigger {
   // type: 'zCMover:zCTrigger:'
   moverBehavior: GEnum;
@@ -247,6 +278,19 @@ export class ZCMover extends ZCTrigger {
   sfxUseLocked: GString;
 }
 
+export class ZCMoverControler extends ZCVob {
+  triggerTarget: GString;
+  moverMessage: GEnum;
+  gotoFixedKey: GInt;
+}
+
+export class ZCMessageFilter extends ZCVob {
+  // type: 'zCMessageFilter:'
+  triggerTarget: GString;
+  onTrigger: GEnum;
+  unUntrigger: GEnum;
+}
+
 export class OCItem extends ZCVob {
   // type: 'oCItem:'
   itemInstance: GString;
@@ -260,6 +304,59 @@ export class OCZoneMusic extends ZCVob {
   reverbLevel: GFloat;
   volumeLevel: GFloat;
   loop: GBool;
+}
+
+export class ZCCamTrj extends ZCVob {
+  // type: 'zCCamTrj_KeyFrame:'
+  time: GFloat;
+  angleRollDeg: GFloat;
+  camFOVScale: GFloat;
+  motionType: GEnum;
+  motionTypeFOV: GEnum;
+  motionTypeRoll: GEnum;
+  motionTypeTimeScale: GEnum;
+  tension: GFloat;
+  bias: GFloat;
+  continuity: GFloat;
+  timeScale: GFloat;
+  timeIsFixed: GEnum;
+  originalPose: GRaw;
+}
+
+const removeKeyFrames = (vobProps: Array<string>): Array<string> => (
+  slice(vobProps, 0, findIndex(
+    vobProps,
+    (line) => includes(line, 'zCCamTrj_KeyFrame'),
+  ))
+);
+
+export class ZCCSCamera extends ZCVob {
+  camTrjFOR: GEnum;
+  targetTrjFOR: GEnum;
+  loopMode: GEnum;
+  splLerpMode: GEnum;
+  ignoreFORVobRotCam: GBool;
+  ignoreFORVobRotTarget: GBool;
+  adaptToSurroundings: GBool;
+  easeToFirstKey: GBool;
+  easeFromLastKey: GBool;
+  totalTime: GFloat;
+  autoCamFocusVobName: GString;
+  autoCamPlayerMovable: GBool;
+  autoCamUntriggerOnLastKey: GBool;
+  autoCamUntriggerOnLastKeyDelay: GFloat;
+  numPos: GInt;
+  numTargets: GInt;
+  keyFrames: Array<ZCCamTrj>;
+  constructor(
+    index: string,
+    unknownValue: GInt,
+    vobType: VobType,
+    vobProps: Array<string>,
+  ) {
+  super(index, unknownValue, vobType, removeKeyFrames(vobProps));
+  }
+
 }
 
 export class OCMob extends ZCVob {
