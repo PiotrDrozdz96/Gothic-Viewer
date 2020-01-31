@@ -3,11 +3,9 @@ import {
   join,
   map,
   compact,
-  chunk,
   replace,
   last,
   trim,
-  flatten,
   parseInt,
 } from 'lodash';
 
