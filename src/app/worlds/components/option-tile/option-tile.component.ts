@@ -1,5 +1,4 @@
 import { Component, Input, ContentChildren, QueryList, ElementRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-option-tile',

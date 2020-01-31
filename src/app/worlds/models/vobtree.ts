@@ -86,7 +86,6 @@ export class Vobtree {
   private getVob(lines: Array<string>): ZCVob {
     const [, index, unknownValue] = lines[0].match(/(\d+)=int:(\d+)/);
     const vobType = new VobType(lines[1]);
-    console.log(vobType);
     const vobConstructor = vobConstructors[vobType.type];
     return new vobConstructor(index, new GInt('int', unknownValue), vobType, lines.slice(2, -2));
   }

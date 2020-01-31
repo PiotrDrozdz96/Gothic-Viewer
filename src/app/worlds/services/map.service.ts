@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
@@ -30,7 +30,7 @@ export class MapService {
       crs: L.CRS.Simple,
       zoomControl: false,
     });
-    const image = L.imageOverlay(imageUrl, bounds).addTo(this.map);
+    L.imageOverlay(imageUrl, bounds).addTo(this.map);
     this.map.fitBounds(bounds);
   }
 

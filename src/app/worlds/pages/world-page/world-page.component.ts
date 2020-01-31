@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { forEach } from 'lodash';
 
 import { World } from '@worlds/models';
 import { MapService, WorldSettingsService } from '@worlds/services';
@@ -16,7 +15,7 @@ export class WorldPageComponent implements AfterViewInit {
 
   constructor(
     private mapService: MapService,
-    private worldSettingsService: WorldSettingsService,
+    worldSettingsService: WorldSettingsService,
   ) {
     worldSettingsService.get().subscribe((settings) => {
       this.worldSettings = settings;

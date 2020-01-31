@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { omit, entries, map, join, isArray } from 'lodash';
+import { omit, entries, map } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 import { ZCVob } from '@worlds/models';

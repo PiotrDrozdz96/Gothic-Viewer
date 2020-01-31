@@ -1,6 +1,6 @@
 import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { mapValues, forEach, has, get, map, values, includes, split } from 'lodash';
+import { forEach, get, map, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
@@ -32,9 +32,9 @@ export class VobtreePanelComponent implements OnChanges {
 
   constructor(
     private mapService: MapService,
-    private worldSettingsService: WorldSettingsService,
-    private toolbarService: ToolbarService,
     private dialog: MatDialog,
+    worldSettingsService: WorldSettingsService,
+    toolbarService: ToolbarService,
   ) {
     worldSettingsService.get().subscribe((settings) => {
       const { name } = settings;
@@ -67,7 +67,7 @@ export class VobtreePanelComponent implements OnChanges {
   }
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(PrefixZenDataComponent, {
+    this.dialog.open(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
         fileName: this.name,

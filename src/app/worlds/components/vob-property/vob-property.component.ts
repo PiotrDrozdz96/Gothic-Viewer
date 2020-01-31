@@ -12,6 +12,6 @@ export class VobPropertyComponent {
   @Input()
   vobProperty: VobProperty;
 
-  constructor() {}
+  constructor() { }
 
 }

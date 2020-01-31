@@ -19,10 +19,10 @@ export class WorldSettingsPageComponent {
   public settingsGroup: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
     private settingsService: WorldSettingsService,
+    formBuilder: FormBuilder,
   ) {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
