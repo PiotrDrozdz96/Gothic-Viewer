@@ -1,0 +1,6 @@
+@import 'panel';
+@import 'variables';
+
+.panel {
+  @include panel($z-index-above-map-2)
+}

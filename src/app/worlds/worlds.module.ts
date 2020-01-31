@@ -30,6 +30,7 @@ const pages = [
 ];
 
 import {
+  WaynetPanelComponent,
   VobtreePanelComponent,
   VobPanelComponent,
   VobsListComponent,
@@ -39,6 +40,7 @@ import {
   OptionTileComponent,
 } from './components';
 const components = [
+  WaynetPanelComponent,
   VobtreePanelComponent,
   VobsListComponent,
   VobPanelComponent,

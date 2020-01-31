@@ -1,4 +1,4 @@
-import { Component, OnChanges, Output, Input, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { forEach, get, map, includes, split } from 'lodash';
 
@@ -8,7 +8,7 @@ import { ToolbarService } from '@toolbar/services';
 import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
-import { World, ZCVob } from '@worlds/models';
+import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
 import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
 import { PrefixZenDataComponent } from '@worlds/dialogs';
@@ -26,9 +26,8 @@ export class VobtreePanelComponent implements OnChanges {
   public vobFilters: VobFilters;
   public name: string;
 
-  @Output() fileResult = new EventEmitter<string>();
-
-  @Input() world: World;
+  @Input() vobtree: Vobtree;
+  @Input() prefixZenData: PrefixZenData;
 
   constructor(
     private mapService: MapService,
@@ -46,10 +45,10 @@ export class VobtreePanelComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges) {
-    const world: World = get(changes, ['world', 'currentValue']);
-    if (world) {
+    const vobtree: Vobtree = get(changes, ['vobtree', 'currentValue']);
+    if (vobtree) {
       this.vobFilters = map(
-        world.vobtree.getSortedVobtree(),
+        vobtree.getSortedVobtree(),
         (vobs: Array<ZCVob>) => {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
@@ -71,7 +70,7 @@ export class VobtreePanelComponent implements OnChanges {
       minWidth: 520,
       data: {
         fileName: this.name,
-        prefixZenData: this.world.prefixZenData,
+        prefixZenData: this.prefixZenData,
       },
     });
   }
