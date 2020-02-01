@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { leftPanelAnimation } from '@common/animations';
 
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
-import { Waynet } from '@worlds/models';
-import { MapService, WorldSettingsService } from '@worlds/services';
+import { Waynet, WaypointsBlock } from '@worlds/models';
+import { MapService } from '@worlds/services';
 
 @Component({
   selector: 'app-waynet-panel',
@@ -14,7 +14,7 @@ import { MapService, WorldSettingsService } from '@worlds/services';
   styleUrls: ['./waynet-panel.component.scss'],
   animations: [ leftPanelAnimation ],
 })
-export class WaynetPanelComponent implements OnInit {
+export class WaynetPanelComponent {
   public isOpenPanel = true;
 
   @Input() waynet: Waynet;
@@ -28,7 +28,6 @@ export class WaynetPanelComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  get wayBlocks(): WaypointsBlock { return this.waynet.waypointsBlock; }
 
 }

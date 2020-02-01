@@ -1,5 +1,13 @@
 <div *ngIf="waynet && isOpenPanel" class="panel" [@leftPanelAnimation]>
   <div class="header">
-    <div class="title" [title]="'Waynet'">Waynet</div>
+    <div class="title" [title]="'WAYNET'">WAYNET</div>
+    <div class="checkbox-right">
+      <mat-checkbox></mat-checkbox>
+    </div>
+  </div>
+  <div class="content">
+    <div *ngFor="let wayBlock of wayBlocks | toArray">
+      {{wayBlock}}
+    </div>
   </div>
 </div>

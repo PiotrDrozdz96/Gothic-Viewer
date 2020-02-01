@@ -6,8 +6,8 @@ import { getZenProp } from '@worlds/utils';
 import { GInt } from './g-types';
 import { WayType, ZCWaypoint } from './waypoint';
 
-interface WaypointsBlock { [key: string]: WayType; }
-interface Way { l?: WayType; r?: WayType; }
+export interface WaypointsBlock { [key: string]: WayType; }
+export interface Way { l?: WayType; r?: WayType; }
 
 export class Waynet {
   startLine: string;

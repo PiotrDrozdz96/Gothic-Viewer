@@ -19,7 +19,7 @@
     .title {
       @include flex-grow;
       @include truncate;
-      padding: 0 8px;
+      padding: 0 16px;
       font-size: $font-large;
     }
 
@@ -29,6 +29,10 @@
     
     .icon-button-right {
       padding: 0 8px;
+    }
+
+    .checkbox-right {
+      padding: 0 24px;
     }
   }
 
