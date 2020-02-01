@@ -1,6 +1,22 @@
-@import 'panel';
+@import 'mixins';
 @import 'variables';
+@import 'panel';
 
 .panel {
   @include panel($z-index-above-map-2)
+}
+
+.waypoint {
+  @include truncate;
+  margin-bottom: 10px;
+}
+
+.circle {
+  height: 10px;
+  width: 10px;
+  margin-right: 10px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  border: 1px solid #0000ff;
+  display: inline-block;
 }

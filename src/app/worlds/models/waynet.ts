@@ -6,7 +6,7 @@ import { getZenProp } from '@worlds/utils';
 import { GInt } from './g-types';
 import { WayType, ZCWaypoint } from './waypoint';
 
-export interface WaypointsBlock { [key: string]: WayType; }
+export interface Waypoints { [key: string]: ZCWaypoint; }
 export interface Way { l?: WayType; r?: WayType; }
 
 export class Waynet {
@@ -16,7 +16,7 @@ export class Waynet {
   numWays: GInt;
 
   singleWaypoints: Array<WayType> = [];
-  waypointsBlock: WaypointsBlock = {};
+  waypoints: Waypoints = {};
   ways: Array<Way> = [];
 
   constructor(data: string) {
@@ -32,7 +32,7 @@ export class Waynet {
 
       const zcWaypoint = new ZCWaypoint(lines);
       if (!zcWaypoint.isPointer()) {
-        this.waypointsBlock[zcWaypoint.getPointerNumber()] = zcWaypoint.wayType;
+        this.waypoints[zcWaypoint.getPointerNumber()] = zcWaypoint;
       }
       if (zcWaypoint.isWaypoint()) {
         this.singleWaypoints.push(zcWaypoint.wayType);

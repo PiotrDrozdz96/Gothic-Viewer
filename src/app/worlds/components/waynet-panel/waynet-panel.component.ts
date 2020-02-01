@@ -5,7 +5,7 @@ import { leftPanelAnimation } from '@common/animations';
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
-import { Waynet, WaypointsBlock } from '@worlds/models';
+import { Waynet, Waypoints } from '@worlds/models';
 import { MapService } from '@worlds/services';
 
 @Component({
@@ -28,6 +28,6 @@ export class WaynetPanelComponent {
     });
   }
 
-  get wayBlocks(): WaypointsBlock { return this.waynet.waypointsBlock; }
+  get waypoints(): Waypoints { return this.waynet.waypoints; }
 
 }

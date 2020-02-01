@@ -6,8 +6,9 @@
     </div>
   </div>
   <div class="content">
-    <div *ngFor="let wayBlock of wayBlocks | toArray">
-      {{wayBlock}}
+    <div class="waypoint" *ngFor="let waypoint of waypoints | toArray">
+      <span class="circle"></span>
+      <span [title]="waypoint.wpName.value">{{waypoint.wpName.value}}</span>
     </div>
   </div>
 </div>
