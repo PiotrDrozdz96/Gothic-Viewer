@@ -25,13 +25,44 @@ export class MapService {
     });
   }
 
-  init(bounds: L.LatLngBoundsExpression, imageUrl: string) {
+  public init(bounds: L.LatLngBoundsExpression, imageUrl: string) {
     this.map = L.map('map', {
       crs: L.CRS.Simple,
       zoomControl: false,
     });
     L.imageOverlay(imageUrl, bounds).addTo(this.map);
     this.map.fitBounds(bounds);
+  }
+
+  public markersGroup(vobs: Array<ZCVob>): VobMarkerGroup {
+    return {
+      iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
+      markers: map(vobs, (vob: ZCVob) => ({
+        vob,
+        marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
+      })),
+    };
+  }
+
+  public addMarkersGroup(gMarkers: VobMarkerGroup) {
+    forEach(gMarkers.markers, (gMarker) => {
+      this.addMarker(gMarker);
+    });
+  }
+
+  public removeMarkersGroup(gMarkers: VobMarkerGroup) {
+    forEach(gMarkers.markers, (gMarker) => {
+      this.removeMarker(gMarker);
+    });
+  }
+
+  public openVob(gMarker: VobMarker, isCenter: boolean) {
+    this.highlightMarker(gMarker.marker, isCenter);
+    this.openedVob.next(gMarker);
+  }
+
+  public closeVob() {
+    this.openedVob.next(undefined);
   }
 
   private unbounceMarker() {
@@ -80,45 +111,16 @@ export class MapService {
     });
   }
 
-  markersGroup(vobs: Array<ZCVob>): VobMarkerGroup {
-    return {
-      iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
-      markers: map(vobs, (vob: ZCVob) => ({
-        vob,
-        marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
-      })),
-    };
-  }
-
-  addMarker(gMarker: VobMarker) {
+  private addMarker(gMarker: VobMarker) {
     const { marker } = gMarker;
     marker.addTo(this.map).on('click', () => {
       this.openVob(gMarker, false);
     });
   }
-  removeMarker(gMarker: VobMarker) {
+
+  private removeMarker(gMarker: VobMarker) {
     const { marker } = gMarker;
     marker.removeFrom(this.map);
   }
 
-  addMarkersGroup(gMarkers: VobMarkerGroup) {
-    forEach(gMarkers.markers, (gMarker) => {
-      this.addMarker(gMarker);
-    });
-  }
-
-  removeMarkersGroup(gMarkers: VobMarkerGroup) {
-    forEach(gMarkers.markers, (gMarker) => {
-      this.removeMarker(gMarker);
-    });
-  }
-
-  openVob(gMarker: VobMarker, isCenter: boolean) {
-    this.highlightMarker(gMarker.marker, isCenter);
-    this.openedVob.next(gMarker);
-  }
-
-  closeVob() {
-    this.openedVob.next(undefined);
-  }
 }

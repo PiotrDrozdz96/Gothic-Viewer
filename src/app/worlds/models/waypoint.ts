@@ -47,11 +47,11 @@ export class WayType implements BlockLine {
 
 export class ZCWaypoint {
   wayType: WayType;
-  wpName?: GString;
-  waterDepth?: GInt;
-  underWater?: GBool;
-  position?: GVec3;
-  direction?: GVec3;
+  wpName: GString;
+  waterDepth: GInt;
+  underWater: GBool;
+  position: GVec3;
+  direction: GVec3;
   constructor(lines: Array<string>) {
     const [wayTypeLine, ...zenProps] = lines;
     this.wayType = new WayType(wayTypeLine);
