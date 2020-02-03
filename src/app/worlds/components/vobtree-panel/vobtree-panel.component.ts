@@ -9,9 +9,17 @@ import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
 import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
-import { VobFilter, VobFilters, VobMarkerGroup } from '@worlds/types';
+import { GMarkerGroup } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
 import { PrefixZenDataComponent } from '@worlds/dialogs';
+
+interface VobFilter {
+  checked: boolean;
+  text: string;
+  vobMarkerGroup: GMarkerGroup<ZCVob>;
+}
+
+type VobFilters = Array<VobFilter>;
 
 const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COMPO];
 
@@ -53,7 +61,7 @@ export class VobtreePanelComponent implements OnChanges {
           return {
             checked: includes(initChecked, vobs[0].vobType.type),
             text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
-            vobMarkerGroup: this.mapService.markersGroup(vobs),
+            vobMarkerGroup: this.mapService.vobMarkersGroup(vobs),
           };
         },
       );
@@ -75,7 +83,7 @@ export class VobtreePanelComponent implements OnChanges {
     });
   }
 
-  public onCheckboxChange({ checked }, vobMarkerGroup: VobMarkerGroup) {
+  public onCheckboxChange({ checked }, vobMarkerGroup: GMarkerGroup<ZCVob>) {
     if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {

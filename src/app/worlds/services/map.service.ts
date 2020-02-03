@@ -4,7 +4,7 @@ import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
 import { ZCVob, GVec3 } from '@worlds/models';
-import { VobMarkerGroup, VobMarker } from '@worlds/types';
+import { GMarker, GMarkerGroup } from '@worlds/types';
 
 const divider = 150;
 const toolbardisplacement = 2.5;
@@ -14,7 +14,7 @@ const toolbardisplacement = 2.5;
 })
 export class MapService {
   private bouncingMarker: L.Marker;
-  openedVob = new BehaviorSubject<VobMarker>(undefined);
+  openedVob = new BehaviorSubject<GMarker<ZCVob>>(undefined);
   map: L.Map;
 
   constructor() {
@@ -34,29 +34,29 @@ export class MapService {
     this.map.fitBounds(bounds);
   }
 
-  public markersGroup(vobs: Array<ZCVob>): VobMarkerGroup {
+  public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
     return {
       iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
       markers: map(vobs, (vob: ZCVob) => ({
-        vob,
+        value: vob,
         marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
       })),
     };
   }
 
-  public addMarkersGroup(gMarkers: VobMarkerGroup) {
+  public addMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
       this.addMarker(gMarker);
     });
   }
 
-  public removeMarkersGroup(gMarkers: VobMarkerGroup) {
+  public removeMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
       this.removeMarker(gMarker);
     });
   }
 
-  public openVob(gMarker: VobMarker, isCenter: boolean) {
+  public openVob(gMarker: GMarker<ZCVob>, isCenter: boolean) {
     this.highlightMarker(gMarker.marker, isCenter);
     this.openedVob.next(gMarker);
   }
@@ -111,14 +111,14 @@ export class MapService {
     });
   }
 
-  private addMarker(gMarker: VobMarker) {
+  private addMarker(gMarker: GMarker<any>) {
     const { marker } = gMarker;
     marker.addTo(this.map).on('click', () => {
       this.openVob(gMarker, false);
     });
   }
 
-  private removeMarker(gMarker: VobMarker) {
+  private removeMarker(gMarker: GMarker<any>) {
     const { marker } = gMarker;
     marker.removeFrom(this.map);
   }

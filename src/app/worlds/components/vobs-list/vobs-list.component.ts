@@ -1,7 +1,8 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { get } from 'lodash';
 
-import { VobMarkerGroup } from '@worlds/types';
+import { ZCVob } from '@worlds/models';
+import { GMarkerGroup } from '@worlds/types';
 import { MapService } from '@worlds/services';
 
 @Component({
@@ -14,7 +15,7 @@ export class VobsListComponent implements OnChanges {
 
   @Input() checked: boolean;
   @Input() text: string;
-  @Input() vobMarkerGroup: VobMarkerGroup;
+  @Input() vobMarkerGroup: GMarkerGroup<ZCVob>;
 
   constructor(public mapService: MapService) { }
 
