@@ -23,7 +23,6 @@ export class World {
       this.binary = binary;
       this.vobtree = new Vobtree(vobtree);
       this.waynet = new Waynet(waynet);
-      console.log(this.waynet);
     }
   }
 

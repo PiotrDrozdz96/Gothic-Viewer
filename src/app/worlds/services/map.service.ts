@@ -3,7 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
-import { ZCVob, GVec3 } from '@worlds/models';
+import { waypointIcon } from '@worlds/consts';
+import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
 import { GMarker, GMarkerGroup } from '@worlds/types';
 
 const divider = 150;
@@ -39,7 +40,18 @@ export class MapService {
       iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
       markers: map(vobs, (vob: ZCVob) => ({
         value: vob,
-        marker: this.createMarker(vob.vobType.type, vob.trafoOSToWSPos, vob.vobName.value),
+        marker: this.createMarker(
+          vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.vobType.type),
+        ),
+      })),
+    };
+  }
+
+  public waypointsMarkersGroup(waypoints: Array<ZCWaypoint>): GMarkerGroup<ZCWaypoint> {
+    return {
+      markers: map(waypoints, (waypoint: ZCWaypoint) => ({
+        value: waypoint,
+        marker: this.createMarker(waypoint.position, waypoint.wpName.value, waypointIcon),
       })),
     };
   }
@@ -103,11 +115,11 @@ export class MapService {
     });
   }
 
-  private createMarker(vobType: string, vec3: GVec3, title: string): L.Marker {
+  private createMarker(vec3: GVec3, title: string, icon: L.DivIcon): L.Marker {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
     return L.marker([(z / divider), (x / divider)], {
       title,
-      icon: this.getMarkerIcon(vobType),
+      icon,
     });
   }
 

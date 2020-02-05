@@ -1,12 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { get, values } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
-import { Waynet, Waypoints } from '@worlds/models';
+import { Waynet, Waypoints, ZCWaypoint } from '@worlds/models';
 import { MapService } from '@worlds/services';
+import { GMarkerGroup } from '@worlds/types';
 
 @Component({
   selector: 'app-waynet-panel',
@@ -14,8 +16,9 @@ import { MapService } from '@worlds/services';
   styleUrls: ['./waynet-panel.component.scss'],
   animations: [ leftPanelAnimation ],
 })
-export class WaynetPanelComponent {
+export class WaynetPanelComponent implements OnChanges {
   public isOpenPanel = true;
+  public markersGroup: GMarkerGroup<ZCWaypoint>;
 
   @Input() waynet: Waynet;
 
@@ -28,6 +31,21 @@ export class WaynetPanelComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    const waynet: Waynet = get(changes, ['waynet', 'currentValue']);
+    if (waynet) {
+      this.markersGroup = this.mapService.waypointsMarkersGroup(values(waynet.waypoints));
+    }
+  }
+
   get waypoints(): Waypoints { return this.waynet.waypoints; }
+
+  public onCheckboxChange({ checked }) {
+    if (checked) {
+      this.mapService.addMarkersGroup(this.markersGroup);
+    } else {
+      this.mapService.removeMarkersGroup(this.markersGroup);
+    }
+  }
 
 }

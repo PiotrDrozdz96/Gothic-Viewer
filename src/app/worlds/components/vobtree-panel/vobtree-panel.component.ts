@@ -52,7 +52,7 @@ export class VobtreePanelComponent implements OnChanges {
     });
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges) {
     const vobtree: Vobtree = get(changes, ['vobtree', 'currentValue']);
     if (vobtree) {
       this.vobFilters = map(

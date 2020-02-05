@@ -6,7 +6,7 @@ export interface GMarker<ZC> {
 }
 
 export interface GMarkerGroup<ZC> {
-  iconUrl: string;
+  iconUrl?: string;
   markers: Array<GMarker<ZC>>;
 }
 

@@ -2,12 +2,12 @@
   <div class="header">
     <div class="title" [title]="'WAYNET'">WAYNET</div>
     <div class="checkbox-right">
-      <mat-checkbox></mat-checkbox>
+      <mat-checkbox (change)="onCheckboxChange($event)"></mat-checkbox>
     </div>
   </div>
   <div class="content">
     <div class="waypoint" *ngFor="let waypoint of waypoints | toArray">
-      <span class="circle"></span>
+      <span class="waypoint-icon"></span>
       <span [title]="waypoint.wpName.value">{{waypoint.wpName.value}}</span>
     </div>
   </div>
