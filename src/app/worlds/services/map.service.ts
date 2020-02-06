@@ -38,12 +38,17 @@ export class MapService {
   public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
     return {
       iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
-      markers: map(vobs, (vob: ZCVob) => ({
-        value: vob,
-        marker: this.createMarker(
-          vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.vobType.type),
-        ),
-      })),
+      markers: map(vobs, (vob: ZCVob) => {
+        const gMarker: GMarker<ZCVob> = {
+          value: vob,
+          marker: this.createMarker(
+            vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.vobType.type),
+          ),
+        };
+        gMarker.marker.on('click', () => { this.openVob(gMarker, false); });
+
+        return gMarker;
+      }),
     };
   }
 
@@ -125,9 +130,7 @@ export class MapService {
 
   private addMarker(gMarker: GMarker<any>) {
     const { marker } = gMarker;
-    marker.addTo(this.map).on('click', () => {
-      this.openVob(gMarker, false);
-    });
+    marker.addTo(this.map);
   }
 
   private removeMarker(gMarker: GMarker<any>) {
