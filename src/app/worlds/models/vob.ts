@@ -2,7 +2,7 @@ import { forEach, trim, omit, join, slice, findIndex, includes } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
 import { getZenProp } from '@worlds/utils';
-import { BlockLine } from '@worlds/types';
+import { BlockLine, ZC } from '@worlds/types';
 
 import { zenPropConstructors } from './zen-prop-constructors';
 import {
@@ -25,7 +25,7 @@ export class VobType implements BlockLine {
   }
 }
 
-export class ZCVob {
+export class ZCVob implements ZC {
   pack: GInt;
   presetName: GString;
   bbox3DWS: GRawFloat;

@@ -6,3 +6,4 @@ export * from './way-name';
 export * from './map-image';
 export * from './zen-world';
 export * from './world-settings';
+export * from './zc';
