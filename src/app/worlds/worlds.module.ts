@@ -50,9 +50,10 @@ const components = [
   OptionTileComponent,
 ];
 
-import { PrefixZenDataComponent } from './dialogs/';
+import { PrefixZenDataComponent, WaynetDataComponent } from './dialogs/';
 const dialogs = [
   PrefixZenDataComponent,
+  WaynetDataComponent,
 ];
 
 @NgModule({

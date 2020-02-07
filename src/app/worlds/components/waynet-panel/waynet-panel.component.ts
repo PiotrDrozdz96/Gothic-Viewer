@@ -1,11 +1,13 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { get, values } from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { get, values, trim } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
+import { WaynetDataComponent } from '@worlds/dialogs';
 import { Waynet, Waypoints, ZCWaypoint } from '@worlds/models';
 import { MapService } from '@worlds/services';
 import { GMarkerGroup } from '@worlds/types';
@@ -25,6 +27,7 @@ export class WaynetPanelComponent implements OnChanges {
 
   constructor(
     private mapService: MapService,
+    private dialog: MatDialog,
     toolbarService: ToolbarService,
   ) {
     toolbarService.getActiveObs().subscribe((active) => {
@@ -47,6 +50,20 @@ export class WaynetPanelComponent implements OnChanges {
     } else {
       this.mapService.removeMarkersGroup(this.markersGroup);
     }
+  }
+
+  public openDialog(): void {
+    this.dialog.open(WaynetDataComponent, {
+      minWidth: 520,
+      data: {
+        startLine: trim(this.waynet.startLine),
+        properties: [
+          { key: 'waynetVersion', property: this.waynet.waynetVersion },
+          { key: 'numWaypoints', property: this.waynet.numWaypoints },
+          { key: 'numWays', property: this.waynet.numWays },
+        ],
+      },
+    });
   }
 
 }

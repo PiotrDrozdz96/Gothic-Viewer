@@ -8,10 +8,10 @@ import { ToolbarService } from '@toolbar/services';
 import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
+import { PrefixZenDataComponent } from '@worlds/dialogs';
 import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
 import { GMarkerGroup } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
-import { PrefixZenDataComponent } from '@worlds/dialogs';
 
 interface VobFilter {
   checked: boolean;

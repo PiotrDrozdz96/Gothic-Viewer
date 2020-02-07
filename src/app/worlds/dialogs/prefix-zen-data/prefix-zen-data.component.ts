@@ -18,4 +18,7 @@ export class PrefixZenDataComponent {
     public dialogRef: MatDialogRef<PrefixZenDataComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Data,
   ) { }
+
+  get fileName(): string { return this.data.fileName; }
+  get prefixZenData(): PrefixZenData { return this.data.prefixZenData; }
 }
