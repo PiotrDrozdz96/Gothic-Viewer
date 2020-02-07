@@ -7,7 +7,7 @@ import { leftPanelAnimation } from '@common/animations';
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
-import { WaynetDataComponent } from '@worlds/dialogs';
+import { WaynetDataComponent, WaynetDialogData } from '@worlds/dialogs';
 import { Waynet, Waypoints, ZCWaypoint } from '@worlds/models';
 import { MapService } from '@worlds/services';
 import { GMarkerGroup } from '@worlds/types';
@@ -53,7 +53,7 @@ export class WaynetPanelComponent implements OnChanges {
   }
 
   public openDialog(): void {
-    this.dialog.open(WaynetDataComponent, {
+    this.dialog.open<WaynetDataComponent, WaynetDialogData>(WaynetDataComponent, {
       minWidth: 520,
       data: {
         startLine: trim(this.waynet.startLine),

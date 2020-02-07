@@ -8,7 +8,7 @@ import { ToolbarService } from '@toolbar/services';
 import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
-import { PrefixZenDataComponent } from '@worlds/dialogs';
+import { PrefixZenDataComponent, PrefixZenDialogData } from '@worlds/dialogs';
 import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
 import { GMarkerGroup } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
@@ -74,7 +74,7 @@ export class VobtreePanelComponent implements OnChanges {
   }
 
   public openDialog(): void {
-    this.dialog.open(PrefixZenDataComponent, {
+    this.dialog.open<PrefixZenDataComponent, PrefixZenDialogData>(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
         fileName: this.name,

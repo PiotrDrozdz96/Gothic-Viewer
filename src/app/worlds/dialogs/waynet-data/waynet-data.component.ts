@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { VobProperty } from '@worlds/types';
 
-interface Data {
+export interface WaynetDialogData {
   startLine: string;
   properties: Array<VobProperty>;
 }
@@ -17,7 +17,7 @@ export class WaynetDataComponent {
 
   constructor(
     public dialogRef: MatDialogRef<WaynetDataComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Data,
+    @Inject(MAT_DIALOG_DATA) public data: WaynetDialogData,
   ) { }
 
   get startLine(): string { return this.data.startLine; }
