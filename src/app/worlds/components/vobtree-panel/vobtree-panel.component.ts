@@ -59,8 +59,8 @@ export class VobtreePanelComponent implements OnChanges {
         vobtree.getSortedVobtree(),
         (vobs: Array<ZCVob>) => {
           return {
-            checked: includes(initChecked, vobs[0].vobType.type),
-            text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
+            checked: includes(initChecked, vobs[0].zcType.type),
+            text: split(vobs[0].zcType.type || 'zCVob:', ':', 1)[0],
             vobMarkerGroup: this.mapService.vobMarkersGroup(vobs),
           };
         },

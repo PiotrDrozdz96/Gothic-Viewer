@@ -31,7 +31,7 @@ export class VobPanelComponent {
 
   private mapPanelData(vob: ZCVob) {
     this.panelData = map(
-      entries(omit(vob, ['index', 'unknownValue', 'vobType'])),
+      entries(omit(vob, ['index', 'unknownValue', 'zcType'])),
       ([key, gType]: [string, any]) => ({
         key,
         property: gType,

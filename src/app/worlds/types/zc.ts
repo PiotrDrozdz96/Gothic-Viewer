@@ -6,6 +6,6 @@ export type ZC = {
   [key in keyof typeof zenPropConstructors]?: GType;
 } & {
   index?: string,
-  vobType: BlockLine;
+  zcType: BlockLine;
   toString(): string;
 };

@@ -37,12 +37,12 @@ export class MapService {
 
   public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
     return {
-      iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
+      iconUrl: this.getMarkerIconUrl(vobs[0].zcType.type),
       markers: map(vobs, (vob: ZCVob) => {
         const gMarker: GMarker<ZCVob> = {
           value: vob,
           marker: this.createMarker(
-            vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.vobType.type),
+            vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.zcType.type),
           ),
         };
         gMarker.marker.on('click', () => { this.openVob(gMarker, false); });
