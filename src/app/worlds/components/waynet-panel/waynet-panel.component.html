@@ -2,7 +2,10 @@
   <div class="header">
     <div class="title" [title]="'WAYNET'">WAYNET</div>
     <div class="checkbox-right">
-      <mat-checkbox (change)="onCheckboxChange($event)"></mat-checkbox>
+      <mat-checkbox
+        [(ngModel)]="checked"
+        (change)="onCheckboxChange($event)"
+      ></mat-checkbox>
     </div>
   </div>
   <div class="content">

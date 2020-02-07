@@ -18,6 +18,7 @@ import { GMarkerGroup } from '@worlds/types';
 })
 export class WaynetPanelComponent implements OnChanges {
   public isOpenPanel = true;
+  public checked = false;
   public markersGroup: GMarkerGroup<ZCWaypoint>;
 
   @Input() waynet: Waynet;
