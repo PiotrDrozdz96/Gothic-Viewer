@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { VobProperty } from '@worlds/types';
+import { ZenProperty } from '@worlds/types';
 
 export interface WaynetDialogData {
   startLine: string;
-  properties: Array<VobProperty>;
+  properties: Array<ZenProperty>;
 }
 
 @Component({
@@ -21,6 +21,6 @@ export class WaynetDataComponent {
   ) { }
 
   get startLine(): string { return this.data.startLine; }
-  get properties(): Array<VobProperty> { return this.data.properties; }
+  get properties(): Array<ZenProperty> { return this.data.properties; }
 
 }

@@ -4,7 +4,7 @@ import { omit, entries, map } from 'lodash';
 import { leftPanelAnimation } from '@common/animations';
 import { ZCVob } from '@worlds/models';
 import { MapService } from '@worlds/services';
-import { VobProperty } from '@worlds/types';
+import { ZenProperty } from '@worlds/types';
 
 @Component({
   selector: 'app-vob-panel',
@@ -15,7 +15,7 @@ import { VobProperty } from '@worlds/types';
 export class VobPanelComponent {
 
   public vob: ZCVob;
-  public panelData: Array<VobProperty>;
+  public panelData: Array<ZenProperty>;
 
   constructor(private mapService: MapService) {
     this.mapService.openedVob.subscribe((gMarker) => {
