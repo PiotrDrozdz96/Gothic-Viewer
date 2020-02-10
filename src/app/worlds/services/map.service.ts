@@ -15,11 +15,11 @@ const toolbardisplacement = 2.5;
 })
 export class MapService {
   private bouncingMarker: L.Marker;
-  openedVob = new BehaviorSubject<GMarker<ZCVob>>(undefined);
+  openedZC = new BehaviorSubject<GMarker<ZCVob>>(undefined);
   map: L.Map;
 
   constructor() {
-    this.openedVob.subscribe((gMarker) => {
+    this.openedZC.subscribe((gMarker) => {
       if (!gMarker) {
         this.unbounceMarker();
       }
@@ -45,7 +45,7 @@ export class MapService {
             vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.zcType.type),
           ),
         };
-        gMarker.marker.on('click', () => { this.openVob(gMarker, false); });
+        gMarker.marker.on('click', () => { this.openZC(gMarker, false); });
 
         return gMarker;
       }),
@@ -73,13 +73,13 @@ export class MapService {
     });
   }
 
-  public openVob(gMarker: GMarker<ZCVob>, isCenter: boolean) {
+  public openZC(gMarker: GMarker<ZCVob>, isCenter: boolean) {
     this.highlightMarker(gMarker.marker, isCenter);
-    this.openedVob.next(gMarker);
+    this.openedZC.next(gMarker);
   }
 
-  public closeVob() {
-    this.openedVob.next(undefined);
+  public closeZC() {
+    this.openedZC.next(undefined);
   }
 
   private unbounceMarker() {

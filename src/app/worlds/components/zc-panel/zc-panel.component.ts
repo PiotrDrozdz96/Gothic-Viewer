@@ -7,18 +7,18 @@ import { MapService } from '@worlds/services';
 import { ZenProperty } from '@worlds/types';
 
 @Component({
-  selector: 'app-vob-panel',
-  templateUrl: './vob-panel.component.html',
-  styleUrls: ['./vob-panel.component.scss'],
+  selector: 'app-zc-panel',
+  templateUrl: './zc-panel.component.html',
+  styleUrls: ['./zc-panel.component.scss'],
   animations: [leftPanelAnimation],
 })
-export class VobPanelComponent {
+export class ZCPanelComponent {
 
   public vob: ZCVob;
   public panelData: Array<ZenProperty>;
 
   constructor(private mapService: MapService) {
-    this.mapService.openedVob.subscribe((gMarker) => {
+    this.mapService.openedZC.subscribe((gMarker) => {
       if (gMarker) {
         const { value } = gMarker;
         this.vob = value;
@@ -40,6 +40,6 @@ export class VobPanelComponent {
   }
 
   public close() {
-    this.mapService.closeVob();
+    this.mapService.closeZC();
   }
 }

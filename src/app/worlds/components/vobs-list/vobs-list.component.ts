@@ -29,7 +29,7 @@ export class VobsListComponent implements OnChanges {
   setOpened() { this.isOpened = !this.isOpened; }
 
   openVob(index: number) {
-    this.mapService.openVob(this.vobMarkerGroup.markers[index], true);
+    this.mapService.openZC(this.vobMarkerGroup.markers[index], true);
   }
 
 }

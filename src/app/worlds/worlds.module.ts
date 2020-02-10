@@ -32,7 +32,7 @@ const pages = [
 import {
   WaynetPanelComponent,
   VobtreePanelComponent,
-  VobPanelComponent,
+  ZCPanelComponent,
   VobsListComponent,
   ZenPropertyComponent,
   GColorsComponent,
@@ -43,7 +43,7 @@ const components = [
   WaynetPanelComponent,
   VobtreePanelComponent,
   VobsListComponent,
-  VobPanelComponent,
+  ZCPanelComponent,
   ZenPropertyComponent,
   GColorsComponent,
   GColorComponent,
