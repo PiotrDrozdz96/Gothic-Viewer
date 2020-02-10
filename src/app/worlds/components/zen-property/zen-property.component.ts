@@ -10,8 +10,12 @@ import { ZenProperty } from '@worlds/types';
 export class ZenPropertyComponent {
 
   @Input()
-  vobProperty: ZenProperty;
+  zenProperty: ZenProperty;
 
   constructor() { }
+
+  get key(): string { return this.zenProperty.key; }
+  get value(): any { return this.zenProperty.property.value; }
+  get type(): string { return this.zenProperty.property.type; }
 
 }
