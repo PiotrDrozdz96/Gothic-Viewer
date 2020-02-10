@@ -5,7 +5,7 @@ import { forEach, map, omit, replace } from 'lodash';
 
 import { waypointIcon } from '@worlds/consts';
 import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
-import { GMarker, GMarkerGroup } from '@worlds/types';
+import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
 
 const divider = 150;
 const toolbardisplacement = 2.5;
@@ -15,7 +15,7 @@ const toolbardisplacement = 2.5;
 })
 export class MapService {
   private bouncingMarker: L.Marker;
-  openedZC = new BehaviorSubject<GMarker<ZCVob>>(undefined);
+  openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
   map: L.Map;
 
   constructor() {
@@ -54,10 +54,15 @@ export class MapService {
 
   public waypointsMarkersGroup(waypoints: Array<ZCWaypoint>): GMarkerGroup<ZCWaypoint> {
     return {
-      markers: map(waypoints, (waypoint: ZCWaypoint) => ({
-        value: waypoint,
-        marker: this.createMarker(waypoint.position, waypoint.wpName.value, waypointIcon),
-      })),
+      markers: map(waypoints, (waypoint: ZCWaypoint) => {
+        const gMarker = {
+          value: waypoint,
+          marker: this.createMarker(waypoint.position, waypoint.wpName.value, waypointIcon),
+        };
+        gMarker.marker.on('click', () => { this.openZC(gMarker, false); });
+
+        return gMarker;
+      }),
     };
   }
 
@@ -73,8 +78,8 @@ export class MapService {
     });
   }
 
-  public openZC(gMarker: GMarker<ZCVob>, isCenter: boolean) {
-    this.highlightMarker(gMarker.marker, isCenter);
+  public openZC(gMarker: GMarker<ZC>, isCenter: boolean) {
+    // this.highlightMarker(gMarker.marker, isCenter);
     this.openedZC.next(gMarker);
   }
 

@@ -1,11 +1,9 @@
-<div *ngIf="vob" class="panel" [@leftPanelAnimation]>
+<div *ngIf="zc" class="panel" [@leftPanelAnimation]>
   <div class="header">
     <button mat-icon-button (click)="close()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <div class="title" [title]="vob.zcType">
-      {{vob.zcType}}
-    </div>
+    <div class="title" [title]="zcType">{{zcType}}</div>
   </div>
   <div class="content">
     <app-zen-property *ngFor="let zenProperty of panelData" [zenProperty]="zenProperty">

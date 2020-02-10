@@ -14,7 +14,11 @@
     </div>
   </div>
   <div class="content">
-    <div class="waypoint" *ngFor="let waypoint of waypoints | toArray">
+    <div
+      *ngFor="let waypoint of waypoints | toArray; let index = index"
+      [ngClass]="{'waypoint': true, 'cursor-pointer': checked}"
+      (click)="openWaypoint(index)"
+    >
       <span class="waypoint-icon"></span>
       <span [title]="waypoint.wpName.value">{{waypoint.wpName.value}}</span>
     </div>

@@ -66,4 +66,10 @@ export class WaynetPanelComponent implements OnChanges {
     });
   }
 
+  public openWaypoint(index: number) {
+    if (this.checked) {
+      this.mapService.openZC(this.markersGroup.markers[index], true);
+    }
+  }
+
 }
