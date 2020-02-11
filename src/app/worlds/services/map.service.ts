@@ -5,7 +5,7 @@ import { forEach, map, omit, replace } from 'lodash';
 
 import { ClassNames } from '@common/utils';
 
-import { waypointIcon } from '@worlds/consts';
+import { waypointIcon, bounceMarkerClassName } from '@worlds/consts';
 import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
 import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
 import { isImageIcon } from '@worlds/utils';
@@ -97,7 +97,7 @@ export class MapService {
 
       this.bouncingMarker.setIcon(new iconConstructor({
         ...omit(markerIcon.options, ['className']),
-        className: ClassNames.omit(markerIcon.options.className, ['bounce-marker']),
+        className: ClassNames.omit(markerIcon.options.className, [bounceMarkerClassName]),
       }));
       this.bouncingMarker = undefined;
     }
@@ -110,7 +110,7 @@ export class MapService {
 
     this.bouncingMarker = marker.setIcon(new iconConstructor({
       ...markerIcon.options,
-      className: ClassNames.add(markerIcon.options.className, ['bounce-marker']),
+      className: ClassNames.add(markerIcon.options.className, [bounceMarkerClassName]),
     }));
   }
 
