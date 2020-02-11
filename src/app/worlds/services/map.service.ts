@@ -3,9 +3,12 @@ import { BehaviorSubject } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
+import { ClassNames } from '@common/utils';
+
 import { waypointIcon } from '@worlds/consts';
 import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
 import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
+import { isImageIcon } from '@worlds/utils';
 
 const divider = 150;
 const toolbardisplacement = 2.5;
@@ -89,24 +92,35 @@ export class MapService {
 
   private unbounceMarker() {
     if (this.bouncingMarker) {
-      this.bouncingMarker.setIcon(new L.Icon(
-        omit(this.bouncingMarker.getIcon().options, ['className']),
-      ));
+      const markerIcon = this.bouncingMarker.getIcon();
+      const iconConstructor = this.getIconContructor(markerIcon);
+
+      this.bouncingMarker.setIcon(new iconConstructor({
+        ...omit(markerIcon.options, ['className']),
+        className: ClassNames.omit(markerIcon.options.className, ['bounce-marker']),
+      }));
       this.bouncingMarker = undefined;
     }
   }
 
   private bounceMarker(marker: L.Marker) {
     this.unbounceMarker();
-    console.log(marker.getIcon());
-    this.bouncingMarker = marker.setIcon(new L.Icon({
-      ...marker.getIcon().options,
-      className: 'bounce-marker',
+    const markerIcon = marker.getIcon();
+    const iconConstructor = this.getIconContructor(markerIcon);
+
+    this.bouncingMarker = marker.setIcon(new iconConstructor({
+      ...markerIcon.options,
+      className: ClassNames.add(markerIcon.options.className, ['bounce-marker']),
     }));
+  }
+
+  private getIconContructor(icon: L.Icon | L.DivIcon): typeof L.Icon | typeof L.DivIcon {
+    return isImageIcon(icon) ? L.Icon : L.DivIcon;
   }
 
   private highlightMarker(marker: L.Marker, isCenter: boolean) {
     const { lat, lng } = marker.getLatLng();
+
     this.bounceMarker(marker);
     if (isCenter) {
       this.map.setView({lat, lng: lng - toolbardisplacement}, this.map.getZoom());
