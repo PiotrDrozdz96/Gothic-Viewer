@@ -79,7 +79,7 @@ export class MapService {
   }
 
   public openZC(gMarker: GMarker<ZC>, isCenter: boolean) {
-    // this.highlightMarker(gMarker.marker, isCenter);
+    this.highlightMarker(gMarker.marker, isCenter);
     this.openedZC.next(gMarker);
   }
 
@@ -98,6 +98,7 @@ export class MapService {
 
   private bounceMarker(marker: L.Marker) {
     this.unbounceMarker();
+    console.log(marker.getIcon());
     this.bouncingMarker = marker.setIcon(new L.Icon({
       ...marker.getIcon().options,
       className: 'bounce-marker',

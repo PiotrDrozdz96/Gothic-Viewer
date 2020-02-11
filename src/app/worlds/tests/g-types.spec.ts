@@ -1,5 +1,3 @@
-import { random, keys } from 'lodash';
-
 import {
   GInt, GBool, GColor, GColorList, Items, Chest, Rest, GVec3
 } from '@worlds/models';
@@ -8,7 +6,6 @@ describe('GTypes', () => {
 
   describe('GTypeSimilarString', () => {
     const gType = new GInt('int', '0');
-
     it('should have correctly type', () => {
       expect(gType.type).toEqual('int');
     });
@@ -35,7 +32,6 @@ describe('GTypes', () => {
 
   describe('GBool', () => {
     const gType = new GBool('bool', '1');
-
     it('should have correctly type', () => {
       expect(gType.type).toEqual('bool');
     });
