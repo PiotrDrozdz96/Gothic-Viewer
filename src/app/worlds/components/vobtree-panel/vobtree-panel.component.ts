@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { forEach, get, map, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
@@ -83,7 +84,10 @@ export class VobtreePanelComponent implements OnChanges {
     });
   }
 
-  public onCheckboxChange({ checked }, vobMarkerGroup: GMarkerGroup<ZCVob>) {
+  public onCheckboxChange(
+    { checked }: MatCheckboxChange,
+    vobMarkerGroup: GMarkerGroup<ZCVob>,
+  ) {
     if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {

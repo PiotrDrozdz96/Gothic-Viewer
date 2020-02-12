@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { get, values, trim } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
@@ -44,7 +45,7 @@ export class WaynetPanelComponent implements OnChanges {
 
   get waypoints(): Waypoints { return this.waynet.waypoints; }
 
-  public onCheckboxChange({ checked }) {
+  public onCheckboxChange({ checked }: MatCheckboxChange) {
     if (checked) {
       this.mapService.addMarkersGroup(this.markersGroup);
     } else {
