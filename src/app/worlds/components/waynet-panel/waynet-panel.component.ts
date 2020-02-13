@@ -23,6 +23,7 @@ export class WaynetPanelComponent implements OnChanges {
   public isOpenPanel = true;
   public checked = false;
   public markersGroup: GMarkerGroup<ZCWaypoint>;
+  public waynetPolyline: L.Polyline;
 
   @Input() waynet: Waynet;
 
@@ -40,6 +41,7 @@ export class WaynetPanelComponent implements OnChanges {
     const waynet: Waynet = get(changes, ['waynet', 'currentValue']);
     if (waynet) {
       this.markersGroup = this.mapService.waypointsMarkersGroup(values(waynet.waypoints));
+      this.waynetPolyline = this.mapService.waynetPolyline(waynet.waypoints, waynet.ways);
     }
   }
 
@@ -48,8 +50,10 @@ export class WaynetPanelComponent implements OnChanges {
   public onCheckboxChange({ checked }: MatCheckboxChange) {
     if (checked) {
       this.mapService.addMarkersGroup(this.markersGroup);
+      this.mapService.add(this.waynetPolyline);
     } else {
       this.mapService.removeMarkersGroup(this.markersGroup);
+      this.mapService.remove(this.waynetPolyline);
     }
   }
 

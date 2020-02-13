@@ -6,7 +6,10 @@ import { forEach, map, omit, replace } from 'lodash';
 import { ClassNames } from '@common/utils';
 
 import { waypointIcon, bounceMarkerClassName } from '@worlds/consts';
-import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
+import {
+  ZCVob, ZCWaypoint, GVec3,
+  Waypoints, WayType, Way,
+} from '@worlds/models';
 import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
 import { isImageIcon } from '@worlds/utils';
 
@@ -18,8 +21,8 @@ const toolbardisplacement = 2.5;
 })
 export class MapService {
   private bouncingMarker: L.Marker;
-  openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
-  map: L.Map;
+  private map: L.Map;
+  public openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
 
   constructor() {
     this.openedZC.subscribe((gMarker) => {
@@ -69,15 +72,23 @@ export class MapService {
     };
   }
 
+  public waynetPolyline(waypoints: Waypoints, ways: Array<Way>): L.Polyline {
+    return L.polyline(map(ways, (way: Way): Array<L.LatLngExpression> => (
+      map(way, (point: WayType): L.LatLngExpression => (
+        this.latLngFromVec3(waypoints[point.getPointerNumber()].position)
+      ))
+    )), { color: '#ff0000' });
+  }
+
   public addMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.addMarker(gMarker);
+      this.add(gMarker.marker);
     });
   }
 
   public removeMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.removeMarker(gMarker);
+      this.remove(gMarker.marker);
     });
   }
 
@@ -88,6 +99,14 @@ export class MapService {
 
   public closeZC() {
     this.openedZC.next(undefined);
+  }
+
+  public add(layer: L.Layer) {
+    layer.addTo(this.map);
+  }
+
+  public remove(layer: L.Layer) {
+    layer.removeFrom(this.map);
   }
 
   private unbounceMarker() {
@@ -140,22 +159,16 @@ export class MapService {
     });
   }
 
-  private createMarker(vec3: GVec3, title: string, icon: L.DivIcon): L.Marker {
+  private latLngFromVec3(vec3: GVec3): L.LatLngExpression {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
-    return L.marker([(z / divider), (x / divider)], {
+    return [(z / divider), (x / divider)];
+  }
+
+  private createMarker(vec3: GVec3, title: string, icon: L.DivIcon): L.Marker {
+    return L.marker(this.latLngFromVec3(vec3), {
       title,
       icon,
     });
-  }
-
-  private addMarker(gMarker: GMarker<any>) {
-    const { marker } = gMarker;
-    marker.addTo(this.map);
-  }
-
-  private removeMarker(gMarker: GMarker<any>) {
-    const { marker } = gMarker;
-    marker.removeFrom(this.map);
   }
 
 }
