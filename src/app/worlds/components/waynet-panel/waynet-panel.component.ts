@@ -1,11 +1,14 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { get, values } from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { get, values, trim } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
 
 import { ToolbarService } from '@toolbar/services';
 import { WAYNET } from '@toolbar/consts';
 
+import { WaynetDataComponent, WaynetDialogData } from '@worlds/dialogs';
 import { Waynet, Waypoints, ZCWaypoint } from '@worlds/models';
 import { MapService } from '@worlds/services';
 import { GMarkerGroup } from '@worlds/types';
@@ -18,12 +21,15 @@ import { GMarkerGroup } from '@worlds/types';
 })
 export class WaynetPanelComponent implements OnChanges {
   public isOpenPanel = true;
+  public checked = false;
   public markersGroup: GMarkerGroup<ZCWaypoint>;
+  public waynetPolyline: L.Polyline;
 
   @Input() waynet: Waynet;
 
   constructor(
     private mapService: MapService,
+    private dialog: MatDialog,
     toolbarService: ToolbarService,
   ) {
     toolbarService.getActiveObs().subscribe((active) => {
@@ -35,16 +41,39 @@ export class WaynetPanelComponent implements OnChanges {
     const waynet: Waynet = get(changes, ['waynet', 'currentValue']);
     if (waynet) {
       this.markersGroup = this.mapService.waypointsMarkersGroup(values(waynet.waypoints));
+      this.waynetPolyline = this.mapService.waynetPolyline(waynet.waypoints, waynet.ways);
     }
   }
 
   get waypoints(): Waypoints { return this.waynet.waypoints; }
 
-  public onCheckboxChange({ checked }) {
+  public onCheckboxChange({ checked }: MatCheckboxChange) {
     if (checked) {
       this.mapService.addMarkersGroup(this.markersGroup);
+      this.mapService.add(this.waynetPolyline);
     } else {
       this.mapService.removeMarkersGroup(this.markersGroup);
+      this.mapService.remove(this.waynetPolyline);
+    }
+  }
+
+  public openDialog(): void {
+    this.dialog.open<WaynetDataComponent, WaynetDialogData>(WaynetDataComponent, {
+      minWidth: 520,
+      data: {
+        startLine: trim(this.waynet.startLine),
+        properties: [
+          { key: 'waynetVersion', property: this.waynet.waynetVersion },
+          { key: 'numWaypoints', property: this.waynet.numWaypoints },
+          { key: 'numWays', property: this.waynet.numWays },
+        ],
+      },
+    });
+  }
+
+  public openWaypoint(index: number) {
+    if (this.checked) {
+      this.mapService.openZC(this.markersGroup.markers[index], true);
     }
   }
 

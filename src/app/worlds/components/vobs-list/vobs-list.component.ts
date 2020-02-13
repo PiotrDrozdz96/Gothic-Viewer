@@ -26,10 +26,10 @@ export class VobsListComponent implements OnChanges {
     }
   }
 
-  setOpened() { this.isOpened = !this.isOpened; }
+  public setOpened() { this.isOpened = !this.isOpened; }
 
-  openVob(index: number) {
-    this.mapService.openVob(this.vobMarkerGroup.markers[index], true);
+  public openVob(index: number) {
+    this.mapService.openZC(this.vobMarkerGroup.markers[index], true);
   }
 
 }

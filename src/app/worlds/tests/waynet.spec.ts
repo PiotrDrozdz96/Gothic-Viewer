@@ -24,6 +24,6 @@ describe('Waynet', () => {
     expect(waynet.numWays.value).toEqual('4');
   });
   it('waynet should save 9 waypointsBlock', () => {
-    expect(size(waynet.waypointsBlock)).toEqual(9);
+    expect(size(waynet.waypoints)).toEqual(9);
   });
 });

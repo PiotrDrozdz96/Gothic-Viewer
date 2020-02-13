@@ -3,9 +3,15 @@ import { BehaviorSubject } from 'rxjs';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
-import { waypointIcon } from '@worlds/consts';
-import { ZCVob, ZCWaypoint, GVec3 } from '@worlds/models';
-import { GMarker, GMarkerGroup } from '@worlds/types';
+import { ClassNames } from '@common/utils';
+
+import { waypointIcon, bounceMarkerClassName } from '@worlds/consts';
+import {
+  ZCVob, ZCWaypoint, GVec3,
+  Waypoints, WayType, Way,
+} from '@worlds/models';
+import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
+import { isImageIcon } from '@worlds/utils';
 
 const divider = 150;
 const toolbardisplacement = 2.5;
@@ -15,11 +21,11 @@ const toolbardisplacement = 2.5;
 })
 export class MapService {
   private bouncingMarker: L.Marker;
-  openedVob = new BehaviorSubject<GMarker<ZCVob>>(undefined);
-  map: L.Map;
+  private map: L.Map;
+  public openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
 
   constructor() {
-    this.openedVob.subscribe((gMarker) => {
+    this.openedZC.subscribe((gMarker) => {
       if (!gMarker) {
         this.unbounceMarker();
       }
@@ -37,15 +43,15 @@ export class MapService {
 
   public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
     return {
-      iconUrl: this.getMarkerIconUrl(vobs[0].vobType.type),
+      iconUrl: this.getMarkerIconUrl(vobs[0].zcType.type),
       markers: map(vobs, (vob: ZCVob) => {
         const gMarker: GMarker<ZCVob> = {
           value: vob,
           marker: this.createMarker(
-            vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.vobType.type),
+            vob.trafoOSToWSPos, vob.vobName.value, this.getMarkerIcon(vob.zcType.type),
           ),
         };
-        gMarker.marker.on('click', () => { this.openVob(gMarker, false); });
+        gMarker.marker.on('click', () => { this.openZC(gMarker, false); });
 
         return gMarker;
       }),
@@ -54,53 +60,86 @@ export class MapService {
 
   public waypointsMarkersGroup(waypoints: Array<ZCWaypoint>): GMarkerGroup<ZCWaypoint> {
     return {
-      markers: map(waypoints, (waypoint: ZCWaypoint) => ({
-        value: waypoint,
-        marker: this.createMarker(waypoint.position, waypoint.wpName.value, waypointIcon),
-      })),
+      markers: map(waypoints, (waypoint: ZCWaypoint) => {
+        const gMarker = {
+          value: waypoint,
+          marker: this.createMarker(waypoint.position, waypoint.wpName.value, waypointIcon),
+        };
+        gMarker.marker.on('click', () => { this.openZC(gMarker, false); });
+
+        return gMarker;
+      }),
     };
+  }
+
+  public waynetPolyline(waypoints: Waypoints, ways: Array<Way>): L.Polyline {
+    return L.polyline(map(ways, (way: Way): Array<L.LatLngExpression> => (
+      map(way, (point: WayType): L.LatLngExpression => (
+        this.latLngFromVec3(waypoints[point.getPointerNumber()].position)
+      ))
+    )), { color: '#ff0000' });
   }
 
   public addMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.addMarker(gMarker);
+      this.add(gMarker.marker);
     });
   }
 
   public removeMarkersGroup(gMarkers: GMarkerGroup<any>) {
     forEach(gMarkers.markers, (gMarker) => {
-      this.removeMarker(gMarker);
+      this.remove(gMarker.marker);
     });
   }
 
-  public openVob(gMarker: GMarker<ZCVob>, isCenter: boolean) {
+  public openZC(gMarker: GMarker<ZC>, isCenter: boolean) {
     this.highlightMarker(gMarker.marker, isCenter);
-    this.openedVob.next(gMarker);
+    this.openedZC.next(gMarker);
   }
 
-  public closeVob() {
-    this.openedVob.next(undefined);
+  public closeZC() {
+    this.openedZC.next(undefined);
+  }
+
+  public add(layer: L.Layer) {
+    layer.addTo(this.map);
+  }
+
+  public remove(layer: L.Layer) {
+    layer.removeFrom(this.map);
   }
 
   private unbounceMarker() {
     if (this.bouncingMarker) {
-      this.bouncingMarker.setIcon(new L.Icon(
-        omit(this.bouncingMarker.getIcon().options, ['className']),
-      ));
+      const markerIcon = this.bouncingMarker.getIcon();
+      const iconConstructor = this.getIconContructor(markerIcon);
+
+      this.bouncingMarker.setIcon(new iconConstructor({
+        ...omit(markerIcon.options, ['className']),
+        className: ClassNames.omit(markerIcon.options.className, [bounceMarkerClassName]),
+      }));
       this.bouncingMarker = undefined;
     }
   }
 
   private bounceMarker(marker: L.Marker) {
     this.unbounceMarker();
-    this.bouncingMarker = marker.setIcon(new L.Icon({
-      ...marker.getIcon().options,
-      className: 'bounce-marker',
+    const markerIcon = marker.getIcon();
+    const iconConstructor = this.getIconContructor(markerIcon);
+
+    this.bouncingMarker = marker.setIcon(new iconConstructor({
+      ...markerIcon.options,
+      className: ClassNames.add(markerIcon.options.className, [bounceMarkerClassName]),
     }));
+  }
+
+  private getIconContructor(icon: L.Icon | L.DivIcon): typeof L.Icon | typeof L.DivIcon {
+    return isImageIcon(icon) ? L.Icon : L.DivIcon;
   }
 
   private highlightMarker(marker: L.Marker, isCenter: boolean) {
     const { lat, lng } = marker.getLatLng();
+
     this.bounceMarker(marker);
     if (isCenter) {
       this.map.setView({lat, lng: lng - toolbardisplacement}, this.map.getZoom());
@@ -120,22 +159,16 @@ export class MapService {
     });
   }
 
-  private createMarker(vec3: GVec3, title: string, icon: L.DivIcon): L.Marker {
+  private latLngFromVec3(vec3: GVec3): L.LatLngExpression {
     const [x, y, z] = vec3.value; // x = north/south y = up/down z = east/west
-    return L.marker([(z / divider), (x / divider)], {
+    return [(z / divider), (x / divider)];
+  }
+
+  private createMarker(vec3: GVec3, title: string, icon: L.DivIcon): L.Marker {
+    return L.marker(this.latLngFromVec3(vec3), {
       title,
       icon,
     });
-  }
-
-  private addMarker(gMarker: GMarker<any>) {
-    const { marker } = gMarker;
-    marker.addTo(this.map);
-  }
-
-  private removeMarker(gMarker: GMarker<any>) {
-    const { marker } = gMarker;
-    marker.removeFrom(this.map);
   }
 
 }

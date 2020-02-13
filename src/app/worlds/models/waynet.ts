@@ -35,13 +35,13 @@ export class Waynet {
         this.waypoints[zcWaypoint.getPointerNumber()] = zcWaypoint;
       }
       if (zcWaypoint.isWaypoint()) {
-        this.singleWaypoints.push(zcWaypoint.wayType);
+        this.singleWaypoints.push(zcWaypoint.zcType);
       } else if (zcWaypoint.isWay()) {
         const { index, ending } = zcWaypoint.getWayName();
         if (!this.ways[index]) {
           this.ways[index] = {};
         }
-        this.ways[index][ending] = zcWaypoint.wayType;
+        this.ways[index][ending] = zcWaypoint.zcType;
       }
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { forEach, get, map, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
@@ -8,10 +9,10 @@ import { ToolbarService } from '@toolbar/services';
 import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
+import { PrefixZenDataComponent, PrefixZenDialogData } from '@worlds/dialogs';
 import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
 import { GMarkerGroup } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
-import { PrefixZenDataComponent } from '@worlds/dialogs';
 
 interface VobFilter {
   checked: boolean;
@@ -59,8 +60,8 @@ export class VobtreePanelComponent implements OnChanges {
         vobtree.getSortedVobtree(),
         (vobs: Array<ZCVob>) => {
           return {
-            checked: includes(initChecked, vobs[0].vobType.type),
-            text: split(vobs[0].vobType.type || 'zCVob:', ':', 1)[0],
+            checked: includes(initChecked, vobs[0].zcType.type),
+            text: split(vobs[0].zcType.type || 'zCVob:', ':', 1)[0],
             vobMarkerGroup: this.mapService.vobMarkersGroup(vobs),
           };
         },
@@ -74,7 +75,7 @@ export class VobtreePanelComponent implements OnChanges {
   }
 
   public openDialog(): void {
-    this.dialog.open(PrefixZenDataComponent, {
+    this.dialog.open<PrefixZenDataComponent, PrefixZenDialogData>(PrefixZenDataComponent, {
       minWidth: 520,
       data: {
         fileName: this.name,
@@ -83,7 +84,10 @@ export class VobtreePanelComponent implements OnChanges {
     });
   }
 
-  public onCheckboxChange({ checked }, vobMarkerGroup: GMarkerGroup<ZCVob>) {
+  public onCheckboxChange(
+    { checked }: MatCheckboxChange,
+    vobMarkerGroup: GMarkerGroup<ZCVob>,
+  ) {
     if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {

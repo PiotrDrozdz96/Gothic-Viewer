@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { PrefixZenData } from '@worlds/models';
 
-interface Data {
+export interface PrefixZenDialogData {
   fileName: string;
   prefixZenData: PrefixZenData;
 }
@@ -16,6 +16,9 @@ interface Data {
 export class PrefixZenDataComponent {
   constructor(
     public dialogRef: MatDialogRef<PrefixZenDataComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Data,
+    @Inject(MAT_DIALOG_DATA) public data: PrefixZenDialogData,
   ) { }
+
+  get fileName(): string { return this.data.fileName; }
+  get prefixZenData(): PrefixZenData { return this.data.prefixZenData; }
 }

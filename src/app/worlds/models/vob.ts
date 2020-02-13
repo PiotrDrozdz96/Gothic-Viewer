@@ -2,7 +2,7 @@ import { forEach, trim, omit, join, slice, findIndex, includes } from 'lodash';
 
 import { vobWhitespace, vobPropWhitespace } from '@worlds/consts';
 import { getZenProp } from '@worlds/utils';
-import { BlockLine } from '@worlds/types';
+import { BlockLine, ZC } from '@worlds/types';
 
 import { zenPropConstructors } from './zen-prop-constructors';
 import {
@@ -25,7 +25,7 @@ export class VobType implements BlockLine {
   }
 }
 
-export class ZCVob {
+export class ZCVob implements ZC {
   pack: GInt;
   presetName: GString;
   bbox3DWS: GRawFloat;
@@ -43,7 +43,7 @@ export class ZCVob {
   constructor(
     public index: string,
     public unknownValue: GInt,
-    public vobType: VobType,
+    public zcType: VobType,
     vobProps: Array<string>,
   ) {
     let restMode = false;
@@ -72,7 +72,7 @@ export class ZCVob {
   }
 
   toString(): string {
-    const vobProps = omit(this, ['index', 'unknownValue', 'vobType']);
+    const vobProps = omit(this, ['index', 'unknownValue', 'zcType']);
     const lines = [];
     forEach(vobProps, (prop, key) => {
       if (key !== 'rest' && key !== 'triggerList') {
@@ -84,7 +84,7 @@ export class ZCVob {
 
     return (
       `${vobWhitespace}childs${this.index}=${this.unknownValue.toString()}\n` +
-      `${this.vobType.toString()}\n` +
+      `${this.zcType.toString()}\n` +
       `${join(lines, '\n')}\n` +
       `${vobWhitespace}[]\n`
     );
@@ -351,10 +351,10 @@ export class ZCCSCamera extends ZCVob {
   constructor(
     index: string,
     unknownValue: GInt,
-    vobType: VobType,
+    zcType: VobType,
     vobProps: Array<string>,
   ) {
-  super(index, unknownValue, vobType, removeKeyFrames(vobProps));
+  super(index, unknownValue, zcType, removeKeyFrames(vobProps));
   }
 
 }
