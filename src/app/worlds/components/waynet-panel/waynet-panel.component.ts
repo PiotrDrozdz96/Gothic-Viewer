@@ -49,11 +49,11 @@ export class WaynetPanelComponent implements OnChanges {
 
   public onCheckboxChange({ checked }: MatCheckboxChange) {
     if (checked) {
-      this.mapService.addMarkersGroup(this.markersGroup);
-      this.mapService.add(this.waynetPolyline);
+      this.mapService.addMarkersGroup(this.markersGroup, 3);
+      this.mapService.add(this.waynetPolyline, -1);
     } else {
-      this.mapService.removeMarkersGroup(this.markersGroup);
-      this.mapService.remove(this.waynetPolyline);
+      this.mapService.removeMarkersGroup(this.markersGroup, 3);
+      this.mapService.remove(this.waynetPolyline, -1);
     }
   }
 

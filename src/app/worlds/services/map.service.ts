@@ -16,12 +16,15 @@ import { isImageIcon } from '@worlds/utils';
 const divider = 150;
 const toolbardisplacement = 2.5;
 
+interface ZoomedMarkers { [key: number]: Array<L.Marker>; }
+
 @Injectable({
   providedIn: 'root',
 })
 export class MapService {
   private bouncingMarker: L.Marker;
   private map: L.Map;
+  private layers: ZoomedMarkers;
   public openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
 
   constructor() {
@@ -33,12 +36,14 @@ export class MapService {
   }
 
   public init(bounds: L.LatLngBoundsExpression, imageUrl: string) {
+    this.layers = {};
     this.map = L.map('map', {
       crs: L.CRS.Simple,
       zoomControl: false,
     });
     L.imageOverlay(imageUrl, bounds).addTo(this.map);
     this.map.fitBounds(bounds);
+    this.map.on('moveend', () => this.placeMarkersInBounds());
   }
 
   public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
@@ -80,16 +85,18 @@ export class MapService {
     )), { color: '#ff0000' });
   }
 
-  public addMarkersGroup(gMarkers: GMarkerGroup<any>) {
-    forEach(gMarkers.markers, (gMarker) => {
-      this.add(gMarker.marker);
+  public addMarkersGroup(gMarkers: GMarkerGroup<any>, zoom: number = 0) {
+    forEach(gMarkers.markers, ({ marker }) => {
+      this.add(marker, zoom, false);
     });
+    this.placeMarkersInBounds();
   }
 
-  public removeMarkersGroup(gMarkers: GMarkerGroup<any>) {
-    forEach(gMarkers.markers, (gMarker) => {
-      this.remove(gMarker.marker);
+  public removeMarkersGroup(gMarkers: GMarkerGroup<any>, zoom: number = 0) {
+    forEach(gMarkers.markers, ({ marker }) => {
+      this.remove(marker, zoom, false);
     });
+    this.placeMarkersInBounds();
   }
 
   public openZC(gMarker: GMarker<ZC>, isCenter: boolean) {
@@ -101,12 +108,24 @@ export class MapService {
     this.openedZC.next(undefined);
   }
 
-  public add(layer: L.Layer) {
-    layer.addTo(this.map);
+  public add(layer: L.Layer, zoom: number = 0, isPlaceMarkers: boolean = true) {
+    if (zoom !== -1) {
+      if (!this.layers[zoom]) {
+        this.layers[zoom] = [];
+      }
+      this.layers[zoom].push(layer as L.Marker);
+    } else {
+      layer.addTo(this.map);
+    }
+    if (isPlaceMarkers) { this.placeMarkersInBounds(); }
   }
 
-  public remove(layer: L.Layer) {
+  public remove(layer: L.Layer, zoom: number = 0, isPlaceMarkers: boolean = true) {
     layer.removeFrom(this.map);
+    if (zoom !== -1) {
+      this.layers[zoom] = this.layers[zoom].filter((value) => value !== layer);
+    }
+    if (isPlaceMarkers) { this.placeMarkersInBounds(); }
   }
 
   private unbounceMarker() {
@@ -171,4 +190,31 @@ export class MapService {
     });
   }
 
+  private placeMarkersInBounds() {
+    const zoom: number = this.map.getZoom();
+    const mapBounds: L.LatLngBounds = this.map.getBounds();
+    const myMarkers: Array<L.Marker> = [];
+
+    forEach(this.layers, (markers, key) => {
+      if (parseInt(key, 10) <= zoom) { // breakdown based on zoom
+        forEach(markers, (marker) => {
+          marker.removeFrom(this.map);
+          const shouldBeVisible = mapBounds.contains(marker.getLatLng());
+          if (shouldBeVisible) { // breakdown based on viewport
+            myMarkers.push(marker);
+          }
+        });
+      } else {
+        forEach(markers, (marker) => {
+          marker.removeFrom(this.map);
+        });
+      }
+    });
+
+    if (myMarkers.length <= 1000) {
+      forEach(myMarkers, (marker) => {
+        marker.addTo(this.map);
+      });
+    }
+  }
 }
