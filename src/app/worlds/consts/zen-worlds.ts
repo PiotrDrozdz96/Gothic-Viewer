@@ -23,6 +23,7 @@ export const zenWorlds: ZenWorlds = {
     name: 'ORCTEMPEL.ZEN',
     zenPath: `${zenDirectory}ORCTEMPEL.ZEN`,
     imageUrl: `${loadingDirectory}ORCTEMPEL.jpg`,
+    mapImageIds: ['temple'],
   },
   world: {
     name: 'WORLD.ZEN',
