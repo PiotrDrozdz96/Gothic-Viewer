@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import 'waypoint-icon';
 
 :host { @include page; }
 .map-container { @include full-page; }
@@ -8,10 +9,8 @@
 #map {
   @include full-page;
   background-color: $background-color-primary;
-
-  ::ng-deep .bounce-marker {
-    animation: bounce 1s infinite;
-  }
+  ::ng-deep .bounce-marker { animation: bounce 1s infinite; }
+  ::ng-deep .waypoint-icon { @include waypoint-icon; }
 }
 
 @keyframes bounce {

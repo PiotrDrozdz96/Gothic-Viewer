@@ -32,7 +32,8 @@
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/app/common/styles/"
+                "src/app/common/styles/",
+                "src/app/worlds/styles/"
               ]
             },
             "scripts": []

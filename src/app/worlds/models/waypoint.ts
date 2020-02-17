@@ -6,7 +6,7 @@ import {
   waynetWhitespace, wayPropWhitespace,
   pointerSymbol,
 } from '@worlds/consts';
-import { BlockLine, WayName } from '@worlds/types';
+import { BlockLine, ZC, WayName, } from '@worlds/types';
 import { getZenProp } from '@worlds/utils';
 
 import { GString, GInt, GBool, GVec3 } from './g-types';
@@ -45,17 +45,17 @@ export class WayType implements BlockLine {
   public getWayName(): WayName { return { name: this.name, index: this.index, ending: this.ending }; }
 }
 
-export class ZCWaypoint {
-  wayType: WayType;
-  wpName?: GString;
-  waterDepth?: GInt;
-  underWater?: GBool;
-  position?: GVec3;
-  direction?: GVec3;
+export class ZCWaypoint implements ZC {
+  zcType: WayType;
+  wpName: GString;
+  waterDepth: GInt;
+  underWater: GBool;
+  position: GVec3;
+  direction: GVec3;
   constructor(lines: Array<string>) {
     const [wayTypeLine, ...zenProps] = lines;
-    this.wayType = new WayType(wayTypeLine);
-    if (!this.wayType.isPointer()) {
+    this.zcType = new WayType(wayTypeLine);
+    if (!this.zcType.isPointer()) {
       forEach(zenProps, (line) => {
         const { key, type, value } = getZenProp(line);
         this[key] = new zenPropConstructors[key](type, value);
@@ -64,23 +64,23 @@ export class ZCWaypoint {
   }
 
   public toString(): string {
-    const wayProps = omit(this, ['wayType']);
+    const wayProps = omit(this, ['zcType']);
     const lines = [];
     forEach(wayProps, (prop, key) => {
       lines.push(`${wayPropWhitespace}${key}=${prop.toString()}`);
     });
 
     return (
-      `${this.wayType.toString()}\n` +
+      `${this.zcType.toString()}\n` +
       `${join(lines, '\n')}${!isEmpty(lines) ? '\n' : ''}` +
       `${waynetWhitespace}[]\n`
     );
   }
 
-  public isWaypoint(): boolean { return this.wayType.isWaypoint(); }
-  public isWay(): boolean { return this.wayType.isWay(); }
-  public isPointer(): boolean { return this.wayType.isPointer(); }
-  public getPointerNumber(): string { return this.wayType.getPointerNumber(); }
-  public getName(): string { return this.wayType.name; }
-  public getWayName(): WayName { return this.wayType.getWayName(); }
+  public isWaypoint(): boolean { return this.zcType.isWaypoint(); }
+  public isWay(): boolean { return this.zcType.isWay(); }
+  public isPointer(): boolean { return this.zcType.isPointer(); }
+  public getPointerNumber(): string { return this.zcType.getPointerNumber(); }
+  public getName(): string { return this.zcType.name; }
+  public getWayName(): WayName { return this.zcType.getWayName(); }
 }

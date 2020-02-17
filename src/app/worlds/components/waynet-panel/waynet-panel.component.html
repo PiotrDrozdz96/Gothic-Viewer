@@ -1,0 +1,26 @@
+<div *ngIf="waynet && isOpenPanel" class="panel" [@leftPanelAnimation]>
+  <div class="header">
+    <div class="icon-button-left">
+      <button mat-icon-button (click)="openDialog()">
+        <mat-icon>description</mat-icon>
+      </button>
+    </div>
+    <div class="title" [title]="'WAYNET'">WAYNET</div>
+    <div class="checkbox-right">
+      <mat-checkbox
+        [(ngModel)]="checked"
+        (change)="onCheckboxChange($event)"
+      ></mat-checkbox>
+    </div>
+  </div>
+  <div class="content">
+    <div
+      *ngFor="let waypoint of waypoints | toArray; let index = index"
+      [ngClass]="{'waypoint': true, 'cursor-pointer': checked}"
+      (click)="openWaypoint(index)"
+    >
+      <span class="waypoint-icon"></span>
+      <span [title]="waypoint.wpName.value">{{waypoint.wpName.value}}</span>
+    </div>
+  </div>
+</div>

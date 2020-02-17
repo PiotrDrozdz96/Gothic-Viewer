@@ -11,6 +11,6 @@ export const mapImages: MapImages = {
   worldHD: {
     imageUrl: `${directory}MAP_WORLD_HD.PNG`,
     name: 'MAP_WORLD_HD',
-    bounds: [[-325, -475], [325, 475]],
+    bounds: [[-330, -480], [320, 470]],
   },
 };

@@ -67,10 +67,10 @@ export class Vobtree {
         this.addPointer(lines);
       } else {
         const vob = this.getVob(lines);
-        if (!has(this, vob.vobType.type)) {
-          this[vob.vobType.type] = [];
+        if (!has(this, vob.zcType.type)) {
+          this[vob.zcType.type] = [];
         }
-        this[vob.vobType.type].push(vob);
+        this[vob.zcType.type].push(vob);
       }
     });
   }

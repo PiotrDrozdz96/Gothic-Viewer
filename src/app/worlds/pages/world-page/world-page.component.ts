@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { get } from 'lodash';
 
-import { World } from '@worlds/models';
+import { World, PrefixZenData, Waynet, Vobtree } from '@worlds/models';
 import { MapService, WorldSettingsService } from '@worlds/services';
 import { WorldSettings } from '@worlds/types';
 
@@ -29,4 +30,8 @@ export class WorldPageComponent implements AfterViewInit {
       this.world = new World(zenRaw);
     }, 0);
   }
+
+  get prefixZenData(): PrefixZenData { return get(this.world, 'prefixZenData', undefined); }
+  get vobtree(): Vobtree { return get(this.world, 'vobtree', undefined); }
+  get waynet(): Waynet { return get(this.world, 'waynet', undefined); }
 }

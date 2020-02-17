@@ -1,0 +1,9 @@
+@mixin waypoint-icon {
+  height: 7px !important;
+  width: 7px !important;
+  margin-right: 10px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  border: 1px solid #0000ff;
+  display: inline-block;
+}

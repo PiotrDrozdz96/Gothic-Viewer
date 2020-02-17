@@ -30,27 +30,30 @@ const pages = [
 ];
 
 import {
+  WaynetPanelComponent,
   VobtreePanelComponent,
-  VobPanelComponent,
+  ZCPanelComponent,
   VobsListComponent,
-  VobPropertyComponent,
+  ZenPropertyComponent,
   GColorsComponent,
   GColorComponent,
   OptionTileComponent,
 } from './components';
 const components = [
+  WaynetPanelComponent,
   VobtreePanelComponent,
   VobsListComponent,
-  VobPanelComponent,
-  VobPropertyComponent,
+  ZCPanelComponent,
+  ZenPropertyComponent,
   GColorsComponent,
   GColorComponent,
   OptionTileComponent,
 ];
 
-import { PrefixZenDataComponent } from './dialogs/';
+import { PrefixZenDataComponent, WaynetDataComponent } from './dialogs/';
 const dialogs = [
   PrefixZenDataComponent,
+  WaynetDataComponent,
 ];
 
 @NgModule({

@@ -1,0 +1,14 @@
+@import 'mixins';
+@import 'variables';
+@import 'panel';
+@import 'waypoint-icon';
+
+.panel { @include panel($z-index-above-map-2) }
+
+.waypoint {
+  @include truncate;
+  margin-bottom: 10px;
+}
+
+.waypoint-icon { @include waypoint-icon; }
+.cursor-pointer { cursor: pointer; }
