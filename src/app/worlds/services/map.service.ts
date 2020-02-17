@@ -87,14 +87,14 @@ export class MapService {
 
   public addMarkersGroup(gMarkers: GMarkerGroup<any>, zoom: number = 0) {
     forEach(gMarkers.markers, ({ marker }) => {
-      this.add(marker, zoom, false);
+      this.add(marker, zoom, true);
     });
     this.placeMarkersInBounds();
   }
 
   public removeMarkersGroup(gMarkers: GMarkerGroup<any>, zoom: number = 0) {
     forEach(gMarkers.markers, ({ marker }) => {
-      this.remove(marker, zoom, false);
+      this.remove(marker, zoom, true);
     });
     this.placeMarkersInBounds();
   }
@@ -108,7 +108,7 @@ export class MapService {
     this.openedZC.next(undefined);
   }
 
-  public add(layer: L.Layer, zoom: number = 0, isPlaceMarkers: boolean = true) {
+  public add(layer: L.Layer, zoom: number = 0, isFromGroup: boolean = false) {
     if (zoom !== -1) {
       if (!this.layers[zoom]) {
         this.layers[zoom] = [];
@@ -117,15 +117,15 @@ export class MapService {
     } else {
       layer.addTo(this.map);
     }
-    if (isPlaceMarkers) { this.placeMarkersInBounds(); }
+    if (!isFromGroup) { this.placeMarkersInBounds(); }
   }
 
-  public remove(layer: L.Layer, zoom: number = 0, isPlaceMarkers: boolean = true) {
+  public remove(layer: L.Layer, zoom: number = 0, isFromGroup: boolean = false) {
     layer.removeFrom(this.map);
     if (zoom !== -1) {
       this.layers[zoom] = this.layers[zoom].filter((value) => value !== layer);
     }
-    if (isPlaceMarkers) { this.placeMarkersInBounds(); }
+    if (!isFromGroup) { this.placeMarkersInBounds(); }
   }
 
   private unbounceMarker() {
