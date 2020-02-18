@@ -6,7 +6,7 @@ export const mapImages: MapImages = {
   blank: {
     imageUrl: `${directory}BLANK.PNG`,
     name: 'BLANK',
-    bounds: [[-48750, -71250], [48750, 71250]],
+    bounds: [[-330, -480], [320, 470]],
   },
   world: {
     imageUrl: `${directory}MAP_WORLD.PNG`,
@@ -27,5 +27,10 @@ export const mapImages: MapImages = {
     imageUrl: `${directory}MAP_OLDCAMP.PNG`,
     name: 'MAP_OLDCAMP',
     bounds: [[-55, -57], [40, 53]],
+  },
+  psicamp: {
+    imageUrl: `${directory}MAP_PSICAMP.PNG`,
+    name: 'MAP_PSICAMP',
+    bounds: [[-145, 215], [23, 450]],
   },
 };

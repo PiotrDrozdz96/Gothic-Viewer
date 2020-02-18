@@ -29,6 +29,6 @@ export const zenWorlds: ZenWorlds = {
     name: 'WORLD.ZEN',
     zenPath: `${zenDirectory}WORLD.ZEN`,
     imageUrl: `${loadingDirectory}WORLD.jpg`,
-    mapImageIds: ['world', 'worldHD', 'oldcamp'],
+    mapImageIds: ['world', 'worldHD', 'oldcamp', 'psicamp'],
   },
 };
