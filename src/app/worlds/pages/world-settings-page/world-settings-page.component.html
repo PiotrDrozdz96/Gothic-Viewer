@@ -35,6 +35,20 @@
         [value]="key">
     </app-option-tile>
   </div>
+
+  <div class="section" *ngIf="zenId && additionalZenMapImageIds">
+    <h1 class="section-header">Wybierz Dodatkowe Mapy</h1>
+    <app-option-tile *ngFor="let key of additionalZenMapImageIds"
+      [text]="mapImages[key].name"
+      [backgroundImage]="mapImages[key].imageUrl"
+      [isActive]="imageId === key"
+    >
+      <input #click type="checkbox"
+        (change)="onCheckChange($event)"
+        [value]="key">
+    </app-option-tile>
+  </div>
+
   <div class="buttons">
     <button
       mat-raised-button

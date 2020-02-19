@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { findIndex } from 'lodash';
 
 import { mapImages, zenWorlds } from '@worlds/consts';
 import { WorldSettingsService } from '@worlds/services';
@@ -27,6 +28,7 @@ export class WorldSettingsPageComponent {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
       image: ['blank', Validators.required],
+      additionalImages: new FormArray([]),
     });
     this.zenChange();
   }
@@ -34,14 +36,23 @@ export class WorldSettingsPageComponent {
   private zenChange() {
     this.settingsGroup.get('zen').valueChanges.subscribe(() => {
       this.settingsGroup.get('image').setValue('blank');
+      const formArray: FormArray = this.settingsGroup.get('additionalImages') as FormArray;
+      while (formArray.length) {
+        formArray.removeAt(0);
+      }
     });
   }
 
   get zenId(): string { return this.settingsGroup.get('zen').value; }
   get imageId(): string { return this.settingsGroup.get('image').value; }
+  get additionalImages(): Array<string> { return this.settingsGroup.get('additionalImages').value; }
   get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
+  get additionalZenMapImageIds(): Array<string> {
+    return zenWorlds[this.zenId].additionalMapImageIds;
+  }
 
-  public onSubmit({zen, image}: { zen: string, image: string}) {
+  public onSubmit({zen, image, additionalImages}:
+    { zen: string, image: string, additionalImages: Array<string> }) {
     this.http.get(
       zenWorlds[zen].zenPath,
       {responseType: 'text'},
@@ -50,5 +61,17 @@ export class WorldSettingsPageComponent {
       this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
       this.router.navigate(['worlds']);
     });
+  }
+
+  public onCheckChange({target: { checked, value }}: EventFrom<HTMLInputElement>) {
+    const formArray: FormArray = this.settingsGroup.get('additionalImages') as FormArray;
+
+    if (checked) {
+      formArray.push(new FormControl(value));
+    } else {
+      formArray.removeAt(findIndex(formArray.value, (ctrl: FormControl) => (
+        ctrl.value === value
+      )));
+    }
   }
 }

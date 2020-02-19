@@ -33,4 +33,9 @@ export const mapImages: MapImages = {
     name: 'MAP_PSICAMP',
     bounds: [[-145, 215], [23, 450]],
   },
+  newcamp: {
+    imageUrl: `${directory}MAP_NEWCAMP.PNG`,
+    name: 'MAP_NEWCAMP',
+    bounds: [[-10, -428], [109, -282]],
+  },
 };

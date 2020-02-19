@@ -16,12 +16,6 @@ const modules = [
   RouterModule.forChild(worldsRoutes),
 ];
 
-import { ArrayToStringPipe, RgbPipe } from '@common/pipes';
-const pipes = [
-  ArrayToStringPipe,
-  RgbPipe,
-];
-
 import { WorldPageComponent, MarkersPageComponent, WorldSettingsPageComponent } from './pages';
 const pages = [
   WorldPageComponent,
@@ -61,7 +55,6 @@ const dialogs = [
     ...pages,
     ...components,
     ...dialogs,
-    ...pipes,
   ],
   imports: [
     ...modules,
