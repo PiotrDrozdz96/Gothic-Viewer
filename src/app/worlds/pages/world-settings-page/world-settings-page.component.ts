@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { findIndex } from 'lodash';
 
+import { onCheckboxGroupChange } from '@common/utils';
 import { mapImages, zenWorlds } from '@worlds/consts';
 import { WorldSettingsService } from '@worlds/services';
 
@@ -16,6 +16,7 @@ export class WorldSettingsPageComponent {
 
   readonly mapImages = mapImages;
   readonly zenWorlds = zenWorlds;
+  readonly onCheckboxGroupChange = onCheckboxGroupChange;
 
   public settingsGroup: FormGroup;
 
@@ -61,17 +62,5 @@ export class WorldSettingsPageComponent {
       this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
       this.router.navigate(['worlds']);
     });
-  }
-
-  public onCheckChange({target: { checked, value }}: EventFrom<HTMLInputElement>) {
-    const formArray: FormArray = this.settingsGroup.get('additionalImages') as FormArray;
-
-    if (checked) {
-      formArray.push(new FormControl(value));
-    } else {
-      formArray.removeAt(findIndex(formArray.value, (formValue: string) => (
-        formValue === value
-      )));
-    }
   }
 }

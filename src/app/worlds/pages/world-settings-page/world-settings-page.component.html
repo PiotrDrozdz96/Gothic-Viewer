@@ -44,7 +44,7 @@
       [isActive]="additionalImages | includes: key"
     >
       <input #click type="checkbox"
-        (change)="onCheckChange($event)"
+        (change)="onCheckboxGroupChange(settingsGroup.get('additionalImages'), $event)"
         [value]="key">
     </app-option-tile>
   </div>
