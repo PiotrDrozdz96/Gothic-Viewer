@@ -7,7 +7,7 @@
 
   <ng-container *ngSwitchDefault [ngSwitch]="type">
     <div *ngSwitchCase="'rest'" class="value-rest">
-      {{value | arrayToString}}
+      {{value | join: '\n' }}
     </div>
 
     <div *ngSwitchCase="'color'" class="value-color">
@@ -23,7 +23,7 @@
 
       <ng-template #isArray>
         <div class="value-array">
-          {{value | arrayToString}}
+          {{value | join: '\n' }}
         </div>
       </ng-template>
 
