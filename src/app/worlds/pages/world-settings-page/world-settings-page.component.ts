@@ -69,8 +69,8 @@ export class WorldSettingsPageComponent {
     if (checked) {
       formArray.push(new FormControl(value));
     } else {
-      formArray.removeAt(findIndex(formArray.value, (ctrl: FormControl) => (
-        ctrl.value === value
+      formArray.removeAt(findIndex(formArray.value, (formValue: string) => (
+        formValue === value
       )));
     }
   }
