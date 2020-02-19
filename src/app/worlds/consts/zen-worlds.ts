@@ -1,34 +1,24 @@
-import { ZenWorlds } from '@worlds/types';
+import { ZenWorld, ZenWorlds } from '@worlds/types';
 
 const zenDirectory = 'assets/Worlds/';
 const loadingDirectory = 'assets/Textures/loadings/';
 
+const createZenWorld = (name: string): ZenWorld => ({
+  name: `${name}.ZEN`,
+  zenPath: `${zenDirectory}${name}.ZEN`,
+  imageUrl: `${loadingDirectory}${name}.jpg`,
+});
+
 export const zenWorlds: ZenWorlds = {
-  freemine: {
-    name: 'FREEMINE.ZEN',
-    zenPath: `${zenDirectory}FREEMINE.ZEN`,
-    imageUrl: `${loadingDirectory}FREEMINE.jpg`,
-  },
-  oldmine: {
-    name: 'OLDMINE.ZEN',
-    zenPath: `${zenDirectory}OLDMINE.ZEN`,
-    imageUrl: `${loadingDirectory}OLDMINE.jpg`,
-  },
-  orcgraveyard: {
-    name: 'ORCGRAVEYARD.ZEN',
-    zenPath: `${zenDirectory}ORCGRAVEYARD.ZEN`,
-    imageUrl: `${loadingDirectory}ORCGRAVEYARD.jpg`,
-  },
+  freemine: createZenWorld('FREEMINE'),
+  oldmine: createZenWorld('OLDMINE'),
+  orcgraveyard: createZenWorld('ORCGRAVEYARD'),
   orctempel: {
-    name: 'ORCTEMPEL.ZEN',
-    zenPath: `${zenDirectory}ORCTEMPEL.ZEN`,
-    imageUrl: `${loadingDirectory}ORCTEMPEL.jpg`,
+    ...createZenWorld('ORCTEMPEL'),
     mapImageIds: ['temple'],
   },
   world: {
-    name: 'WORLD.ZEN',
-    zenPath: `${zenDirectory}WORLD.ZEN`,
-    imageUrl: `${loadingDirectory}WORLD.jpg`,
+    ...createZenWorld('WORLD'),
     mapImageIds: ['world', 'worldHD'],
     additionalMapImageIds: ['oldcamp', 'psicamp', 'newcamp'],
   },
