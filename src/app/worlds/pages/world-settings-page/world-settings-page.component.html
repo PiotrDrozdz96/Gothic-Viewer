@@ -41,7 +41,7 @@
     <app-option-tile *ngFor="let key of additionalZenMapImageIds"
       [text]="mapImages[key].name"
       [backgroundImage]="mapImages[key].imageUrl"
-      [isActive]="imageId === key"
+      [isActive]="additionalImages | includes: key"
     >
       <input #click type="checkbox"
         (change)="onCheckChange($event)"
