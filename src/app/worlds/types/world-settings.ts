@@ -1,6 +1,7 @@
 export interface WorldSettings {
   zenRaw: string;
   name: string;
-  imageUrl: string;
-  bounds: L.LatLngBoundsExpression;
+  images: Array<L.ImageOverlay>;
+  // imageUrl: string;
+  // bounds: L.LatLngBoundsExpression;
 }

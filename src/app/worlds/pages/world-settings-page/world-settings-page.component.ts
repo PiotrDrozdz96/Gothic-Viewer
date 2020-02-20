@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as L from 'leaflet';
+import { map } from 'lodash';
 
+import { onCheckboxGroupChange } from '@common/utils';
 import { mapImages, zenWorlds } from '@worlds/consts';
 import { WorldSettingsService } from '@worlds/services';
 
@@ -15,6 +18,7 @@ export class WorldSettingsPageComponent {
 
   readonly mapImages = mapImages;
   readonly zenWorlds = zenWorlds;
+  readonly onCheckboxGroupChange = onCheckboxGroupChange;
 
   public settingsGroup: FormGroup;
 
@@ -27,6 +31,7 @@ export class WorldSettingsPageComponent {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
       image: ['blank', Validators.required],
+      additionalImages: new FormArray([]),
     });
     this.zenChange();
   }
@@ -34,20 +39,37 @@ export class WorldSettingsPageComponent {
   private zenChange() {
     this.settingsGroup.get('zen').valueChanges.subscribe(() => {
       this.settingsGroup.get('image').setValue('blank');
+      const formArray: FormArray = this.settingsGroup.get('additionalImages') as FormArray;
+      while (formArray.length) {
+        formArray.removeAt(0);
+      }
     });
   }
 
   get zenId(): string { return this.settingsGroup.get('zen').value; }
   get imageId(): string { return this.settingsGroup.get('image').value; }
+  get additionalImages(): Array<string> { return this.settingsGroup.get('additionalImages').value; }
   get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
+  get additionalZenMapImageIds(): Array<string> {
+    return zenWorlds[this.zenId].additionalMapImageIds;
+  }
 
-  public onSubmit({zen, image}: { zen: string, image: string}) {
+  public onSubmit({zen, image, additionalImages}:
+    { zen: string, image: string, additionalImages: Array<string> }) {
     this.http.get(
       zenWorlds[zen].zenPath,
       {responseType: 'text'},
     ).subscribe((zenRaw: string) => {
       const {imageUrl, bounds} = mapImages[image];
-      this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
+      const images: Array<L.ImageOverlay> = [
+        L.imageOverlay(imageUrl, bounds),
+        ...map(additionalImages, (imageId) => {
+          const { imageUrl: additionalUrl, bounds: additionalBounds } = mapImages[imageId];
+          return L.imageOverlay(additionalUrl, additionalBounds);
+        }),
+      ];
+
+      this.settingsService.next({ name: zenWorlds[zen].name , images, zenRaw });
       this.router.navigate(['worlds']);
     });
   }

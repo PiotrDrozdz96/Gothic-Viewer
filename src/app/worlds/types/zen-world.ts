@@ -3,6 +3,7 @@ export interface ZenWorld {
   zenPath: string;
   imageUrl: string;
   mapImageIds?: Array<string>;
+  additionalMapImageIds?: Array<string>;
 }
 
 export interface ZenWorlds {

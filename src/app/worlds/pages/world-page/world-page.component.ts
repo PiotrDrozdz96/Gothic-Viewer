@@ -24,9 +24,9 @@ export class WorldPageComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const {imageUrl, bounds, zenRaw } = this.worldSettings;
+    const {images, zenRaw } = this.worldSettings;
     setTimeout(() => {
-      this.mapService.init(bounds, imageUrl);
+      this.mapService.init(images);
       this.world = new World(zenRaw);
     }, 0);
   }
