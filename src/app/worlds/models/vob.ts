@@ -35,10 +35,15 @@ export class ZCVob implements ZC {
   visual: GString;
   showVisual: GBool;
   visualCamAlign: GEnum;
+  visualAniMode?: GEnum; // G2
+  visualAniModeStrength?: GFloat; // G2
+  vobFarClipZScale?: GFloat; // G2
   cdStatic: GBool;
   cdDyn: GBool;
   staticVob: GBool;
   dynShadow: GEnum;
+  zbias?: GInt; // G2
+  isAmbient?: GBool; // G2
   rest: Rest;
   constructor(
     public index: string,
@@ -47,6 +52,7 @@ export class ZCVob implements ZC {
     vobProps: Array<string>,
   ) {
     let restMode = false;
+    console.log(zcType);
     forEach(vobProps, (line) => {
       if (!restMode) {
         const {key, type, value} = getZenProp(line);
@@ -59,7 +65,7 @@ export class ZCVob implements ZC {
           }
           restMode = true;
         } else {
-
+          console.log(key);
           this[key] = new zenPropConstructors[key](type, value);
         }
       } else {
@@ -109,13 +115,14 @@ export class ZCVobLight extends ZCVob {
   lightStatic: GBool;
   lightQuality: GEnum;
   lensflareFX: GString;
-  turnedOn: GBool;
-  rangeAniScale: GString;
-  rangeAniFPS: GFloat;
-  rangeAniSmooth: GBool;
-  colorAniList: GColorList;
-  colorAniFPS: GFloat;
-  colorAniSmooth: GBool;
+  turnedOn?: GBool;
+  rangeAniScale?: GString;
+  rangeAniFPS?: GFloat;
+  rangeAniSmooth?: GBool;
+  colorAniList?: GColorList;
+  colorAniFPS?: GFloat;
+  colorAniSmooth?: GBool;
+  canMove?: GBool;
 }
 
 export class ZCVobSound extends ZCVob {
@@ -180,6 +187,8 @@ export class ZCZoneZFog extends ZCVob {
   fogRangeCenter: GFloat;
   innerRangePerc: GFloat;
   fogColor: GColor;
+  fadeOutSky?: GBool; // G2
+  overrideColor?: GBool; // G2
 }
 
 export class ZCTrigger extends ZCVob {
@@ -263,6 +272,7 @@ export class ZCMover extends ZCTrigger {
   stayOpenTimeSec: GFloat;
   moverLocked: GBool;
   autoLinkEnabled: GBool;
+  autoRotate?: GBool; // G2
   numKeyframes: GInt;
   moveSpeed: GFloat;
   posLerpType: GEnum;

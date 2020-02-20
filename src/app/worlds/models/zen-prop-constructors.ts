@@ -14,10 +14,15 @@ export const zenPropConstructors = {
   visual: GString,
   showVisual: GBool,
   visualCamAlign: GEnum,
+  visualAniMode: GEnum, // G2
+  visualAniModeStrength: GFloat, // G2
+  vobFarClipZScale: GFloat, // G2
   cdStatic: GBool,
   cdDyn: GBool,
   staticVob: GBool,
   dynShadow: GEnum,
+  zbias: GInt, // G2
+  isAmbient: GBool, // G2
   // ZCVobLight
   lightPresetInUse: GString,
   lightType: GEnum,
@@ -34,6 +39,7 @@ export const zenPropConstructors = {
   colorAniList: GColorList,
   colorAniFPS: GFloat,
   colorAniSmooth: GBool,
+  canMove: GBool, // G2
   // ZCVobSound
   sndVolume: GFloat,
   sndMode: GEnum,
@@ -62,6 +68,8 @@ export const zenPropConstructors = {
   // ZCZoneZFog
   fogRangeCenter: GFloat,
   fogColor: GColor,
+  fadeOutSky: GBool, // G2
+  overrideColor: GBool, // G2
   // ZCTrigger
   triggerTarget: GString,
   flags: GRaw,
@@ -121,6 +129,7 @@ export const zenPropConstructors = {
   stayOpenTimeSec: GFloat,
   moverLocked: GBool,
   autoLinkEnabled: GBool,
+  autoRotate: GBool, // G2
   numKeyframes: GInt,
   moveSpeed: GFloat,
   posLerpType: GEnum,
