@@ -52,7 +52,6 @@ export class ZCVob implements ZC {
     vobProps: Array<string>,
   ) {
     let restMode = false;
-    console.log(zcType);
     forEach(vobProps, (line) => {
       if (!restMode) {
         const {key, type, value} = getZenProp(line);
@@ -65,7 +64,6 @@ export class ZCVob implements ZC {
           }
           restMode = true;
         } else {
-          console.log(key);
           this[key] = new zenPropConstructors[key](type, value);
         }
       } else {
