@@ -189,6 +189,11 @@ export class ZCZoneZFog extends ZCVob {
   overrideColor?: GBool; // G2
 }
 
+export class ZCTriggerWorldStart extends ZCVob {  // G2
+  triggerTarget: GString;
+  fireOnlyFirstTime: GBool;
+}
+
 export class ZCTrigger extends ZCVob {
   triggerTarget: GString;
   flags: GRaw;

@@ -70,6 +70,8 @@ export const zenPropConstructors = {
   fogColor: GColor,
   fadeOutSky: GBool, // G2
   overrideColor: GBool, // G2
+  // ZCTriggerWorldStart G2
+  fireOnlyFirstTime: GBool,
   // ZCTrigger
   triggerTarget: GString,
   flags: GRaw,

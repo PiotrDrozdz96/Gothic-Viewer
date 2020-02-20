@@ -17,6 +17,7 @@ export const VOB = {
   ZC_PFX_CONTROLLER: 'zCPFXControler:' as 'zCPFXControler:',
   ZC_ZONE_FOG: 'zCZoneZFog:' as 'zCZoneZFog:',
   ZC_ZONE_FOG_DEFAULT: 'zCZoneZFogDefault:zCZoneZFog:' as 'zCZoneZFogDefault:zCZoneZFog:',
+  ZC_TRIGGER_WORLD_START: 'zCTriggerWorldStart:' as 'zCTriggerWorldStart:',
   ZC_TRIGGER: 'zCTrigger:' as 'zCTrigger:',
   ZC_CS_TRIGGER: 'oCCSTrigger:zCTrigger:' as 'oCCSTrigger:zCTrigger:',
   ZC_TRIGGER_CHANGE_LEVEL: 'oCTriggerChangeLevel:zCTrigger:' as 'oCTriggerChangeLevel:zCTrigger:',
