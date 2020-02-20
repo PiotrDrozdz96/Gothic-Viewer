@@ -1,5 +1,5 @@
 import { FormArray, FormControl } from '@angular/forms';
-import { findIndex } from 'lodash';
+import { indexOf } from 'lodash';
 
 export const onCheckboxGroupChange = (
   formArray: FormArray,
@@ -8,8 +8,6 @@ export const onCheckboxGroupChange = (
   if (checked) {
     formArray.push(new FormControl(value));
   } else {
-    formArray.removeAt(findIndex(formArray.value, (formValue: string) => (
-      formValue === value
-    )));
+    formArray.removeAt(indexOf(formArray.value, value));
   }
 };
