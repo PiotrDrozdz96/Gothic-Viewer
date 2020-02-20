@@ -194,6 +194,10 @@ export class ZCTriggerWorldStart extends ZCVob {  // G2
   fireOnlyFirstTime: GBool;
 }
 
+export class ZCTriggerUntouch extends ZCVob { // G2
+  triggerTarget: GString;
+}
+
 export class ZCTrigger extends ZCVob {
   triggerTarget: GString;
   flags: GRaw;

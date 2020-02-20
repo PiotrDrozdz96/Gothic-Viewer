@@ -19,6 +19,7 @@ export const emptyVobtree = {
   [VOB.ZC_ZONE_FOG]: [],
   [VOB.ZC_ZONE_FOG_DEFAULT]: [],
   [VOB.ZC_TRIGGER_WORLD_START]: [],
+  [VOB.ZC_TRIGGER_UNTOUCH]: [],
   [VOB.ZC_TRIGGER]: [],
   [VOB.ZC_CS_TRIGGER]: [],
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]: [],
