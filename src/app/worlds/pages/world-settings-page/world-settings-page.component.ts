@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as L from 'leaflet';
+import { map } from 'lodash';
 
 import { onCheckboxGroupChange } from '@common/utils';
 import { mapImages, zenWorlds } from '@worlds/consts';
@@ -59,7 +61,15 @@ export class WorldSettingsPageComponent {
       {responseType: 'text'},
     ).subscribe((zenRaw: string) => {
       const {imageUrl, bounds} = mapImages[image];
-      this.settingsService.next({ name: zenWorlds[zen].name , imageUrl, bounds, zenRaw });
+      const images: Array<L.ImageOverlay> = [
+        L.imageOverlay(imageUrl, bounds),
+        ...map(additionalImages, (imageId) => {
+          const { imageUrl: additionalUrl, bounds: additionalBounds } = mapImages[imageId];
+          return L.imageOverlay(additionalUrl, additionalBounds);
+        }),
+      ];
+
+      this.settingsService.next({ name: zenWorlds[zen].name , images, zenRaw });
       this.router.navigate(['worlds']);
     });
   }

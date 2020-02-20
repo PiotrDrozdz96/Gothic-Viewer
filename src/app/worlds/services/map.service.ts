@@ -35,14 +35,14 @@ export class MapService {
     });
   }
 
-  public init(bounds: L.LatLngBoundsExpression, imageUrl: string) {
+  public init(images: Array<L.ImageOverlay>) {
     this.layers = {};
     this.map = L.map('map', {
       crs: L.CRS.Simple,
       zoomControl: false,
     });
-    L.imageOverlay(imageUrl, bounds).addTo(this.map);
-    this.map.fitBounds(bounds);
+    forEach(images, (image) => { image.addTo(this.map); });
+    this.map.fitBounds(images[0].getBounds());
     this.map.on('moveend', () => this.placeMarkersInBounds());
   }
 
