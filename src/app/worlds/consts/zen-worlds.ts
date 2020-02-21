@@ -29,5 +29,7 @@ export const zenWorlds: ZenWorlds = {
   },
   newworld: {
     ...createZenWorld('NEWWORLD'),
+    mapImageIds: ['newworld'],
+    additionalMapImageIds: ['newworldCity'],
   },
 };

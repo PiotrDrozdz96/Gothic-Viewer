@@ -48,4 +48,14 @@ export const mapImages: MapImages = {
     name: 'MAP_OLDCAMP2',
     bounds: [[-55, -57], [40, 53]],
   },
+  newworld: {
+    imageUrl: `${directory}MAP_NEWWORLD.PNG`,
+    name: 'MAP_NEWWORLD',
+    bounds: [[-265, -180], [320, 615]],
+  },
+  newworldCity: {
+    imageUrl: `${directory}MAP_NEWWORLD_CITY.PNG`,
+    name: 'MAP_NEWWORLD_CITY',
+    bounds: [[-51, -38], [63, 120]],
+  },
 };
