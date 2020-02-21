@@ -58,4 +58,9 @@ export const mapImages: MapImages = {
     name: 'MAP_NEWWORLD_CITY',
     bounds: [[-51, -38], [63, 120]],
   },
+  addonworld: {
+    imageUrl: `${directory}MAP_ADDONWORLD.PNG`,
+    name: 'MAP_ADDONWORLD',
+    bounds: [[-210, -300], [240, 270]],
+  },
 };
