@@ -70,6 +70,10 @@ export const zenPropConstructors = {
   fogColor: GColor,
   fadeOutSky: GBool, // G2
   overrideColor: GBool, // G2
+  // ZCEarthquake G2
+  radius: GFloat,
+  timeSec: GFloat,
+  amplitudeCM: GVec3,
   // ZCTriggerWorldStart G2
   fireOnlyFirstTime: GBool,
   // ZCTrigger

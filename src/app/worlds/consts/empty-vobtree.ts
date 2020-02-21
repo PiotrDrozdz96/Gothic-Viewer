@@ -18,6 +18,7 @@ export const emptyVobtree = {
   [VOB.ZC_PFX_CONTROLLER]: [],
   [VOB.ZC_ZONE_FOG]: [],
   [VOB.ZC_ZONE_FOG_DEFAULT]: [],
+  [VOB.ZC_EARTHQUAKE]: [],
   [VOB.ZC_TRIGGER_WORLD_START]: [],
   [VOB.ZC_TRIGGER_UNTOUCH]: [],
   [VOB.ZC_TRIGGER]: [],

@@ -189,6 +189,12 @@ export class ZCZoneZFog extends ZCVob {
   overrideColor?: GBool; // G2
 }
 
+export class ZCEarthquake extends ZCVob {  // G2
+  radius: GFloat;
+  timeSec: GFloat;
+  amplitudeCM: GVec3;
+}
+
 export class ZCTriggerWorldStart extends ZCVob {  // G2
   triggerTarget: GString;
   fireOnlyFirstTime: GBool;
