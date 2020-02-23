@@ -22,6 +22,9 @@ export const zenWorlds: ZenWorlds = {
     mapImageId: 'world',
     additionalMapImageIds: ['oldcamp', 'psicamp', 'newcamp'],
   },
+};
+
+export const zenWorlds2: ZenWorlds = {
   addonworld: {
     ...createZenWorld('ADDONWORLD'),
     mapImageId: 'addonworld',

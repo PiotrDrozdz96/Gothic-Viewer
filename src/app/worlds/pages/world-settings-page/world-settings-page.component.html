@@ -12,6 +12,18 @@
       >
     </app-option-tile>
   </div>
+  <div class="section">
+    <app-option-tile *ngFor="let key of zenWorlds2 | keys"
+      [text]="zenWorlds2[key].name"
+      [backgroundImage]="zenWorlds2[key].imageUrl"
+      [isActive]="zenId === key"
+    >
+      <input #click type="radio"
+        [formControl]="settingsGroup.get('zen')"
+        [value]="key"
+      >
+    </app-option-tile>
+  </div>
 
   <div class="buttons">
     <button
