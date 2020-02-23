@@ -13,11 +13,6 @@ export const mapImages: MapImages = {
     name: 'MAP_WORLD',
     bounds: [[-330, -480], [320, 470]],
   },
-  worldHD: {
-    imageUrl: `${directory}MAP_WORLD_HD.PNG`,
-    name: 'MAP_WORLD_HD',
-    bounds: [[-330, -480], [320, 470]],
-  },
   temple: {
     imageUrl: `${directory}MAP_TEMPLE.PNG`,
     name: 'MAP_TEMPLE',

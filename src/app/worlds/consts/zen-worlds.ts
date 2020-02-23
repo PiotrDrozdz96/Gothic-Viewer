@@ -15,26 +15,26 @@ export const zenWorlds: ZenWorlds = {
   orcgraveyard: createZenWorld('ORCGRAVEYARD'),
   orctempel: {
     ...createZenWorld('ORCTEMPEL'),
-    mapImageIds: ['temple'],
+    mapImageId: 'temple',
   },
   world: {
     ...createZenWorld('WORLD'),
-    mapImageIds: ['world', 'worldHD'],
+    mapImageId: 'world',
     additionalMapImageIds: ['oldcamp', 'psicamp', 'newcamp'],
   },
   addonworld: {
     ...createZenWorld('ADDONWORLD'),
-    mapImageIds: ['addonworld'],
+    mapImageId: 'addonworld',
   },
   dragonisland: createZenWorld('DRAGONISLAND'),
   oldworld: {
     ...createZenWorld('OLDWORLD'),
-    mapImageIds: ['oldworld'],
+    mapImageId: 'oldworld',
     additionalMapImageIds: ['oldcamp2'],
   },
   newworld: {
     ...createZenWorld('NEWWORLD'),
-    mapImageIds: ['newworld'],
+    mapImageId: 'newworld',
     additionalMapImageIds: ['newworldCity'],
   },
 };

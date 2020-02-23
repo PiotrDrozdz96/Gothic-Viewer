@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import * as L from 'leaflet';
 import { map } from 'lodash';
 
-import { onCheckboxGroupChange } from '@common/utils';
 import { mapImages, zenWorlds } from '@worlds/consts';
 import { WorldSettingsService } from '@worlds/services';
 
@@ -16,9 +15,7 @@ import { WorldSettingsService } from '@worlds/services';
 })
 export class WorldSettingsPageComponent {
 
-  readonly mapImages = mapImages;
   readonly zenWorlds = zenWorlds;
-  readonly onCheckboxGroupChange = onCheckboxGroupChange;
 
   public settingsGroup: FormGroup;
 
@@ -30,7 +27,6 @@ export class WorldSettingsPageComponent {
   ) {
     this.settingsGroup = formBuilder.group({
       zen: ['', Validators.required],
-      image: ['blank', Validators.required],
       additionalImages: new FormArray([]),
     });
     this.zenChange();
@@ -47,23 +43,20 @@ export class WorldSettingsPageComponent {
   }
 
   get zenId(): string { return this.settingsGroup.get('zen').value; }
-  get imageId(): string { return this.settingsGroup.get('image').value; }
-  get additionalImages(): Array<string> { return this.settingsGroup.get('additionalImages').value; }
-  get zenMapImageIds(): Array<string> { return zenWorlds[this.zenId].mapImageIds; }
+  get zenMapImageId(): string { return zenWorlds[this.zenId].mapImageId; }
   get additionalZenMapImageIds(): Array<string> {
     return zenWorlds[this.zenId].additionalMapImageIds;
   }
 
-  public onSubmit({zen, image, additionalImages}:
-    { zen: string, image: string, additionalImages: Array<string> }) {
+  public onSubmit({ zen }: { zen: string }) {
     this.http.get(
       zenWorlds[zen].zenPath,
       {responseType: 'text'},
     ).subscribe((zenRaw: string) => {
-      const {imageUrl, bounds} = mapImages[image];
+      const {imageUrl, bounds} = mapImages[this.zenMapImageId];
       const images: Array<L.ImageOverlay> = [
         L.imageOverlay(imageUrl, bounds),
-        ...map(additionalImages, (imageId) => {
+        ...map(this.additionalZenMapImageIds, (imageId) => {
           const { imageUrl: additionalUrl, bounds: additionalBounds } = mapImages[imageId];
           return L.imageOverlay(additionalUrl, additionalBounds);
         }),

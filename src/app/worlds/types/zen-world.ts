@@ -2,7 +2,7 @@ export interface ZenWorld {
   name: string;
   zenPath: string;
   imageUrl: string;
-  mapImageIds?: Array<string>;
+  mapImageId?: string;
   additionalMapImageIds?: Array<string>;
 }
 
