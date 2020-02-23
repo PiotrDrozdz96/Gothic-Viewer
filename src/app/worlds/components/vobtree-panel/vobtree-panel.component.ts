@@ -22,7 +22,7 @@ interface VobFilter {
 
 type VobFilters = Array<VobFilter>;
 
-const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT, VOB.LEVEL_COMPO];
+const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT];
 
 @Component({
   selector: 'app-vobtree-panel',
