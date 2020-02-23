@@ -5,10 +5,10 @@ import { pointerSymbol, emptyVobtree, VOB } from '@worlds/consts';
 import {
   ZCVob, ZCVobLevelCompo, ZCVobSpot, ZCVobLight, ZCVobSound, ZCVobSoundDaytime,
   ZCVobLensFlare, ZCVobStair, ZCVobFarPlane, ZCVobScreenFX, ZCVobAnimate, ZCVobStartPoint,
-  ZCPFXController, ZCZoneZFog, ZCTrigger, OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript,
-  ZCTriggerList, ZCCodeMaster, ZCTouchDamage, ZCMover, ZCMoverControler, ZCMessageFilter,
-  ZCCSCamera, OCItem, OCZoneMusic, OCMob, OCMobInter, OCMobWheel, OCMobSwitch,
-  OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer, VobType,
+  ZCPFXController, ZCZoneZFog, ZCEarthquake, ZCTriggerWorldStart, ZCTriggerUntouch, ZCTrigger,
+  OCCSTrigger, OCTriggerChangeLevel, ZCTriggerScript, ZCTriggerList, ZCCodeMaster, ZCTouchDamage,
+  ZCMover, ZCMoverControler, ZCMessageFilter, ZCCSCamera, OCItem, OCZoneMusic, OCMob, OCMobInter,
+  OCMobWheel, OCMobSwitch, OCMobLadder, OCMobBed, OCMobFire, OCMobDoor, OCMobContainer, VobType,
 } from './vob';
 import { vobConstructors } from './vob-constructors';
 import { GInt } from './g-types';
@@ -31,6 +31,9 @@ export class Vobtree {
   [VOB.ZC_PFX_CONTROLLER]?: Array<ZCPFXController>;
   [VOB.ZC_ZONE_FOG]?: Array<ZCZoneZFog>;
   [VOB.ZC_ZONE_FOG_DEFAULT]?: Array<ZCZoneZFog>;
+  [VOB.ZC_EARTHQUAKE]?: Array<ZCEarthquake>;
+  [VOB.ZC_TRIGGER_WORLD_START]?: Array<ZCTriggerWorldStart>;
+  [VOB.ZC_TRIGGER_UNTOUCH]?: Array<ZCTriggerUntouch>;
   [VOB.ZC_TRIGGER]?: Array<ZCTrigger>;
   [VOB.ZC_CS_TRIGGER]?: Array<OCCSTrigger>;
   [VOB.ZC_TRIGGER_CHANGE_LEVEL]?: Array<OCTriggerChangeLevel>;

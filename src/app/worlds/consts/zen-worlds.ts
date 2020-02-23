@@ -22,4 +22,19 @@ export const zenWorlds: ZenWorlds = {
     mapImageIds: ['world', 'worldHD'],
     additionalMapImageIds: ['oldcamp', 'psicamp', 'newcamp'],
   },
+  addonworld: {
+    ...createZenWorld('ADDONWORLD'),
+    mapImageIds: ['addonworld'],
+  },
+  dragonisland: createZenWorld('DRAGONISLAND'),
+  oldworld: {
+    ...createZenWorld('OLDWORLD'),
+    mapImageIds: ['oldworld'],
+    additionalMapImageIds: ['oldcamp2'],
+  },
+  newworld: {
+    ...createZenWorld('NEWWORLD'),
+    mapImageIds: ['newworld'],
+    additionalMapImageIds: ['newworldCity'],
+  },
 };
