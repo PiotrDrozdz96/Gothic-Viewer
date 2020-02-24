@@ -6,6 +6,7 @@ import * as L from 'leaflet';
 import { map } from 'lodash';
 
 import { mapImages, zenWorlds, zenWorlds2 } from '@worlds/consts';
+import { World } from '@worlds/models';
 import { WorldSettingsService } from '@worlds/services';
 
 @Component({
@@ -53,8 +54,11 @@ export class WorldSettingsPageComponent {
         }),
       ];
 
-      this.settingsService.next({ name: this.allZenWorlds[zen].name , images, zenRaw });
-      this.router.navigate(['worlds']);
+      const world = new World(zenRaw);
+      if (world.isValid) {
+        this.settingsService.next({ name: this.allZenWorlds[zen].name , images, world });
+        this.router.navigate(['worlds']);
+      }
     });
   }
 }

@@ -26,6 +26,8 @@ export class World {
     }
   }
 
+  get isValid(): boolean { return this.prefixZenData.isValid; }
+
   private extractPrefixZenData(data: string): [PrefixZenData, string] {
     const prefixZenData = new PrefixZenData(split(data, '\n', 11));
     if (!prefixZenData.isValid) {
