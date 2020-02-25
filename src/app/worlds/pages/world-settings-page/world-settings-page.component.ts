@@ -21,6 +21,7 @@ export class WorldSettingsPageComponent {
   readonly allZenWorlds = { ...zenWorlds, ...zenWorlds2 };
 
   public settingsGroup: FormGroup;
+  private uploadedZen: string;
 
   constructor(
     private http: HttpClient,
@@ -60,5 +61,9 @@ export class WorldSettingsPageComponent {
         this.router.navigate(['worlds']);
       }
     });
+  }
+
+  public fileChange(fileResult) {
+    console.log(fileResult);
   }
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule, PipesModule } from '@common/modules';
+import { MaterialModule, PipesModule, ComponentsModule } from '@common/modules';
 import { worldsRoutes } from './worlds.routing';
 
 const modules = [
@@ -13,6 +13,7 @@ const modules = [
   ReactiveFormsModule,
   MaterialModule,
   PipesModule,
+  ComponentsModule,
   RouterModule.forChild(worldsRoutes),
 ];
 
