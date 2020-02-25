@@ -3,14 +3,13 @@ import { pick } from 'lodash';
 
 import { ReadedFile } from '@common/types';
 
-const pickFile = (file) => pick(file, [
+const pickFile = (file: File) => pick(file, [
   'name',
   'lastModified',
   'lastModifiedDate',
   'webkitRelativePath',
   'size',
   'type',
-  'result',
 ]);
 
 @Component({
