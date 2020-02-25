@@ -19,6 +19,8 @@ const pickFile = (file) => pick(file, [
 })
 export class InputFileReaderComponent {
 
+  private reader = new FileReader();
+
   @Output() readedFile = new EventEmitter<ReadedFile>();
 
   @ViewChild('elementRef', { static: true }) elementRef: ElementRef<HTMLInputElement>;
@@ -28,12 +30,11 @@ export class InputFileReaderComponent {
   get nativeElement(): HTMLInputElement { return this.elementRef.nativeElement; }
 
   public fileChange({ target: { files } }: EventFrom<HTMLInputElement>) {
-    const reader = new FileReader();
     const file = files[0];
 
-    reader.readAsText(file);
-    reader.onload = () => {
-      const result = reader.result as string;
+    this.reader.readAsText(file);
+    this.reader.onload = () => {
+      const result = this.reader.result as string;
       this.readedFile.emit({...pickFile(file), result});
     };
   }
