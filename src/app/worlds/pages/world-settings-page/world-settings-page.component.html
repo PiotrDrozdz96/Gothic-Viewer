@@ -24,7 +24,7 @@
       >
     </app-option-tile>
     <app-option-tile text="UPLOAD FILE" backgroundImage="assets/spacer-icon.png">
-      <app-input-file-reader #click (readedFile)="fileChange($event)">
+      <app-input-file-reader #click accept=".zen" (readedFile)="fileChange($event)">
       </app-input-file-reader>
     </app-option-tile>
   </div>

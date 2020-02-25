@@ -1,4 +1,4 @@
-import { Component, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, Input, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { pick } from 'lodash';
 
 import { ReadedFile } from '@common/types';
@@ -22,7 +22,7 @@ export class InputFileReaderComponent {
   private reader = new FileReader();
 
   @Output() readedFile = new EventEmitter<ReadedFile>();
-
+  @Input() accept: string;
   @ViewChild('elementRef', { static: true }) elementRef: ElementRef<HTMLInputElement>;
 
   constructor() { }
