@@ -53,9 +53,12 @@ export class WorldSettingsPageComponent implements OnDestroy {
 
   get zenField(): AbstractControl { return this.settingsGroup.get('zen'); }
   get zenId(): string { return this.zenField.value; }
-  get zenMapImageId(): string { return this.allZenWorlds[this.zenId].mapImageId; }
+  get isOwnFile(): boolean { return this.zenId === OWN_FILE_OPTION; }
+  get zenMapImageId(): string {
+    return this.allZenWorlds[this.isOwnFile ? this.uploadText : this.zenId].mapImageId;
+  }
   get additionalZenMapImageIds(): Array<string> {
-    return this.allZenWorlds[this.zenId].additionalMapImageIds;
+    return this.allZenWorlds[this.isOwnFile ? this.uploadText : this.zenId].additionalMapImageIds;
   }
 
   public onSubmit() {
@@ -68,10 +71,14 @@ export class WorldSettingsPageComponent implements OnDestroy {
       }),
     ];
 
-    this.http.get(
-      this.allZenWorlds[this.zenId].zenPath,
-      {responseType: 'text'},
-    ).subscribe((zenRaw: string) => { this.sendWorld(zenRaw, images); });
+    if (this.isOwnFile) {
+      this.sendWorld(this.uploadedZen, images);
+    } else {
+      this.http.get(
+        this.allZenWorlds[this.zenId].zenPath,
+        {responseType: 'text'},
+      ).subscribe((zenRaw: string) => { this.sendWorld(zenRaw, images); });
+    }
   }
 
   public fileChange({ name, result }: ReadedFile) {
@@ -83,9 +90,11 @@ export class WorldSettingsPageComponent implements OnDestroy {
   private sendWorld(zenRaw: string, images: Array<L.ImageOverlay>) {
     const world = new World(zenRaw);
     if (world.isValid) {
-      this.settingsService.next(
-        { name: this.allZenWorlds[this.zenId].name , images, world },
-      );
+      this.settingsService.next({
+        name: this.isOwnFile ? this.uploadText : this.allZenWorlds[this.zenId].name,
+        images,
+        world,
+      });
       this.router.navigate(['worlds']);
     }
   }
