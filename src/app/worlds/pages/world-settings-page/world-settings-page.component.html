@@ -1,4 +1,4 @@
-<form [formGroup]="settingsGroup" (ngSubmit)="onSubmit(settingsGroup.value)">
+<form [formGroup]="settingsGroup" (ngSubmit)="onSubmit()">
   <div class="section">
     <h1 class="section-header">Wybierz Zen</h1>
     <app-option-tile *ngFor="let key of zenWorlds | keys"
@@ -7,7 +7,7 @@
       [isActive]="zenId === key"
     >
       <input #click type="radio"
-        [formControl]="settingsGroup.get('zen')"
+        [formControl]="zenField"
         [value]="key"
       >
     </app-option-tile>
@@ -19,11 +19,15 @@
       [isActive]="zenId === key"
     >
       <input #click type="radio"
-        [formControl]="settingsGroup.get('zen')"
+        [formControl]="zenField"
         [value]="key"
       >
     </app-option-tile>
-    <app-option-tile text="UPLOAD FILE" backgroundImage="assets/spacer-icon.png">
+    <app-option-tile
+      [text]="uploadText"
+      backgroundImage="assets/spacer-icon.png"
+      [isActive]="zenId === OWN_FILE_OPTION"
+    >
       <app-input-file-reader #click accept=".zen" (readedFile)="fileChange($event)">
       </app-input-file-reader>
     </app-option-tile>

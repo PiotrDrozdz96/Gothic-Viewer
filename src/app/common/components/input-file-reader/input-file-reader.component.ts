@@ -28,13 +28,14 @@ export class InputFileReaderComponent {
 
   get nativeElement(): HTMLInputElement { return this.elementRef.nativeElement; }
 
-  public fileChange({ target: { files } }: EventFrom<HTMLInputElement>) {
-    const file = files[0];
+  public fileChange({ target }: EventFrom<HTMLInputElement>) {
+    const file = target.files[0];
 
     this.reader.readAsText(file);
     this.reader.onload = () => {
       const result = this.reader.result as string;
       this.readedFile.emit({...pickFile(file), result});
+      target.value = '';
     };
   }
 
