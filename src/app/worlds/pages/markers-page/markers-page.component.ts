@@ -71,7 +71,7 @@ const ELEMENT_DATA: Array<MarkerElement> = [
 export class MarkersPageComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'color', 'shape', 'icon', 'marker', 'canvas'];
   dataSource = ELEMENT_DATA;
-  private renderedCount = 0;
+  public renderedCount = 0;
   private zip = new JSZip();
 
   constructor() { }
