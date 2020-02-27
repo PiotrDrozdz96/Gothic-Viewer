@@ -8,15 +8,24 @@
     <div class="title" [title]="'WAYNET'">WAYNET</div>
     <div class="checkbox-right">
       <mat-checkbox
-        [(ngModel)]="checked"
-        (change)="onCheckboxChange($event)"
+        [(ngModel)]="waynetChecked"
+        (change)="onWaynet($event)"
       ></mat-checkbox>
     </div>
+  </div>
+  <div class="header2">
+    <mat-checkbox
+      color="warn"
+      [(ngModel)]="waypointsChecked"
+      (change)="onWaypoints($event)"
+    >
+      Waypoints ({{(waypoints | toArray).length}})
+    </mat-checkbox>
   </div>
   <div class="content">
     <div
       *ngFor="let waypoint of waypoints | toArray; let index = index"
-      [ngClass]="{'waypoint': true, 'cursor-pointer': checked}"
+      [ngClass]="{'waypoint': true, 'cursor-pointer': waypointsChecked}"
       (click)="openWaypoint(index)"
     >
       <span class="waypoint-icon"></span>

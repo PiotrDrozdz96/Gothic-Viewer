@@ -21,7 +21,8 @@ import { GMarkerGroup } from '@worlds/types';
 })
 export class WaynetPanelComponent implements OnChanges {
   public isOpenPanel = true;
-  public checked = false;
+  public waynetChecked = true;
+  public waypointsChecked = false;
   public markersGroup: GMarkerGroup<ZCWaypoint>;
   public waynetPolyline: L.Polyline;
 
@@ -42,18 +43,25 @@ export class WaynetPanelComponent implements OnChanges {
     if (waynet) {
       this.markersGroup = this.mapService.waypointsMarkersGroup(values(waynet.waypoints));
       this.waynetPolyline = this.mapService.waynetPolyline(waynet.waypoints, waynet.ways);
+      this.mapService.add(this.waynetPolyline, -1);
     }
   }
 
   get waypoints(): Waypoints { return this.waynet.waypoints; }
 
-  public onCheckboxChange({ checked }: MatCheckboxChange) {
+  public onWaynet({ checked }: MatCheckboxChange) {
     if (checked) {
-      this.mapService.addMarkersGroup(this.markersGroup, 3);
       this.mapService.add(this.waynetPolyline, -1);
     } else {
-      this.mapService.removeMarkersGroup(this.markersGroup, 3);
       this.mapService.remove(this.waynetPolyline, -1);
+    }
+  }
+
+  public onWaypoints({ checked }: MatCheckboxChange) {
+    if (checked) {
+      this.mapService.addMarkersGroup(this.markersGroup, 3);
+    } else {
+      this.mapService.removeMarkersGroup(this.markersGroup, 3);
     }
   }
 
@@ -72,7 +80,7 @@ export class WaynetPanelComponent implements OnChanges {
   }
 
   public openWaypoint(index: number) {
-    if (this.checked) {
+    if (this.waypointsChecked) {
       this.mapService.openZC(this.markersGroup.markers[index], true);
     }
   }

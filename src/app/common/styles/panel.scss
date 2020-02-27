@@ -36,6 +36,11 @@
     }
   }
 
+  .header2 {
+    padding: 7px 4px 4px 24px;
+    background-color: $background-color-quaternary;
+  }
+
   .content {
     @include scrollbar;
     @include flex-grow;
