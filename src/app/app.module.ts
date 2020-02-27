@@ -13,7 +13,7 @@ import { appRoutes } from './app.routing';
   ],
   imports: [
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
     ToolbarModule,
   ],
   providers: [],
