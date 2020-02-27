@@ -10,14 +10,14 @@ const createZenWorld = (name: string): ZenWorld => ({
 });
 
 export const zenWorlds: ZenWorlds = {
-  freemine: createZenWorld('FREEMINE'),
-  oldmine: createZenWorld('OLDMINE'),
-  orcgraveyard: createZenWorld('ORCGRAVEYARD'),
-  orctempel: {
+  'FREEMINE.ZEN': createZenWorld('FREEMINE'),
+  'OLDMINE.ZEN': createZenWorld('OLDMINE'),
+  'ORCGRAVEYARD.ZEN': createZenWorld('ORCGRAVEYARD'),
+  'ORCTEMPEL.ZEN': {
     ...createZenWorld('ORCTEMPEL'),
     mapImageId: 'temple',
   },
-  world: {
+  'WORLD.ZEN': {
     ...createZenWorld('WORLD'),
     mapImageId: 'world',
     additionalMapImageIds: ['oldcamp', 'psicamp', 'newcamp'],
@@ -25,17 +25,17 @@ export const zenWorlds: ZenWorlds = {
 };
 
 export const zenWorlds2: ZenWorlds = {
-  addonworld: {
+  'ADDONWORLD.ZEN': {
     ...createZenWorld('ADDONWORLD'),
     mapImageId: 'addonworld',
   },
-  dragonisland: createZenWorld('DRAGONISLAND'),
-  oldworld: {
+  'DRAGONISLAND.ZEN': createZenWorld('DRAGONISLAND'),
+  'OLDWORLD.ZEN': {
     ...createZenWorld('OLDWORLD'),
     mapImageId: 'oldworld',
     additionalMapImageIds: ['oldcamp2'],
   },
-  newworld: {
+  'NEWWORLD.ZEN': {
     ...createZenWorld('NEWWORLD'),
     mapImageId: 'newworld',
     additionalMapImageIds: ['newworldCity'],

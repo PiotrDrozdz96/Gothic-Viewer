@@ -1,4 +1,5 @@
 import { Component, Input, ContentChildren, QueryList, ElementRef } from '@angular/core';
+import { invokeMap } from 'lodash';
 
 @Component({
   selector: 'app-option-tile',
@@ -16,9 +17,7 @@ export class OptionTileComponent {
   constructor() { }
 
   public click() {
-    this.clickableChildren.forEach(({ nativeElement }) => {
-      nativeElement.click();
-    });
+    invokeMap(this.clickableChildren.toArray(), 'nativeElement.click');
   }
 
 }

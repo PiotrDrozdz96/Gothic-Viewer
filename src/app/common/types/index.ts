@@ -1,1 +1,2 @@
-export * from './Color';
+export * from './color';
+export * from './readed-file';

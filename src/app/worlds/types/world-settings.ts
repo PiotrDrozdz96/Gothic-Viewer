@@ -1,5 +1,7 @@
+import { World } from '@worlds/models';
+
 export interface WorldSettings {
-  zenRaw: string;
+  world: World;
   name: string;
   images: Array<L.ImageOverlay>;
 }
