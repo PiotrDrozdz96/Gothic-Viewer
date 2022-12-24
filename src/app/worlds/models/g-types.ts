@@ -118,8 +118,8 @@ export class Items {
   instance: string;
   number: string;
   constructor(item: string) {
-    const [, instance, numberOf] = item.match(/([^:]+):?(\d*)/);
-    this.instance = instance;
+    const [, instance, numberOf] = item.match(/([^:]+):?(\d*)/) || [, '', '1'];
+    this.instance = instance || '';
     this.number = numberOf || '1';
   }
   toString(): string {

@@ -1,0 +1,5 @@
+@import 'panel';
+
+.panel { @include panel($z-index-above-map-2) }
+
+.cursor-pointer { cursor: pointer; }

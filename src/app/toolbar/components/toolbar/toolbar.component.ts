@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ToolbarService } from '@toolbar/services';
-import { MAP, WAYNET } from '@toolbar/consts';
+import { MAP, WAYNET, ITEMS } from '@toolbar/consts';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,6 +12,7 @@ export class ToolbarComponent {
 
   readonly MAP = MAP;
   readonly WAYNET = WAYNET;
+  readonly ITEMS = ITEMS;
 
   public active: string;
 

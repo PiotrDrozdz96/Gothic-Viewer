@@ -5,12 +5,14 @@ import { slash } from '@common/utils';
 import { PrefixZenData } from './prefix-zen-data';
 import { Waynet } from './waynet';
 import { Vobtree } from './vobtree';
+import { WorldItems } from './world-items';
 
 export class World {
   prefixZenData: PrefixZenData;
   binary: string;
   vobtree: Vobtree;
   waynet: Waynet;
+  items: WorldItems;
 
   constructor(fileResult: string) {
     const [prefixZenData, withoutPrefix] = this.extractPrefixZenData(fileResult);
@@ -22,6 +24,7 @@ export class World {
       const [vobtree, waynet] = slash(withoutBinary, '[WayNet % 0 0]\n');
       this.binary = binary;
       this.vobtree = new Vobtree(vobtree);
+      this.items = new WorldItems(this.vobtree);
       this.waynet = new Waynet(waynet);
     }
   }

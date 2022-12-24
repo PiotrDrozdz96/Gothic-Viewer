@@ -1,6 +1,7 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, Input, SimpleChanges, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { skip } from 'rxjs/operators';
 import { forEach, get, map, includes, split } from 'lodash';
 
 import { leftPanelAnimation } from '@common/animations';
@@ -10,9 +11,11 @@ import { MAP } from '@toolbar/consts';
 
 import { VOB } from '@worlds/consts';
 import { PrefixZenDataComponent, PrefixZenDialogData } from '@worlds/dialogs';
-import { Vobtree, PrefixZenData, ZCVob } from '@worlds/models';
-import { GMarkerGroup } from '@worlds/types';
+import { Vobtree, PrefixZenData, ZCVob, OCItem, OCMobContainer } from '@worlds/models';
+import { GMarkerGroup, ItemFilter } from '@worlds/types';
 import { MapService, WorldSettingsService } from '@worlds/services';
+import { itemsVobs } from '@worlds/consts/items-vobs';
+import { Subscription } from 'rxjs';
 
 interface VobFilter {
   checked: boolean;
@@ -30,10 +33,12 @@ const initChecked = [VOB.ZC_TRIGGER_CHANGE_LEVEL, VOB.START_POINT];
   styleUrls: ['./vobtree-panel.component.scss'],
   animations: [ leftPanelAnimation ],
 })
-export class VobtreePanelComponent implements OnChanges {
+export class VobtreePanelComponent implements OnChanges, OnDestroy {
   public isOpenPanel = true;
   public vobFilters: VobFilters;
   public name: string;
+
+  private subscriptions: Subscription[] = [];
 
   @Input() vobtree: Vobtree;
   @Input() prefixZenData: PrefixZenData;
@@ -44,13 +49,41 @@ export class VobtreePanelComponent implements OnChanges {
     worldSettingsService: WorldSettingsService,
     toolbarService: ToolbarService,
   ) {
-    worldSettingsService.get().subscribe((settings) => {
+    this.subscriptions.push(worldSettingsService.get().subscribe((settings) => {
       const { name } = settings;
       this.name = name;
-    });
-    toolbarService.getActiveObs().subscribe((active) => {
+    }));
+    this.subscriptions.push(toolbarService.getActiveObs().subscribe((active) => {
       this.isOpenPanel = active === MAP;
-    });
+    }));
+    this.subscriptions.push(mapService.triggerFilterItems.pipe(skip(1)).subscribe(() => {
+      const itemVobFilters = itemsVobs.map((value) => this.vobFilters.find((vobFilter) => vobFilter.text === value));
+      itemVobFilters.forEach((vobFilter) => {
+        if(vobFilter && vobFilter.checked) {
+          this.mapService.removeMarkersGroup(vobFilter.vobMarkerGroup);
+          if(this.mapService.withFilterItems.getValue()) {
+            const newGroup = { ...vobFilter.vobMarkerGroup };
+            if(vobFilter.text === 'oCItem') {
+              newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes((marker.value as OCItem).itemInstance.value));
+            }
+            if(vobFilter.text === 'oCMobContainer') {
+              newGroup.markers = newGroup.markers.filter((marker) => (marker.value as OCMobContainer).contains.value.find((item) => this.selectedItems.includes(item.instance)));
+            }
+            this.mapService.addMarkersGroup(newGroup);
+          } else {
+            this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
+          }
+        }
+      });
+    }));
+  }
+
+  get selectedItems(): Array<string> {
+    return this.mapService.filterItems.filter((item) => item.checked).map((item) => item.text);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,9 +119,12 @@ export class VobtreePanelComponent implements OnChanges {
 
   public onCheckboxChange(
     { checked }: MatCheckboxChange,
+    text: string,
     vobMarkerGroup: GMarkerGroup<ZCVob>,
   ) {
-    if (checked) {
+    if (itemsVobs.includes(text)) {
+      this.mapService.handleItemsFilter();
+    } else if (checked) {
       this.mapService.addMarkersGroup(vobMarkerGroup);
     } else {
       this.mapService.removeMarkersGroup(vobMarkerGroup);

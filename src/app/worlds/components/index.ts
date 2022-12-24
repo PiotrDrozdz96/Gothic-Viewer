@@ -5,4 +5,5 @@ export * from './vobs-list/vobs-list.component';
 export * from './vobtree-panel/vobtree-panel.component';
 export * from './waynet-panel/waynet-panel.component';
 export * from './zc-panel/zc-panel.component';
+export * from './items-panel/items-panel.component';
 export * from './zen-property/zen-property.component';
