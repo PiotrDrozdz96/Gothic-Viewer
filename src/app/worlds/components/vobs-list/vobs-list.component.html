@@ -8,14 +8,12 @@
   </button>
 </span>
 <div *ngIf="isOpened" class="list">
-  <div
-    *ngFor="let gMarker of vobMarkerGroup.markers; let index = index"
-    class="list-element"
-    (click)="openVob(index)"
-  >
-    <img class="small-marker" [src]="vobMarkerGroup.iconUrl">
-    <span class="list-element-text" [title]="gMarker.value.vobName.value || text">
-      {{gMarker.value.vobName.value || text}}
-    </span>
-  </div>
+  <ng-container *ngFor="let gMarker of vobMarkerGroup.markers; let index = index">
+    <div class="list-element" (click)="openVob(index)" *ngIf="isVisible(gMarker)">
+      <img class="small-marker" [src]="vobMarkerGroup.iconUrl">
+      <span class="list-element-text" [title]="gMarker.value.vobName.value || text">
+        {{gMarker.value.vobName.value || text}}
+      </span>
+    </div>
+  </ng-container>
 </div>
