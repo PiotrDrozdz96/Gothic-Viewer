@@ -17,6 +17,7 @@ import { ItemFilter } from '@worlds/types';
 })
 export class ItemsPanelComponent {
   public isOpenPanel = true;
+  public search = '';
 
   constructor(toolbarService: ToolbarService, private mapService: MapService) {
     toolbarService.getActiveObs().subscribe((active) => {
