@@ -61,7 +61,7 @@ export class VobtreePanelComponent implements OnChanges, OnDestroy {
       itemVobFilters.forEach((vobFilter) => {
         if(vobFilter && vobFilter.checked) {
           this.mapService.removeMarkersGroup(vobFilter.vobMarkerGroup);
-          if(this.mapService.withFilterItems.getValue()) {
+          if(this.mapService.withFilters) {
             const newGroup = { ...vobFilter.vobMarkerGroup };
             if(vobFilter.text === 'oCItem') {
               newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes((marker.value as OCItem).itemInstance.value));

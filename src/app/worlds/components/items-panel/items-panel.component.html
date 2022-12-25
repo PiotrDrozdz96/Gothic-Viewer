@@ -1,19 +1,11 @@
 <div *ngIf="items && isOpenPanel" class="panel" [@leftPanelAnimation]>
   <div class="header">
-    <div class="icon-button-left">
-    </div>
+    <div class="icon-button-left"></div>
     <div class="title" [title]="'ITEMS'">ITEMS</div>
-    <div class="checkbox-right">
-      <mat-checkbox
-        [(ngModel)]="withFiltersItems"
-        (change)="onFilters($event)"
-      ></mat-checkbox>
-    </div>
+    <div class="checkbox-right"></div>
   </div>
   <div class="content">
-    <div
-      *ngFor="let item of items; let index = index"
-    >
+    <div *ngFor="let item of items; let index = index">
       <mat-checkbox
         color="warn"
         [(ngModel)]="item.checked"

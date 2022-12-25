@@ -28,7 +28,6 @@ export class MapService {
   private layers: ZoomedMarkers;
   public filterItems: ItemFilter[] = [];
   public openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
-  public withFilterItems = new BehaviorSubject<boolean>(false);
   public triggerFilterItems = new BehaviorSubject<boolean>(false);
 
   constructor() {
@@ -36,9 +35,6 @@ export class MapService {
       if (!gMarker) {
         this.unbounceMarker();
       }
-    });
-    this.withFilterItems.pipe(skip(1)).subscribe(() => {
-      this.handleItemsFilter();
     });
   }
 
@@ -57,6 +53,10 @@ export class MapService {
       text: item.instance,
       number: item.number,
     }));
+  }
+
+  get withFilters (): boolean {
+    return this.filterItems.some((item) => item.checked);
   }
 
   public handleItemsFilter() {

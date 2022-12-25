@@ -15,7 +15,7 @@ export class WorldItems {
   }
 
   private getItemsFromOCItems (vobtree: Vobtree) {
-    const oCItems = vobtree[VOB.OC_ITEM];
+    const oCItems = vobtree[VOB.OC_ITEM] || [];
     const nameInstances = oCItems.map((ocItem) => ocItem.itemInstance.value);
     const countedItems = nameInstances.reduce((acc, instanceName) => {
       const trimmedName = trim(instanceName)

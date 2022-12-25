@@ -15,28 +15,18 @@ import { ItemFilter } from '@worlds/types';
   styleUrls: ['./items-panel.component.scss'],
   animations: [ leftPanelAnimation ],
 })
-export class ItemsPanelComponent implements OnDestroy {
+export class ItemsPanelComponent {
   public isOpenPanel = true;
-  public withFiltersItems = false;
 
   constructor(toolbarService: ToolbarService, private mapService: MapService) {
     toolbarService.getActiveObs().subscribe((active) => {
       this.isOpenPanel = active === ITEMS;
     });
-    mapService.withFilterItems.subscribe((value) => {
-      this.withFiltersItems = value;
-    });
   }
 
-  ngOnDestroy(): void {
-    this.mapService.withFilterItems.next(false);
-  }
 
   get items(): ItemFilter[] { return this.mapService.filterItems; }
 
-  public onFilters({ checked }: MatCheckboxChange) {
-    this.mapService.withFilterItems.next(checked);
-  }
 
   public onChange() {
     this.mapService.handleItemsFilter();
