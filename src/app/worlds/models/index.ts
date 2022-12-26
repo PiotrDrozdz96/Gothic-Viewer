@@ -7,3 +7,4 @@ export * from './vobtree';
 export * from './waypoint';
 export * from './waynet';
 export * from './world';
+export * from './world-items';

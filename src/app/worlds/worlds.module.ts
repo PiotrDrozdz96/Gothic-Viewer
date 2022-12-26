@@ -26,6 +26,7 @@ const pages = [
 
 import {
   WaynetPanelComponent,
+  ItemsPanelComponent,
   VobtreePanelComponent,
   ZCPanelComponent,
   VobsListComponent,
@@ -36,6 +37,7 @@ import {
 } from './components';
 const components = [
   WaynetPanelComponent,
+  ItemsPanelComponent,
   VobtreePanelComponent,
   VobsListComponent,
   ZCPanelComponent,

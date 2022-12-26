@@ -1,0 +1,26 @@
+<div *ngIf="items && isOpenPanel" class="panel" [@leftPanelAnimation]>
+  <div class="header">
+    <div class="icon-button-left"></div>
+    <div class="title" [title]="'ITEMS'">ITEMS</div>
+    <div class="checkbox-right"></div>
+  </div>
+  <div class="header2">
+    <mat-form-field color="warn">
+      <mat-label>Wyszukaj</mat-label>
+      <input matInput [(ngModel)]="search">
+    </mat-form-field>
+  </div>
+  <div class="content">
+    <ng-container *ngFor="let item of items; let index = index">
+      <div *ngIf="!search || item.text.toLowerCase().includes(search.toLowerCase())">
+        <mat-checkbox
+          color="warn"
+          [(ngModel)]="item.checked"
+          (change)="onChange($event)"
+          >
+          <span [title]="item.text">{{item.text}} ({{item.number}})</span>
+        </mat-checkbox>
+      </div>
+    </ng-container>
+  </div>
+</div>

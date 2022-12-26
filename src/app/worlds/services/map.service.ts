@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { skip } from 'rxjs/operators';
 import * as L from 'leaflet';
 import { forEach, map, omit, replace } from 'lodash';
 
@@ -8,9 +9,9 @@ import { ClassNames } from '@common/utils';
 import { waypointIcon, bounceMarkerClassName } from '@worlds/consts';
 import {
   ZCVob, ZCWaypoint, GVec3,
-  Waypoints, WayType, Way,
+  Waypoints, WayType, Way, WorldItems,
 } from '@worlds/models';
-import { GMarker, GMarkerGroup, ZC } from '@worlds/types';
+import { GMarker, GMarkerGroup, ItemFilter, ZC } from '@worlds/types';
 import { isImageIcon } from '@worlds/utils';
 
 const divider = 150;
@@ -25,7 +26,9 @@ export class MapService {
   private bouncingMarker: L.Marker;
   private map: L.Map;
   private layers: ZoomedMarkers;
+  public filterItems: ItemFilter[] = [];
   public openedZC = new BehaviorSubject<GMarker<ZC>>(undefined);
+  public triggerFilterItems = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.openedZC.subscribe((gMarker) => {
@@ -35,7 +38,7 @@ export class MapService {
     });
   }
 
-  public init(images: Array<L.ImageOverlay>) {
+  public init(images: Array<L.ImageOverlay>, items: WorldItems) {
     this.layers = {};
     this.map = L.map('map', {
       crs: L.CRS.Simple,
@@ -44,6 +47,20 @@ export class MapService {
     forEach(images, (image) => { image.addTo(this.map); });
     this.map.fitBounds(images[0].getBounds());
     this.map.on('moveend', () => this.placeMarkersInBounds());
+
+    this.filterItems = items.chest.value.map((item) => ({
+      checked: false,
+      text: item.instance,
+      number: item.number,
+    }));
+  }
+
+  get withFilters (): boolean {
+    return this.filterItems.some((item) => item.checked);
+  }
+
+  public handleItemsFilter() {
+    this.triggerFilterItems.next(!this.triggerFilterItems.getValue());
   }
 
   public vobMarkersGroup(vobs: Array<ZCVob>): GMarkerGroup<ZCVob> {
@@ -122,7 +139,7 @@ export class MapService {
 
   public remove(layer: L.Layer, zoom: number = 0, isFromGroup: boolean = false) {
     layer.removeFrom(this.map);
-    if (zoom !== -1) {
+    if (zoom !== -1 && this.layers[zoom]) {
       this.layers[zoom] = this.layers[zoom].filter((value) => value !== layer);
     }
     if (!isFromGroup) { this.placeMarkersInBounds(); }

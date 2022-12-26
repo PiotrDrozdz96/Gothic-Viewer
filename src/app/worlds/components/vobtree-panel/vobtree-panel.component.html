@@ -17,7 +17,7 @@
       <mat-checkbox
         color="warn"
         [(ngModel)]="vobFilter.checked"
-        (change)="onCheckboxChange($event, vobFilter.vobMarkerGroup)"
+        (change)="onCheckboxChange($event, vobFilter.text, vobFilter.vobMarkerGroup)"
       >
         {{vobFilter.text}} ({{vobFilter.vobMarkerGroup.markers.length}})
       </mat-checkbox>
