@@ -53,7 +53,6 @@ export class VobsListComponent implements OnChanges {
   };
 
   public openVob(index: number) {
-    console.log(this.vobMarkerGroup.markers);
     this.mapService.openZC(this.vobMarkerGroup.markers[index], true);
   }
 

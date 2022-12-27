@@ -59,19 +59,21 @@ export class VobtreePanelComponent implements OnChanges, OnDestroy {
     this.subscriptions.push(mapService.triggerFilterItems.pipe(skip(1)).subscribe(() => {
       const itemVobFilters = itemsVobs.map((value) => this.vobFilters.find((vobFilter) => vobFilter.text === value));
       itemVobFilters.forEach((vobFilter) => {
-        if(vobFilter && vobFilter.checked) {
+        if(vobFilter) {
           this.mapService.removeMarkersGroup(vobFilter.vobMarkerGroup);
-          if(this.mapService.withFilters) {
-            const newGroup = { ...vobFilter.vobMarkerGroup };
-            if(vobFilter.text === 'oCItem') {
-              newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes((marker.value as OCItem).itemInstance.value));
+          if(vobFilter.checked) {
+            if(this.mapService.withFilters) {
+              const newGroup = { ...vobFilter.vobMarkerGroup };
+              if(vobFilter.text === 'oCItem') {
+                newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes((marker.value as OCItem).itemInstance.value));
+              }
+              if(vobFilter.text === 'oCMobContainer') {
+                newGroup.markers = newGroup.markers.filter((marker) => (marker.value as OCMobContainer).contains.value.find((item) => this.selectedItems.includes(item.instance)));
+              }
+              this.mapService.addMarkersGroup(newGroup);
+            } else {
+              this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
             }
-            if(vobFilter.text === 'oCMobContainer') {
-              newGroup.markers = newGroup.markers.filter((marker) => (marker.value as OCMobContainer).contains.value.find((item) => this.selectedItems.includes(item.instance)));
-            }
-            this.mapService.addMarkersGroup(newGroup);
-          } else {
-            this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
           }
         }
       });
