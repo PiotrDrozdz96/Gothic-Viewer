@@ -45186,7 +45186,7 @@ var __spread = (this && this.__spread) || function () {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"items && isOpenPanel\" class=\"panel\" [@leftPanelAnimation]>\n  <div class=\"header\">\n    <div class=\"icon-button-left\"></div>\n    <div class=\"title\" [title]=\"'ITEMS'\">ITEMS</div>\n    <div class=\"checkbox-right\"></div>\n  </div>\n  <div class=\"header2\">\n    <mat-form-field color=\"warn\">\n      <mat-label>Wyszukaj</mat-label>\n      <input matInput [(ngModel)]=\"search\">\n    </mat-form-field>\n  </div>\n  <div class=\"content\">\n    <ng-container *ngFor=\"let item of items; let index = index\">\n      <div *ngIf=\"!search || item.text.toLowerCase().includes(search.toLowerCase())\">\n        <mat-checkbox\n          color=\"warn\"\n          [(ngModel)]=\"item.checked\"\n          (change)=\"onChange($event)\"\n          >\n          <span [title]=\"item.text\">{{item.text}} ({{item.number}})</span>\n        </mat-checkbox>\n      </div>\n    </ng-container>\n  </div>\n</div>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"items && isOpenPanel\" class=\"panel\" [@leftPanelAnimation]>\n  <div class=\"header\">\n    <div class=\"icon-button-left\"></div>\n    <div class=\"title\" [title]=\"'ITEMS'\">Przedmioty</div>\n    <div class=\"checkbox-right\"></div>\n  </div>\n  <div class=\"header2\">\n    <mat-form-field color=\"warn\">\n      <mat-label>Wyszukaj</mat-label>\n      <input matInput [(ngModel)]=\"search\">\n    </mat-form-field>\n  </div>\n  <div class=\"content\">\n    <ng-container *ngFor=\"let item of items; let index = index\">\n      <div *ngIf=\"!search || item.text.toLowerCase().includes(search.toLowerCase())\">\n        <mat-checkbox\n          color=\"warn\"\n          [(ngModel)]=\"item.checked\"\n          (change)=\"onChange($event)\"\n          >\n          <span [title]=\"item.text\">{{item.text}} ({{item.number}})</span>\n        </mat-checkbox>\n      </div>\n    </ng-container>\n  </div>\n</div>\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/worlds/components/option-tile/option-tile.component.html": 
@@ -45715,7 +45715,6 @@ var __spread = (this && this.__spread) || function () {
                 };
                 ;
                 VobsListComponent.prototype.openVob = function (index) {
-                    console.log(this.vobMarkerGroup.markers);
                     this.mapService.openZC(this.vobMarkerGroup.markers[index], true);
                 };
                 return VobsListComponent;
@@ -45792,20 +45791,22 @@ var __spread = (this && this.__spread) || function () {
                     this.subscriptions.push(mapService.triggerFilterItems.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["skip"])(1)).subscribe(function () {
                         var itemVobFilters = _worlds_consts_items_vobs__WEBPACK_IMPORTED_MODULE_11__["itemsVobs"].map(function (value) { return _this_1.vobFilters.find(function (vobFilter) { return vobFilter.text === value; }); });
                         itemVobFilters.forEach(function (vobFilter) {
-                            if (vobFilter && vobFilter.checked) {
+                            if (vobFilter) {
                                 _this_1.mapService.removeMarkersGroup(vobFilter.vobMarkerGroup);
-                                if (_this_1.mapService.withFilters) {
-                                    var newGroup = Object.assign({}, vobFilter.vobMarkerGroup);
-                                    if (vobFilter.text === 'oCItem') {
-                                        newGroup.markers = newGroup.markers.filter(function (marker) { return _this_1.selectedItems.includes(marker.value.itemInstance.value); });
+                                if (vobFilter.checked) {
+                                    if (_this_1.mapService.withFilters) {
+                                        var newGroup = Object.assign({}, vobFilter.vobMarkerGroup);
+                                        if (vobFilter.text === 'oCItem') {
+                                            newGroup.markers = newGroup.markers.filter(function (marker) { return _this_1.selectedItems.includes(marker.value.itemInstance.value); });
+                                        }
+                                        if (vobFilter.text === 'oCMobContainer') {
+                                            newGroup.markers = newGroup.markers.filter(function (marker) { return marker.value.contains.value.find(function (item) { return _this_1.selectedItems.includes(item.instance); }); });
+                                        }
+                                        _this_1.mapService.addMarkersGroup(newGroup);
                                     }
-                                    if (vobFilter.text === 'oCMobContainer') {
-                                        newGroup.markers = newGroup.markers.filter(function (marker) { return marker.value.contains.value.find(function (item) { return _this_1.selectedItems.includes(item.instance); }); });
+                                    else {
+                                        _this_1.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
                                     }
-                                    _this_1.mapService.addMarkersGroup(newGroup);
-                                }
-                                else {
-                                    _this_1.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
                                 }
                             }
                         });

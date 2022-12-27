@@ -50151,7 +50151,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"items && isOpenPanel\" class=\"panel\" [@leftPanelAnimation]>\n  <div class=\"header\">\n    <div class=\"icon-button-left\"></div>\n    <div class=\"title\" [title]=\"'ITEMS'\">ITEMS</div>\n    <div class=\"checkbox-right\"></div>\n  </div>\n  <div class=\"header2\">\n    <mat-form-field color=\"warn\">\n      <mat-label>Wyszukaj</mat-label>\n      <input matInput [(ngModel)]=\"search\">\n    </mat-form-field>\n  </div>\n  <div class=\"content\">\n    <ng-container *ngFor=\"let item of items; let index = index\">\n      <div *ngIf=\"!search || item.text.toLowerCase().includes(search.toLowerCase())\">\n        <mat-checkbox\n          color=\"warn\"\n          [(ngModel)]=\"item.checked\"\n          (change)=\"onChange($event)\"\n          >\n          <span [title]=\"item.text\">{{item.text}} ({{item.number}})</span>\n        </mat-checkbox>\n      </div>\n    </ng-container>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div *ngIf=\"items && isOpenPanel\" class=\"panel\" [@leftPanelAnimation]>\n  <div class=\"header\">\n    <div class=\"icon-button-left\"></div>\n    <div class=\"title\" [title]=\"'ITEMS'\">Przedmioty</div>\n    <div class=\"checkbox-right\"></div>\n  </div>\n  <div class=\"header2\">\n    <mat-form-field color=\"warn\">\n      <mat-label>Wyszukaj</mat-label>\n      <input matInput [(ngModel)]=\"search\">\n    </mat-form-field>\n  </div>\n  <div class=\"content\">\n    <ng-container *ngFor=\"let item of items; let index = index\">\n      <div *ngIf=\"!search || item.text.toLowerCase().includes(search.toLowerCase())\">\n        <mat-checkbox\n          color=\"warn\"\n          [(ngModel)]=\"item.checked\"\n          (change)=\"onChange($event)\"\n          >\n          <span [title]=\"item.text\">{{item.text}} ({{item.number}})</span>\n        </mat-checkbox>\n      </div>\n    </ng-container>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -50782,7 +50782,6 @@ let VobsListComponent = class VobsListComponent {
     }
     ;
     openVob(index) {
-        console.log(this.vobMarkerGroup.markers);
         this.mapService.openZC(this.vobMarkerGroup.markers[index], true);
     }
 };
@@ -50875,20 +50874,22 @@ let VobtreePanelComponent = class VobtreePanelComponent {
         this.subscriptions.push(mapService.triggerFilterItems.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["skip"])(1)).subscribe(() => {
             const itemVobFilters = _worlds_consts_items_vobs__WEBPACK_IMPORTED_MODULE_11__["itemsVobs"].map((value) => this.vobFilters.find((vobFilter) => vobFilter.text === value));
             itemVobFilters.forEach((vobFilter) => {
-                if (vobFilter && vobFilter.checked) {
+                if (vobFilter) {
                     this.mapService.removeMarkersGroup(vobFilter.vobMarkerGroup);
-                    if (this.mapService.withFilters) {
-                        const newGroup = Object.assign({}, vobFilter.vobMarkerGroup);
-                        if (vobFilter.text === 'oCItem') {
-                            newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes(marker.value.itemInstance.value));
+                    if (vobFilter.checked) {
+                        if (this.mapService.withFilters) {
+                            const newGroup = Object.assign({}, vobFilter.vobMarkerGroup);
+                            if (vobFilter.text === 'oCItem') {
+                                newGroup.markers = newGroup.markers.filter((marker) => this.selectedItems.includes(marker.value.itemInstance.value));
+                            }
+                            if (vobFilter.text === 'oCMobContainer') {
+                                newGroup.markers = newGroup.markers.filter((marker) => marker.value.contains.value.find((item) => this.selectedItems.includes(item.instance)));
+                            }
+                            this.mapService.addMarkersGroup(newGroup);
                         }
-                        if (vobFilter.text === 'oCMobContainer') {
-                            newGroup.markers = newGroup.markers.filter((marker) => marker.value.contains.value.find((item) => this.selectedItems.includes(item.instance)));
+                        else {
+                            this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
                         }
-                        this.mapService.addMarkersGroup(newGroup);
-                    }
-                    else {
-                        this.mapService.addMarkersGroup(vobFilter.vobMarkerGroup);
                     }
                 }
             });
